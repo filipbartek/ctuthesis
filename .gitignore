@@ -11,3 +11,12 @@
 *.sh
 *.toc
 ctuman-*.pdf
+
+*.bbl
+*.bcf
+*.glg
+*.glo
+*.gls
+*.ist
+*.pdf
+*.run.xml
