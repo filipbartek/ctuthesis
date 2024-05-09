@@ -1,0 +1,52 @@
+\documentclass[twoside]{ctuthesis}
+
+\input{preamble}
+
+\hypersetup{hidelinks}
+
+\toggletrue{RESULTS}
+
+\begin{document}
+
+%a) na titulní nebo prvé straně
+%i) označení vysoké školy, fakulty a školícího pracoviště,
+%ii) název práce,
+%iii) označení „Disertační práce“,
+%iv) jméno disertanta,
+%v) rok podání práce,
+%vi) jméno školitele
+%vii) studijní program,
+%viii) obor studia,
+%b) jednostránkovou anotaci v jazyce práce a současně jazyce českém a anglickém,
+\maketitle
+
+\input{introduction}
+
+\iftoggle{RESULTS}{
+\input{results}
+}
+
+\chapter{Conclusion}
+
+%e) v závěrečné části
+%i) přehled výsledků disertace včetně původního přínosu doktoranda (tj.
+%stručný přehled původních výsledků disertace, v čem zlepšují současný
+%stav),
+%ii) závěry pro další rozvoj vědy nebo pro realizaci v praxi,
+
+\todo[inline]{TBA}
+
+%\appendix
+%\printindex
+
+\appendix
+
+\input{publications}
+
+\printglossaries
+
+\bibliography{bartefil}
+
+\ctutemplate{specification.as.chapter}
+
+\end{document}

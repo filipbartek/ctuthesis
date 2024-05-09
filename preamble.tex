@@ -1,0 +1,82 @@
+\ctusetup{
+	%preprint = \ctuverlog,
+	mainlanguage = english,
+	title-english = {Machine learning for saturation-based theorem proving},
+	doctype = D,
+	faculty = F3,
+	department-english = {\href{https://cyber.felk.cvut.cz/}{Department of Cybernetics}},
+	author = {Mgr. Filip Bártek},
+	supervisor = {\href{https://people.ciirc.cvut.cz/~urbanjo3/}{Mgr. Josef Urban, Ph.D.}},
+	% TODO: Set the correct supervisor address.
+	supervisor-address = {Czech Technical University in Prague\\Czech Institute of Informatics, Robotics and Cybernetics.\\Jugoslávských partyzánů 1580/3\\160 00 Praha 6\\Czech Republic},
+	supervisor-specialist = {\href{https://people.ciirc.cvut.cz/~sudamar2/}{RNDr. Martin Suda, Ph.D.}},
+	% https://intranet.fel.cvut.cz/cz/vv/doktorandi/obory.html
+	fieldofstudy-english = {Computer Science},
+	keywords-english = {\acrlong{ml}, \acrlong{atping}},
+	keywords-czech = {strojové učení, automatické dokazování},
+	% TODO: Set the correct date.
+	day = 30,
+	month = 6,
+	year = 2024,
+	specification-file = {NavrRamcovehoTematuDP_MS.pdf},
+	front-list-of-figures = false,
+	front-list-of-tables = false,
+	pkg-hyperref = true,
+}
+
+\input{glossary}
+
+\ctuprocess
+
+\begin{abstract-czech}
+\todo[inline]{TBA}
+\end{abstract-czech}
+
+\begin{abstract-english}
+\todo[inline]{TBA}
+\end{abstract-english}
+
+\begin{thanks}
+I thank my supervisors Martin Suda and Josef Urban.\todo{Finalize.}
+
+%\begin{itemize}
+%\item This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement n° 649043).
+%\item This work was supported by the Grant Agency of the Czech Technical University in Prague, grant No. SGS20/215/OHK3/3T/37.
+%\item The work on this paper was supported by the Czech Science Foundation grant 20-06390Y.
+%\item This work was supported by the European Regional Development Fund under the Czech project AI\&Reasoning no. CZ.02.1.01/0.0/0.0/15 003/0000466.
+%\item The work on this paper was supported by the Czech Science Foundation grant 24-12759S.
+%\end{itemize}
+% Grants that are recent and important are prioritized.
+The research presented in this thesis was supported by
+the Czech Science Foundation grants 24-12759S and 20-06390Y,
+the European Regional Development Fund under the Czech project AI\&Reasoning no.~CZ.02.1.01/0.0/0.0/15 003/0000466,
+% Project 649043 (AI4REASON) financed only my PAAR 2020 publication.
+the \gls{erc} under the European Union's Horizon 2020 research and innovation programme (grant agreement n°~649043), and
+the Grant Agency of the Czech Technical University in Prague, grant No.~SGS20/215/OHK3/3T/37.
+\end{thanks}
+
+\begin{declaration}
+%Prohlašuji, že jsem předloženou práci vypracoval samostatně, a že jsem uvedl veškerou použitou literaturu.
+I hereby declare I have written this doctoral thesis independently and quoted all the sources of information used in accordance with methodological instructions on ethical principles for writing an academic thesis. Moreover, I state that this thesis has neither been submitted nor accepted for any other degree.
+
+In Prague, \ctufield{day}~\monthinlanguage{title}~\ctufield{year}
+\end{declaration}
+
+% Only for testing purposes
+%\listfiles
+%\usepackage[pagewise]{lineno}
+%\usepackage{lipsum,blindtext}
+%\usepackage{mathrsfs} % provides \mathscr used in the ridiculous examples
+
+% Custom packages
+\usepackage{todonotes}
+% Allow the `todonotes` side notes to span the whole margin.
+\setlength{\marginparwidth}{3cm}
+
+\usepackage[numbers]{natbib}
+\bibliographystyle{plainnat}
+
+\usepackage{cleveref}
+
+\usepackage{etoolbox}
+\newtoggle{RESULTS}
