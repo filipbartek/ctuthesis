@@ -1,3 +1,5 @@
+\newcommand{\defn}\emph
+
 \chapter{Introduction}
 
 %c) v úvodní části
@@ -13,7 +15,31 @@
 
 \section{Automatic theorem proving}
 
+Many problems can be encoded in \gls{fol}, such as ...
+Solving a problem in \gls{fol} amounts to finding a proof that the conjecture necessarily follows from the premises.
+A common approach is \defn{refutation-based proving}:
+We search for a proof that a trivial contradiction is a logical consequence of the premises conjoined with the negated conjecture.
+
 \subsection{Saturation-based automatic theorem proving}
+
+A saturation-based \gls{atper} searches for a proof iteratively.
+In each iteration, one of the unprocessed clauses is selected and moved to the active clause set.
+Then, all the possible inferences within the active clause set are performed.
+
+The process can be improved with forward and backward subsumption.
+
+\subsection{Strategies}
+
+A typical \gls{atper} employs several heuristics that guide the proof search.
+The heuristics determine, for example, which clause is selected as the given clause, or which inferences are performed.
+Furthermore, the heuristics are typically parameterized, as there is no single configuration that works the best for all problems of interest.
+A configuration of all heuristics of a \gls{atper} is known as a strategy.
+
+In the context of \gls{atping}, \defn{\gls{aac}} is the task of finding, given an input problem, a strategy that is expected to solve the problem in a short time.
+In general, \gls{aac} can be applied to any parameterized solver.
+Several general-purpose \gls{aac} systems have been proposed.
+
+\subsection{TPTP}
 
 \section{Machine learning}
 
@@ -29,4 +55,15 @@ Clause selection
 
 Simplification ordering on terms
 
-\section{Strategies}
+\section{Terminology}
+
+\begin{tabularx}{\linewidth}
+{ l c >{\raggedright\arraybackslash}X }
+\bfseries Term & \bfseries Symbol & \bfseries Alternatives \\
+\Midrule
+Strategy & $s$ & Configuration, heuristic, protocol \\
+Strategy space & $\Theta$ & Configuration space, parameter space, parameter configuration space \\
+Problem & $p$ & Instance \\
+Solver & $A$ & Algorithm \\
+Strategy schedule & $t_s$ & Heuristic schedule \\
+\end{tabularx}
