@@ -2,8 +2,6 @@
 
 \input{preamble}
 
-\usepackage{tabularx, array, booktabs}
-
 \toggletrue{RESULTS}
 
 \begin{document}
@@ -43,9 +41,24 @@
 
 \input{publications}
 
+\chapter{Terms and symbols}
+
+\begin{tabularx}{\linewidth}
+{ l c >{\raggedright\arraybackslash}X }
+\bfseries Term & \bfseries Symbol & \bfseries Alternatives \\
+\Midrule
+Strategy & $s$ & Configuration, heuristic, protocol \\
+Strategy space & $\Theta$ & Configuration space, parameter space, parameter configuration space \\
+Problem & $p$ & Instance \\
+Solver & $A$ & Algorithm \\
+Strategy schedule & $t_s$ & Heuristic schedule \\
+\end{tabularx}
+
 \printglossaries
 
 \bibliography{bartefil}
+
+\todo[inline]{Consider adding a CV.}
 
 \ctutemplate{specification.as.chapter}
 

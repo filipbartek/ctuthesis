@@ -20,3 +20,5 @@ ctuman-*.pdf
 *.ist
 *.pdf
 *.run.xml
+
+!publications/*.pdf
