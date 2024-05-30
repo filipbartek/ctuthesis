@@ -13,30 +13,7 @@
 
 \section{First-order logic}
 
-\Gls{fol} is a formal language that allows modeling facts and formally reasoning about them.
-A formula in \gls{fol} is defined recursively:
-
-\begin{grammar}
-% https://tptp.org/TPTP/SyntaxBNF.html
-<formula> ::= <formula> $\land$ <formula>
-\alt <formula> $\lor$ <formula>
-\alt $\lnot$ <formula>
-\alt $\forall$ <variable> <formula>
-\alt $\exists$ <variable> <formula>
-\alt <atom>
-
-<atom> ::= <predicate> | <predicate> `(' <term-list> `)'
-
-<term> ::= <function> | <function> `(' <term-list> `)' | <variable>
-
-<term-list> ::= <term> | <term> `,' <term-list>
-
-<predicate> ::= <identifier>
-
-<function> ::= <identifier>
-
-<variable> ::= <identifier>
-\end{grammar}
+\Gls{fol}, also known as predicate logic, is a formal language that allows modeling facts and formally reasoning about them.
 
 \section{Automatic theorem proving (ATP)}
 
