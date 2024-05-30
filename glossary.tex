@@ -9,14 +9,47 @@
 % Automated reasoning
 \newacronym{atper}{ATP}{automatic theorem prover}
 \newacronym{atping}{ATP}{automatic theorem proving}
+\newacronym{kb}{KB}{Knuth-Bendix}
+\glsunset{kb}
+\newacronym{kbo}{KBO}{\acrlong{kb} \glslink{to}{ordering}}
+% Vampire option: --term_ordering (-to)
+\newglossaryentry{to}{name={simplification ordering on terms}, description={\gls{term} ordering used to orient equations in \glslink{SuperpositionCalculus}{superposition} inferences and inform \gls{LiteralSelection}}}
+\newglossaryentry{superposition}{name={superposition}, see=SuperpositionCalculus, description={?}}
+\newglossaryentry{SuperpositionCalculus}{name={superposition calculus}, description={TBA}}
+\newglossaryentry{precedence}{name={precedence}, description={?}}
+% Vampire option: --symbol_precedence (-sp)
+\newglossaryentry{sp}{name={symbol precedence}, parent=precedence, description={permutation of the \gls{signature}}}
+\newglossaryentry{signature}{name={signature}, symbol={$\Sigma$}, description={set of all symbols used in a \gls{problem}}}
+\newglossaryentry{problem}{name={problem}, description={a set of premises and a conjecture, all of which are specified as formulas}}
+\newglossaryentry{LiteralSelection}{name={literal selection}, description={TBA}}
+\newglossaryentry{ClauseSelection}{name={clause selection}, description={TBA}}
+\newglossaryentry{clause}{name={clause}, description={multiset of \glspl{literal}}}
+\newglossaryentry{literal}{name={literal}, description={an \gls{atom} or the negation of an \gls{atom}}}
+\newglossaryentry{atom}{name={atom}, description={an application of a \gls{predicate}}}
+\newglossaryentry{term}{name={term}, description={TBA}}
+\newglossaryentry{symbol}{name={symbol}, description={?}}
+\newglossaryentry{predicate}{parent=symbol, name={predicate}, description={a symbol that represents a functional propositional variable}}
+\newglossaryentry{function}{parent=symbol, name={function}, description={a symbol that represents a functional variable}}
+\newglossaryentry{variable}{name={variable}, description={TBA}}
+\newglossaryentry{strategy}{name={strategy}, description={a configuration of an \gls{atper}}}
+\newglossaryentry{vampire}{name={Vampire}, description={a prominent \gls{atper}}}
+\newglossaryentry{enigma}{name={ENIGMA}, description={?}}
+
+\newglossaryentry{recommender}{name={recommender}, description={TBA}}
+\newglossaryentry{PrecedenceRecommender}{name={precedence recommender}, parent=recommender, description={TBA}}
+\newglossaryentry{npr}{name={neural precedence recommender}, parent=PrecedenceRecommender, description={TBA}}
+\newacronym{ltr}{LTR}{learning to rank}
+
+\newacronym{sota}{SOTA}{state of the art}
 
 % Machine learning
-\newacronym{ann}{ANN}{aritificial \acrlong{nn}}
-\newacronym{cnn}{CNN}{convolutional \acrlong{nn}}
-\newacronym{dl}{DL}{deep learning}
-\newacronym{gnn}{GNN}{graph \acrlong{nn}}
-\newacronym{ml}{ML}{machine learning}
 \newacronym{nn}{NN}{neural network}
+\newacronym[parent=nn]{ann}{ANN}{aritificial \acrlong{nn}}
+\newacronym[parent=nn]{cnn}{CNN}{convolutional \acrlong{nn}}
+\newacronym{dl}{DL}{deep learning}
+\newacronym[parent=nn]{dnn}{DNN}{deep \acrlong{nn}}
+\newacronym[parent=nn]{gnn}{GNN}{graph \acrlong{nn}}
+\newacronym{ml}{ML}{machine learning}
 
 % Conferences
 \newacronym{cade}{CADE}{Conference on Automated Deduction}
@@ -45,9 +78,9 @@
 %\newacronym{fel}{FEL}{\href{https://fel.cvut.cz/}{Faculty of Electrical Engineering}}
 
 % CASC
-\newacronym{casc}{CASC}{CADE ATP System Competition}
-\newacronym{casc-14}{CASC-14}{CADE-14 ATP System Competition}
-\newacronym{casc-j11}{CASC-J11}{11th IJCAR ATP System Competition \cite{DBLP:journals/aicom/SutcliffeD23}}
+\newacronym{casc}{CASC}{CADE \acrshort{atper} System Competition}
+\newacronym[parent=casc]{casc-14}{CASC-14}{\Acrshort{cade}-14 \acrshort{atper} System Competition}
+\newacronym[parent=casc]{casc-j11}{CASC-J11}{11th \acrshort{ijcar} \acrshort{atper} System Competition \cite{DBLP:journals/aicom/SutcliffeD23}}
 % https://www.tptp.org/CASC/J11/Design.html#Divisions
 \newacronym{tfa}{TFA}{Typed (monomorphic) First-order with Arithmetic theorems}
 \newacronym{fof}{FOF}{First-Order Form theorems}

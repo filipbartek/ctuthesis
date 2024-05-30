@@ -11,6 +11,15 @@
 %Má-li práce formu komentovaného souboru publikací dle čl. 1, odst.1.3, pak odst. 3.1. písm.
 %c) a odst. 3.1 písm. d) jsou nahrazeny spojujícím textem rozsahu alespoň 10 stran.
 
+\todo[inline]{Explain enough for the title of the thesis to be understood and instructive.}
+\todo[inline]{Introduce the basic concepts: ATP, ML, search space, combinatorial explosion of proof search, heuristics, ML.}
+\todo[inline]{Ideas: "ATP is important" - provers, ... MLTP is quite established (?) - AITP conference ...}
+\todo[inline]{Discuss prominent successes of machine-assisted proving. Bill McCune w/ Otter - Robbins algebra problem. Sledgehammer. Software verification. Draw inspiration from Urban, Jasmin.}
+\todo[inline]{Ensure the introduction reads like a story.}
+
+\chapter{Preliminaries}
+\todo[inline]{Consider naming this chapter \enquote{\Gls{sota}}.}
+
 \section{First-order logic}
 
 \Gls{fol}, also known as predicate logic, is a formal language that allows modeling facts and formally reasoning about them.
@@ -64,19 +73,21 @@ Several general-purpose \gls{aac} systems have been proposed.
 In supervised \gls{ml}, such a system is trained on a dataset that consists of training examples,
 each of which specifies an input to the system and a corresponding desired output (target label).
 
-
-
 \subsection{Neural networks}
 
 Since ..., \glspl{ann} have been a prominent paradigm in \gls{ml}.
 The rise of \gls{dl} to prominence was precipitated by the success of \gls{cnn} for image classification.
 
-
-\Glspl{gnn}
+\Glspl{gnn} use the idea of aggregating local aggregation of information that is at the core of \glspl{cnn}, and generalize it to arbitrary graphs.
 
 \subsection{Algorithm configuration}
 
 \section{Combining ATP with ML}
+
+The proof search in an \gls{atper} is guided by several heuristics.
+These heuristics are parameterized.
+
+For example, the clause selection heuristics decides which of the passive clauses should be selected.
 
 Black-box view: heuristic optimization
 
@@ -86,4 +97,58 @@ Clause selection
 
 Simplification ordering on terms
 
-\section{State of the art}
+\todo[inline]{Discuss related work (Enigma etc.).}
+
+\Gls{enigma} uses \gls{ml} to train a clause selection heuristic.
+First, training data is collected by running proof searches on many problem and collecting their traces.
+The clauses inferred in the proof searches are labeled as positive or negative:
+The clauses that contributed to the proof are labeled positive, and the remaining clauses are labeled negative.
+This training data is used to train a clause selection model that prioritizes positive clauses over negative and, hopefully, generalizes to unseen clauses.
+
+\Gls{ml} systems have been used to improve premise selection.
+In this approach, the trained model is evaluated before the proof search to prune the premise set.
+This way, the completeness of the proving procedure is compromised.
+However, in problems with huge premise sets, some kind of premise selection is often very helpful and a smart premise selection may aid even further.
+
+\todo[inline]{Mention automated algorithm configuration.}
+
+\chapter{State of the art}
+
+\chapter{Preliminaries}
+
+\todo[inline]{Define: ML, ATP, saturation-based ATP}
+
+\chapter{Contributions}
+
+This dissertation thesis presents the results of my research in \gls{ml} for \gls{atping}.
+In summary, I have substantially contributed to the design and evaluation of several \acrshort{ml}-based techniques that enhance the performance of the \gls{atper} \gls{vampire} on the \gls{fol} fragment of \gls{tptp}.
+While the experiments have been performed with \gls{vampire},
+the techniques apply to \gls{superposition}-based \glspl{atper} in general.
+Furthermore, each of them can can be potentially useful in other areas of parameterized problem solving.
+
+Since \gls{tptp} represents many target domains of \gls{atping} and since \gls{vampire} is a prominent representative of the \acrlong{sota} in \gls{atping},
+the results can be understood as improvements in \gls{fol} \gls{atping} in general.
+I focused on \gls{fol} \gls{atping} because this area is well established yet nontrivial.
+
+In all cases, the \gls{ml} is based on learning from proof searches of the target prover performed on problems from the target domain.
+
+\section{Precedence recommenders}
+
+Two of the techniques instantiate the \gls{kbo} by generating a \gls{sp}.
+This way, the proof search is restricted: The \gls{to} restricts the inferences by orienting the equations and \glslink{LiteralSelection}{selecting literals}.
+The \gls{sp} is specific to the input problem:
+Problem \glspl{signature}, in general, differ in size so the \gls{PrecedenceRecommender} needs to address this when generating a \gls{precedence} for the input problem.
+This poses an unusual design challenge, which finally led us to relate our research to works in the field of \gls{ltr}.
+
+The first approach I explored scores the \glspl{symbol} using a small number of simple syntactic features of the \glspl{symbol} \cite{}.
+The second approach is more involved:
+Before the proof search, a \gls{gnn} is evaluated on the structure and metadata of the input \gls{problem} and assigns scores to the \glspl{symbol} (see \cref{sec:results:npr}).
+Finally, the symbols are sorted by their scores.
+
+\section{Clause selection}
+
+See \cref{sec:results:selection}.
+
+\section{Strategy scheduling}
+
+See \cref{sec:results:regularization}.
