@@ -20,6 +20,10 @@
 \chapter{Preliminaries}
 \todo[inline]{Consider naming this chapter \enquote{\Gls{sota}}.}
 
+\todo[inline]{Define: ML, ATP, saturation-based ATP}
+\todo[inline]{Justify: \enquote{Vampire represents the \gls{sota} of \gls{atping}.}}
+\todo[inline]{Explain how restricting the proof search helps.}
+
 \section{First-order logic}
 
 \Gls{fol}, also known as predicate logic, is a formal language that allows modeling facts and formally reasoning about them.
@@ -112,43 +116,71 @@ However, in problems with huge premise sets, some kind of premise selection is o
 
 \todo[inline]{Mention automated algorithm configuration.}
 
-\chapter{State of the art}
-
-\chapter{Preliminaries}
-
-\todo[inline]{Define: ML, ATP, saturation-based ATP}
+%\chapter{State of the art}
 
 \chapter{Contributions}
 
 This dissertation thesis presents the results of my research in \gls{ml} for \gls{atping}.
-In summary, I have substantially contributed to the design and evaluation of several \acrshort{ml}-based techniques that enhance the performance of the \gls{atper} \gls{vampire} on the \gls{fol} fragment of \gls{tptp}.
-While the experiments have been performed with \gls{vampire},
-the techniques apply to \gls{superposition}-based \glspl{atper} in general.
-Furthermore, each of them can can be potentially useful in other areas of parameterized problem solving.
+In summary, I have substantially contributed to the design and evaluation of several \acrshort{ml}-based systems that improve the performance of the \gls{atper} \gls{vampire} on the \gls{fol} fragment of \gls{tptp}.
+While the experiments have been performed using \gls{vampire},
+the core techniques are applicable to any \gls{superposition}-based \gls{atper}.
+Furthermore, they are potentially useful in other areas of parameterized problem solving\todo{Where do we explain details? Reference here.}.
 
-Since \gls{tptp} represents many target domains of \gls{atping} and since \gls{vampire} is a prominent representative of the \acrlong{sota} in \gls{atping},
-the results can be understood as improvements in \gls{fol} \gls{atping} in general.
-I focused on \gls{fol} \gls{atping} because this area is well established yet nontrivial.
+Since \gls{tptp} represents several target domains of \gls{atping}
+such as mathematics and software verification
+and since \gls{vampire} represents the \acrlong{sota} in \gls{atping}\todo{Ensure this is justified somewhere.},
+the results can be understood as pushing the limits of \gls{fol} \gls{atping} in general.
+I focused on \gls{fol} \gls{atping} because this area is well established yet nontrivial.\todo{Write a better justification.}
 
-In all cases, the \gls{ml} is based on learning from proof searches of the target prover performed on problems from the target domain.
+In all cases, the \gls{ml} is based on learning from proof searches of the target prover (Vampire) performed on problems from the target domain (TPTP).
 
-\section{Precedence recommenders}
+\section{Symbol precedence recommenders}
 
-Two of the techniques instantiate the \gls{kbo} by generating a \gls{sp}.
-This way, the proof search is restricted: The \gls{to} restricts the inferences by orienting the equations and \glslink{LiteralSelection}{selecting literals}.
-The \gls{sp} is specific to the input problem:
-Problem \glspl{signature}, in general, differ in size so the \gls{PrecedenceRecommender} needs to address this when generating a \gls{precedence} for the input problem.
-This poses an unusual design challenge, which finally led us to relate our research to works in the field of \gls{ltr}.
+Vampire uses a \gls{to} to restrict the proof search without compromising the completeness:
+The \gls{to} orients some of the equations for unidirectional rewriting with the superposition inferences,
+and literal selection restricts the inferences on any given clause to a subset of literals.
+\Gls{kbo}, the standard \gls{to} used in \gls{vampire}, is parameterized by a \gls{sp}.
+By restricting the inferences, the precedence guides the proof search.
 
-The first approach I explored scores the \glspl{symbol} using a small number of simple syntactic features of the \glspl{symbol} \cite{}.
-The second approach is more involved:
-Before the proof search, a \gls{gnn} is evaluated on the structure and metadata of the input \gls{problem} and assigns scores to the \glspl{symbol} (see \cref{sec:results:npr}).
-Finally, the symbols are sorted by their scores.
+We explored two approaches to generating a \gls{sp} for a given input problem.
+In \cref{sec:results:simple}, we introduce a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination of their syntactic features.
+In \cref{sec:results:npr}, we build on this work to train a \gls{gnn}-based \gls{PrecedenceRecommender}.
 
-\section{Clause selection}
+Since the problems in \gls{tptp} are, in general, signature-agnostic,
+the signatures differ both in content (the semantics of the symbols) and size (the number of the symbols).
+This poses an unusual design challenge,
+which finally led us to apply techniques that have been previously explored in the field of \gls{ltr}.
+Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably, an instructive description of a \gls{gnn}-based permutation recommender.
 
-See \cref{sec:results:selection}.
+\section{Clause selection guidance}
 
-\section{Strategy scheduling}
+In each iteration of the main loop,
+a saturation-based \gls{atper} selects one of the clauses that have been inferred so far.
+The selected clause is then added to the active clause set and all the possible inferences within the active set are performed.
+The \glspl{atper} rely on heuristics to select the clause.
+The symbol-counting heuristic, which happens to be one of the most popular ones,
+prioritizes clauses that are small in the number of symbol and variable occurrences.
+In the weighted variant of this heuristic,
+each symbol contributes an amount specified by its weight,
+which is a parameter of the heuristic.
 
-See \cref{sec:results:regularization}.
+In the work described in \cref{sec:results:selection},
+I used a \gls{gnn} to assign a weight to each of the symbols of the input problem.
+These weights were then used in a weighted symbol-counting clause selection heuristic in \gls{vampire}.
+
+\section{Strategy construction and scheduling}
+
+Besides \gls{to} and clause selection, the prominent \glspl{atper} contain various other parameterized heuristics,
+such as premise selection, subformula naming, backward and forward subsumption, etc.
+The configuration of all the heuristics of a prover constitutes a strategy of the preprocessing and proof search.
+Various strategies are suitable for various problems -- for example, aggressive premise selection is, in practice, necessary to solve problems with many premises, while it does not bring any benefit for small problems.
+
+The research presented in \cref{sec:results:regularization} combines two important tasks in automation of parameterized problem solving and applies them to \gls{atping}.
+\begin{enumerate}
+\item \Gls{aac} is the task of finding a good configuration (strategy) for a distribution of problems.
+\item \Gls{AlgorithmScheduling} is the task of finding, given a portfolio of algorithms, a good schedule for a distribution of problems.
+\end{enumerate}
+In our research, we generated a set of strong and mutually complementary strategies for the \gls{atper} \gls{vampire},
+and combined these strategies into strong schedules.
+To ensure good generalization of the resulting schedules, we introduced custom regularization into the scheduling process.
+To the best of our knowledge, this is the first principled treatment of generalization of \gls{AlgorithmScheduling}.\todo{Polish the wording.}
