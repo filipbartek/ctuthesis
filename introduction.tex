@@ -1,7 +1,5 @@
 \newcommand{\defn}\emph
 
-\chapter{Introduction}
-
 %c) v úvodní části
 %i) přehled současného stavu dané vědní problematiky (s odkazy na
 %literaturu) a
@@ -11,24 +9,14 @@
 %Má-li práce formu komentovaného souboru publikací dle čl. 1, odst.1.3, pak odst. 3.1. písm.
 %c) a odst. 3.1 písm. d) jsou nahrazeny spojujícím textem rozsahu alespoň 10 stran.
 
-\todo[inline]{Explain enough for the title of the thesis to be understood and instructive.}
-\todo[inline]{Introduce the basic concepts: ATP, ML, search space, combinatorial explosion of proof search, heuristics, ML.}
-\todo[inline]{Ideas: "ATP is important" - provers, ... MLTP is quite established (?) - AITP conference ...}
-\todo[inline]{Discuss prominent successes of machine-assisted proving. Bill McCune w/ Otter - Robbins algebra problem. Sledgehammer. Software verification. Draw inspiration from Urban, Jasmin.}
-\todo[inline]{Ensure the introduction reads like a story.}
-
 \chapter{Preliminaries}
-\todo[inline]{Consider naming this chapter \enquote{State of the art}.}
+\todo[inline]{Remove this chapter once its content is subsumed by \cref{sec:sota}.}
 
-\todo[inline]{Define: ML, ATP, saturation-based ATP}
-\todo[inline]{Justify: \enquote{Vampire represents the state of the art of \gls{atping}.}}
-\todo[inline]{Explain how restricting the proof search helps.}
-
-\section{First-order logic}
+\section{First-Order Logic}
 
 \Gls{fol}, also known as predicate logic, is a formal language that allows modeling facts and formally reasoning about them.
 
-\section{Automatic theorem proving (ATP)}
+\section{Automatic Theorem Proving (ATP)}
 
 Many problems can be defined in \gls{fol}.
 Notable examples include problems in mathematics and software verification.
@@ -48,7 +36,7 @@ A part of the evaluation problems are sampled from \gls{tptp}, and all the probl
 Both \gls{casc} and the \gls{tptp} library use the \gls{tptp} language to define the problems.
 The \gls{tptp} language is, in practice, the standard language for the definition of \gls{fol} problems.
 
-\subsection{Saturation-based theorem proving}
+\subsection{Saturation-Based Theorem Proving}
 
 A saturation-based \gls{atper} searches for a proof iteratively.
 In each iteration, one of the unprocessed clauses is selected and moved to the active clause set.
@@ -69,22 +57,22 @@ Several general-purpose \gls{aac} systems have been proposed.
 
 \subsection{Vampire}
 
-\subsection{TPTP problem library}
+\subsection{TPTP Problem Library}
 
-\section{Machine learning (ML)}
+\section{Machine Learning (ML)}
 
 \Gls{ml} automates the process of creating a responsive system with a useful behavior.\todo{Compare with a dictionary definition.}
 In supervised \gls{ml}, such a system is trained on a dataset that consists of training examples,
 each of which specifies an input to the system and a corresponding desired output (target label).
 
-\subsection{Neural networks}
+\subsection{Neural Networks}
 
 Since ..., \glspl{ann} have been a prominent paradigm in \gls{ml}.
 The rise of \gls{dl} to prominence was precipitated by the success of \gls{cnn} for image classification.
 
 \Glspl{gnn} use the idea of aggregating local aggregation of information that is at the core of \glspl{cnn}, and generalize it to arbitrary graphs.
 
-\subsection{Algorithm configuration}
+\subsection{Algorithm Configuration}
 
 \section{Combining ATP with ML}
 
@@ -118,23 +106,74 @@ However, in problems with huge premise sets, some kind of premise selection is o
 
 %\chapter{State of the art}
 
-\chapter{Contributions}
+\chapter{Introduction}
+\glsresetall
+
+\section{State of the Art}
+\label{sec:sota}
+
+Practical problems from various domains can be formulated in general formal languages,
+such as predicate logic and \gls{fol}.
+Deductive reasoning offers clear-cut solutions to problem instances,
+and each such solution is justified by a proof.
+
+\Gls{sat} solvers have shown great success and practical applicability in solving problems formulated in \gls{PropositionalLogic}.
+This challenges the intuition that \acrshort{np}-hardness makes \gls{sat} impractically hard.
+
+The paradigms of \gls{fol} and \gls{hol} offer higher expressive power and more compact formulations of some important classes of problems.
+The price is the increased complexity of reasoning,
+which culminates in the undecidability of \gls{fol} \cite{}.
+
+
+Various practical problems can be formulated as statements in \gls{fol}.
+%Many hard practical problems can be encoded in \gls{fol}.
+Notable domains include mathematics and software verification.
+This makes \glspl{atper} attractive general-purpose solvers.
+
+\Gls{atping} deals with the task of proving theorems automatically.
+An \gls{atper} is a software tool that searches for a proof of a given logical statement.
+State of the art \glspl{atper}
+
+\todo[inline]{Explain enough for the title of the thesis to be understood and instructive.}
+
+\todo[inline]{Clarify terms: ML, ATP, FOL, TPTP, Vampire, search space, saturation-based ATP, superposition-based ATP, parameterized problem solving (?), proof search (as training data point, as process), problem (input problem), \gls{to}, superposition inference, literal selection, inference, KBO, combinatorial explosion of proof search, heuristics, strategy scheduling, strategy optimization, complementary strategies}
+
+\todo[inline]{Ideas: "ATP is important" - provers, ... MLTP is quite established (?) - AITP conference ...}
+\todo[inline]{Discuss prominent successes of machine-assisted proving. Bill McCune w/ Otter - Robbins algebra problem. Sledgehammer. Software verification. Draw inspiration from Urban, Jasmin.}
+\todo[inline]{Ensure the introduction reads like a story.}
+
+\Gls{ml} has been successfully applied to improve the performance of various \glspl{atper} \cite{DBLP:journals/corr/abs-2403-04017}.
+
+\todo[inline]{
+ATPing has solved many useful problems. It's a cool technology.
+
+Since ATPing is hard, it uses heuristics.
+
+The heuristics are traditionally tuned by humans. ML has been used increasingly to improve ATP performance.
+
+How to do ML for ATP? - Proof search guidance, HPO.
+}
+
+\todo[inline]{Justify: \enquote{Vampire represents the state of the art of \gls{atping}.}}
+\todo[inline]{Explain how restricting the proof search helps.}
+
+\section{Contributions}
 
 This dissertation thesis presents the results of my research in \gls{ml} for \gls{atping}.
-In summary, I have substantially contributed to the design and evaluation of several \acrshort{ml}-based systems that improve the performance of the \gls{atper} \gls{vampire} on the \gls{fol} fragment of \gls{tptp}.
+In summary, I have substantially contributed to the design, implementation, and evaluation of several \acrshort{ml}-based systems that improve the performance of the state-of-the-art \gls{atper} \gls{vampire} on the \gls{fol} fragment of \gls{tptp}.
 While the experiments have been performed using \gls{vampire},
 the core techniques are applicable to any \gls{superposition}-based \gls{atper}.
-Furthermore, they are potentially useful in other areas of parameterized problem solving\todo{Where do we explain details? Reference here.}.
+Furthermore, they are potentially useful in other areas of parameterized problem solving, as detailed below.
 
 Since \gls{tptp} represents several target domains of \gls{atping}
-such as mathematics and software verification
+such as mathematics and software verification,
 and since \gls{vampire} represents the state of the art in \gls{atping}\todo{Ensure this is justified somewhere.},
 the results can be understood as pushing the limits of \gls{fol} \gls{atping} in general.
 I focused on \gls{fol} \gls{atping} because this area is well established yet nontrivial.\todo{Write a better justification.}
 
-In all cases, the \gls{ml} is based on learning from proof searches of the target prover (Vampire) performed on problems from the target domain (TPTP).
+In all cases, the \gls{ml} is based on learning from proof searches of the target prover (\gls{vampire}) performed on problems from the target domain (\gls{tptp}).
 
-\section{Symbol precedence recommenders}
+\subsection{Symbol Precedence Recommenders}
 
 Vampire uses a \gls{to} to restrict the proof search without compromising the completeness:
 The \gls{to} orients some of the equations for unidirectional rewriting with the superposition inferences,
@@ -143,16 +182,17 @@ and literal selection restricts the inferences on any given clause to a subset o
 By restricting the inferences, the precedence guides the proof search.
 
 We explored two approaches to generating a \gls{sp} for a given input problem.
-In \cref{sec:results:simple}, we introduce a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination of their syntactic features.
-In \cref{sec:results:npr}, we build on this work to train a \gls{gnn}-based \gls{PrecedenceRecommender}.
+In \cref{sec:results:simple}, we trained a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination of their syntactic features.
+In \cref{sec:results:npr}, we build on this work to train a \acrshort{gnn}-based \gls{PrecedenceRecommender}.
+In both cases, we trained the recommender to generate \glspl{sp} that likely result in a short successful proof search.
 
 Since the problems in \gls{tptp} are, in general, signature-agnostic,
 the signatures differ both in content (the semantics of the symbols) and size (the number of the symbols).
 This poses an unusual design challenge,
 which finally led us to apply techniques that have been previously explored in the field of \gls{ltr}.
-Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably, an instructive description of a \gls{gnn}-based permutation recommender.
+Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably, an instructive description of a \acrshort{gnn}-based permutation recommender.
 
-\section{Clause selection guidance}
+\subsection{Clause Selection Guidance}
 
 In each iteration of the main loop,
 a saturation-based \gls{atper} selects one of the clauses that have been inferred so far.
@@ -168,7 +208,7 @@ In the work described in \cref{sec:results:selection},
 I used a \gls{gnn} to assign a weight to each of the symbols of the input problem.
 These weights were then used in a weighted symbol-counting clause selection heuristic in \gls{vampire}.
 
-\section{Strategy construction and scheduling}
+\subsection{Strategy Construction and Scheduling}
 
 Besides \gls{to} and clause selection, the prominent \glspl{atper} contain various other parameterized heuristics,
 such as premise selection, subformula naming, backward and forward subsumption, etc.
