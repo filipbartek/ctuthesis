@@ -124,6 +124,30 @@ The paradigms of \gls{fol} and \gls{hol} offer higher expressive power and more 
 The price is the increased complexity of reasoning,
 which culminates in the undecidability of \gls{fol} \cite{}.
 
+\subsection{Saturation-Based Theorem Proving}
+
+\Gls{saturation}-based approach has shown notable success in \gls{fol} \gls{tping}, as demonstrated in the \gls{casc} \cite{Sut16}.
+A \gls{saturation}-based \gls{tper} searches for a refutation
+(a trivial contradiction represented by the empty clause)
+by inferring new facts from those previously inferred,
+starting with the premises and the negated conjecture expressed in \gls{cnf}.
+
+In each iteration, one clause is selected from the \defn{unprocessed set} and moved into the \defn{processed set}.
+Then, all the admissible inferences within the processed set\todo{Possibly better: \enquote{all the inferences in which processed clauses take part as premises}} are performed,
+with the new inferred clauses added to the unprocessed set.
+While the resolution inference rule suffices to ensure the refutational completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
+additional inference rules may greatly increase the performance of the prover.
+For example, the superposition inference rule has demonstrated notable success on problems that include equality \cite{}.
+
+Two main choice points guide \gls{saturation}-based proof search:
+\begin{enumerate}
+\item Which of the unprocessed clauses should be selected?
+\item What inferences should be performed?
+\end{enumerate}
+My research has dealt with both of these:
+See \cref{sec:contrib:ClauseSelection} and \cref{sec:contrib:SymbolPrecedenceRecommenders}, respectively.\todo{Consider leaving out this sentence as it breaks the flow.}
+
+\subsection{Notes}
 
 Various practical problems can be formulated as statements in \gls{fol}.
 %Many hard practical problems can be encoded in \gls{fol}.
@@ -174,6 +198,7 @@ I focused on \gls{fol} \gls{atping} because this area is well established yet no
 In all cases, the \gls{ml} is based on learning from proof searches of the target prover (\gls{vampire}) performed on problems from the target domain (\gls{tptp}).
 
 \subsection{Symbol Precedence Recommenders}
+\label{sec:contrib:SymbolPrecedenceRecommenders}
 
 Vampire uses a \gls{to} to restrict the proof search without compromising the completeness:
 The \gls{to} orients some of the equations for unidirectional rewriting with the superposition inferences,
@@ -193,6 +218,7 @@ which finally led us to apply techniques that have been previously explored in t
 Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably, an instructive description of a \acrshort{gnn}-based permutation recommender.
 
 \subsection{Clause Selection Guidance}
+\label{sec:contrib:ClauseSelection}
 
 In each iteration of the main loop,
 a saturation-based \gls{atper} selects one of the clauses that have been inferred so far.
