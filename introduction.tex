@@ -126,28 +126,44 @@ The paradigms of \gls{fol} and \gls{hol} offer higher expressive power and more 
 The price is the increased complexity of reasoning,
 which culminates in the undecidability of \gls{fol} \cite{}.
 
+\todo[inline]{Explain: CNF, "refutational" CNF, axioms, negated conjecture, input problem}
+
 \subsection{Saturation-Based Theorem Proving}
 
-\Gls{saturation}-based approach has shown notable success in \gls{fol} \gls{tping}, as demonstrated in the \gls{casc} \cite{Sut16}.
+\Gls{saturation}-based approach has shown notable success in \gls{fol} \gls{tping}, as demonstrated in the \gls{casc} \cite{Sut16}.\todo{Consider praising Vampire here.}
 A \gls{saturation}-based \gls{tper} searches for a refutation
 (a trivial contradiction represented by the empty clause)
-by inferring new facts from those previously inferred,
-starting with the premises and the negated conjecture expressed in \gls{cnf}.
+by iteratively deriving new facts,
+starting with the input problem expressed in \gls{cnf}.
 
-In each iteration, one clause is selected from the \defn{unprocessed set} and moved into the \defn{processed set}.
-Then, all the admissible inferences within the processed set\todo{Possibly better: \enquote{all the inferences in which processed clauses take part as premises}} are performed,
-with the new inferred clauses added to the unprocessed set.
+In each iteration, a clause is selected from the \defn{unprocessed set}.
+This clause, referred to as the \defn{given clause}, is moved into the \defn{processed set}.
+Then, all the clauses in the processed set are considered as premises of all the inference rules.
+%Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
+Clauses derived by the generating inferences are added to the unprocessed set.
+
+The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
 While the resolution inference rule suffices to ensure the refutational completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
-additional inference rules may greatly increase the performance of the prover.
-For example, the superposition inference rule has demonstrated notable success on problems that include equality \cite{}.
+additional inference rules, in practice, greatly increase the power of the prover.
+For example, the superposition inference rule has demonstrated notable success in reasoning with equality \cite{}.
 
-Two main choice points guide \gls{saturation}-based proof search:
+Adding generating rules into the calculus increases the power of each inference step at the cost of increasing the branching factor of the proof search.
+Even with only the resolution inference, the number of new clauses derived in each iteration may grow exponentially \cite{}.\todo{Really? Cite a source.}\todo{Something like that happens in practice.}
+This leads to a steadily increasing computational cost of each iteration,
+which effectively slows the proof search down in the later stages.
+To offset this slowdown, the provers restrict the inferences in various ways.
+For example, it is possible to select a subset of literals in each clause and only perform inferences on the selected literals.
+If the \defn{literal selection} procedure satisfies certain conditions\todo{Clarify or cite a source.},
+the restriction preserves completeness of the calculus.
+In some cases, it is even beneficial to forfeit the completeness in exchange for a more narrow and, presumably, faster-converging proof search.
+
+In summary, two main choice points guide the \gls{saturation}-based proof search:
 \begin{enumerate}
-\item Which of the unprocessed clauses should be selected?
-\item What inferences should be performed?
+\item Clause selection: Which of the unprocessed clauses should be selected?
+\item Inference restriction: Which of the inferences should be performed?\todo{This is affected by \gls{to} (literal selection, equality orienting) and forward subsumption.}\todo{Precedences actually likely work by pruning the search space rather than guidance.}
 \end{enumerate}
-My research has dealt with both of these:
-See \cref{sec:contrib:ClauseSelection} and \cref{sec:contrib:SymbolPrecedenceRecommenders}, respectively.\todo{Consider leaving out this sentence as it breaks the flow.}
+%My research has dealt with both of these:
+%See \cref{sec:contrib:ClauseSelection} and \cref{sec:contrib:SymbolPrecedenceRecommenders}, respectively.
 
 \subsection{Notes}
 
