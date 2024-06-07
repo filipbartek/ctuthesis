@@ -165,6 +165,19 @@ In summary, two main choice points guide the \gls{saturation}-based proof search
 %My research has dealt with both of these:
 %See \cref{sec:contrib:ClauseSelection} and \cref{sec:contrib:SymbolPrecedenceRecommenders}, respectively.
 
+\subsection{Machine Learning for Theorem Proving}
+
+While refutationally-complete calculi are in common use in \gls{atping},
+their practical utility is limited by the high branching factor of the proof search.
+In practice, the proof search with a complete calculus often slows down quickly and consumes an ever-increasing amount of memory,
+so we need ways to find a proof fast if such a proof exists.
+
+The standard approaches to proof search guidance rely on heuristics.
+Such heuristics are tweaked by human experts based on experience with solving problems from various domains.
+It is also possible to configure the heuristics automatically using \gls{ml}.
+
+\todo[inline]{Finish this section.}
+
 \subsection{Notes}
 
 Various practical problems can be formulated as statements in \gls{fol}.
