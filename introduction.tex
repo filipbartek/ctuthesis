@@ -214,12 +214,14 @@ How to do ML for ATP? - Proof search guidance, HPO.
 
 \section{Contributions}
 
-This dissertation thesis presents the results of my research in \gls{ml} for \gls{atping}.
-In summary, I have substantially contributed to the design, implementation, and evaluation of several \acrshort{ml}-based systems that improve the performance of the state-of-the-art \gls{atper} \gls{vampire} on the \gls{fol} fragment of \gls{tptp}.
+\todo[inline]{Maybe: Add an introductory sentence that ties this section to the previous one.}
+In summary, I have substantially contributed to the design, implementation, and evaluation of several \acrshort{ml}-based systems that improve the performance of the state-of-the-art \gls{atper} \gls{vampire}.
+% on the \gls{fol} fragment of \gls{tptp}.
 While the experiments have been performed using \gls{vampire},
 the core techniques are applicable to any \gls{superposition}-based \gls{atper}.
 Furthermore, they are potentially useful in other areas of parameterized problem solving, as detailed below.
 
+I used the \gls{fol} fragment of \gls{tptp} as the target problem distribution\todo{Replace or clarify?} of my research.
 Since \gls{tptp} represents several target domains of \gls{atping}
 such as mathematics and software verification,
 and since \gls{vampire} represents the state of the art in \gls{atping}\todo{Ensure this is justified somewhere.},
@@ -231,21 +233,22 @@ In all cases, the \gls{ml} is based on learning from proof searches of the targe
 \subsection{Symbol Precedence Recommenders}
 \label{sec:contrib:SymbolPrecedenceRecommenders}
 
-Vampire uses a \gls{to} to restrict the proof search without compromising the completeness:
-The \gls{to} orients some of the equations for unidirectional rewriting with the superposition inferences,
-and literal selection restricts the inferences on any given clause to a subset of literals.
-\Gls{kbo}, the standard \gls{to} used in \gls{vampire}, is parameterized by a \gls{sp}.
-By restricting the inferences, the precedence guides the proof search.
+Vampire uses a \gls{to} to restrict the proof search without compromising completeness.
+The ordering orients some of the equations, and the superposition inferences only apply such equations for rewriting in one direction.
+Moreover, literal selection restricts the inferences on any given clause to a subset of literals, and the term ordering influences the selection\todo{How? For example, can only a strictly maximal literal be selected?}.
+In these two ways, the \gls{to} prunes and guides\todo{Is "guidance" an overstatement?} the proof search.
+
+\Gls{kbo}, the default term ordering scheme used in \gls{vampire}, is parameterized by a \gls{sp}\todo{Define here or before.}.
+Choosing a good \gls{sp} improves the proof search pruning and guidance.
 
 We explored two approaches to generating a \gls{sp} for a given input problem.
-In \cref{sec:results:simple}, we trained a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination of their syntactic features.
-In \cref{sec:results:npr}, we build on this work to train a \acrshort{gnn}-based \gls{PrecedenceRecommender}.
+In our paper \cite{} (see \cref{sec:results:simple}), we present a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination of their syntactic features.
+In a later work (see \cref{sec:results:npr}), we build on this to train a \acrshort{gnn}-based \gls{PrecedenceRecommender}.
 In both cases, we trained the recommender to generate \glspl{sp} that likely result in a short successful proof search.
 
-Since the problems in \gls{tptp} are, in general, signature-agnostic,
-the signatures differ both in content (the semantics of the symbols) and size (the number of the symbols).
-This poses an unusual design challenge,
-which finally led us to apply techniques that have been previously explored in the field of \gls{ltr}.
+The problems in \gls{tptp} do not share signatures.
+This poses an unusual design challenge\todo{Clarify what the challenge is: there is no clear mapping of symbols and the signature sizes vary. Thus we use a signature-agnostic model/system.},
+which eventually led us to apply techniques that have been previously explored in the field of \gls{ltr}.
 Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably, an instructive description of a \acrshort{gnn}-based permutation recommender.
 
 \subsection{Clause Selection Guidance}
