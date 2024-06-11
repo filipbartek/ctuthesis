@@ -116,17 +116,17 @@ However, in problems with huge premise sets, some kind of premise selection is o
 
 Practical problems from various domains can be formulated in general formal languages,
 such as predicate logic and \gls{fol}.
-Deductive reasoning offers clear-cut solutions to problem instances,
+Deductive reasoning offers clear-cut solutions to formalized problems,
 and each such solution is justified by a proof.
 
 \Gls{sat} solvers have shown great success and practical applicability in solving problems formulated in \gls{PropositionalLogic}.
 This challenges the intuition that \acrshort{np}-hardness makes \gls{sat} impractically hard.
 
-The paradigms of \gls{fol} and \gls{hol} offer higher expressive power and more compact formulations of some important classes of problems.
+The paradigms of \gls{fol} and \gls{hol} offer higher expressive power and more compact formulations.
 The price is the increased complexity of reasoning,
-which culminates in the undecidability of \gls{fol} \cite{}.
+which, in \gls{fol}, culminates in the undecidability \cite{}.
 
-\todo[inline]{Explain: CNF, "refutational" CNF, axioms, negated conjecture, input problem}
+\todo[inline]{Explain: CNF, "refutational" CNF, axioms, negated conjecture, input problem, why FOL is interesting}
 
 \subsection{Saturation-Based Theorem Proving}
 
@@ -143,7 +143,7 @@ Then, all the clauses in the processed set are considered as premises of all the
 Clauses derived by the generating inferences are added to the unprocessed set.
 
 The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
-While the resolution inference rule suffices to ensure the refutational completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
+While the resolution inference rule suffices to ensure refutational completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
 additional inference rules, in practice, greatly increase the power of the prover.
 For example, the superposition inference rule has demonstrated notable success in reasoning with equality \cite{}.
 
@@ -153,9 +153,10 @@ This leads to a steadily increasing computational cost of each iteration,
 which effectively slows the proof search down in the later stages.
 To offset this slowdown, the provers restrict the inferences in various ways.
 For example, it is possible to select a subset of literals in each clause and only perform inferences on the selected literals.
-If the \defn{literal selection} procedure satisfies certain conditions\todo{Clarify or cite a source.},
-the restriction preserves completeness of the calculus.
-In some cases, it is even beneficial to forfeit the completeness in exchange for a more narrow and, presumably, faster-converging proof search.
+If the \defn{literal selection} procedure always selects either a negative literal or all maximal literals,
+the restriction preserves completeness of the calculus \cite{DBLP:conf/cav/KovacsV13}.
+In some cases, it is even beneficial to restrict the inferences in a way that forfeits completeness
+in exchange for a more narrow and, presumably, faster-converging proof search.
 
 In summary, two main choice points guide the \gls{saturation}-based proof search:
 \begin{enumerate}
@@ -209,20 +210,20 @@ The heuristics are traditionally tuned by humans. ML has been used increasingly 
 How to do ML for ATP? - Proof search guidance, HPO.
 }
 
-\todo[inline]{Justify: \enquote{Vampire represents the state of the art of \gls{atping}.}}
+\todo[inline]{Justify: \enquote{Vampire represents the state of the art of \gls{atping}.} Justify by CASC report etc.}
 \todo[inline]{Explain how restricting the proof search helps.}
 
 \section{Contributions}
 
 \todo[inline]{Maybe: Add an introductory sentence that ties this section to the previous one.}
-In summary, I have substantially contributed to the design, implementation, and evaluation of several \acrshort{ml}-based systems that improve the performance of the state-of-the-art \gls{atper} \gls{vampire}.
+In summary, I have substantially contributed to the design, implementation, and evaluation of several \acrshort{ml}-based systems that improve the performance of the state-of-the-art \gls{atper} \gls{vampire} \cite{DBLP:conf/cav/KovacsV13}.
 % on the \gls{fol} fragment of \gls{tptp}.
 While the experiments have been performed using \gls{vampire},
 the core techniques are applicable to any \gls{superposition}-based \gls{atper}.
 Furthermore, they are potentially useful in other areas of parameterized problem solving, as detailed below.
 
 I used the \gls{fol} fragment of \gls{tptp} as the target problem distribution\todo{Replace or clarify?} of my research.
-Since \gls{tptp} represents several target domains of \gls{atping}
+Since \gls{tptp} represents several target domains of \gls{atping},
 such as mathematics and software verification,
 and since \gls{vampire} represents the state of the art in \gls{atping}\todo{Ensure this is justified somewhere.},
 the results can be understood as pushing the limits of \gls{fol} \gls{atping} in general.
