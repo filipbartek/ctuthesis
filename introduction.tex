@@ -83,7 +83,7 @@ For example, the clause selection heuristics decides which of the passive clause
 
 Black-box view: heuristic optimization
 
-Premise selection
+\Gls{AxiomSelection}
 
 Clause selection
 
@@ -97,10 +97,10 @@ The clauses inferred in the proof searches are labeled as positive or negative:
 The clauses that contributed to the proof are labeled positive, and the remaining clauses are labeled negative.
 This training data is used to train a clause selection model that prioritizes positive clauses over negative and, hopefully, generalizes to unseen clauses.
 
-\Gls{ml} systems have been used to improve premise selection.
+\Gls{ml} systems have been used to improve \gls{AxiomSelection}.
 In this approach, the trained model is evaluated before the proof search to prune the premise set.
 This way, the completeness of the proving procedure is compromised.
-However, in problems with huge premise sets, some kind of premise selection is often very helpful and a smart premise selection may aid even further.
+However, in problems with huge premise sets, some kind of \gls{AxiomSelection} is often very helpful and a smart \gls{AxiomSelection} may aid even further.
 
 \todo[inline]{Mention automated algorithm configuration.}
 
@@ -283,10 +283,12 @@ which matches the intuition that general clauses should be preferred to concrete
 
 \subsection{Strategy Construction and Scheduling}
 
-Besides \gls{to} and clause selection, the prominent \glspl{atper} contain various other parameterized heuristics,
-such as premise selection, subformula naming, backward and forward subsumption, etc.
-The configuration of all the heuristics of a prover constitutes a strategy of the preprocessing and proof search.
-Various strategies are suitable for various problems -- for example, aggressive premise selection is, in practice, necessary to solve problems with many premises, while it does not bring any benefit for small problems.
+Prominent \glspl{atper} expose various options that control the preprocessing and the proof search.
+Besides \gls{to} and clause selection,
+the options configure \gls{AxiomSelection} \cite{DBLP:conf/cade/HoderV11}, subformula naming, redundancy elimination, etc.
+% redundancy elimination ~ backward and forward subsumption
+The configuration of all of the options of a prover constitutes a \defn{strategy}.
+Different problems may require different strategies -- for example, aggressive \gls{AxiomSelection} is, in practice, necessary to solve problems with many axioms, while it rarely brings any benefit for small problems.
 
 The research presented in \cref{sec:results:regularization} combines two important tasks in automation of parameterized problem solving and applies them to \gls{atping}.
 \begin{enumerate}
