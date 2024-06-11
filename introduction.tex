@@ -255,19 +255,31 @@ Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably
 \subsection{Clause Selection Guidance}
 \label{sec:contrib:ClauseSelection}
 
-In each iteration of the main loop,
-a saturation-based \gls{atper} selects one of the clauses that have been inferred so far.
-The selected clause is then added to the active clause set and all the possible inferences within the active set are performed.
-The \glspl{atper} rely on heuristics to select the clause.
-The symbol-counting heuristic, which happens to be one of the most popular ones,
-prioritizes clauses that are small in the number of symbol and variable occurrences.
-In the weighted variant of this heuristic,
+%In each iteration of the main loop,
+%a saturation-based \gls{atper} selects one of the clauses that have been inferred so far.
+%The selected clause is then added to the active clause set and all the possible inferences within the active set are performed.
+%The \glspl{atper} rely on heuristics to select the (given) clause.
+
+Given clause selection is the most important choice point in a prover.
+The symbol-counting heuristic \cite{}, which is one of the most popular ones,
+selects a clause that is small in the number of symbol and variable occurrences.
+In the weighted variant of this heuristic \cite{},
 each symbol contributes an amount specified by its weight,
 which is a parameter of the heuristic.
 
 In the work described in \cref{sec:results:selection},
-I used a \gls{gnn} to assign a weight to each of the symbols of the input problem.
-These weights were then used in a weighted symbol-counting clause selection heuristic in \gls{vampire}.
+I modified Vampire to support the weighted symbol-counting clause selection heuristic
+and trained a \gls{gnn} to propose a weight for each of the symbols of the input problem.
+%These weights were then used in a weighted symbol-counting clause selection heuristic in \gls{vampire}.
+This symbol weight recommender is signature-agnostic,
+which helps it overcome the challenge of misaligned signatures present in \gls{tptp}.
+
+The resulting system solved \SI{6.6}{\percent} more problems than the baseline,
+which is an improvement greater than that introduced, under the same conditions, by AVATAR,
+a powerful proving technique fusing a SAT solver with FOL ATP.
+Our experiments revealed that constraining the training to assign a weight of at least 1 to each symbol is a fruitful strategy\todo{Disambiguate from the term "strategy"?}.
+The trained system assigned a relatively low weight to the variable occurrences,
+which matches the intuition that general clauses should be preferred to concrete ones.
 
 \subsection{Strategy Construction and Scheduling}
 
