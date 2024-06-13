@@ -12,10 +12,6 @@
 \chapter{Preliminaries [to be removed]}
 \todo[inline]{Remove this chapter once its content is subsumed by \cref{sec:sota}.}
 
-\section{First-Order Logic}
-
-\Gls{fol}, also known as predicate logic, is a formal language that allows modeling facts and formally reasoning about them.
-
 \section{Automatic Theorem Proving (ATP)}
 
 Many problems can be defined in \gls{fol}.
@@ -109,38 +105,47 @@ However, in problems with huge premise sets, some kind of \gls{AxiomSelection} i
 \chapter{Introduction}
 \glsresetall
 
+\todo[inline]{Consider quoting Diaspora -- knowledge mines.}
+
 \section{State of the Art}
 \label{sec:sota}
 
 \subsection{Deductive Reasoning}
 
 Practical problems from various domains can be formulated in general formal languages,
-such as predicate logic and \gls{fol}.
-Deductive reasoning offers clear-cut solutions to formalized problems,
+such as predicate logic and \gls{fol}.\todo{What are the limitations of the encodings?}\todo{Demonstrate on examples.}
+Deductive reasoning offers clear-cut solutions\todo{vague} to formalized problems,
 and each such solution is justified by a proof.
 
-\Gls{sat} solvers have shown great success and practical applicability in solving problems formulated in \gls{PropositionalLogic}.
+\Gls{sat} solvers have shown great success and practical applicability in solving problems formulated in \gls{PropositionalLogic} \cite{}.
 This challenges the intuition that \acrshort{np}-hardness makes \gls{sat} impractically hard.
 
-The paradigms of \gls{fol} and \gls{hol} offer higher expressive power and more compact formulations.
-The price is the increased complexity of reasoning,
-which, in \gls{fol}, culminates in the undecidability \cite{}.
+The \gls{fol} paradigm offers higher expressive power and more compact formulations,
+which makes it suitable for problems in high-level domains such as mathematics and software verification.\todo{Express idea: FOL prover is a general-purpose solver.}\todo{Consider mentioning \gls{hol}.}
+However, the expressivity comes at the cost of increased complexity\todo{vague} of reasoning.
+The complexity of \acrlong{fol} is epitomized by the undecidability of the logic \cite{}.
 
-\todo[inline]{Explain: CNF, "refutational" CNF, axioms, negated conjecture, input problem, why FOL is interesting}
+A \gls{fol} \defn{problem} is represented by a set of \defn{axioms} and a \defn{conjecture},
+each of which is a \gls{fol} sentence.
+The task of an \gls{atper} is to prove that the axioms entail the conjecture.
+\defn{Refutational} provers reduce this task to proving that the axioms together with the \defn{negated conjecture} are inconsistent.
 
 \subsection{Saturation-Based Theorem Proving}
 
 \Gls{saturation}-based approach has shown notable success in \gls{fol} \gls{tping}, as demonstrated in the \gls{casc} \cite{Sut16}.\todo{Consider praising Vampire here.}
-A \gls{saturation}-based \gls{tper} searches for a refutation
+A \defn{\gls{saturation}-based \gls{tper}} searches for a refutation
 (a trivial contradiction represented by the empty clause)
 by iteratively deriving new facts,
-starting with the input problem expressed in \gls{cnf}.
+starting with the input problem expressed in (refutational\todo{Is there a better term?}) \gls{cnf}.
+\Gls{cnf} is sufficiently expressive:
+Any \gls{fol} problem can be converted (\enquote{clausified}) into an equisatisfiable \gls{cnf} in polynomial time.
 
-In each iteration, a clause is selected from the \defn{unprocessed set}.
+In each iteration of a saturation-based proof search,
+a clause is selected from the \defn{unprocessed set}\todo{Consider clarifying the initialization of the processed (empty) and unprocessed (input) sets.}.
 This clause, referred to as the \defn{given clause}, is moved into the \defn{processed set}.
 Then, all the clauses in the processed set are considered as premises of all the inference rules.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
-Clauses derived by the generating inferences are added to the unprocessed set.
+All new clauses derived by the generating inferences are added to the unprocessed set.
 
 The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
 While the resolution inference rule suffices to ensure refutational completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
@@ -151,12 +156,13 @@ Adding generating rules into the calculus increases the power of each inference 
 Even with only the resolution inference, the number of new clauses derived in each iteration may grow exponentially \cite{}.\todo{Really? Cite a source.}\todo{Something like that happens in practice.}
 This leads to a steadily increasing computational cost of each iteration,
 which effectively slows the proof search down in the later stages.
-To offset this slowdown, the provers restrict the inferences in various ways.
+
+To combat such slowdown, the provers restrict the inferences in various ways.
 For example, it is possible to select a subset of literals in each clause and only perform inferences on the selected literals.
 If the \defn{literal selection} procedure always selects either a negative literal or all maximal literals,
-the restriction preserves completeness of the calculus \cite{DBLP:conf/cav/KovacsV13}.
-In some cases, it is even beneficial to restrict the inferences in a way that forfeits completeness
-in exchange for a more narrow and, presumably, faster-converging proof search.
+the restriction preserves completeness of the calculus \cite{DBLP:conf/cav/KovacsV13}\todo{Cite the original source.}.
+Moreover, it may even be beneficial to restrict the inferences in a way that forfeits completeness
+in exchange for a more narrow and, presumably, better-aimed\todo{Find a better expression. Alternative: \enquote{faster-converging}} proof search.
 
 In summary, two main choice points guide the \gls{saturation}-based proof search:
 \begin{enumerate}
@@ -168,37 +174,27 @@ In summary, two main choice points guide the \gls{saturation}-based proof search
 
 \subsection{Machine Learning for Theorem Proving}
 
-While refutationally-complete calculi are in common use in \gls{atping},
-their practical utility is limited by the high branching factor of the proof search.
-In practice, the proof search with a complete calculus often slows down quickly and consumes an ever-increasing amount of memory,
-so we need ways to find a proof fast if such a proof exists.
+The choice points described in the previous section are typically resolved by \defn{heuristics},
+that is, functions that were instantiated, by hand or automatically, to optimize the performance of the prover on a class of input problems.
+Automated optimization of the heuristics amounts to learning from proof searches.
+Standard techniques of \gls{ml} are applicable.
+For example, clause selection can be cast as a supervised classification problem \cite{}.
 
-The standard approaches to proof search guidance rely on heuristics.
-Such heuristics are tweaked by human experts based on experience with solving problems from various domains.
-It is also possible to configure the heuristics automatically using \gls{ml}.
+\Gls{ml} has been successfully applied to improve the performance of various \glspl{atper} \cite{DBLP:journals/corr/abs-2403-04017}.
+Specifically, \gls{ml} has been used to improve axiom selection \cite{}, clause selection \cite{}, ...
+My work adds more insights to this body of research.
+
+\todo[inline]{Explain what \gls{ml} is.}
 
 \todo[inline]{Finish this section.}
 
 \subsection{Notes}
 
-Various practical problems can be formulated as statements in \gls{fol}.
-%Many hard practical problems can be encoded in \gls{fol}.
-Notable domains include mathematics and software verification.
-This makes \glspl{atper} attractive general-purpose solvers.
-
-\Gls{atping} deals with the task of proving theorems automatically.
-An \gls{atper} is a software tool that searches for a proof of a given logical statement.
-State of the art \glspl{atper}
-
-\todo[inline]{Explain enough for the title of the thesis to be understood and instructive.}
-
-\todo[inline]{Clarify terms: ML, ATP, FOL, TPTP, Vampire, search space, saturation-based ATP, superposition-based ATP, parameterized problem solving (?), proof search (as training data point, as process), problem (input problem), \gls{to}, superposition inference, literal selection, inference, KBO, combinatorial explosion of proof search, heuristics, strategy scheduling, strategy optimization, complementary strategies}
+\todo[inline]{Clarify terms: TPTP, Vampire, search space, superposition-based ATP, parameterized problem solving (?), proof search (as training data point, as process), problem (input problem), \gls{to}, superposition inference, literal selection, inference, KBO, combinatorial explosion of proof search, heuristics, strategy scheduling, strategy optimization, complementary strategies}
 
 \todo[inline]{Ideas: "ATP is important" - provers, ... MLTP is quite established (?) - AITP conference ...}
 \todo[inline]{Discuss prominent successes of machine-assisted proving. Bill McCune w/ Otter - Robbins algebra problem. Sledgehammer. Software verification. Draw inspiration from Urban, Jasmin.}
 \todo[inline]{Ensure the introduction reads like a story.}
-
-\Gls{ml} has been successfully applied to improve the performance of various \glspl{atper} \cite{DBLP:journals/corr/abs-2403-04017}.
 
 \todo[inline]{
 ATPing has solved many useful problems. It's a cool technology.
@@ -211,7 +207,6 @@ How to do ML for ATP? - Proof search guidance, HPO.
 }
 
 \todo[inline]{Justify: \enquote{Vampire represents the state of the art of \gls{atping}.} Justify by CASC report etc.}
-\todo[inline]{Explain how restricting the proof search helps.}
 
 \section{Contributions}
 
