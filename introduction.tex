@@ -212,14 +212,13 @@ Then, all the clauses in the processed set are considered as premises of all the
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
 All new clauses derived by the inferences are added to the unprocessed set.
 
-Vampire implements ordered resolution, superposition calculus
+\todo[inline]{Calculi: ordered resolution (without equality, with \gls{to}), superposition.
 
-\todo[inline]{Calculi: ordered resolution (without equality, with \gls{to}), superposition.}
-
-The most commonly used calculi are resolution \cite{} and superposition \cite{}.
+Vampire implements ordered resolution and superposition calculus.}
 
 The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
-While the resolution calculus suffices to ensure refutational completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
+The most commonly used calculi are the resolution calculus \cite{} and the superposition calculus \cite{}.
+While the resolution calculus suffices to ensure completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
 additional inference rules, in practice, greatly increase the power of the prover.
 For example, the superposition inference rule is the standard technique for reasoning with equality \cite{}.
 
@@ -232,7 +231,8 @@ For example, the superposition inference rule is the standard technique for reas
 In the past, people tried to make the calculus as small as possible and yet preserve completeness.}
 
 Adding generating rules into the calculus increases the power of each inference step at the cost of increasing the branching factor of the proof search.
-Even with only the resolution inference, the number of new clauses derived in each iteration may grow quadratically \cite{}.\todo{Really? Cite a source. Or avoid discussing this.}\todo{Something like that happens in practice.}
+Even with only the resolution inference, the size of the unprocessed set may grow quadratically in the number of iterations \cite{}.\todo{Really? Cite a source. Or avoid discussing this.}\todo{Something like that happens in practice.}
+%Even with only the resolution inference, the number of new clauses derived in each iteration may grow quadratically \cite{}.
 This leads to a steadily increasing computational cost of each iteration,
 which effectively slows the proof search down in the later stages.
 
@@ -240,11 +240,12 @@ which effectively slows the proof search down in the later stages.
 
 For example, superposition and paramodulation only differ in the restrictions.}
 
-To combat such slowdown, the calculus restricts the inferences in various ways.
-For example, it is possible to select a subset of literals in each clause and only perform inferences on the selected literals.
-If the \defn{literal selection} function is well-behaved,
+To combat such slowdown, the successful calculi (notably, the ordered resolution and the superposition calculi) restrict the inferences in various ways.
+For example, the superposition calculus is parameterized by a \defn{literal selection} function -- a function that selects a subset of literals in each clause.
+The inferences are only performed on the selected literals.
+If the function is well-behaved,
 i.e., it selects either a negative literal or all maximal literals\todo{What does this mean? What if there are two incomparable literals in the clause? How does the selection deal with negation?},
-the restriction preserves completeness of the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}.
+the restriction preserves completeness of the calculus \cite{DBLP:journals/logcom/BachmairG94}.
 Moreover, it may even be beneficial to restrict the inferences in a way that forfeits completeness
 in exchange for a more narrow and, presumably, better-aimed\todo{Find a better expression. Alternative: \enquote{faster-converging}} proof search.
 
