@@ -194,19 +194,20 @@ The task of an \gls{atper} is to prove that the axioms entail\todo{Unexpected, b
 
 \subsection{Saturation-Based Theorem Proving}
 
-\Gls{saturation}-based approach is the state-of-the-art approach in \gls{fol} \gls{tping}, as demonstrated in the \gls{casc} \cite{Sut16}.\todo{Consider praising Vampire here.}
-A \defn{\gls{saturation}-based \gls{tper}} organizes the search for a contradiction
-(the empty clause)
-by iteratively selecting clauses
+\Gls{saturation}-based approach is the state-of-the-art in \gls{fol} \gls{tping},
+as demonstrated by the repeated success of the saturation-based theorem provers Vampire \cite{DBLP:conf/cav/KovacsV13} and E \cite{DBLP:conf/cade/0001CV19}\todo{Mention more saturation-based provers.} in the \gls{casc} \cite{Sut16}.
 
-deriving new facts,
-starting with the input problem expressed in \gls{cnf}.
+A \defn{\gls{saturation}-based \gls{tper}} organizes the search for contradiction
+(the empty clause)
+by maintaining and incrementally expanding so-called \defn{processed set}\todo{Consider using a different terminology: active and passive set.} -- a set of clauses that have all been cross-combined to derive new clauses.
+%deriving new facts,
+%starting with the input problem expressed in \gls{cnf}.
 %\Gls{cnf} is sufficiently expressive:
 %Any \gls{fol} problem can be converted (\enquote{clausified}) into an equisatisfiable \gls{cnf} in polynomial time.
-
-In each iteration of a saturation-based proof search,
-a clause is selected from the \defn{unprocessed set}\todo{Consider clarifying the initialization of the processed (empty) and unprocessed (input) sets.}.
-This clause, referred to as the \defn{given clause}, is moved into the \defn{processed set}.
+The search starts by initializing the processed set as empty and populating the \defn{unprocessed set} with the input clauses.
+In each iteration,
+a clause is selected from the unprocessed set.
+This clause, referred to as the \defn{given clause}, is moved into the processed set.
 Then, all the clauses in the processed set are considered as premises of all the inference rules.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
 All new clauses derived by the inferences are added to the unprocessed set.
