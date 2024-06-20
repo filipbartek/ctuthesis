@@ -139,6 +139,8 @@ A proof, then, is a sequence of clauses,
 each of which is either an input\todo{potentially unclear} clause or a clause derived from one of the previous clauses by an inference rule, and
 last of which is the empty clause (a trivial contradiction).
 If all the inference rules are \defn{correct}\todo{Is this the right term? Alternatives: consistent, valid.}, then such proof establishes unsatisfiability of the input set of clauses.
+If the inference calculus is \defn{complete} and the input clause set is unsatisfiable,
+then a proof of unsatisfiability exists and can be found, for example, by enumerating the clauses derivable from the input clauses.
 
 %If a set of clauses is unsatisfiable, then its negation is logically valid.
 %If a set of clauses is satisfiable, than the satisfying interpretation defines a counter-example to the negation of the set.
