@@ -156,42 +156,6 @@ The search starts by visiting the input clauses and
 each subsequent step visits a clause derivable by the inference rules from some of the clauses visited before.
 \defn{\Gls{atping}} automates such search.
 
-\subsection{Notes on FOL Reasoning [to be removed]}
-
-\todo[inline]{FOL solver is a general-purpose solver. Problems from many domains can be encoded as FOL problems.}
-
-Practical problems from various domains can be translated into general-purpose formal languages,
-such as \gls{PropositionalLogic} and \gls{fol}.\todo{What are the limitations of the encodings?}\todo{Demonstrate on examples.}
-Deductive reasoning\todo{Unclear that this is related to logic.} offers clear-cut solutions\todo{vague} to formalized\todo{Unclear. Formalization is conversion of a problem in logic.} problems,
-and each such solution is justified by a proof.
-
-\todo[inline]{Reasoning task $\approx$ proving validity (semantic entailment) or satisfiability (existence of a model)}
-
-\todo[inline]{Formalization: Solution to the original problem is equivalent to the *validity* (or satisfiability, existence of model) of a FOL formula.
-
-The complex problem is deciding whether a fomula is valid.}
-
-\todo[inline]{FOL is not a language. FOL theorems is a language. Disambiguate throughout the text.}
-
-\Gls{sat} solvers have shown great success and practical applicability in solving problems formulated in \gls{PropositionalLogic} \cite{DBLP:series/faia/336}.
-This challenges the intuition that \acrshort{np}-hardness makes \gls{sat} impractically hard.
-
-The \gls{fol} paradigm offers higher expressive power and thus more compact formulations,
-which makes it suitable for problems in complex domains such as mathematics and software verification.\todo{Express idea: FOL prover is a general-purpose solver.}\todo{Consider mentioning \gls{hol}.}
-However, the expressiveness comes at the cost of higher complexity\todo{vague} of the reasoning task.
-%The complexity of \acrlong{fol} is epitomized\todo{} by the undecidability of the logic \cite{}.
-Provability in \gls{fol} is undecidable.
-% If the input CNF is satisfiable, Vampire may loop forever without saturating the clause set.
-% If the input CNF is unsatisfiable, Vampire will necessarily find the proof in a finite number of steps.
-
-A \gls{fol} \defn{problem} is represented by a set of \defn{axioms} and a \defn{conjecture},
-each of which is a \gls{fol} sentence.
-\todo[inline]{A solver for FOL is a prover. We focus on proving (refutational, entailment) because FOL is hard. Disprovers (model builders etc.) are necessarily incomplete.}
-The task of an \gls{atper} is to prove that the axioms entail\todo{Unexpected, baf. "logically entail". Introduce.} the conjecture.\todo{This sentence is unexpected.}
-\defn{Refutational} provers reduce this task to proving that the axioms together with the \defn{negated conjecture} are inconsistent.
-
-\todo[inline]{"refutational complete": no need to explicitly qualify "refutational". Vampire is complete in what it does: refutational proving.}
-
 \subsection{Saturation-Based Theorem Proving}
 
 \Gls{saturation}-based approach is the state-of-the-art in \gls{fol} \gls{tping},
@@ -275,6 +239,42 @@ My work adds more insights to this body of research.
 Consider including an overview of proxy tasks.}
 
 \todo[inline]{Finish this section.}
+
+\subsection{Notes on FOL Reasoning [to be removed]}
+
+\todo[inline]{FOL solver is a general-purpose solver. Problems from many domains can be encoded as FOL problems.}
+
+Practical problems from various domains can be translated into general-purpose formal languages,
+such as \gls{PropositionalLogic} and \gls{fol}.\todo{What are the limitations of the encodings?}\todo{Demonstrate on examples.}
+Deductive reasoning\todo{Unclear that this is related to logic.} offers clear-cut solutions\todo{vague} to formalized\todo{Unclear. Formalization is conversion of a problem in logic.} problems,
+and each such solution is justified by a proof.
+
+\todo[inline]{Reasoning task $\approx$ proving validity (semantic entailment) or satisfiability (existence of a model)}
+
+\todo[inline]{Formalization: Solution to the original problem is equivalent to the *validity* (or satisfiability, existence of model) of a FOL formula.
+
+The complex problem is deciding whether a fomula is valid.}
+
+\todo[inline]{FOL is not a language. FOL theorems is a language. Disambiguate throughout the text.}
+
+\Gls{sat} solvers have shown great success and practical applicability in solving problems formulated in \gls{PropositionalLogic} \cite{DBLP:series/faia/336}.
+This challenges the intuition that \acrshort{np}-hardness makes \gls{sat} impractically hard.
+
+The \gls{fol} paradigm offers higher expressive power and thus more compact formulations,
+which makes it suitable for problems in complex domains such as mathematics and software verification.\todo{Express idea: FOL prover is a general-purpose solver.}\todo{Consider mentioning \gls{hol}.}
+However, the expressiveness comes at the cost of higher complexity\todo{vague} of the reasoning task.
+%The complexity of \acrlong{fol} is epitomized\todo{} by the undecidability of the logic \cite{}.
+Provability in \gls{fol} is undecidable.
+% If the input CNF is satisfiable, Vampire may loop forever without saturating the clause set.
+% If the input CNF is unsatisfiable, Vampire will necessarily find the proof in a finite number of steps.
+
+A \gls{fol} \defn{problem} is represented by a set of \defn{axioms} and a \defn{conjecture},
+each of which is a \gls{fol} sentence.
+\todo[inline]{A solver for FOL is a prover. We focus on proving (refutational, entailment) because FOL is hard. Disprovers (model builders etc.) are necessarily incomplete.}
+The task of an \gls{atper} is to prove that the axioms entail\todo{Unexpected, baf. "logically entail". Introduce.} the conjecture.\todo{This sentence is unexpected.}
+\defn{Refutational} provers reduce this task to proving that the axioms together with the \defn{negated conjecture} are inconsistent.
+
+\todo[inline]{"refutational complete": no need to explicitly qualify "refutational". Vampire is complete in what it does: refutational proving.}
 
 \subsection{Notes}
 
