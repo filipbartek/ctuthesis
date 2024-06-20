@@ -105,68 +105,149 @@ However, in problems with huge premise sets, some kind of \gls{AxiomSelection} i
 \chapter{Introduction}
 \glsresetall
 
-\todo[inline]{Consider quoting Diaspora -- knowledge mines.}
+\todo[inline]{Consider quoting Diaspora -- \enquote{knowledge mines}.}
 
 \section{State of the Art}
 \label{sec:sota}
 
-\subsection{Deductive Reasoning}
+\subsection{Reasoning in First-Order Logic}
 
-Practical problems from various domains can be formulated in general formal languages,
-such as predicate logic and \gls{fol}.\todo{What are the limitations of the encodings?}\todo{Demonstrate on examples.}
-Deductive reasoning offers clear-cut solutions\todo{vague} to formalized problems,
+\Gls{fol} is an established formalism capable of representing a wide range of problems from diverse areas such as mathematics and software verification\todo{Add more examples.}.
+A \gls{fol} representation of a problem consists of a set of \defn{axioms} and a \defn{conjecture},
+each expressed as a \gls{fol} formula.
+The axioms \defn{logically entail} the conjecture if and only if
+every interpretation\todo{unclear term} that satisfies all the axioms also satisfies the conjecture\footnote{Note that if the conjecture is logically entailed by an empty set of axioms
+(that is, satisfied by every interpretation),
+the conjecture is said to be \defn{logically valid} (tautological).}.
+Solving the problem amounts proving that such entailment holds.
+%(or, equivalently, that the conjecture holds assuming the axioms hold).
+
+To prove the entailment \defn{by contradiction},
+it suffices to prove that the set of all axioms together with the negated conjecture entails a contradiction.
+We call such representation of a problem \defn{refuational}.
+%This is the basis of \defn{refutational theorem proving}.
+
+Every refutational \gls{fol} problem (a set of \gls{fol} formulas) can be transformed into an equisatisfiable set of clauses (disjunctions of literals) in polynomial time \cite{}.
+We call such representation of the \gls{fol} problem \defn{\gls{cnf}}
+and the process leading to it \defn{clausification}\todo{Define \enquote{preprocessing}.}.
+
+Solving a refutational \gls{cnf} problem amounts to proving that the set of clauses is \defn{unsatisfiable},
+that is, that every interpretation falsifies at least one of the clauses.
+A common way to represent a proof of unsatisfiability is using an \defn{inference calculus},
+that is, a set of inference rules.
+A proof, then, is a sequence of clauses,
+each of which is either an input\todo{potentially unclear} clause or a clause derived from one of the previous clauses by an inference rule, and
+last of which is the empty clause (a trivial contradiction).
+If all the inference rules are \defn{correct}\todo{Is this the right term? Alternatives: consistent, valid.}, then such proof establishes unsatisfiability of the input set of clauses.
+
+%If a set of clauses is unsatisfiable, then its negation is logically valid.
+%If a set of clauses is satisfiable, than the satisfying interpretation defines a counter-example to the negation of the set.
+
+The problem of unsatisfiability and, by reduction, entailment in \gls{fol} is semi-decidable:
+There is an algorithm that will, if the input clause set is unsatisfiable, eventually determine the unsatisfiability,
+but there is no algorithm that would determine the satisfiability of every satisfiable clause set.
+%This is related to the fact that to show the satisfiability, one has to prove that an interpretation with certain properties exists,
+%while this interpretation may be arbitrarily large (infinite) and complex.
+
+Given a correct inference calculus, the process of solving a \gls{fol} problem can be viewed as a search for the empty clause.
+The search starts by visiting the input clauses and
+each subsequent step visits a clause derivable by the inference rules from some of the clauses visited before.
+\defn{\Gls{atping}} automates such search.
+
+\subsection{Notes on FOL Reasoning [to be removed]}
+
+\todo[inline]{FOL solver is a general-purpose solver. Problems from many domains can be encoded as FOL problems.}
+
+Practical problems from various domains can be translated into general-purpose formal languages,
+such as \gls{PropositionalLogic} and \gls{fol}.\todo{What are the limitations of the encodings?}\todo{Demonstrate on examples.}
+Deductive reasoning\todo{Unclear that this is related to logic.} offers clear-cut solutions\todo{vague} to formalized\todo{Unclear. Formalization is conversion of a problem in logic.} problems,
 and each such solution is justified by a proof.
 
-\Gls{sat} solvers have shown great success and practical applicability in solving problems formulated in \gls{PropositionalLogic} \cite{}.
+\todo[inline]{Reasoning task $\approx$ proving validity (semantic entailment) or satisfiability (existence of a model)}
+
+\todo[inline]{Formalization: Solution to the original problem is equivalent to the *validity* (or satisfiability, existence of model) of a FOL formula.
+
+The complex problem is deciding whether a fomula is valid.}
+
+\todo[inline]{FOL is not a language. FOL theorems is a language. Disambiguate throughout the text.}
+
+\Gls{sat} solvers have shown great success and practical applicability in solving problems formulated in \gls{PropositionalLogic} \cite{DBLP:series/faia/336}.
 This challenges the intuition that \acrshort{np}-hardness makes \gls{sat} impractically hard.
 
-The \gls{fol} paradigm offers higher expressive power and more compact formulations,
-which makes it suitable for problems in high-level domains such as mathematics and software verification.\todo{Express idea: FOL prover is a general-purpose solver.}\todo{Consider mentioning \gls{hol}.}
-However, the expressivity comes at the cost of increased complexity\todo{vague} of reasoning.
-The complexity of \acrlong{fol} is epitomized by the undecidability of the logic \cite{}.
+The \gls{fol} paradigm offers higher expressive power and thus more compact formulations,
+which makes it suitable for problems in complex domains such as mathematics and software verification.\todo{Express idea: FOL prover is a general-purpose solver.}\todo{Consider mentioning \gls{hol}.}
+However, the expressiveness comes at the cost of higher complexity\todo{vague} of the reasoning task.
+%The complexity of \acrlong{fol} is epitomized\todo{} by the undecidability of the logic \cite{}.
+Provability in \gls{fol} is undecidable.
+% If the input CNF is satisfiable, Vampire may loop forever without saturating the clause set.
+% If the input CNF is unsatisfiable, Vampire will necessarily find the proof in a finite number of steps.
 
 A \gls{fol} \defn{problem} is represented by a set of \defn{axioms} and a \defn{conjecture},
 each of which is a \gls{fol} sentence.
-The task of an \gls{atper} is to prove that the axioms entail the conjecture.
+\todo[inline]{A solver for FOL is a prover. We focus on proving (refutational, entailment) because FOL is hard. Disprovers (model builders etc.) are necessarily incomplete.}
+The task of an \gls{atper} is to prove that the axioms entail\todo{Unexpected, baf. "logically entail". Introduce.} the conjecture.\todo{This sentence is unexpected.}
 \defn{Refutational} provers reduce this task to proving that the axioms together with the \defn{negated conjecture} are inconsistent.
+
+\todo[inline]{"refutational complete": no need to explicitly qualify "refutational". Vampire is complete in what it does: refutational proving.}
 
 \subsection{Saturation-Based Theorem Proving}
 
-\Gls{saturation}-based approach has shown notable success in \gls{fol} \gls{tping}, as demonstrated in the \gls{casc} \cite{Sut16}.\todo{Consider praising Vampire here.}
-A \defn{\gls{saturation}-based \gls{tper}} searches for a refutation
-(a trivial contradiction represented by the empty clause)
-by iteratively deriving new facts,
-starting with the input problem expressed in (refutational\todo{Is there a better term?}) \gls{cnf}.
-\Gls{cnf} is sufficiently expressive:
-Any \gls{fol} problem can be converted (\enquote{clausified}) into an equisatisfiable \gls{cnf} in polynomial time.
+\Gls{saturation}-based approach is the state-of-the-art approach in \gls{fol} \gls{tping}, as demonstrated in the \gls{casc} \cite{Sut16}.\todo{Consider praising Vampire here.}
+A \defn{\gls{saturation}-based \gls{tper}} organizes the search for a contradiction
+(the empty clause)
+by iteratively selecting clauses
+
+deriving new facts,
+starting with the input problem expressed in \gls{cnf}.
+%\Gls{cnf} is sufficiently expressive:
+%Any \gls{fol} problem can be converted (\enquote{clausified}) into an equisatisfiable \gls{cnf} in polynomial time.
 
 In each iteration of a saturation-based proof search,
 a clause is selected from the \defn{unprocessed set}\todo{Consider clarifying the initialization of the processed (empty) and unprocessed (input) sets.}.
 This clause, referred to as the \defn{given clause}, is moved into the \defn{processed set}.
 Then, all the clauses in the processed set are considered as premises of all the inference rules.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
-All new clauses derived by the generating inferences are added to the unprocessed set.
+All new clauses derived by the inferences are added to the unprocessed set.
+
+Vampire implements ordered resolution, superposition calculus
+
+\todo[inline]{Calculi: ordered resolution (without equality, with \gls{to}), superposition.}
+
+The most commonly used calculi are resolution \cite{} and superposition \cite{}.
 
 The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
-While the resolution inference rule suffices to ensure refutational completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
+While the resolution calculus suffices to ensure refutational completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search,
 additional inference rules, in practice, greatly increase the power of the prover.
-For example, the superposition inference rule has demonstrated notable success in reasoning with equality \cite{}.
+For example, the superposition inference rule is the standard technique for reasoning with equality \cite{}.
+
+% Superposition is a generalization of Knuth-Bendix completion.
+% Superposition on UEQ is unfailing KB completion.
+
+\todo[inline]{The calculi are normally tweaked to be minimal yet ensure completeness.}
+\todo[inline]{Bare, unrestricted rules are *prolific*.
+
+In the past, people tried to make the calculus as small as possible and yet preserve completeness.}
 
 Adding generating rules into the calculus increases the power of each inference step at the cost of increasing the branching factor of the proof search.
-Even with only the resolution inference, the number of new clauses derived in each iteration may grow exponentially \cite{}.\todo{Really? Cite a source.}\todo{Something like that happens in practice.}
+Even with only the resolution inference, the number of new clauses derived in each iteration may grow quadratically \cite{}.\todo{Really? Cite a source. Or avoid discussing this.}\todo{Something like that happens in practice.}
 This leads to a steadily increasing computational cost of each iteration,
 which effectively slows the proof search down in the later stages.
 
-To combat such slowdown, the provers restrict the inferences in various ways.
+\todo[inline]{The calculus is sound. Restrictions are included in the calculus. They are typically completeness-preserving.
+
+For example, superposition and paramodulation only differ in the restrictions.}
+
+To combat such slowdown, the calculus restricts the inferences in various ways.
 For example, it is possible to select a subset of literals in each clause and only perform inferences on the selected literals.
-If the \defn{literal selection} procedure always selects either a negative literal or all maximal literals,
-the restriction preserves completeness of the calculus \cite{DBLP:conf/cav/KovacsV13}\todo{Cite the original source.}.
+If the \defn{literal selection} function is well-behaved,
+i.e., it selects either a negative literal or all maximal literals\todo{What does this mean? What if there are two incomparable literals in the clause? How does the selection deal with negation?},
+the restriction preserves completeness of the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}.
 Moreover, it may even be beneficial to restrict the inferences in a way that forfeits completeness
 in exchange for a more narrow and, presumably, better-aimed\todo{Find a better expression. Alternative: \enquote{faster-converging}} proof search.
 
 In summary, two main choice points guide the \gls{saturation}-based proof search:
 \begin{enumerate}
-\item Clause selection: Which of the unprocessed clauses should be selected?
+\item Clause selection: Which of the unprocessed clauses should be selected?\todo{Explain why this is important. Typically the prover derives a lot of useless clauses. If it always selected a useful clause, it would find a proof quickly. Add another paragraph about clause selection and "proof".}
 \item Inference restriction: Which of the inferences should be performed?\todo{This is affected by \gls{to} (literal selection, equality orienting) and forward subsumption.}\todo{Precedences actually likely work by pruning the search space rather than guidance.}
 \end{enumerate}
 %My research has dealt with both of these:
@@ -175,16 +256,19 @@ In summary, two main choice points guide the \gls{saturation}-based proof search
 \subsection{Machine Learning for Theorem Proving}
 
 The choice points described in the previous section are typically resolved by \defn{heuristics},
-that is, functions that were instantiated, by hand or automatically, to optimize the performance of the prover on a class of input problems.
-Automated optimization of the heuristics amounts to learning from proof searches.
-Standard techniques of \gls{ml} are applicable.
+that is, procedures that were instantiated\todo{Disambiguate from logical "instantiation". Consider drawing terminology from Hoos - programming by configuration.}, by hand or automatically, to optimize the performance of the prover on a class of input problems.
+A promising approach to automated optimization of the heuristics is based on learning from proof searches.
+Standard techniques of \gls{ml} are applicable.\todo{Such formulation undermines the challenge. We should stress we need non-standard techniques. Remember we often used proxy tasks. Another challenge: ML uses real vectors while we use discrete stuff, for example representations of formulas (graphs).}
 For example, clause selection can be cast as a supervised classification problem \cite{}.
 
-\Gls{ml} has been successfully applied to improve the performance of various \glspl{atper} \cite{DBLP:journals/corr/abs-2403-04017}.
+\Gls{ml} has been successfully applied to improve the performance of various \glspl{atper} \cite{DBLP:journals/corr/abs-2403-04017}.\todo{Undermines novelty. It is an open area.}
 Specifically, \gls{ml} has been used to improve axiom selection \cite{}, clause selection \cite{}, ...
 My work adds more insights to this body of research.
 
 \todo[inline]{Explain what \gls{ml} is.}
+\todo[inline]{Explain GNN. Relate to the challenge of representing the logic formulas for NN.
+
+Consider including an overview of proxy tasks.}
 
 \todo[inline]{Finish this section.}
 
@@ -211,13 +295,13 @@ How to do ML for ATP? - Proof search guidance, HPO.
 \section{Contributions}
 
 \todo[inline]{Maybe: Add an introductory sentence that ties this section to the previous one.}
-In summary, I have substantially contributed to the design, implementation, and evaluation of several \acrshort{ml}-based systems that improve the performance of the state-of-the-art \gls{atper} \gls{vampire} \cite{DBLP:conf/cav/KovacsV13}.
+%In summary, I have substantially contributed to the design, implementation, and evaluation of several \acrshort{ml}-based systems that improve the performance of the state-of-the-art \gls{atper} \gls{vampire} \cite{DBLP:conf/cav/KovacsV13}.
 % on the \gls{fol} fragment of \gls{tptp}.
 While the experiments have been performed using \gls{vampire},
 the core techniques are applicable to any \gls{superposition}-based \gls{atper}.
 Furthermore, they are potentially useful in other areas of parameterized problem solving, as detailed below.
 
-I used the \gls{fol} fragment of \gls{tptp} as the target problem distribution\todo{Replace or clarify?} of my research.
+I used the \gls{fol} fragment of \gls{tptp} as the target\todo{Consider factoring out "target".} problem distribution\todo{Replace or clarify?} of my research.
 Since \gls{tptp} represents several target domains of \gls{atping},
 such as mathematics and software verification,
 and since \gls{vampire} represents the state of the art in \gls{atping}\todo{Ensure this is justified somewhere.},
@@ -231,18 +315,21 @@ In all cases, the \gls{ml} is based on learning from proof searches of the targe
 
 Vampire uses a \gls{to} to restrict the proof search without compromising completeness.
 The ordering orients some of the equations, and the superposition inferences only apply such equations for rewriting in one direction.
-Moreover, literal selection restricts the inferences on any given clause to a subset of literals, and the term ordering influences the selection\todo{How? For example, can only a strictly maximal literal be selected?}.
+Moreover, literal selection restricts the inferences on any given clause to a subset of literals, and the term ordering affects which literals are selected\todo{How? For example, can only a strictly maximal literal be selected?}.
 In these two ways, the \gls{to} prunes and guides\todo{Is "guidance" an overstatement?} the proof search.
 
 \Gls{kbo}, the default term ordering scheme used in \gls{vampire}, is parameterized by a \gls{sp}\todo{Define here or before.}.
 Choosing a good \gls{sp} improves the proof search pruning and guidance.
 
 We explored two approaches to generating a \gls{sp} for a given input problem.
-In our paper \cite{} (see \cref{sec:results:simple}), we present a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination of their syntactic features.
+In our paper \cite{} (see \cref{sec:results:simple}), we present a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination\todo{Stress the challenge of designing the proxy task. "We present a p. recommender which uses ... over syntactic features.} of their syntactic features.
 In a later work (see \cref{sec:results:npr}), we build on this to train a \acrshort{gnn}-based \gls{PrecedenceRecommender}.
-In both cases, we trained the recommender to generate \glspl{sp} that likely result in a short successful proof search.
+In both cases, we trained the recommender to generate \glspl{sp} that improve the likelihood of a successful proof search.
 
-The problems in \gls{tptp} do not share signatures.
+\todo[inline]{Explain somewhere: We learn across problems. We try to generalize across problems. }
+
+The problems in \gls{tptp} do not share signatures\todo{Consider explaining "signature" before.},
+which means ...\todo{}
 This poses an unusual design challenge\todo{Clarify what the challenge is: there is no clear mapping of symbols and the signature sizes vary. Thus we use a signature-agnostic model/system.},
 which eventually led us to apply techniques that have been previously explored in the field of \gls{ltr}.
 Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably, an instructive description of a \acrshort{gnn}-based permutation recommender.
@@ -256,9 +343,9 @@ Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably
 %The \glspl{atper} rely on heuristics to select the (given) clause.
 
 Given clause selection is the most important choice point in a prover.
-The symbol-counting heuristic \cite{}, which is one of the most popular ones,
-selects a clause that is small in the number of symbol and variable occurrences.
-In the weighted variant of this heuristic \cite{},
+The symbol-counting heuristic \cite{DBLP:conf/cade/SchulzM16}, which is one of the most common clause selection heuristics,
+prefers selecting a clause that is small in the number of symbol and variable occurrences.
+In the weighted variant of this heuristic \cite{E-manual},
 each symbol contributes an amount specified by its weight,
 which is a parameter of the heuristic.
 
@@ -266,15 +353,16 @@ In the work described in \cref{sec:results:selection},
 I modified Vampire to support the weighted symbol-counting clause selection heuristic
 and trained a \gls{gnn} to propose a weight for each of the symbols of the input problem.
 %These weights were then used in a weighted symbol-counting clause selection heuristic in \gls{vampire}.
-This symbol weight recommender is signature-agnostic,
-which helps it overcome the challenge of misaligned signatures present in \gls{tptp}.
+Thanks to the use of a \gls{gnn}, this symbol weight recommender is signature-agnostic,
+which solves the challenge of misaligned signatures present in \gls{tptp}.
+The trained heuristic solved \SI{6.6}{\percent} more problems than the baseline.
 
-The resulting system solved \SI{6.6}{\percent} more problems than the baseline,
-which is an improvement greater than that introduced, under the same conditions, by AVATAR,
-a powerful proving technique fusing a SAT solver with FOL ATP.
-Our experiments revealed that constraining the training to assign a weight of at least 1 to each symbol is a fruitful strategy\todo{Disambiguate from the term "strategy"?}.
-The trained system assigned a relatively low weight to the variable occurrences,
-which matches the intuition that general clauses should be preferred to concrete ones.
+%The resulting system solved \SI{6.6}{\percent} more problems than the baseline,
+%which is an improvement greater than that introduced, under the same conditions, by AVATAR,
+%a powerful proving technique fusing a SAT solver with FOL ATP.
+%Our experiments revealed that constraining the training to assign a weight of at least 1 to each symbol is a fruitful strategy\todo{Disambiguate from the term "strategy"?}.
+%The trained system assigned a relatively low weight to the variable occurrences,
+%which matches the intuition that general clauses should be preferred to concrete ones.
 
 \subsection{Strategy Construction and Scheduling}
 
@@ -290,7 +378,9 @@ The research presented in \cref{sec:results:regularization} combines two importa
 \item \Gls{aac} is the task of finding a good configuration (strategy) for a distribution of problems.
 \item \Gls{AlgorithmScheduling} is the task of finding, given a portfolio of algorithms, a good schedule for a distribution of problems.
 \end{enumerate}
-In our research, we generated a set of strong and mutually complementary strategies for the \gls{atper} \gls{vampire},
+In our work, we generated a set of strong and mutually complementary strategies for the \gls{atper} \gls{vampire},
 and combined these strategies into strong schedules.
 To ensure good generalization of the resulting schedules, we introduced custom regularization into the scheduling process.
 To the best of our knowledge, this is the first principled treatment of generalization of \gls{AlgorithmScheduling}.\todo{Polish the wording.}
+
+\todo[inline]{Consider including a list of publications in Contributions.}
