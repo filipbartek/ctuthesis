@@ -112,44 +112,74 @@ However, in problems with huge premise sets, some kind of \gls{AxiomSelection} i
 
 \subsection{Reasoning in First-Order Logic}
 
-\Gls{fol} is an established formalism capable of representing a wide range of problems from diverse areas such as mathematics and software verification\todo{Add more examples.}.
-A \gls{fol} representation of a problem consists of a set of \defn{axioms} and a \defn{conjecture},
-each expressed as a \gls{fol} formula.
-The axioms \defn{logically entail} the conjecture if and only if
-every interpretation\todo{unclear term}\todo{Here we implicitly assume that all variables are bound. Otherwise, we would need to talk about valuation too.} that satisfies all the axioms also satisfies the conjecture\footnote{Note that if the conjecture is logically entailed by an empty set of axioms
-(that is, satisfied by every interpretation),
-the conjecture is said to be \defn{logically valid} (tautological).}.
-Solving the problem amounts proving that such entailment holds.
-%(or, equivalently, that the conjecture holds assuming the axioms hold).
+\todo[inline]{Too technical. Make it more storylike.}
+\todo[inline]{Make terminology more consistent. Representation, solving (original problem or FOL problem), introduce "task" (computational task). Witness, certificate, convince, argue, ascertain $\approx$ proof. ATP finds proof, proves conjecture (don't use "proving" in other meanings).}
 
-To prove the entailment \defn{by contradiction},
-it suffices to prove that the set of all axioms together with the negated conjecture entails a contradiction.
-We call such representation of a problem \defn{refuational}.
-%This is the basis of \defn{refutational theorem proving}.
+During the 20th century, \gls{fol} was established as the standard formalism for foundations of mathematics, namely the set theory \cite{DBLP:journals/bsl/Ferreiros01}.
+Thanks to its expressiveness, \gls{fol} has found use in diverse areas such as software verification and common-sense reasoning\todo{Add more examples.}.
+These circumstances demonstrate the general importance of reasoning in \gls{fol}.
 
-Every refutational \gls{fol} problem (a set of \gls{fol} formulas) can be transformed into an equisatisfiable set of clauses (disjunctions of literals) in polynomial time \cite{}.
-We call such representation of the \gls{fol} problem \defn{\gls{cnf}}
+A reasoning task can be represented in \gls{fol} by a set of \defn{axioms} (for example, the axioms of set theory, group theory, or theory of numbers; in general, any collection of \gls{fol} formulas) and a \defn{conjecture}.
+The axioms and the conjecture are \gls{fol} \defn{formulas} constructed on top of a common \defn{signature} -- a set of non-logical\todo{Is this term ok?} symbols (predicate and function names).
+%\footnote{Predicate symbols map tuples of elements to Boolean values, and function symbols map tuples of elements to elements.}
+An \defn{interpretation} of the signature specifies semantics of the signature's symbols.
+The (possibly\todo{Or even necessarily?} infinitely many) interpretations that satisfy a set of axioms form the \defn{theory} of the axioms.
+If the conjecture is satisfied by all the interpretations in the theory defined by the axioms,
+the axioms \defn{logically entail} the conjecture.
+We also called the conjecture a theorem of the theory.
+
+%\Gls{fol} is an established formalism capable of representing\todo{Discuss the process of representation in more detail. Give an example.} a wide range of reasoning tasks from diverse areas such as mathematics and software verification\todo{Add more examples.}.
+%A \gls{fol} representation of a problem consists of a set of \defn{axioms} and a \defn{conjecture},
+%each expressed as a \gls{fol} formula.
+%The axioms \defn{logically entail} the conjecture if and only if\todo{Informalize -- use "if" or something similar.}
+%every interpretation\todo{unclear term}\todo{Here we implicitly assume that all variables are bound. Otherwise, we would need to talk about valuation too.} that satisfies all the axioms also satisfies the conjecture\footnote{Note that if the conjecture is logically entailed by an empty set of axioms
+%(that is, satisfied by every interpretation),
+%the conjecture is said to be \defn{logically valid} (tautological).}.
+%Solving the problem amounts to verifying that such entailment holds.\todo{Storify, add more detail, expand.}\todo{"holds" and "entailment" are both metalogical technical terms.}
+%%(or, equivalently, that the conjecture holds assuming the axioms hold).
+
+\todo[inline]{Add a paragraph discussing informal and formal proofs?}
+
+A common technique in informal theorem proving in mathematics is proof by contradiction.
+A straightforward counterpart exists in \gls{fol} --
+the task of checking
+entailment is easily reduced to
+checking the
+unsatisfiability of a set of formulas\todo{Can we only do this in classical logic? Should this be discussed?}:
+The set of axioms $\mathcal{A}$ entails conjecture $C$ if the set of formulas $\mathcal{A} \cup \{\lnot C\}$ (where $\lnot C$ is the negation of $C$) is unsatisfiable, that is, falsified by every interpretation.
+In the rest of this text, we call such set of formulas a \defn{\gls{fol} problem}.
+
+%One of the approaches of establishing such entailment is proving by contradiction.
+%To prove the entailment \defn{by contradiction}\todo{Introduce: Why do we care about proving by contradiction?},
+%it suffices to prove\todo{I use "prove" too often.} that the set of all axioms together with the negated conjecture is unsatisfiable\todo{Clear?}.
+%We call such representation of a problem \defn{refutational}\todo{Try to use standard terminology instead. Or factor out the term "refutational problem".}.
+%%This is the basis of \defn{refutational theorem proving}.
+
+Every \gls{fol} problem can be transformed into an equisatisfiable set of clauses (disjunctions of \gls{fo} literals) in polynomial time \cite{}.
+We call such representation of the problem \defn{\gls{cnf}}
 and the process leading to it \defn{clausification}\todo{Define \enquote{preprocessing}.}.
 
-Solving a refutational \gls{cnf} problem amounts to proving that the set of clauses is \defn{unsatisfiable},
-that is, that every interpretation falsifies at least one of the clauses.
-A common way to represent a proof of unsatisfiability is using an \defn{inference calculus},
+Solving a \gls{cnf} problem amounts to showing that the set of clauses is unsatisfiable.
+A common way to define a proof of unsatisfiability is using an \defn{inference calculus},
 that is, a set of inference rules.
 A proof, then, is a sequence of clauses,
 each of which is either an input\todo{potentially unclear} clause or a clause derived from one of the previous clauses by an inference rule, and
 last of which is the empty clause (a trivial contradiction).
-If all the inference rules are \defn{correct}\todo{Is this the right term? Alternatives: consistent, valid.}, then such proof establishes unsatisfiability of the input set of clauses.
+If all the inference rules are \defn{sound}\todo{Replace "correct" with "sound" throughout the text.}, then such proof establishes unsatisfiability of the input set of clauses.
 If the inference calculus is \defn{complete} and the input clause set is unsatisfiable,
-then a proof of unsatisfiability exists and can be found, for example, by enumerating the clauses derivable from the input clauses.
+then a proof of unsatisfiability exists and can be found, for example, by exhaustively enumerating the clauses derivable from the input clauses.
 
 %If a set of clauses is unsatisfiable, then its negation is logically valid.
 %If a set of clauses is satisfiable, than the satisfying interpretation defines a counter-example to the negation of the set.
 
 The problem of unsatisfiability and, by reduction, entailment in \gls{fol} is semi-decidable:
-There is an algorithm that will, if the input clause set is unsatisfiable, eventually determine the unsatisfiability,
-but there is no algorithm that would determine the satisfiability of every satisfiable clause set.
+There is an algorithm that will, if the input clause set is unsatisfiable, eventually find a proof and therefore establish the unsatisfiability,
+but there is no algorithm that would determine the satisfiability of every satisfiable clause set \cite{}.
+\todo[inline]{For each algorithm that is sound and complete, there is a problem that will make the algorithm loop forever. Any alg. will necessarily not terminate on some input.}
 %This is related to the fact that to show the satisfiability, one has to prove that an interpretation with certain properties exists,
 %while this interpretation may be arbitrarily large (infinite) and complex.
+
+\todo[inline]{The (proof) search needs to be *smart* to succeed.}
 
 Given a correct inference calculus, the process of solving a \gls{fol} problem can be viewed as a search for the empty clause.
 The search starts by visiting the input clauses and
