@@ -155,36 +155,40 @@ In the rest of this text, we call such set of formulas a \defn{\gls{fol} problem
 %We call such representation of a problem \defn{refutational}\todo{Try to use standard terminology instead. Or factor out the term "refutational problem".}.
 %%This is the basis of \defn{refutational theorem proving}.
 
-Every \gls{fol} problem can be transformed into an equisatisfiable set of clauses (disjunctions of \gls{fo} literals) in polynomial time \cite{}.
+Using De-Morgan laws, subformula naming (Tseitin transformation), and Skolemization\todo{Are these exactly the components of clausification? Are they named and described correctly?},
+every \gls{fol} problem can be transformed into an equisatisfiable set of universally quantified clauses (disjunctions of \gls{fo} literals) in polynomial time \cite{}.
 We call such representation of the problem \defn{\gls{cnf}}
 and the process leading to it \defn{clausification}\todo{Define \enquote{preprocessing}.}.
 
 Solving a \gls{cnf} problem amounts to showing that the set of clauses is unsatisfiable.
-A common way to define a proof of unsatisfiability is using an \defn{inference calculus},
-that is, a set of inference rules.
-A proof, then, is a sequence of clauses,
-each of which is either an input\todo{potentially unclear} clause or a clause derived from one of the previous clauses by an inference rule, and
-last of which is the empty clause (a trivial contradiction).
-If all the inference rules are \defn{sound}\todo{Replace "correct" with "sound" throughout the text.}, then such proof establishes unsatisfiability of the input set of clauses.
-If the inference calculus is \defn{complete} and the input clause set is unsatisfiable,
-then a proof of unsatisfiability exists and can be found, for example, by exhaustively enumerating the clauses derivable from the input clauses.
+A common way to define a proof of unsatisfiability (or, generally, entailment) is using an \defn{inference calculus} -- a set of inference rules.
+A proof, then, is a sequence\todo{Finite?} of clauses,
+each of which is either an input\todo{potentially unclear} clause or a clause derived from some (typically one or two) of the previous clauses by an inference rule.
+If all the inference rules are \defn{sound},
+then each of the clauses in the proof is a logical consequence of the input set of clauses.
+Finally, if the empty clause (a trivial contradiction) appears in the proof,
+the proof certifies the unsatisfiability of the input set of clauses.
+It is easy to view proving unsatisfiablity as a search for (a derivation of) the empty clause.
+
+\defn{Complete} inference calculi are of special interest:
+If an inference calculus is complete and the input clause set is unsatisfiable\todo{Does it need to be finite?},
+then a finite\todo{?} proof of unsatisfiability exists and can be found, for example, by exhaustively enumerating the clauses derivable from the input clauses.
+Enumerating the derivable clauses in a \enquote{smart} way is the basis of saturation-based theorem proving.
 
 %If a set of clauses is unsatisfiable, then its negation is logically valid.
 %If a set of clauses is satisfiable, than the satisfying interpretation defines a counter-example to the negation of the set.
 
-The problem of unsatisfiability and, by reduction, entailment in \gls{fol} is semi-decidable:
-There is an algorithm that will, if the input clause set is unsatisfiable, eventually find a proof and therefore establish the unsatisfiability,
-but there is no algorithm that would determine the satisfiability of every satisfiable clause set \cite{}.
-\todo[inline]{For each algorithm that is sound and complete, there is a problem that will make the algorithm loop forever. Any alg. will necessarily not terminate on some input.}
-%This is related to the fact that to show the satisfiability, one has to prove that an interpretation with certain properties exists,
-%while this interpretation may be arbitrarily large (infinite) and complex.
+%The problem of unsatisfiability and, by reduction, entailment in \gls{fol} is semi-decidable:
+%There is an algorithm that will, if the input clause set is unsatisfiable, eventually find a proof and therefore establish the unsatisfiability,
+%but there is no algorithm that would determine the satisfiability of every satisfiable clause set \cite{}.
+%\todo[inline]{For each algorithm that is sound and complete, there is a problem that will make the algorithm loop forever. Any alg. will necessarily not terminate on some input.}
+%%This is related to the fact that to show the satisfiability, one has to prove that an interpretation with certain properties exists,
+%%while this interpretation may be arbitrarily large (infinite) and complex.
 
-\todo[inline]{The (proof) search needs to be *smart* to succeed.}
-
-Given a correct inference calculus, the process of solving a \gls{fol} problem can be viewed as a search for the empty clause.
-The search starts by visiting the input clauses and
-each subsequent step visits a clause derivable by the inference rules from some of the clauses visited before.
-\defn{\Gls{atping}} automates such search.
+%Given a sound inference calculus, the process of solving a \gls{fol} problem can be viewed as a search for the empty clause.
+%The search starts by visiting the input clauses and
+%each subsequent step visits a clause derivable by the inference rules from some of the clauses visited before.
+%\defn{\Gls{atping}} automates such search.
 
 \subsection{Saturation-Based Theorem Proving}
 
