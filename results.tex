@@ -1,5 +1,4 @@
-\newtoggle{PAPERS}
-\toggletrue{PAPERS}
+\newcommand*{\IncludePaper}[2][height=\paperheight-1.5in]{\includepdf[pages=-, pagecommand={}, #1]{#2}}
 
 \chapter{Results}
 
@@ -16,29 +15,21 @@ Each of the publications is self-contained.
 
 Filip Bártek and Martin Suda. Learning Precedences from Simple Symbol Features. \Gls{paar} 2020. \cite{DBLP:conf/cade/Bartek020}
 
-\todo[inline]{Consider removing this paper. Am I allowed to include it even though it's not prestigious?}
-
-\iftoggle{PAPERS}{
-\includepdf[pages=-]{publications/simple.pdf}
-}
+\IncludePaper{publications/simple.pdf}
 
 \section{Neural Precedence Recommender}
 \label{sec:results:npr}
 
 Filip Bártek and Martin Suda. Neural Precedence Recommender. \Gls{cade} 28, 2021. \cite{DBLP:conf/cade/Bartek021}
 
-\iftoggle{PAPERS}{
-\includepdf[pages=-]{publications/Neural Precedence Recommender.pdf}
-}
+\IncludePaper{publications/Neural Precedence Recommender.pdf}
 
 \section{A GNN-Advised Clause Selection}
 \label{sec:results:selection}
 
 Filip Bártek and Martin Suda. How much should this symbol weigh? A \acrshort{gnn}-Advised Clause Selection \cite{DBLP:conf/lpar/Bartek023}
 
-\iftoggle{PAPERS}{
-\includepdf[pages=-]{publications/weights.pdf}
-}
+\IncludePaper{publications/weights.pdf}
 
 \section{Regularization in Spider-Style Strategy Discovery and Schedule Construction}
 \label{sec:results:regularization}
@@ -47,17 +38,11 @@ Filip Bártek, Karel Chvalovský, and Martin Suda. Regularization in Spider-Styl
 
 In this paper, we invented strong complementary strategies for the \gls{atper} Vampire and constructed strong schedules that generalize well.
 
-\iftoggle{PAPERS}{
-\includepdf[pages=-]{publications/regularization.pdf}
-}
+\IncludePaper{publications/regularization.pdf}
 
 \section{Cautious Specialization of Strategy Schedules}
 \label{sec:results:cautious}
 
 Filip Bártek, Karel Chvalovský, and Martin Suda. Cautious Specialization of Strategy Schedules (Extended Abstract). \Gls{paar} 2024. \cite{DBLP:conf/paar/BartekC024}
 
-\iftoggle{PAPERS}{
-\includepdf[pages=-]{publications/cautious.pdf}
-}
-
-{}
+\IncludePaper{publications/cautious.pdf}
