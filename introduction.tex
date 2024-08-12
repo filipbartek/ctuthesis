@@ -185,18 +185,23 @@ In addition to these, the performance of a saturation-based prover may also depe
 
 \subsection{Machine Learning for Theorem Proving}
 
-\todo[inline]{Describe all the crucial parameterized heuristics in Vampire.}
+%\todo[inline]{Describe all the crucial parameterized heuristics in Vampire.}
 
-Each of the choice points described previously is typically governed by a \defn{heuristic} -- a procedure that aims to decide the choice in a way that optimizes the performance of the prover on the input problems of interest.\footnote{The most common measures of performance of a prover on a set of problems are success rate and \gls{par} \cite{}. Both of them assume a fixed runtime limit.}\todo{Too technical?}
-Many such heuristics are parameterized and their configuration can be adjusted to specialize the prover to a particular set or distribution of problems.
+Each of the choice points described previously is typically governed by a \defn{heuristic} -- a procedure that aims to decide the choice in a way that optimizes the performance of the prover on the input problems of interest.
+%\footnote{The most common measures of performance of a prover on a set of problems are success rate and \gls{par} \cite{}. Both of them assume a fixed runtime limit.}
+%\todo{Too technical?}
+Many such heuristics are parameterized and their configuration can be adjusted to further specialize the prover to a particular set or distribution of problems.
+
 For example, clause selection is often implemented by interleaving two priority queues (\enquote{age} and \enquote{weight}), and the ratio at which these queues are interleaved, the so-called \enquote{age-weight ratio}, is configurable.
 Furthermore, there is no universally best value of the ratio --
-the optimum value depends on the input problem \cite{DBLP:conf/cade/SchulzM16}\todo{Schulz doesn't claim the difference is significant so it may be just due to noise. I would like to assume it's significant because it reaches more than \SI{10}{\percent} solved problems when comparing two classes of problems (unit eq and non-Horn eq).}
+the optimum value depends on the input problem \cite{DBLP:conf/cade/SchulzM16}
+%\todo{Schulz doesn't claim the difference is significant so it may be just due to noise. I would like to assume it's significant because it reaches more than \SI{10}{\percent} solved problems when comparing two classes of problems (unit eq and non-Horn eq).}
 % In unit eq, the weight-age ratio 2 is better than 15, solving 10.22 % problems.
 % In general eq, the weight-age ratio 15 is better than 2, solving 0.89 % problems.
 % > In the unit-equality category, FIFO is comparatively much weaker than in the other categories.
 % https://docs.google.com/spreadsheets/d/1tcoeSrXt1wo3RnUJ4uqtvrO79sue8FZSV6xOeWaipmY
-and, in general, on the configuration of the remaining heuristics\todo[author=FB]{I cannot find any source to cite on this.}.
+and, in general, on the configuration of the remaining heuristics.
+%\todo[author=FB]{I cannot find any source to cite on this.}
 
 Traditionally, finding a good configuration of one or more parameters of a prover is the work of an expert user that draws from their experience with \gls{atping}.
 Modern computing technology allows us to automate the process by \defn{\gls{ml}}\todo{Explain what \gls{ml} is.}.
