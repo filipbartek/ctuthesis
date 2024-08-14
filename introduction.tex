@@ -187,15 +187,21 @@ In addition to these, the performance of a saturation-based prover may also depe
 
 %\todo[inline]{Describe all the crucial parameterized heuristics in Vampire.}
 
-Each of the choice points described previously is typically governed by a \defn{heuristic} -- a procedure that aims to decide the choice in a way that optimizes the performance of the prover on the input problems of interest.
+Each of the choice points in a theorem prover is typically governed by a \defn{heuristic} -- a procedure that aims to decide the choice in a way that optimizes the performance of the prover on the input problems of interest.
 %\footnote{The most common measures of performance of a prover on a set of problems are success rate and \gls{par} \cite{}. Both of them assume a fixed runtime limit.}
 %\todo{Too technical?}
-Many such heuristics are parameterized and their configuration can be adjusted to further specialize the prover to a particular set or distribution of problems.
+Many such heuristics are parameterized and their configuration can be adjusted to further specialize the prover to a particular type of problems.
 
 For example, clause selection is often implemented by interleaving two priority queues (\enquote{age} and \enquote{weight}), and the ratio at which these queues are interleaved, the so-called \enquote{age-weight ratio}, is configurable.
-Furthermore, there is no universally best value of the ratio --
-the optimum value depends on the input problem \cite{DBLP:conf/cade/SchulzM16}
+There is no universally best value of the ratio --
+the optimum value depends on the input problem
+%\footnote{Specifically, in the unit problems (all clauses are unit) with equality,
+%weight-based selection should be performed twice as often as age-based selection,
+%while in problems with at least one non-Horn clause,
+%weight-based selection should be performed 15 times as often as age-based selection.}
+\cite{DBLP:conf/cade/SchulzM16}
 %\todo{Schulz doesn't claim the difference is significant so it may be just due to noise. I would like to assume it's significant because it reaches more than \SI{10}{\percent} solved problems when comparing two classes of problems (unit eq and non-Horn eq).}
+% unit eq: FIFO is relatively good. general eq: FIFO is relatively bad.
 % In unit eq, the weight-age ratio 2 is better than 15, solving 10.22 % problems.
 % In general eq, the weight-age ratio 15 is better than 2, solving 0.89 % problems.
 % > In the unit-equality category, FIFO is comparatively much weaker than in the other categories.
@@ -204,26 +210,64 @@ and, in general, on the configuration of the remaining heuristics.
 %\todo[author=FB]{I cannot find any source to cite on this.}
 
 Traditionally, finding a good configuration of one or more parameters of a prover is the work of an expert user that draws from their experience with \gls{atping}.
-Modern computing technology allows us to automate the process by \defn{\gls{ml}}\todo{Explain what \gls{ml} is.}.
-Various approaches have been applied successfully to configure theorem provers automatically \cite{DBLP:journals/corr/abs-2403-04017}. %\cite{DBLP:conf/gcai/Urban15,DBLP:conf/cpp/JakubuvU17,DBLP:conf/gcai/SchaferS15,DBLP:journals/jar/KuhlweinU15,DBLP:conf/mkm/HoldenK21}
+Modern computing technology has opened possibilities for automating expert decisions in various domains by \defn{\gls{ml}}\todo{Explain what \gls{ml} is.} \cite{}.
+%and a growing number of researchers believes in the potential of applying \gls{ml} to \gls{atping}.
+To apply \gls{ml} in \gls{atping}, however, special considerations need to be taken.
 
-In this thesis, we present novel approaches for configuring \gls{to}\todo{SOT is introduced later.} (\cref{sec:results:simple,sec:results:npr}) and clause selection (\cref{sec:results:selection}).
-Special care had to be taken for the trained \gls{ml} system to propose problem-dependent symbol permutation (precedence) or symbol weights, respectively.
+\todo[inline]{"statistical models" "data from prover runs" - what could it mean to use ML for ATP? Foreshadow the challenges -- representation of formulas and terms etc.}
 
-In \cref{sec:results:regularization,sec:results:cautious},
-I present research that extends on the task of optimizing all the parameters (the whole strategy) of Vampire jointly.
-To achieve greater performance, several strong and mutually complementary strategies were identified and combined into strategy schedules.
-The main innovation in this part of my research is the systematic treatment of generalization of the strategy schedules.
+For example, we could try to predict, for an arbitrary input problem, an age-weight ratio
+such that the prover is likely to solve the problem.
+To train such a \gls{ml} system using supervised learning\todo{new term},
+%Let us consider the example of clause selection using the age- and weight-based priority queues once more.
+%To train a \gls{ml} system that predicts a good value of the age-weight ratio for an arbitrary input problem,
+we need to represent the input problems (sets of \gls{fol} formulas) in a form suitable for \gls{ml}.
+For example, we could use a numeric vector consisting of human-designed features, such as symbol counts or term walk counts, or automate the feature extraction using a \gls{rnn} or a \gls{gnn}.
+
+Since the satisfiability of a set of clauses does not depend on the particular naming of the symbols and variables,
+we may decide make the representation of the problem oblivious to the names
+to make sure we are learning general patterns based on common abstract sub-structures in the problems,
+rather than idiosyncratic patterns based naming conventions.
+\Glspl{nn} admit such representation naturally.
+
+%We may include the names of some or all the symbols and variables,
+%or leave them out to make the system oblivious to the symbol and variable names,
+%relying solely on the logical structure of the problem.
+% Actually, we typically also provide roles of the clauses.
+Furthermore, we need to decide what data the system will be trained on
+(for example, outcomes of prover runs with varying age-weight ratio and input problem).
+While our final goal is to optimize the performance of the prover in terms of, for example, the percentage of problems solved with a fixed time limit,
+for the purpose of training,
+we typically need to approximate this measure by a proxy task, for example, regression of age-weight ratio.
+\todo{Stress the challenge of ML.}
 
 As an alternative to configuring the heuristics,
 a trained \gls{ml} system may be invoked during or before the proof search in place of a man-made heuristic.
-Notably, \gls{ml}-based systems have been trained to perform clause selection and axiom selection \cite{DBLP:journals/corr/abs-2403-04017}.
+For example, \gls{ml}-based systems have been trained to perform clause selection and axiom selection \cite{DBLP:conf/birthday/BlaauwbroekCGJK24}.
+
+While a growing body of research on \gls{ml} for \gls{atping} exists \cite{DBLP:conf/birthday/BlaauwbroekCGJK24},
+%\cite{DBLP:conf/gcai/Urban15,DBLP:conf/cpp/JakubuvU17,DBLP:conf/gcai/SchaferS15,DBLP:journals/jar/KuhlweinU15,DBLP:conf/mkm/HoldenK21}
+many avenues remain unexplored.
+The work presented in this thesis explores several novel approaches, as detailed in the next section.
+%\cref{sec:results:simple,sec:results:npr,sec:results:selection}
+
+% Goal of this section (also): Foreshadow what has not been done yet to prepare ground for contributions.
+
+% Purpose: zoom in on various places of my reserach, convince the reader that it is cool and important and interesting
+
+%In this thesis, we present novel approaches for configuring \gls{to}\todo{SOT is introduced later.} (\cref{sec:results:simple,sec:results:npr}) and clause selection (\cref{sec:results:selection}).
+%Special care had to be taken for the trained \gls{ml} system to propose problem-dependent symbol permutation (precedence) or symbol weights, respectively.\todo{Explain in more detail. Expand to a paragraph. At least one of these challenges. "NNs work with vectors of fixed length." "Aggregate experience across different problems."}
+%
+%In \cref{sec:results:regularization,sec:results:cautious},
+%I present research that extends on the task of optimizing all the parameters (the whole strategy) of Vampire jointly.
+%To achieve greater performance, several strong and mutually complementary strategies were identified and combined into strategy schedules.
+%The main innovation in this part of my research is the systematic treatment of generalization of the strategy schedules\todo{vague}.\todo{Consider discussing strategies separately. New section. "Strategy schedules are also very important for ATP. "No ML model is executed in preprocessing or runtime."}
 
 %A promising approach to automated optimization of the heuristics is based on learning from proof search traces -- sequences of annotated clauses derived in a proof search.
 %Standard techniques of \gls{ml} are applicable.\todo{Such formulation undermines the challenge. We should stress we need non-standard techniques. Remember we often used proxy tasks. Another challenge: ML uses real vectors while we use discrete stuff, for example representations of formulas (graphs).}
 %For example, clause selection can be cast as a supervised classification problem \cite{}.
 
-%\Gls{ml} has been successfully applied to improve the performance of various \glspl{atper} \cite{DBLP:journals/corr/abs-2403-04017}.\todo{Undermines novelty. It is an open area.}
+%\Gls{ml} has been successfully applied to improve the performance of various \glspl{atper} \cite{DBLP:conf/birthday/BlaauwbroekCGJK24}.\todo{Undermines novelty. It is an open area.}
 %Specifically, \gls{ml} has been used to improve axiom selection \cite{}, clause selection \cite{}, ...
 %My work adds more insights to this body of research.
 
@@ -233,46 +277,66 @@ Notably, \gls{ml}-based systems have been trained to perform clause selection an
 
 \todo[inline]{Explain GNN. Relate to the challenge of representing the logic formulas for NN.
 
-Consider including an overview of proxy tasks.}
+Consider including an overview of proxy tasks -- clause classification, ...
+
+Proxy is only intuitively representative.
+
+Maybe: Reinforcement learning could do without proxy tasks. "The advantage of RL is ... and the advantage of supervised ... is ..."}
+
+%\subsection{Strategies and Strategy Schedules}
+%
+%The union of all the heuristics that control the proof search in a prover constitutes a proof search \defn{\gls{strategy}} \cite{DBLP:books/daglib/0002958}\todo{Should I really cite Schulz as coining the term "strategy"?}.
+%Similarly to the individual options,
+%the strategies are also specialized to different problems.
+%Running several strategies with short time limits in a sequence is often a good way to deal with the uncertainty of which strategy to use.
+%Such sequence of strategies with associated time limits constitutes a \defn{\gls{StrategySchedule}}.
 
 \section{Contributions}
+\label{sec:contributions}
+
+\todo[inline]{Relate to challenges and proxies outlined above.}
 
 \todo[inline]{Maybe: Add an introductory sentence that ties this section to the previous one.}
 %In summary, I have substantially contributed to the design, implementation, and evaluation of several \acrshort{ml}-based systems that improve the performance of the state-of-the-art \gls{atper} \gls{vampire} \cite{DBLP:conf/cav/KovacsV13}.
 % on the \gls{fol} fragment of \gls{tptp}.
+This section summarizes the contributions presented in this thesis.
 While the experiments have been performed using \gls{vampire},
 the core techniques are applicable to any \gls{superposition}-based \gls{atper}.
-Furthermore, they are potentially useful in other areas of parameterized problem solving, as detailed below.
+Furthermore, they are potentially useful in other types of parameterized problem solving, as detailed below.
 
-I used the \gls{fol} fragment of \gls{tptp} as the target\todo{Consider factoring out "target".} problem distribution\todo{Replace or clarify?} of my research.
+I used the \gls{fol} fragment of \gls{tptp} as the target\todo{Consider factoring out "target".} problem distribution\todo{Replace or clarify?} in most of my research.
 Since \gls{tptp} represents several target domains of \gls{atping},
 such as mathematics and software verification,
 and since \gls{vampire} represents the state of the art in \gls{atping}\todo{Ensure this is justified somewhere.},
-the results can be understood as pushing the limits of \gls{fol} \gls{atping} in general.
-I focused on \gls{fol} \gls{atping} because this area is well established yet nontrivial.\todo{Write a better justification.}
-
-In all cases, the \gls{ml} is based on learning from proof searches of the target prover (\gls{vampire}) performed on problems from the target domain (\gls{tptp}).
+the results can be understood as exploring and extending the limits of \gls{fol} \gls{atping} in general.
+%I focused on \gls{fol} \gls{atping} because this area is well established yet nontrivial.\todo{Write a better justification.}
+In all cases, the \gls{ml} is based on learning from results of proof searches of the target prover (\gls{vampire}) performed on problems from the target domain (\gls{tptp}).
 
 \subsection{Symbol Precedence Recommenders}
 \label{sec:contrib:SymbolPrecedenceRecommenders}
 
-Vampire uses a \gls{to} to restrict the proof search without compromising completeness.
-The ordering orients some of the equations, and the superposition inferences only apply such equations for rewriting in one direction.
-Moreover, literal selection restricts the inferences on any given clause to a subset of literals, and the term ordering affects which literals are selected\todo{How? For example, can only a strictly maximal literal be selected?}.
+Vampire uses a \gls{to} \cite{} to restrict the proof search without compromising completeness:
+\begin{enumerate}
+\item The ordering orients some of the equations.
+Superposition inference is a generalization of term rewriting
+and the oriented equations are only used for such rewriting in one of the two directions.
+\item Literal selection restricts the inferences on any given clause to a subset of literals, and the term ordering affects which literals are selected\todo{How? For example, can only a strictly maximal literal be selected?}.
+\end{enumerate}
 In these two ways, the \gls{to} prunes and guides\todo{Is "guidance" an overstatement?} the proof search.
 
-\Gls{kbo}, the default term ordering scheme used in \gls{vampire}, is parameterized by a \gls{sp}\todo{Define here or before.}.
-Choosing a good \gls{sp} improves the proof search pruning and guidance.
+\Gls{kbo}, the default term ordering scheme used in \gls{vampire}, is parameterized by a \defn{\gls{sp}} -- a permutation of the \gls{signature} of the input problem.
+Choosing a good \gls{sp} may make the pruning more aggressive or the guidance more accurate,
+aiding in finding the proof quickly.
 
-We explored two approaches to generating a \gls{sp} for a given input problem.
-In our paper \cite{} (see \cref{sec:results:simple}), we present a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination\todo{Stress the challenge of designing the proxy task. "We present a p. recommender which uses ... over syntactic features.} of their syntactic features.
-In a later work (see \cref{sec:results:npr}), we build on this to train a \acrshort{gnn}-based \gls{PrecedenceRecommender}.
-In both cases, we trained the recommender to generate \glspl{sp} that improve the likelihood of a successful proof search.
+I explored two approaches to automatically finding a good \gls{sp} for an arbitrary input problem.
+In my initial paper \cite{DBLP:conf/cade/Bartek020} (see \cref{sec:results:simple}), I present a \gls{PrecedenceRecommender} that sorts the symbols by a linear combination\todo{Stress the challenge of designing the proxy task. "We present a p. recommender which uses ... over syntactic features.} of their syntactic features with learned weights.
+In a later work \cite{DBLP:conf/cade/Bartek021} (see \cref{sec:results:npr}), I built on this to train a \acrshort{gnn}-based \gls{PrecedenceRecommender}.
+In both cases, I trained the recommender to generate \glspl{sp} that improve the likelihood of a successful proof search.
 
 \todo[inline]{Explain somewhere: We learn across problems. We try to generalize across problems. }
 
-The problems in \gls{tptp} do not share signatures\todo{Consider explaining "signature" before.},
-which means ...\todo{}
+The problems in \gls{tptp} do not share \glspl{signature},
+which means ...\todo{Finish the sentence.}
 This poses an unusual design challenge\todo{Clarify what the challenge is: there is no clear mapping of symbols and the signature sizes vary. Thus we use a signature-agnostic model/system.},
 which eventually led us to apply techniques that have been previously explored in the field of \gls{ltr}.
 Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably, an instructive description of a \acrshort{gnn}-based permutation recommender.
@@ -285,7 +349,7 @@ Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably
 %The selected clause is then added to the active clause set and all the possible inferences within the active set are performed.
 %The \glspl{atper} rely on heuristics to select the (given) clause.
 
-Given clause selection is the most important choice point in a prover.
+Clause selection is the most important choice point in a prover.
 The symbol-counting heuristic \cite{DBLP:conf/cade/SchulzM16}, which is one of the most common clause selection heuristics,
 prefers selecting a clause that is small in the number of symbol and variable occurrences.
 In the weighted variant of this heuristic \cite{E-manual},
@@ -297,7 +361,7 @@ I modified Vampire to support the weighted symbol-counting clause selection heur
 and trained a \gls{gnn} to propose a weight for each of the symbols of the input problem.
 %These weights were then used in a weighted symbol-counting clause selection heuristic in \gls{vampire}.
 Thanks to the use of a \gls{gnn}, this symbol weight recommender is signature-agnostic,
-which solves the challenge of misaligned signatures present in \gls{tptp}.
+which solves the challenge of misaligned signatures present in \gls{tptp}.\todo{This is common with precedence recommender.}
 The trained heuristic solved \SI{6.6}{\percent} more problems than the baseline.
 
 %The resulting system solved \SI{6.6}{\percent} more problems than the baseline,
@@ -316,14 +380,14 @@ the options configure \gls{AxiomSelection} \cite{DBLP:conf/cade/HoderV11}, subfo
 The configuration of all of the options of a prover constitutes a \defn{strategy}.
 Different problems may require different strategies -- for example, aggressive \gls{AxiomSelection} is, in practice, necessary to solve problems with many axioms, while it rarely brings any benefit for small problems.
 
-The research presented in \cref{sec:results:regularization} combines two important tasks in automation of parameterized problem solving and applies them to \gls{atping}.
+The research presented in \cref{sec:results:regularization,sec:results:cautious} combines two important tasks in automation of parameterized problem solving and applies them to \gls{atping}:
 \begin{enumerate}
 \item \Gls{aac} is the task of finding a good configuration (strategy) for a distribution of problems.
 \item \Gls{AlgorithmScheduling} is the task of finding, given a portfolio of algorithms, a good schedule for a distribution of problems.
 \end{enumerate}
 In our work, we generated a set of strong and mutually complementary strategies for the \gls{atper} \gls{vampire},
 and combined these strategies into strong schedules.
-To ensure good generalization of the resulting schedules, we introduced custom regularization into the scheduling process.
+To ensure good generalization of the resulting schedules, we introduced novel regularization into the scheduling process.
 To the best of our knowledge, this is the first principled treatment of generalization of \gls{AlgorithmScheduling}.\todo{Polish the wording.}
 
 \todo[inline]{Consider including a list of publications in Contributions.}
