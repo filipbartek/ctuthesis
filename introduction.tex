@@ -187,12 +187,13 @@ In addition to these, the performance of a saturation-based prover may also depe
 
 %\todo[inline]{Describe all the crucial parameterized heuristics in Vampire.}
 
-Each of the choice points in a theorem prover is typically governed by a \defn{heuristic} -- a procedure that aims to decide the choice in a way that optimizes the performance of the prover on the input problems of interest.
+Each of the main choice points in a theorem prover is governed by a \defn{heuristic} -- a procedure that aims to decide the choice so as to optimize the performance of the prover.
 %\footnote{The most common measures of performance of a prover on a set of problems are success rate and \gls{par} \cite{}. Both of them assume a fixed runtime limit.}
 %\todo{Too technical?}
-Many such heuristics are parameterized and their configuration can be adjusted to further specialize the prover to a particular type of problems.
+Many such heuristics can be adjusted through options exposed by the prover to further specialize the prover to a particular type of problems.
 
-For example, clause selection is often implemented by interleaving two priority queues (\enquote{age} and \enquote{weight}), and the ratio at which these queues are interleaved, the so-called \enquote{age-weight ratio}, is configurable.
+For example, clause selection is often implemented by interleaving two priority queues (\enquote{age} and \enquote{weight}).
+The ratio at which these queues are interleaved, the so-called \enquote{age-weight ratio}, is configurable.
 There is no universally best value of the ratio --
 the optimum value depends on the input problem
 %\footnote{Specifically, in the unit problems (all clauses are unit) with equality,
@@ -206,49 +207,62 @@ the optimum value depends on the input problem
 % In general eq, the weight-age ratio 15 is better than 2, solving 0.89 % problems.
 % > In the unit-equality category, FIFO is comparatively much weaker than in the other categories.
 % https://docs.google.com/spreadsheets/d/1tcoeSrXt1wo3RnUJ4uqtvrO79sue8FZSV6xOeWaipmY
-and, in general, on the configuration of the remaining heuristics.
+and, in general, on the configuration of the other heuristics.
 %\todo[author=FB]{I cannot find any source to cite on this.}
 
 Traditionally, finding a good configuration of one or more parameters of a prover is the work of an expert user that draws from their experience with \gls{atping}.
-Modern computing technology has opened possibilities for automating expert decisions in various domains by \defn{\gls{ml}}\todo{Explain what \gls{ml} is.} \cite{}.
+Modern computing technology has opened new possibilities for the automation of expert decisions in various domains by \defn{\gls{ml}} \cite{DBLP:books/lib/HastieTF09,DBLP:journals/nn/Schmidhuber15}.
+% Hastie provides an overview of machine learning (as does Mohri).
+% Schmidhuber argues that GPUs have made NNs much more powerful.
 %and a growing number of researchers believes in the potential of applying \gls{ml} to \gls{atping}.
-To apply \gls{ml} in \gls{atping}, however, special considerations need to be taken.
+To apply \gls{ml} to \gls{atping}, however, special considerations must be taken into account.
 
 \todo[inline]{"statistical models" "data from prover runs" - what could it mean to use ML for ATP? Foreshadow the challenges -- representation of formulas and terms etc.}
 
 For example, we could try to predict, for an arbitrary input problem, an age-weight ratio
-such that the prover is likely to solve the problem.
-To train such a \gls{ml} system using supervised learning\todo{new term},
+that makes the prover likely to solve the problem in a given time limit.
+To train such system using standard supervised learning techniques,
 %Let us consider the example of clause selection using the age- and weight-based priority queues once more.
 %To train a \gls{ml} system that predicts a good value of the age-weight ratio for an arbitrary input problem,
-we need to represent the input problems (sets of \gls{fol} formulas) in a form suitable for \gls{ml}.
-For example, we could use a numeric vector consisting of human-designed features, such as symbol counts or term walk counts, or automate the feature extraction using a \gls{rnn} or a \gls{gnn}.
+we need to map input problems to numeric vectors of fixed length.
+For example, we could construct the numeric vector representation using human-designed features,
+such as symbol counts or term walk counts \cite{DBLP:conf/mkm/JakubuvU17},
+or automate feature extraction using a \gls{rnn} \cite{DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/iclr/EvansSAKG18} or a \gls{gnn} \cite{DBLP:conf/cade/JakubuvCOP0U20}.
 
 Since the satisfiability of a set of clauses does not depend on the particular naming of the symbols and variables,
-we may decide make the representation of the problem oblivious to the names
-to make sure we are learning general patterns based on common abstract sub-structures in the problems,
-rather than idiosyncratic patterns based naming conventions.
-\Glspl{nn} admit such representation naturally.
+we may decide to make the representation of the problem oblivious to the symbol and variable names.
+This ensures we are learning general patterns based on common abstract sub-structures in the problems,
+rather than idiosyncratic patterns based on naming conventions.
+\Glspl{nn} admit such representation naturally \cite{DBLP:conf/cade/JakubuvCOP0U20}.
 
 %We may include the names of some or all the symbols and variables,
 %or leave them out to make the system oblivious to the symbol and variable names,
 %relying solely on the logical structure of the problem.
 % Actually, we typically also provide roles of the clauses.
-Furthermore, we need to decide what data the system will be trained on
-(for example, outcomes of prover runs with varying age-weight ratio and input problem).
-While our final goal is to optimize the performance of the prover in terms of, for example, the percentage of problems solved with a fixed time limit,
-for the purpose of training,
-we typically need to approximate this measure by a proxy task, for example, regression of age-weight ratio.
-\todo{Stress the challenge of ML.}
+%Furthermore, we need to decide what data the system will be trained on
+%(for example, outcomes of prover runs with varying age-weight ratio and input problem).
+Our final goal is to optimize the performance of the prover in terms of, for example, the percentage of problems solved within a fixed time limit.
+For the purpose of training,
+we typically need to approximate this measure by a \defn{proxy task} -- an optimization task that admits \gls{ml} and is believed to correlate with the final performance measure.
 
-As an alternative to configuring the heuristics,
-a trained \gls{ml} system may be invoked during or before the proof search in place of a man-made heuristic.
-For example, \gls{ml}-based systems have been trained to perform clause selection and axiom selection \cite{DBLP:conf/birthday/BlaauwbroekCGJK24}.
+For example, the task of estimating a good age-weight ratio is easy to implement as supervised learning task, provided we have some ground truth\todo{new term} available.
+In this case, such ground truth is an assignment of age-weight ratios to the training problems.
+We could, for example, evaluate each training problem with several candidate values of age-weight ratio and choose the best observed value as the respective ground truth.
+This simplification establishes a proxy task:
+Predicting an age-weight ratio close to the ground truth is a proxy of solving the problem.
+
+\todo[inline]{Stress the challenge of ML.}
+\todo[inline]{Consider comparing to RL.}
+
+As an alternative to configuring one or more heuristics before the proof search starts (offline),
+a trained \gls{ml} system may be integrated within the proof search procedure in place of a man-made heuristic (online).
+For example, \gls{ml}-based systems have been trained to perform clause selection \cite{DBLP:conf/birthday/BlaauwbroekCGJK24}.
+Such \gls{ml} system evaluates each inferred clause for the purpose of clause selection.
 
 While a growing body of research on \gls{ml} for \gls{atping} exists \cite{DBLP:conf/birthday/BlaauwbroekCGJK24},
 %\cite{DBLP:conf/gcai/Urban15,DBLP:conf/cpp/JakubuvU17,DBLP:conf/gcai/SchaferS15,DBLP:journals/jar/KuhlweinU15,DBLP:conf/mkm/HoldenK21}
 many avenues remain unexplored.
-The work presented in this thesis explores several novel approaches, as detailed in the next section.
+The work presented in this thesis explores several novel approaches, as detailed in the next section.\todo{Describe what is unique about our approach concisely. "A unifying theme for these approaches was", "An interesting commonality of the first two ... is they all train ranking some objects as proxy task."}
 %\cref{sec:results:simple,sec:results:npr,sec:results:selection}
 
 % Goal of this section (also): Foreshadow what has not been done yet to prepare ground for contributions.
