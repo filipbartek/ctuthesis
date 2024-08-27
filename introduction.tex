@@ -256,13 +256,20 @@ Predicting an age-weight ratio close to the best observed value is a proxy of so
 
 As an alternative to configuring one or more heuristics before the proof search starts (offline),
 a trained \gls{ml} system may be integrated within the proof search procedure in place of a man-made heuristic (online).
-For example, \gls{ml}-based systems have been trained to perform clause selection \cite{DBLP:conf/mkm/JakubuvU17,DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/cade/JakubuvCOP0U20,DBLP:conf/lpar/LoosISK17,DBLP:conf/cade/000121a,DBLP:conf/frocos/Suda21}.
-Such \gls{ml} system evaluates all inferred clauses to prioritize them.
+For example, \gls{ml}-based systems have been trained to perform clause selection \cite{
+% ENIGMA
+DBLP:conf/mkm/JakubuvU17,DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/cade/JakubuvCOP0U20,
+% Loos
+DBLP:conf/lpar/LoosISK17,
+% Deepire
+DBLP:conf/cade/000121a,DBLP:conf/frocos/Suda21}.
+Such \gls{ml} systems evaluate all the inferred clauses to prioritize them.
 
 While a growing body of research on \gls{ml} for \gls{atping} exists \cite{DBLP:conf/birthday/BlaauwbroekCGJK24},
 %\cite{DBLP:conf/gcai/Urban15,DBLP:conf/cpp/JakubuvU17,DBLP:conf/gcai/SchaferS15,DBLP:journals/jar/KuhlweinU15,DBLP:conf/mkm/HoldenK21}
 many avenues remain unexplored.
-The work presented in this thesis explores several novel approaches, as detailed in the next section.\todo{Describe what is unique about our approach concisely. "A unifying theme for these approaches was", "An interesting commonality of the first two ... is they all train ranking some objects as proxy task."}
+The work presented in this thesis explores several novel approaches, as detailed in the next section.
+An interesting commonality of the approaches to proof search guidance (\cref{sec:contrib:SymbolPrecedenceRecommenders,sec:contrib:ClauseSelection}) is that they train ranking of objects (symbols or clauses, respectively) as the proxy task.
 %\cref{sec:results:simple,sec:results:npr,sec:results:selection}
 
 % Goal of this section (also): Foreshadow what has not been done yet to prepare ground for contributions.
