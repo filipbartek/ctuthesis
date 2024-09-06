@@ -14,30 +14,74 @@
 
 \todo[inline]{Consider quoting Diaspora -- \enquote{knowledge mines}.}
 
+\todo[inline]{Search for knowledge, problem solving}
+
 \section{State of the Art}
 \label{sec:sota}
-
-\subsection{Reasoning in First-Order Logic}
 
 \todo[inline]{Too technical. Make it more storylike.}
 \todo[inline]{Make terminology more consistent. Representation, solving (original problem or FOL problem), introduce "task" (computational task). Witness, certificate, convince, argue, ascertain $\approx$ proof. ATP finds proof, proves conjecture (don't use "proving" in other meanings).}
 
-During the 20th century,
-concluding historical development tracing back to Aristotle's syllogistic logic,
-% https://plato.stanford.edu/entries/logic-firstorder-emergence/
-\gls{fol} emerged as the standard formalism for foundations of mathematics
-%(namely the set theory)
-\cite{DBLP:journals/bsl/Ferreiros01}.%\todo[author=MS]{prijde mi, ze ted ta prvni veta kulminuje necim (set theory), o cem pak vlastne vubec nebudes mluvit, coz je trosku divny}
-%\todo[author=MS]{jeji zacatek zni tak trochu jako pripominani historie. Pak by se nekdo znaly mohl ptat: A kde jsou Boole, Peirce, Frege (https://plato.stanford.edu/entries/logic-firstorder-emergence/), i kdyz ty jsou prave ukotveni jeste v 19. stol}
-% What is ATP good for: https://tptp.org/Seminars/ATP/Applications/Summary.html
-Thanks to its expressiveness, \gls{fol} has found use in diverse areas such as
-mathematics \cite{},
-software and hardware synthesis and verification \cite{},
-common-sense reasoning \cite{}, and
-legal reasoning \cite{}.\todo{The listed areas are actually related primarily to automated reasoning rather than \gls{fol}.}
-%These areas demonstrate the general importance of reasoning in \gls{fol}.
+\subsection{Advent of First-Order Logic}
 
+Throughout the history, mankind has faced a vast array of challenges of analytical nature.
+Mathematics rose to prominence as a discipline that studied, on an abstract level, the tools and approaches that demonstrated success in solving such challenges.
+Mathematical knowledge became developed mainly in directions set by
+%Mathematical knowledge grew from the ground provided by
+natural sciences, engineering, and social sciences.
+At the same time, the fields of mathematics and logic
+%inspired special fascination
+%fascinated idealists
+fascinated humans
+%attracted the attention of idealists
+as the only rigorous\todo{Differentiate from philosophy and theology.} disciplines that can be, at least in theory, studied in isolation from the material world we inhabit.
+
+\todo[inline]{Add a paragraph on the history of logic.}
+
+In the 19th century, mathematics were considered a mature and important discipline of human intellectual endeavor.
+Meanwhile,
+advances in logic\todo{What advances, specifically?} opened new possibilities
+for resolving\todo{Consider using a different word: reduce, suppress, curb}
+and clearly delimiting ambiguity in mathematics.
+The need for clarity in mathematics
+ultimately crystallized in the search for formally defined foundations of mathematics as a whole.
+In the 20th century,
+\gls{fol} emerged as the standard formalism for expressing these foundations \cite{DBLP:journals/bsl/Ferreiros01}.
+
+%During the 20th century,
+%\gls{fol} emerged as the standard formalism for foundations of mathematics
+%(namely the set theory)
+%\cite{DBLP:journals/bsl/Ferreiros01}.
+%\todo[author=MS]{prijde mi, ze ted ta prvni veta kulminuje necim (set theory), o cem pak vlastne vubec nebudes mluvit, coz je trosku divny}
+%\todo[author=MS]{jeji zacatek zni tak trochu jako pripominani historie. Pak by se nekdo znaly mohl ptat: A kde jsou Boole, Peirce, Frege (https://plato.stanford.edu/entries/logic-firstorder-emergence/), i kdyz ty jsou prave ukotveni jeste v 19. stol}
+%This concluded historical development tracing back to Aristotle's syllogistic logic.
+% https://plato.stanford.edu/entries/logic-firstorder-emergence/
+
+Besides a formal language for specifying statements,
+\gls{fol} specifies unambiguous notions of valid statement and valid reasoning.
+In practice, these notions have been applied in various sub-domains of mathematics, such as arithmetics, group theory, and graph theory.
+
+While mathematics played a crucial role in the establishment of \gls{fol},
+the expressive power of the language of \gls{fol} makes it suitable for reasoning in other analytical domains.
+% What is ATP good for: https://tptp.org/Seminars/ATP/Applications/Summary.html
+% These are actually example use cases of ATP, not FOL.
+\Gls{fol} and its extensions have been applied in, for example, software and hardware verification and synthesis
+\cite{
+DBLP:journals/tcad/DSilvaKW08, % Survey of automated SW verification
+DBLP:series/lncs/10001}, % KeY uses dynamic logic, an extension of FOL.
+common-sense reasoning \cite{}, and
+legal reasoning \cite{DBLP:journals/logcom/PrakkenWBA15,
+% ASPIC+ uses FOL extended with defeasible rules.
+DBLP:conf/atal/LibalN21}.\todo{The listed areas are actually related primarily to automated reasoning rather than \gls{fol}.}
+% The Legislation Editor NAI uses "first-order Deontic logic".
+%These areas demonstrate the general importance of reasoning in \gls{fol}.
 \todo[inline,author=MS]{celkove prvni odstavec zatim pusobi nedokoncene; drive jsi tam mel tusim "problems"/"represented in logic"/"solvers" a to smerovani mi proslo nosnejsi. Mozna muzes mit nejdriv historii, pak aplikace (jeste zkust nejake prihodit) a pak to modelovani a resice?}
+
+\subsection{Reasoning in First-Order Logic}
+
+\Gls{fol} is a general-purpose reasoning paradigm.
+In this section, I outline how \gls{fol} is used for reasoning,
+focusing especially on the notions used in automated reasoning.
 
 A reasoning task can be represented in \gls{fol} by a set of \defn{axioms} (for example, axioms of set theory, group theory, or arithmetic; in general, any collection of \gls{fol} formulas) and a \defn{conjecture}.
 The axioms and the conjecture are \gls{fol} \defn{formulas} constructed using\todo{Vague?} a common \defn{signature} -- a set of non-logical\todo{Is this term ok?} symbols (identifiers of predicates and functions).
@@ -76,7 +120,14 @@ In the rest of this text, we call such set of \gls{fol} formulas a \defn{\gls{fo
 %We call such representation of a problem \defn{refutational}\todo{Try to use standard terminology instead. Or factor out the term "refutational problem".}.
 %%This is the basis of \defn{refutational theorem proving}.
 
-Using De-Morgan laws, subformula naming (Tseitin transformation), and Skolemization\todo{Are these exactly the components of clausification? Are they named and described correctly?},
+By applying
+De Morgan laws,
+% 1. To obtain negation normal form (NNF) by pushing down negations; we also use "invinite De Morgan laws" to push below quantifiers
+% 2. To obtain CNF
+Skolemizing,
+% Skolemization eliminates existential quantifiers. The resulting formula is equisatisfiable but not equivalent.
+pulling up quantifiers, and
+naming subformulas (Tseitin transformation),
 every \gls{fol} problem can be transformed into an equisatisfiable set of universally quantified clauses (disjunctions of \gls{fo} literals) in polynomial time \cite{DBLP:books/el/RV01/NonnengartW01}.
 We call such representation of the problem \defn{\gls{cnf}}
 and the process leading to it \defn{clausification}\todo{Define \enquote{preprocessing}.}.
