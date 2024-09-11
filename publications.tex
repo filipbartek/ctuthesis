@@ -22,6 +22,8 @@
 \newcommand{\auth}\textbf
 \newcommand{\core}[3]{\href{https://portal.core.edu.au/conf-ranks/#3/}{CORE#1 conference rank: #2}}
 \newcommand{\wos}[1]{\href{https://www.webofscience.com/wos/woscc/full-record/WOS:#1}{Web of Science record: #1}}
+%\newcommand{\citations}[3]{\href{https://scholar.google.com/citations?view_op=view_citation&citation_for_view=DiFzKOgAAAAJ:#3}{Number of citations according to Google Scholar: #1 (excluding self-citations: #2)}}
+\newcommand{\citations}[4]{\href{https://scholar.google.com/scholar?cites=#4}{Number of citations\footnote{Source: \href{https://scholar.google.com/}{Google Scholar}. Date extracted: \formatdate{11}{9}{2024}. Excluding self-citations.}\todo{Join duplicate footnotes.}\todo{Unfiy the date format with the rest of the document.}: #2}}
 
 \todo[inline]{Add contributions.}
 
@@ -38,20 +40,16 @@
 Neural Precedence Recommender.
 \Gls{cade} 28, 2021.
 \cite{DBLP:conf/cade/Bartek021}
-\\
-\core{2021}{A}{918}
-\\
-\wos{000693448800030}
-\\
-See \cref{sec:results:npr}.
+\\ \core{2021}{A}{918}
+\\ \wos{000693448800030}
+\\ \citations{8}{5}{d1gkVwhDpl0C}{4757052500503566147}
+\\ See \cref{sec:results:npr}.
 
 \item \auth{Filip Bártek}, Karel Chvalovský, and Martin Suda. Regularization in Spider-Style Strategy Discovery and Schedule Construction. \Gls{ijcar} 2024. \cite{DBLP:conf/ijcar/BartekCS24}
-\\
-\core{2023}{A}{1314}
-\\
-\wos{001273489700012}
-\\
-See \cref{sec:results:regularization}.
+\\ \core{2023}{A}{1314}
+\\ \wos{001273489700012}
+\\ \citations{3}{1}{IjCSPb-OGe4C}{14661423119916603256}
+\\ See \cref{sec:results:regularization}.
 
 \end{enumerate}
 
@@ -63,14 +61,13 @@ See \cref{sec:results:regularization}.
 \begin{enumerate}
 
 \item \auth{Filip Bártek} and Martin Suda. Learning Precedences from Simple Symbol Features. \Gls{paar} 2020. \cite{DBLP:conf/cade/Bartek020}
-\\
-See \cref{sec:results:simple}.
+\\ \citations{6}{4}{u-x6o8ySG0sC}{7330041666500653943}
+\\ See \cref{sec:results:simple}.
 
 \item \auth{Filip Bártek} and Martin Suda. How much should this symbol weigh? A \acrshort{gnn}-Advised Clause Selection. \Gls{lpar} 2023. \cite{DBLP:conf/lpar/Bartek023}
-\\
-\core{2021}{A}{1596}
-\\
-See \cref{sec:results:selection}.
+\\ \core{2021}{A}{1596}
+\\ \citations{3}{1}{qjMakFHDy7sC}{3677938196667465426}
+\\ See \cref{sec:results:selection}.
 
 \item \auth{Filip Bártek}, Karel Chvalovský, and Martin Suda. Cautious Specialization of Strategy Schedules. \Gls{paar} 2024. \cite{DBLP:conf/paar/BartekC024}
 
@@ -92,5 +89,3 @@ See \cref{sec:results:selection}.
 \item \auth{Filip Bártek}. \foreignlanguage{czech}{Realizace Rabinovy hry na konečných grafech}. Bachelor's thesis. 2012. \cite{Bartek2012thesis}
 \item \auth{Filip Bártek}. Minimum representations of Boolean functions defined by multiple intervals. Master's thesis. 2015. \cite{bartek2015}
 \end{enumerate}
-
-\todo[inline]{Add citations from \href{https://scholar.google.com/citations?user=DiFzKOgAAAAJ}{Google Scholar}.}
