@@ -40,7 +40,7 @@ At the same time, the fields of mathematics and logic
 %fascinated idealists
 fascinated humans
 %attracted the attention of idealists
-as the only rigorous\todo{Differentiate from philosophy and theology.} disciplines that can be, at least in theory, studied in isolation from the material world we inhabit.
+as the only rigorous\todo{Differentiate from philosophy and theology.} disciplines that can, at least in theory, be studied in isolation from the material world we inhabit.
 
 \todo[inline]{Add a paragraph on the history of logic.}
 
@@ -87,7 +87,7 @@ DBLP:conf/atal/LibalN21}.\todo{The listed areas are actually related primarily t
 
 \Gls{fol} is a general-purpose reasoning paradigm.
 In this section, I outline how \gls{fol} is used for reasoning,
-focusing especially on the notions used in automated reasoning.
+focusing especially on the notions and approaches used in automated reasoning.
 
 A reasoning task can be represented in \gls{fol} by a set of \defn{axioms} (for example, axioms of set theory, group theory, or arithmetic; in general, any collection of \gls{fol} formulas) and a \defn{conjecture}.
 The axioms and the conjecture are \gls{fol} \defn{formulas} constructed using\todo{Vague?} a common \defn{signature} -- a set of non-logical\todo{Is this term ok?} symbols (identifiers of predicates and functions).
@@ -111,7 +111,7 @@ We then also call the conjecture a \defn{theorem} of the \defn{theory}\todo{Defi
 
 \todo[inline]{Add a paragraph discussing informal and formal proofs?}
 
-Proof by contradiction is a common technique of proving informally a theorem in mathematics.
+Proof by contradiction is a common technique of establishing validity of a theorem in mathematics.
 A straightforward counterpart exists in formal logic --
 the task of certifying
 entailment is easily reduced to
@@ -150,7 +150,8 @@ In this paradigm, the task of proving unsatisfiablity can be realized as a searc
 
 \defn{Complete} inference calculi are of special interest:
 If an inference calculus is complete and the input clause set is unsatisfiable\todo{Does it need to be finite?},
-then a finite\todo{?} proof of unsatisfiability exists and can be found, for example, by exhaustively enumerating all the clauses derivable from the input clauses.
+then a finite\todo{?} proof of unsatisfiability exists.
+In such case, a proof can be found, for example, by exhaustively enumerating all the clauses derivable from the input clauses.
 Enumerating the derivable clauses in a way that ensures a fast derivation of the empty clause (provided the input set of clauses is unsatisfiable) is the main goal of saturation-based \gls{tping}.
 
 %If a set of clauses is unsatisfiable, then its negation is logically valid.
