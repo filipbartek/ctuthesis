@@ -25,12 +25,34 @@
 %\newcommand{\citations}[3]{\href{https://scholar.google.com/citations?view_op=view_citation&citation_for_view=DiFzKOgAAAAJ:#3}{Number of citations according to Google Scholar: #1 (excluding self-citations: #2)}}
 \newcommand{\citations}[4]{\href{https://scholar.google.com/scholar?cites=#4}{Number of citations\footnote{Source: \href{https://scholar.google.com/}{Google Scholar}. Date extracted: \formatdate{11}{9}{2024}. Excluding self-citations.}\todo{Join duplicate footnotes.}\todo{Unfiy the date format with the rest of the document.}: #2}}
 
+\Cref{tab:publications} shows an overview of the publications.
 In each publication, the share of all co-authors is equal.
 %in case the share of all co-authors is not
 %equal, the list shall be completed by the doctoral student’s share of co-authorship for
 %individual publications
 
 \todo[inline]{Add detailed contributions.}
+
+\todo[inline]{Consider removing the table.}
+\begin{table}[h]
+\begin{ctucolortab}
+\centering
+\caption{Conference and workshop publications. Each publication is identified by the event (conference or workshop) it was published at.}
+\label{tab:publications}
+\begin{tabular}{lr|ccrrcc}
+\toprule
+\multirow{2}{*}{Event} & \multirow{2}{*}{Year} & \multirow{2}{*}{CORE\tablefootnote{CORE conference rank}} & \multirow{2}{*}{WoS\tablefootnote{Is the publication indexed in Web of Science?}} & \multicolumn{2}{c}{Citations\tablefootnote{Source: Google Scholar. Date extracted: 11 September 2024.}} & \multirow{2}{*}{Bibliography} & \multirow{2}{*}{Sect.} \\
+& & & & All & Ext.\tablefootnote{Excluding self-citations} & & \\
+\Midrule
+\Acrshort{paar}  & 2020 &   &   & 6 & 4 & \cite{DBLP:conf/cade/Bartek020} & \ref{sec:results:simple} \\
+\Acrshort{cade}  & 2021 & A & \checkmark & 8 & 5 & \cite{DBLP:conf/cade/Bartek021} & \ref{sec:results:npr} \\
+\Acrshort{lpar}  & 2023 & A &   & 3 & 1 & \cite{DBLP:conf/lpar/Bartek023} & \ref{sec:results:selection} \\
+\Acrshort{ijcar} & 2024 & A & \checkmark & 3 & 1 & \cite{DBLP:conf/ijcar/BartekCS24} & \ref{sec:results:regularization} \\
+\Acrshort{paar}  & 2024 &   &   &   &   & \cite{DBLP:conf/paar/BartekC024} & \ref{sec:results:cautious} \\
+\bottomrule
+\end{tabular}
+\end{ctucolortab}
+\end{table}
 
 \section{Publications Related to the Dissertation Thesis}
 % publikace vztahující se k tématu disertační práce
