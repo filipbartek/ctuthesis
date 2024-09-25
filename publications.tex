@@ -40,8 +40,8 @@
 \newcommand{\external}{Excluding self-citations.}
 \newcommand{\citations}[4]{\href{https://scholar.google.com/scholar?cites=#4}{Number of citations\footnote{\scholar{} \external{}}\todo{Join duplicate footnotes.}\todo{Unfiy the date format with the rest of the document.}: #2}}
 
-\Cref{tab:publications} shows an overview of the publications.
-In each publication, the share of all co-authors is equal.
+%\Cref{tab:publications} shows an overview of the publications.
+
 %in case the share of all co-authors is not
 %equal, the list shall be completed by the doctoral student’s share of co-authorship for
 %individual publications
@@ -76,9 +76,9 @@ In each publication, the share of all co-authors is equal.
 % další publikace excerpované WoS
 \label{sec:wos}
 
-\begin{enumerate}
+\subsubsection{Neural Precedence Recommender}
 
-\item \auth{Filip Bártek} and Martin Suda.
+\auth{Filip Bártek} and Martin Suda.
 Neural Precedence Recommender.
 \Acrfull{cade} 2021.
 \cite{DBLP:conf/cade/Bartek021}
@@ -87,16 +87,39 @@ Neural Precedence Recommender.
 \\ \citations{8}{5}{d1gkVwhDpl0C}{4757052500503566147}
 \\ See \cref{sec:results:npr}.
 
-\item \auth{Filip Bártek}, Karel Chvalovský, and Martin Suda.
-Regularization in Spider-Style Strategy Discovery and Schedule Construction.
-\Acrfull{ijcar} 2024.
-\cite{DBLP:conf/ijcar/BartekCS24}
-\\ \core{2023}{A}{1314}
-%\\ \wos{001273489700012}
-\\ \citations{3}{1}{IjCSPb-OGe4C}{14661423119916603256}
-\\ See \cref{sec:results:regularization}.
+\subsubsection{Regularization in Spider-Style Strategy Discovery and Schedule Construction}
 
-\end{enumerate}
+%\auth{Filip Bártek}, Karel Chvalovský, and Martin Suda.
+%Regularization in Spider-Style Strategy Discovery and Schedule Construction.
+%\Acrfull{ijcar} 2024.
+%\cite{DBLP:conf/ijcar/BartekCS24}
+
+\begin{itemize}
+\item[Authors] \auth{Filip Bártek}, Karel Chvalovský, and Martin Suda
+\item[Title] Regularization in Spider-Style Strategy Discovery and Schedule Construction \cite{DBLP:conf/ijcar/BartekCS24}
+\item[Conference] \Acrfull{ijcar} 2024\footnote{\core{2023}{A}{1314}}
+%\item \wos{001273489700012}
+%\item \citations{3}{1}{IjCSPb-OGe4C}{14661423119916603256}
+\item[Public acceptance] \citations{3}{1}{IjCSPb-OGe4C}{14661423119916603256}
+\end{itemize}
+
+This paper is included in \cref{sec:results:regularization}.
+
+\paragraph{Author contributions.}
+Conceptualization: M.S. and \auth{F.B.};
+Data curation: \auth{F.B.} and M.S.;
+Formal analysis: \auth{F.B.} and M.S.;
+Funding acquisition: M.S., \auth{F.B.}, and Josef Urban;
+Investigation: \auth{F.B.}, M.S., and K.C.;
+Methodology: M.S., \auth{F.B.}, and K.C.;
+Project administration: M.S.;
+Resources: Josef Urban;
+Software: \auth{F.B.}, M.S., and K.C.;
+Supervision: M.S.;
+Validation: \auth{F.B.};
+Visualization: \auth{F.B.} and M.S.;
+Writing -- original draft: M.S., \auth{F.B.}, and K.C.;
+Writing -- review \& editing: \auth{F.B.}, M.S., and K.C.
 
 \subsection{Other Publications}
 % publikace ostatní
