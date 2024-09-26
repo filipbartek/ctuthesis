@@ -45,26 +45,41 @@ How much should this symbol weigh? A \acrshort{gnn}-Advised Clause Selection.
 \section{Regularization in Spider-Style Strategy Discovery and Schedule Construction}
 \label{sec:results:regularization}
 
-Filip Bártek, Karel Chvalovský, and Martin Suda.
-Regularization in Spider-Style Strategy Discovery and Schedule Construction.
-\Acrlong{ijcar} 12, 2024.
-\cite{DBLP:conf/ijcar/BartekCS24}\todo{Link to the arXiv version with appendix.}
+In the research presented below \cite{DBLP:conf/ijcar/BartekCS24},
+my co-authors and I automatically synthesized strong complementary strategies (configurations) for the \gls{atper} Vampire.
+Using these strategies,
+we constructed strong strategy schedules\todo{Does the concept of schedule make sense at this point?} that generalize well to unseen problems.
 
-In the research presented in this paper,
-I and my co-authors invented strong complementary strategies for the \gls{atper} Vampire and constructed strong schedules that generalize well to unseen problems.
-A greedy schedule construction algorithm is at the core of this work.
+A greedy algorithm is at the core of the strategy construction process.
+The algorithm is parameterized with several regularizing options.
+These new variants of the algorithm along with an analysis of their regularizing strength
+constitute the main contributions presented in the paper.
+
+A manuscript with additional appendices is available online \cite{DBLP:journals/corr/abs-2403-12869}.
 
 \IncludePaper{publications/regularization.pdf}
 
 \section{Cautious Specialization of Strategy Schedules}
 \label{sec:results:cautious}
 
-Filip Bártek, Karel Chvalovský, and Martin Suda.
-Cautious Specialization of Strategy Schedules (Extended Abstract).
-\Acrlong{paar} 9, 2024.
-\cite{DBLP:conf/paar/BartekC024}
+In \cref{sec:results:regularization},
+my co-authors and I focused on constructing a monolithic strategy schedule that performs well on the whole target set of problems.
+The performance of the prover can be further increased by dividing the target set of problems into classes
+and constructing a specialized schedule for each of the classes.
+Each of such classes should be identified by problem features that are easy to compute
+so that the branching system of schedules can be used on an unseen problem efficiently.
 
-In this extended abstract, we expanded on the work introduced in \cref{sec:results:regularization}.
-We performed initial experiments with specializing the schedules constructed using the previous approach.
+As long the classes are relatively homogeneous with respect to the performance of the strategies,
+this approach is expected to yield an improvement of performance on the training problems.
+However, aggressive specialization may lead to a decreased performance on unseen problems.
+
+In the extended abstract presented below \cite{DBLP:conf/paar/BartekC024},
+we expanded on the work introduced in \cref{sec:results:regularization}
+by investigating the problem of specialization of strategy schedules.
+We performed two initial experiments:
+\begin{enumerate}
+\item First, we compared a hand-tweaked split of the problem space into three classes by the number of atoms to a random split.
+\item Second, we experimented with training a collection of boosting trees to effectively tailor a schedule for an arbitrary input problem.
+\end{enumerate}
 
 \IncludePaper{publications/cautious.pdf}
