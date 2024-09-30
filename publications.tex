@@ -72,13 +72,17 @@ Each publication is identified by the event (conference or workshop) it was publ
 \end{ctucolortab}
 \end{table}
 
-\todo[inline]{Add detailed contributions.}
 For the purpose of this summary, a \defn{self-citation} is a citation from a publication with at least one shared author.
 
 For each of the publications included in this section,
 the contributions of individual authors are expressed according to the \href{https://credit.niso.org/}{CRediT contributor role taxonomy} \cite{DBLP:journals/lp/BrandAAHS15}.
 % Role descriptions: https://credit.niso.org/contributor-roles-defined/
 
+\newcommand{\FB}{\auth{F.B.}}
+\newcommand{\MS}{M.S.}
+\newcommand{\KC}{K.C.}
+\newcommand{\JU}{Josef Urban}
+\newcommand{\CK}{Cezary Kaliszyk}
 
 \section{Publications Indexed in \href{https://www.webofscience.com/}{Web of Science}}
 % další publikace excerpované WoS
@@ -96,6 +100,20 @@ the contributions of individual authors are expressed according to the \href{htt
 
 This paper is included in \cref{sec:results:npr}.
 
+\paragraph{Author contributions.}
+Conceptualization:            \MS{} and \FB{};
+Formal analysis:              \FB{};
+Funding acquisition:          \MS{}, \FB{}, and \JU{};
+Investigation:                \FB{};
+Methodology:                  \FB{} and \MS{};
+Project administration:       \MS{};
+Resources:                    \JU{};
+Software:                     \FB{} and \MS{};
+Supervision:                  \MS{};
+Visualization:                \FB{};
+Writing -- original draft:    \FB{} and \MS{};
+Writing -- review \& editing: \FB{} and \MS{}
+
 \subsubsection{Regularization in Spider-Style Strategy Discovery and Schedule Construction}
 
 \begin{itemize}
@@ -109,20 +127,21 @@ This paper is included in \cref{sec:results:npr}.
 This paper is included in \cref{sec:results:regularization}.
 
 \paragraph{Author contributions.}
-Conceptualization: M.S., \auth{F.B.}, and K.C.;
-Data curation: \auth{F.B.} and M.S.;
-Formal analysis: \auth{F.B.} and M.S.;
-Funding acquisition: M.S., \auth{F.B.}, and Josef Urban;
-Investigation: \auth{F.B.}, M.S., and K.C.;
-Methodology: M.S., \auth{F.B.}, and K.C.;
-Project administration: M.S.;
-Resources: Josef Urban;
-Software: \auth{F.B.}, M.S., and K.C.;
-Supervision: M.S.;
-Validation: \auth{F.B.};
-Visualization: \auth{F.B.} and M.S.;
-Writing -- original draft: M.S., \auth{F.B.}, and K.C.;
-Writing -- review \& editing: \auth{F.B.}, M.S., and K.C.
+Conceptualization:            \MS{}, \FB{}, and \KC{};
+Data curation:                \FB{} and \MS{};
+Formal analysis:              \FB{} and \MS{};
+Funding acquisition:          \MS{}, \JU{}, and \FB{};
+Investigation:                \FB{}, \MS{}, and \KC{};
+Methodology:                  \MS{}, \FB{}, and \KC{};
+Project administration:       \MS{};
+Resources:                    \JU{};
+Software:                     \FB{}, \MS{}, and \KC{};
+Supervision:                  \MS{};
+Validation:                   \FB{};
+% FB: I ran the experiments repeatedly and increased the number of folds in cross-validation until I got stable behavior.
+Visualization:                \FB{} and \MS{};
+Writing -- original draft:    \MS{}, \FB{}, and \KC{};
+Writing -- review \& editing: \FB{}, \MS{}, and \KC{}
 
 \section{Other Publications}
 % publikace ostatní
@@ -140,6 +159,20 @@ Writing -- review \& editing: \auth{F.B.}, M.S., and K.C.
 
 This paper is included in \cref{sec:results:simple}.
 
+\paragraph{Author contributions.}
+Conceptualization:            \MS{} and \FB{};
+Formal analysis:              \FB{};
+Funding acquisition:          \JU{}, \MS{}, and \FB{};
+Investigation:                \FB{};
+Methodology:                  \MS{} and \FB{};
+Project administration:       \MS{};
+Resources:                    \JU{};
+Software:                     \FB{} and \MS{};
+Supervision:                  \MS{};
+Visualization:                \FB{};
+Writing -- original draft:    \FB{} and \MS{};
+Writing -- review \& editing: \FB{} and \MS{}
+
 \subsubsection{A \acrshort{gnn}-Advised Clause Selection}
 
 \begin{itemize}
@@ -151,6 +184,20 @@ This paper is included in \cref{sec:results:simple}.
 
 This paper is included in \cref{sec:results:selection}.
 
+\paragraph{Author contributions.}
+Conceptualization:            \MS{}, \FB{}, and \CK{};
+Formal analysis:              \FB{} and \MS{};
+Funding acquisition:          \MS{}, \JU{}, and \FB{};
+Investigation:                \FB{};
+Methodology:                  \FB{} and \MS{};
+Project administration:       \MS{};
+Resources:                    \JU{};
+Software:                     \FB{};
+Supervision:                  \MS{};
+Visualization:                \FB{};
+Writing -- original draft:    \FB{} and \MS{};
+Writing -- review \& editing: \FB{} and \MS{}
+
 \subsubsection{Cautious Specialization of Strategy Schedules}
 
 \begin{itemize}
@@ -160,6 +207,21 @@ This paper is included in \cref{sec:results:selection}.
 \end{itemize}
 
 This paper is included in \cref{sec:results:cautious}.
+
+\paragraph{Author contributions.}
+Conceptualization:            \MS{}, \KC{}, and \FB{};
+Data curation:                \MS{} and \KC{};
+Formal analysis:              \MS{} and \KC{};
+Funding acquisition:          \MS{};
+Investigation:                \KC{} and \MS{};
+Methodology:                  \MS{} and \KC{};
+Project administration:       \MS{} and \FB{};
+Resources:                    \JU{};
+Software:                     \KC{} and \MS{};
+Supervision:                  \MS{};
+Visualization:                \MS{};
+Writing -- original draft:    \MS{}, \KC{}, and \FB{};
+Writing -- review \& editing: \FB{}, \MS{}, and \KC{}
 
 \subsection{Datasets}
 
@@ -173,3 +235,17 @@ This paper is included in \cref{sec:results:cautious}.
 This dataset is a supplement to our paper
 Regularization in Spider-Style Strategy Discovery and Schedule Construction \cite{DBLP:conf/ijcar/BartekCS24}.
 
+\paragraph{Author contributions.}
+Conceptualization:            \FB{} and \MS{};
+Data curation:                \FB{} and \MS{};
+Formal analysis:              \FB{};
+Funding acquisition:          \MS{}, \JU{}, and \FB{};
+Investigation:                \FB{};
+Methodology:                  \FB{};
+Project administration:       \MS{};
+Resources:                    \JU{};
+Software:                     \FB{};
+Supervision:                  \MS{};
+Visualization:                \FB{};
+Writing -- original draft:    \FB{};
+Writing -- review \& editing: \MS{}
