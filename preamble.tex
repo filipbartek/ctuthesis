@@ -22,8 +22,6 @@
 	pkg-hyperref = true,
 }
 
-\input{glossary}
-
 \ctuprocess
 
 \begin{thanks}
@@ -71,38 +69,5 @@ In Prague, \today
 \todo[inline]{TBA}
 \end{abstract-czech}
 
-% Custom packages
-\usepackage{array}
-\usepackage{csquotes}
-\usepackage[useregional]{datetime2}
-\usepackage{etoolbox}
-\usepackage[detect-weight=true,binary-units=true]{siunitx}
-
-\usepackage{todonotes}
-% Allow the `todonotes` side notes to span the whole margin.
-\setlength{\marginparwidth}{4.5cm}
-
-% Bibliography
-\usepackage[numbers,sort&compress]{natbib}
-\bibliographystyle{unsrtnat}
-\usepackage{doi}
-\usepackage{cleveref}
-
-% Tables
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{tablefootnote}
-
-%\usepackage{titlecaps}
-%\Addlcwords{with of the and from a in to for}
-%\usepackage{sectsty}
-%\sectionfont{\titlecap}
-%\subsectionfont{\titlecap}
-%\subsubsectionfont{\titlecap}
-
+\input{preamble-common}
 \hypersetup{hidelinks}
-\hypersetup{
-    pdfauthor={Filip Bártek},
-    pdftitle={Machine Learning for Saturation-Based Theorem Proving},
-    pdfkeywords={machine learning, automatic theorem proving}
-}
