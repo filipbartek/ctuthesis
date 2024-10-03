@@ -284,6 +284,8 @@ FUNCTION {format.issn}
 
 FUNCTION {format.url}
 { url empty$
+  doi empty$ not
+  or
     { "" }
     { new.block "URL \url{" url * "}" * }
   if$
@@ -934,6 +936,7 @@ FUNCTION {misc}
   howpublished output
   format.date output
   format.issn output
+  format.doi output
   format.url output
   new.block
   note output
