@@ -27,7 +27,8 @@
 \newacronym{kb}{KB}{Knuth-Bendix}
 \newacronym{kbo}{KBO}{Knuth-Bendix \glslink{to}{ordering}}
 % Vampire option: --term_ordering (-to)
-\newglossaryentry{to}{name={simplification ordering on terms}, description={\gls{term} ordering used to orient equations in \glslink{SuperpositionCalculus}{superposition} inferences and inform \gls{LiteralSelection}}}
+\newglossaryentry{to}{name={\gls{term} ordering}, description={a partial ordering on \glspl{term}}}
+\newglossaryentry{sot}{name={simplification ordering on \glspl{term}}, parent=to, description={\gls{to} used to orient equations in \glslink{SuperpositionCalculus}{superposition} inferences and inform \gls{LiteralSelection}}}
 \newglossaryentry{superposition}{name={superposition}, see=SuperpositionCalculus, description={?}}
 \newglossaryentry{SuperpositionCalculus}{name={superposition calculus}, description={TBA}}
 \newglossaryentry{precedence}{name={precedence}, description={?}}
@@ -51,12 +52,18 @@
 \newglossaryentry{enigma}{name={ENIGMA}, description={?}}
 
 \newglossaryentry{recommender}{name={recommender}, description={TBA}}
-\newglossaryentry{PrecedenceRecommender}{name={precedence recommender}, parent=recommender, description={TBA}}
-\newglossaryentry{npr}{name={neural precedence recommender}, parent=PrecedenceRecommender, description={TBA}}
+\newglossaryentry{SymbolPrecedenceRecommender}{name={\gls{sp} \gls{recommender}}, parent=recommender, description={TBA}}
+\newglossaryentry{npr}{name={neural \gls{precedence} \gls{recommender}}, parent=recommender, description={TBA}}
 \newacronym{ltr}{LTR}{learning to rank}
 \newacronym{np}{NP}{nondeterministic polynomial}
 
 % Machine learning
+\newacronym{ml}{ML}{machine learning}
+\newacronym{rl}{RL}{reinforcement learning}
+\newacronym{asp}{ASP}{answer set programming}
+\newglossaryentry{LinearRegression}{name={linear regression}, description={?}}
+
+% Neural networks
 \newacronym{nn}{NN}{neural network}
 \newacronym[parent=nn]{ann}{ANN}{aritificial \acrlong{nn}}
 \newacronym[parent=nn]{cnn}{CNN}{convolutional \acrlong{nn}}
@@ -64,8 +71,6 @@
 \newacronym[parent=nn]{dnn}{DNN}{deep \acrlong{nn}}
 \newacronym[parent=nn]{gnn}{GNN}{graph \acrlong{nn}}
 \newacronym[parent=nn]{rnn}{RNN}{recursive \acrlong{nn}}
-\newacronym{ml}{ML}{machine learning}
-\newglossaryentry{LinearRegression}{name={linear regression}, description={?}}
 
 % Conferences
 \newacronym{cade}{CADE}{Conference on Automated Deduction}
@@ -73,13 +78,17 @@
 \newacronym{lpar}{LPAR}{International Conference on Logic for Programming, Artificial Intelligence and Reasoning}
 \newacronym{paar}{PAAR}{Workshop on Practical Aspects of Automated Reasoning}
 
-\newacronym{aac}{AAC}{automated algorithm configuration}
+% AutoML
+\newacronym{ac}{AC}{algorithm configuration}
+\newacronym{aac}{AAC}{automated \acrlong{ac}}
 \newacronym{as}{AS}{algorithm selection}
 \newglossaryentry{AlgorithmScheduling}{name={algorithm scheduling}, description={?}}
-\newacronym{erc}{ERC}{European Research Council}
+\newacronym{smac}{SMAC}{sequential model-based \acrlong{ac}}
+\newacronym{smbo}{SMBO}{sequential model-based optimization}
+\newacronym{epm}{EPM}{empirical performance model}
 
-\newacronym{asp}{ASP}{answer set programming}
 \newacronym{cpu}{CPU}{central processing unit}
+\newacronym{erc}{ERC}{European Research Council}
 \newacronym{mi}{Mi}{megainstruction}
 \newacronym{par}{PAR}{penalized average runtime}
 \newacronym{pcs}{PCS}{parameter configuration space}
