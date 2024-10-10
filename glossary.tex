@@ -24,11 +24,12 @@
 \newglossaryentry{atping}{parent=tping, name={automatic \gls{tping}}, description={TBA}}
 \newglossaryentry{saturation}{name={saturation}, description={TBA}}
 \newglossaryentry{AxiomSelection}{name={axiom selection}, description={TBA}}
-\newacronym{kb}{KB}{Knuth-Bendix}
-\newacronym{kbo}{KBO}{Knuth-Bendix \glslink{to}{ordering}}
 % Vampire option: --term_ordering (-to)
 \newglossaryentry{to}{name={\gls{term} ordering}, description={a partial ordering on \glspl{term}}}
 \newglossaryentry{sot}{name={simplification ordering on \glspl{term}}, parent=to, description={\gls{to} used to orient equations in \glslink{SuperpositionCalculus}{superposition} inferences and inform \gls{LiteralSelection}}}
+\newacronym{kb}{KB}{Knuth-Bendix}
+\newacronym[parent=sot]{kbo}{KBO}{Knuth-Bendix \glslink{to}{ordering}}
+\newacronym[parent=sot]{lpo}{LPO}{lexicographic path \glslink{to}{ordering}}
 \newglossaryentry{superposition}{name={superposition}, see=SuperpositionCalculus, description={?}}
 \newglossaryentry{SuperpositionCalculus}{name={superposition calculus}, description={TBA}}
 \newglossaryentry{precedence}{name={precedence}, description={?}}
