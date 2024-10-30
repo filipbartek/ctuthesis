@@ -199,6 +199,9 @@ All new clauses derived by the inferences are added to the unprocessed set.\foot
 
 Vampire implements ordered resolution and superposition calculus.}
 
+Resolution is complete.
+To reason with equality, we use superposition.\todo[color=red]{Finish this paragraph.}
+
 The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
 The most common calculi are the resolution calculus \cite{} and the superposition calculus \cite{}\todo[author=MS]{chtel jsem hned chtit, abys doplnil "for natively dealing with equality", ale k tomu se pak dostavas hned brzy dal, tak ted uz nevim}.
 While the resolution calculus suffices to ensure completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search\todo[author=MS]{moc nemam rad "proof search", protoze to nic neznamane}\todo[author=MS]{hlavni problem to ale je, ze normalne rikame/dokazujeme "a calculus is/isn't complete"},
@@ -229,6 +232,7 @@ The inferences are only performed on the selected literals.
 If the selection function is well-behaved,
 i.e., it selects either a negative literal or all literals that are maximal with respect to a given \gls{to},
 the restriction preserves completeness of the calculus \cite{DBLP:journals/logcom/BachmairG94}.
+% Note: Other restriction may preserve completeness too.
 Moreover, it may even be beneficial to restrict the inferences in a way that forfeits completeness
 in exchange for a more narrow and faster-converging proof search.
 
@@ -248,6 +252,8 @@ In addition to these, the performance of a saturation-based prover may also depe
 %This dissertation thesis discusses various ways of adjusting the heuristics in the prover Vampire using \gls{ml}.
 
 \subsection{Machine Learning for Theorem Proving}
+
+\todo[inline]{Reference \href{https://github.com/IBM/TRAIL}{TRAIL}.}
 
 %\todo[inline]{Describe all the crucial parameterized heuristics in Vampire.}
 
@@ -321,7 +327,7 @@ This simplification establishes a proxy task:
 Predicting an age-weight ratio close to the best observed value is a machine-learnable proxy of solving the problem (in the sense of finding a proof of unsatisfiability).
 
 \todo[inline]{Stress the challenge of ML.}
-\todo[inline,color=green]{Consider discussing RL and looping here. With RL, we can use the prover as a black box, training on just the output status or runtime, with no introspection. This is done notably in SMAC.
+\todo[inline]{Consider discussing RL and looping here. With RL, we can use the prover as a black box, training on just the output status or runtime, with no introspection. This is done notably in SMAC.
 
 Maybe: Reinforcement learning could do without proxy tasks. "The advantage of RL is ... and the advantage of supervised ... is ..."
 
@@ -389,7 +395,9 @@ Consider including an overview of proxy tasks -- clause classification, ...}
 %Running several strategies with short time limits in a sequence is often a good way to deal with the uncertainty of which strategy to use.
 %Such sequence of strategies with associated time limits constitutes a \defn{\gls{StrategySchedule}}.
 
-\todo[inline,color=green]{What is the state of the art in strategy scheduling? Should we describe it for the sake of completeness? MS: Not necessarily. Consider adding a section.}
+\section{Strategy Schedules}
+
+\todo[inline,color=red]{What is the state of the art in strategy scheduling? Should we describe it for the sake of completeness? MS: Not necessarily. Consider adding a section.}
 
 \section{Contributions}
 \label{sec:contributions}
@@ -430,12 +438,12 @@ Choosing a good \gls{sp} for a given input problem
 may make the pruning more aggressive or the guidance more accurate,
 aiding in finding the proof quickly.
 
-I explored two approaches to automatically finding a good \gls{sp} for an arbitrary input problem.
+I explored two approaches of automatically finding a good \gls{sp} for an arbitrary input problem.
 In my initial paper \cite{DBLP:conf/cade/Bartek020} (see \cref{sec:results:simple}),
-I present a \defn{\gls{SymbolPrecedenceRecommender}} that sorts the symbols by a linear combination\todo{Stress the challenge of designing the proxy task. "We present a p. recommender which uses ... over syntactic features.} of their syntactic features using learned weights.
+I present a \defn{\gls{SymbolPrecedenceRecommender}} that sorts the symbols by a linear combination\todo[color=red]{This is not true. Correct.}\todo{Stress the challenge of designing the proxy task. "We present a p. recommender which uses ... over syntactic features.} of their syntactic features using learned weights.
 In a later work \cite{DBLP:conf/cade/Bartek021} (see \cref{sec:results:npr}),
 I improved on this by training a \acrshort{gnn}-based \gls{SymbolPrecedenceRecommender}.
-In both cases, I trained the recommender to generate \glspl{sp} that improve the likelihood of a successful proof search.
+In both cases, I trained the recommender to generate \glspl{sp} that improve the likelihood of a\todo{an early?} successful proof search.
 
 \todo[inline]{Explain somewhere: We learn across problems. We try to generalize across problems. }
 
@@ -452,7 +460,7 @@ Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably
 %The selected clause is then added to the active clause set and all the possible inferences within the active set are performed.
 %The \glspl{atper} rely on heuristics to select the (given) clause.
 
-Clause selection is the most important choice point in a prover.
+Clause selection is the most important choice point in a saturation-based prover.
 The symbol-counting heuristic \cite{DBLP:conf/cade/SchulzM16}, which is one of the most common clause selection heuristics,
 prioritizes clauses that are small in the number of symbol and variable occurrences.
 In the weighted variant of this heuristic \cite{E-manual},
