@@ -100,7 +100,8 @@ An \defn{interpretation} of the signature specifies semantics of each of the sig
 If the conjecture is satisfied by all the interpretations that satisfy the axioms\todo{all the models of the theory},
 the axioms \defn{logically entail} the conjecture.
 % Here we define "theorem" solely for "automated theorem proving" to make more sense.
-We then also call the conjecture a \defn{theorem} of the \defn{theory}\todo{Define \enquote{theory} properly.} defined by the axioms.
+We then also call the conjecture a \defn{theorem}\todo[color=green]{\enquote{Theorem} is actually a \emph{provable} statement. A valid statement need not be provable in general.} of the \defn{theory}\todo{Define \enquote{theory} properly.} defined by the axioms,
+or a \defn{logical consequence} of the axioms.
 
 %\Gls{fol} is an established formalism capable of representing\todo{Discuss the process of representation in more detail. Give an example.} a wide range of reasoning tasks from diverse areas such as mathematics and software verification\todo{Add more examples.}.
 %A \gls{fol} representation of a problem consists of a set of \defn{axioms} and a \defn{conjecture},
@@ -144,7 +145,7 @@ A common way to define a proof of unsatisfiability (or, generally, entailment) i
 A proof, then, is a finite sequence of clauses,
 each of which is either an input\todo{potentially unclear} clause or a clause derived from some (typically one or two) of the preceding clauses by an inference rule.
 If all the inference rules are \defn{sound},
-then each of the clauses in the proof is a logical consequence\todo{undefined term} of the input set of clauses.
+then each of the clauses in the proof is a logical consequence of the input set of clauses.
 Finally, if the empty clause (a trivial contradiction) appears in the proof,
 the proof certifies the unsatisfiability of the input set of clauses.
 In this paradigm, the task of proving unsatisfiablity of a set of clauses can be realized as a search for (a derivation of) the empty clause.
