@@ -5,8 +5,8 @@
 \chapter{Results}
 
 The results of my research have been published at various conferences and workshops.
-This chapter includes a selection of the most important of these publications.
-Each of the publications is presented in its final published form and is, as such, self-contained.
+This chapter includes a selection of these publications.
+Each of the publications is presented in its final published form and is self-contained.
 
 \todo[inline]{Consider promoting the paper sections to chapters.}
 \todo[inline]{Emphasize that all of the solutions use ML for preprocessing.}
@@ -17,20 +17,25 @@ Each of the publications is presented in its final published form and is, as suc
 
 State-of-the-art \glspl{atper}, including \gls{vampire}, use the \gls{SuperpositionCalculus} as the core of the reasoning procedure.
 The inferences of the \gls{SuperpositionCalculus} are restricted by a \gls{sot}.
-Various schemes are used to instantiate the ordering,
-\gls{kbo} and \gls{lpo} being among the most popular ones.
+Various schemes have been used to instantiate the ordering,
+for example,
+\gls{kbo} and \gls{lpo}.
 Both of these \gls{to} schemes are parameterized by a \gls{sp} -- a permutation of the symbols in the signature.
 
-The standard methods implemented in \gls{vampire} construct the \gls{precedence} by sorting the symbols by their arity or number of occurrences in the input problem.
+The standard heuristic methods implemented in \gls{vampire} construct the \gls{precedence} by sorting the symbols by their arity or number of occurrences in the input problem.
 In the work presented below \cite{DBLP:conf/cade/Bartek020},
-a \gls{precedence} is constructed using six simple symbol features,
+a \gls{precedence} is constructed using a combination of six simple symbol features,
 including the arity and the occurrence count.
-First, a pairwise preference regressor (Elastic-Net or Gradient Boosting) predicts a preference value for each pair of symbols.
-Second, a precedence is constructed using the predicted preference values.
-The regressor is trained on runs of Vampire with \gls{kbo} instantiated by random precedences.
+Once the system has been trained,
+a precedence is constructed in two steps:
+\begin{enumerate}
+\item A pairwise preference regressor (Elastic-Net or Gradient Boosting) predicts a preference value for each pair of symbols.
+\item A precedence is constructed using the predicted symbol pair preference values.
+\end{enumerate}
+The preference regressor is trained on runs of Vampire with \gls{kbo} instantiated by random precedences.
 The training aims to minimize the time it takes Vampire to solve an input problem.
 
-The main contribution of this work is that it established how pairwise ranking can be used as a proxy task in \gls{ml} for \gls{atping} (in this case, for training a \gls{sp} recommender).
+The main contribution of this work is the establishment of a method of using pairwise ranking as a proxy task in \gls{ml} for \gls{atping} (in this case, for training a \gls{sp} recommender).
 This proved especially useful in my subsequent research,
 as presented in \cref{sec:results:npr,sec:results:selection}.
 
