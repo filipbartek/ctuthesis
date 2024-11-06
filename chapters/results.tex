@@ -44,17 +44,15 @@ as presented in \cref{sec:results:npr,sec:results:selection}.
 \ResultSection{Neural Precedence Recommender}
 \label{sec:results:npr}
 
-\todo[inline,color=green]{This section is new and RC.}
-
 A \gls{gnn} can be used to extract task-specific features of various syntactic elements of an input problem,
 including the predicate and function symbols.
 In the work presented below \cite{DBLP:conf/cade/Bartek021},
-I trained a \gls{gnn} to predict a score\todo[color=green]{The paper uses \enquote{symbol cost} and \enquote{precedence cost}. Is the discrepancy justified?} for each symbol in the signature such that ordering the symbols by their scores yields a good \gls{sp} for \gls{kbo} in Vampire.
+I trained a \gls{gnn} to predict a score for each symbol in the signature such that ordering the symbols by their scores yields a good \gls{sp} for \gls{kbo} in Vampire.
 
 %This work capitalizes on casting the task of training a \gls{sp} recommender as a pairwise ranking task.
 
 A straightforward way to determine the best precedence for a given problem involves evaluating all possible precedences (permutations of the signature of the problem).
-This is prohibitively expensive on all but the smallest problems, and no efficient alternative is known.
+This is prohibitively expensive on all but the smallest problems.
 On the other hand, we can easily compare an arbitrary pair of precedences.
 Following from this observation, we train the symbol score predictor on the proxy task of (pairwise) ranking of precedences.
 
@@ -65,7 +63,7 @@ In summary, our \gls{sp} recommender is trained on three nested proxy tasks:
 \item Pairwise ranking of precedences
 \end{enumerate}
 
-Empirical experiments presented in the paper demonstrate that a trained precedence recommender outperforms the baseline by more than \SI{4}{\percent} in terms of solved problems.
+Experiments presented in the paper demonstrate that a trained precedence recommender outperforms the baseline by more than \SI{4}{\percent} in the number of solved problems.
 This confirms that the proxy tasks are aligned with the main task of solving more problems and demonstrates the potential of customizing symbol precedence automatically.
 
 % R1:
@@ -89,18 +87,16 @@ the reviewers praised the clear and detailed presentation of the \gls{gnn} that 
 \ResultSection{A GNN-Advised Clause Selection}
 \label{sec:results:selection}
 
-\todo[inline,color=green]{This section is new and RC.}
-
 In the work presented below \cite{DBLP:conf/lpar/Bartek023},
 we turned our attention to clause selection,
-arguably the most important choice point in a saturation-based prover.
+arguably the most important heuristic choice point in a saturation-based prover.
 We used the \gls{gnn} architecture
 that proved useful in precedence recommendation (see \cref{sec:results:npr})
 and trained a \gls{nn} that proposes symbol weights to configure the symbol-counting clause selection heuristic \cite{DBLP:conf/cade/SchulzM16,E-manual}.
 
 For each problem, the \gls{nn} is only evaluated once as a preprocessing step to determine the symbol weights.
 This approach allows using the optimized clause selection procedure implemented in Vampire
-with very little modification and virtually no computational cost during runtime.
+with very little modification and negligible computational cost during runtime.
 
 The trained system increased the performance of a baseline Vampire by \SI{6.6}{\percent},
 which is more than the increase introduced by AVATAR,
@@ -109,7 +105,7 @@ a powerful technique that delegates some propositional sub-tasks of the \gls{fol
 Manual inspection revealed that
 the system learned to
 prioritize clauses with occurrences of symbols that appear in the conjecture (goal-directed guidance),
-deprioritize clauses with subformula names (namely subformula definitions),
+deprioritize clauses with subformula names,
 and prioritize general clauses -- clauses with variable occurrences.
 
 \IncludePaper{publications/weights.pdf}
