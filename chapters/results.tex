@@ -2,17 +2,17 @@
 %\newcommand*{\IncludePaper}[2][height=\paperheight-1.5in]{\includepdf[pages=1, pagecommand={}, #1]{#2}}
 \newcommand*{\IncludePaper}[2][]{}
 
-\chapter{Results}
+\newcommand{\ResultSection}{\chapter}
 
-The results of my research have been published at various conferences and workshops.
-This chapter includes a selection of these publications.
-Each of the publications is presented in its final published form and is self-contained.
-
-\todo[inline,color=green]{Consider promoting the paper sections to chapters.}
+\todo[inline]{Consider categorizing the papers into chapters by topic:
+Symbol Precedences,
+Clause Selection,
+Strategy Schedules
+}
 \todo[inline]{Emphasize that all of the solutions use ML for preprocessing.}
 \todo[inline]{Mention that the NNs can be swapped -- these results show an example of a NN.}
 
-\section{Learning Precedences from Simple Symbol Features}
+\ResultSection{Learning Precedences from Simple Symbol Features}
 \label{sec:results:simple}
 
 State-of-the-art \glspl{atper}, including \gls{vampire}, use the \gls{SuperpositionCalculus} as the core of the reasoning procedure.
@@ -41,7 +41,7 @@ as presented in \cref{sec:results:npr,sec:results:selection}.
 
 \IncludePaper{publications/simple.pdf}
 
-\section{Neural Precedence Recommender}
+\ResultSection{Neural Precedence Recommender}
 \label{sec:results:npr}
 
 \todo[inline,color=green]{This section is new and RC.}
@@ -86,7 +86,7 @@ the reviewers praised the clear and detailed presentation of the \gls{gnn} that 
 
 \IncludePaper{publications/Neural Precedence Recommender.pdf}
 
-\section{A GNN-Advised Clause Selection}
+\ResultSection{A GNN-Advised Clause Selection}
 \label{sec:results:selection}
 
 \todo[inline,color=green]{This section is new and RC.}
@@ -114,7 +114,7 @@ and prioritize general clauses -- clauses with variable occurrences.
 
 \IncludePaper{publications/weights.pdf}
 
-\section{Regularization in Spider-Style Strategy Discovery and Schedule Construction}
+\ResultSection{Regularization in Spider-Style Strategy Discovery and Schedule Construction}
 \label{sec:results:regularization}
 
 In the research presented below \cite{DBLP:conf/ijcar/BartekCS24},
@@ -131,7 +131,7 @@ A manuscript with additional appendices is available online \cite{DBLP:journals/
 
 \IncludePaper{publications/regularization.pdf}
 
-\section{Cautious Specialization of Strategy Schedules}
+\ResultSection{Cautious Specialization of Strategy Schedules}
 \label{sec:results:cautious}
 
 In \cref{sec:results:regularization},
