@@ -62,11 +62,34 @@ In Prague, \today
 \end{declaration}
 
 \begin{abstract-english}
-\todo[inline,color=red]{TBA}
+\todo[inline,color=green]{Review.}
+
+Automatic theorem proving (ATP) for first-order logic (FOL) is a technology that allows solving a wide array of formalized tasks
+coming from domains such as mathematics and software verification.
+Saturation-based automatic theorem provers,
+exemplified by the highly optimized prover Vampire,
+constitute the state of the art in ATP.
+
+State-of-the-art provers contain various heuristics that guide the proof search.
+Configuring these heuristics well\todo{too informal} can greatly increase the chance of success on an arbitrary input problem.
+Machine learning (ML) can substitute an expert user in configuring the heuristics.
+
+This dissertation thesis presents a line of research into ML for saturation-based ATP.
+I experimented with three ways of applying ML to improve the performance of the saturation-based prover Vampire.
+In the first set of experiments, I created and evaluated a system that, given an arbitrary input problem, predicts a symbol precedence to instantiate a simplification ordering on terms.
+Secondly, I created a system that predicts symbol weights for the weighted symbol-counting clause selection scheme.
+Finally, I constructed strong strategy schedules.
+
+All the research presented in this thesis has been published in peer-reviewed papers.
+The thesis includes the papers in their final published form.
+
+%I used the award winning prover Vampire to implement and empirically evaluate the ML designs I proposed.
+%I used the FOL fragment of the TPTP problem library as the target problem domain.
+%Using a problem set this broad and varied ensures a level of generality of the empirical results.
 \end{abstract-english}
 
 \begin{abstract-czech}
-\todo[inline,color=red]{TBA}
+\todo[inline,color=red]{Translate from English.}
 \end{abstract-czech}
 
 \input{preamble-common}
