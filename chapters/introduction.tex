@@ -91,11 +91,12 @@ DBLP:conf/atal/LibalN21}.\todo{The listed areas are actually related primarily t
 \Gls{fol} is a general-purpose reasoning paradigm.
 In this section, I outline how \gls{fol} is used in reasoning,
 focusing especially on the notions and approaches used in automated reasoning.\todo{This paragraph is too vague. What is reasoning?}
+I invite readers interested in more details to consult relevant literature on \gls{logic} \cite{DBLP:books/daglib/0072413} and \gls{ar} \cite{}.\todo[color=green]{Add more references for both logic and AR.}
 
 A reasoning task is\todo{"defined by a \emph{signature} and axioms and conjecture." Continue in this vain, starting with signature. Formulas are built using signature (non-logical symbols) and logical symbols.} represented in \gls{fol} by a set of \defn{axioms} (for example, axioms of set theory, group theory, or arithmetic; in general, any collection of \gls{fol} formulas) and a \defn{conjecture}.
 The axioms and the conjecture are \gls{fol} \defn{sentences} (formulas with no free variable occurrences) constructed using a common \defn{signature}, that is, a set of non-logical\todo{Contrast with logical symbols -- connectives and quantifiers.} symbols that serve as identifiers of predicates and functions.
 %\footnote{Predicate symbols map tuples of elements to Boolean values, and function symbols map tuples of elements to elements.}
-An \defn{interpretation} of the signature specifies semantics of each of the signature's symbols and, by composition, each formula over the signature.\todo{Point the reader to literature that explains FOL in more detail.}
+An \defn{interpretation} of the signature specifies semantics of each of the signature's symbols and, by composition, each formula over the signature.
 %The (possibly\todo{Or even necessarily?} infinitely many) interpretations that satisfy a set of axioms form the \defn{theory} of the axioms.\todo[author=MS]{"In mathematical logic, a theory (also called a formal theory) is a set of sentences in a formal language." \url{https://en.wikipedia.org/wiki/Theory\_(mathematical\_logic)}}
 If the conjecture is satisfied by all the interpretations that satisfy the axioms\todo{all the models of the theory},
 the axioms \defn{logically entail} the conjecture.
