@@ -1,18 +1,7 @@
-Automatic theorem proving (ATP) for first-order logic (FOL) is a technology that allows solving a wide array of formalized tasks
-coming from domains such as mathematics and software verification.
-Saturation-based automatic theorem provers,
-exemplified by the highly optimized prover Vampire,
-constitute the state of the art in ATP.
+Automatic theorem proving (ATP) for first-order logic (FOL) is a technology that allows solving a wide array of formalized tasks coming from domains such as mathematics and software verification. Saturation-based automatic theorem provers, exemplified by the highly optimized prover Vampire, constitute the state of the art in ATP.
 
-State-of-the-art provers contain various heuristics that guide the proof search.
-Configuring these heuristics well\todo{too informal} can greatly increase the chance of success on an arbitrary input problem.
-Machine learning (ML) can substitute an expert user in configuring the heuristics.
+State-of-the-art provers contain various heuristics that guide the proof search. Given an arbitrary input problem, configuring these heuristics well\todo{too informal} can greatly increase the chance of success. Machine learning (ML) can substitute an expert user in configuring the heuristics.
 
-This dissertation thesis presents a line of research into ML for saturation-based ATP.
-I experimented with three ways of applying ML to improve the performance of the saturation-based prover Vampire.
-In the first set of experiments, I created and evaluated a system that, given an arbitrary input problem, predicts a symbol precedence to instantiate a simplification ordering on terms.
-Secondly, I created a system that predicts symbol weights for the weighted symbol-counting clause selection scheme.
-Finally, I constructed strong strategy schedules.
+This dissertation thesis presents a line of research in ML for saturation-based ATP. I designed and evaluated three approaches of applying ML to improve the performance of the saturation-based prover Vampire. In the first approach, I created and evaluated a system that, given an arbitrary input problem, predicts a symbol precedence to instantiate a simplification ordering on terms. Secondly, I created a system that predicts symbol weights for the weighted symbol-counting clause selection scheme. Finally, my co-authors and I created a system that automatically finds complementary strategies and constructs strong strategy schedules that generalize well to unseen problems.
 
-All the research presented in this thesis has been published in peer-reviewed papers.
-The thesis includes the papers in their final published form.
+All the research presented in this thesis has been published in peer-reviewed papers. The thesis includes the papers in their final published form.
