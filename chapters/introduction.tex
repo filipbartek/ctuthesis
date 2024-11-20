@@ -483,7 +483,8 @@ The symbol-counting heuristic \cite{DBLP:conf/cade/SchulzM16}, which is one of t
 prioritizes clauses that are small in the number of symbol and variable occurrences.
 In the weighted variant of this heuristic \cite{E-manual},
 the user specifies a weight for each of the symbols
-and each symbol occurrence is weighted by the weight of the corresponding symbol.
+and
+the clause weight is computed as the weighted sum of the symbol occurrence counts.
 
 In the work described in \cref{sec:results:selection} \cite{DBLP:conf/lpar/Bartek023},
 I modified Vampire to support the weighted symbol-counting clause selection heuristic
