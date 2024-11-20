@@ -452,7 +452,7 @@ aiding in finding the proof quickly.
 
 I explored two approaches of automatically finding a good \gls{sp} for an arbitrary input problem.
 In my initial paper \cite{DBLP:conf/cade/Bartek020} (see \cref{sec:results:simple}),
-I present a \defn{\gls{SymbolPrecedenceRecommender}} that sorts the symbols by a linear combination\todo[color=red]{This is not true. Correct.}\todo{Stress the challenge of designing the proxy task. "We present a p. recommender which uses ... over syntactic features.} of their syntactic features using learned weights.
+I present a \defn{\gls{SymbolPrecedenceRecommender}} that orders the symbols using a small set\todo{Stress the challenge of designing the proxy task. "We present a p. recommender which uses ... over syntactic features.} of their syntactic features.
 In a later work \cite{DBLP:conf/cade/Bartek021} (see \cref{sec:results:npr}),
 I improved on this by training a \acrshort{gnn}-based \gls{SymbolPrecedenceRecommender}.
 In both cases, I trained the recommender to generate \glspl{sp} that improve the likelihood of a\todo{an early?} successful proof search.
