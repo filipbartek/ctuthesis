@@ -13,4 +13,42 @@
 %stav),
 %ii) závěry pro další rozvoj vědy nebo pro realizaci v praxi,
 
-\todo[inline,color=red]{TBA}
+\section{Summary}
+
+\todo[inline,color=green]{new section}
+
+\Gls{ml} provides an attractive direction for improving \gls{atping} because provers are complex, heuristic-driven systems whose behavior is difficult to optimize by hand,
+and because typically, training data can be generated in large amounts, limited only by the computational resources.
+In this thesis,
+I presented novel techniques of applying \gls{ml} to saturation-based \gls{atping} for \gls{fol}.
+By using the prover \gls{vampire} and the \gls{tptp} problem library in the experiments,
+I demonstrated namely the degree to which these techniques can be used to improve on the state of the art in \gls{atping}.
+
+The first broad approach I explored is the configuration of selected heuristics on a per-problem basis:
+Given an input problem, a trained recommender configures a heuristic in \gls{vampire} in order to maximize the chance that the problem is solved quickly.
+I configured two heuristics in this way:
+\gls{sot} (via \gls{sp}; see \cref{sec:results:simple,sec:results:npr}) and weighted symbol-counting clause selection (see \cref{sec:results:selection}).\todo{Mention that the shape of the configuration of the heuristic depends on the signature size.}
+
+\Glspl{gnn} were notably useful in configuring the heuristics,
+yielding an improvement of \pc{4} and \pc{6.6} over a baseline, respectively, in the expected percentage of problems solved in a fixed time limit.
+Notably, using a \gls{gnn} allows training a signature-agnostic recommender -- one that learns from the structure of the training problems, ignoring the symbol names.
+
+Each of the \acrshort{gnn}-based recommenders is trained on a proxy task of ranking objects (precedences or clauses)
+with training data in the form of ordered pairs of objects.
+Each of these recommender designs shows how solutions to pairwise ranking,
+a task studied in the fields of \acrlong{ltr} and recommender systems,
+can be applied in \gls{atping}.
+
+The second approach (see \cref{sec:results:regularization,sec:results:cautious}) configures a large number of heuristics jointly.
+Instead of recommending a configuration on a per-problem basis,
+I constructed a static schedule of many configurations to optimize \gls{vampire}'s performance on a whole distribution of problems.
+
+The main innovation in this branch of my research is the rigorous treatment of generalization of the output schedules to unseen problems.
+To this effect, I proposed a regularized greedy algorithm for constructing the schedules.
+This algorithm, as well as the whole idea of regularization of algorithm schedules, has potential applications in domains outside of \gls{tping}\todo{Provide some examples.}.
+
+\todo[inline,color=red]{Finish.}
+
+\section{Future Work}
+
+\todo[inline,color=red]{Finish.}
