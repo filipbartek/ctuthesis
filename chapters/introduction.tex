@@ -280,7 +280,7 @@ the optimum value depends on the input problem
 %while in problems with at least one non-Horn clause,
 %weight-based selection should be performed 15 times as often as age-based selection.}
 \cite{DBLP:conf/cade/SchulzM16}
-%\todo{Schulz doesn't claim the difference is significant so it may be just due to noise. I would like to assume it's significant because it reaches more than \SI{10}{\percent} solved problems when comparing two classes of problems (unit eq and non-Horn eq).}
+%\todo{Schulz doesn't claim the difference is significant so it may be just due to noise. I would like to assume it's significant because it reaches more than \pc{10} solved problems when comparing two classes of problems (unit eq and non-Horn eq).}
 % unit eq: FIFO is relatively good. general eq: FIFO is relatively bad.
 % In unit eq, the weight-age ratio 2 is better than 15, solving 10.22 % problems.
 % In general eq, the weight-age ratio 15 is better than 2, solving 0.89 % problems.
@@ -492,9 +492,9 @@ and trained a \gls{gnn} to propose a weight for each of the symbols of an arbitr
 Thanks to the use of a \gls{gnn}, this symbol weight recommender is signature-agnostic,
 which overcomes the challenge of misaligned signatures present in \gls{tptp}.\todo{This is common with precedence recommender.}
 Final evaluation showed that
-the trained heuristic solves \SI{6.6}{\percent} more problems than the baseline.
+the trained heuristic solves \pc{6.6} more problems than the baseline.
 
-%The resulting system solved \SI{6.6}{\percent} more problems than the baseline,
+%The resulting system solved \pc{6.6} more problems than the baseline,
 %which is an improvement greater than that introduced, under the same conditions, by AVATAR,
 %a powerful proving technique fusing a SAT solver with FOL ATP.
 %Our experiments revealed that constraining the training to assign a weight of at least 1 to each symbol is a fruitful strategy\todo{Disambiguate from the term "strategy"?}.
