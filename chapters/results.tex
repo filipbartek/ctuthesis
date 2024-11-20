@@ -54,7 +54,7 @@ I trained a \gls{gnn} to predict a score for each symbol in the signature such t
 A straightforward way to determine the best precedence for a given problem involves evaluating all possible precedences (permutations of the signature of the problem).
 This is prohibitively expensive on all but the smallest problems.
 On the other hand, we can easily compare an arbitrary pair of precedences.
-Following from this observation, we train the symbol score predictor on the proxy task of (pairwise) ranking of precedences.
+Following from this observation, we train the symbol score predictor on the proxy task of (pairwise) ranking of precedences.\todo{Mention when a precedence is considered better than another.}
 
 In summary, our \gls{sp} recommender is trained on three nested proxy tasks:
 \begin{enumerate}
