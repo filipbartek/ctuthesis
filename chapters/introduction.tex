@@ -454,8 +454,14 @@ I explored two approaches of automatically finding a good \gls{sp} for an arbitr
 In my initial paper \cite{DBLP:conf/cade/Bartek020} (see \cref{sec:results:simple}),
 I present a \defn{\gls{SymbolPrecedenceRecommender}} that orders the symbols using a small set\todo{Stress the challenge of designing the proxy task. "We present a p. recommender which uses ... over syntactic features.} of their syntactic features.
 In a later work \cite{DBLP:conf/cade/Bartek021} (see \cref{sec:results:npr}),
-I improved on this by training a \acrshort{gnn}-based \gls{SymbolPrecedenceRecommender}.
-In both cases, I trained the recommender to generate \glspl{sp} that improve the likelihood of a\todo{an early?} successful proof search.
+I improved on this by training a \acrshort{gnn}-based \glslink{SymbolPrecedenceRecommender}{precedence recommender}.
+In both cases, I trained the recommender to generate a \gls{sp} that
+approximately minimizes the number of iterations the saturation loop takes to solve the input problem.
+% simple: cost(\pi) is the number of saturation iteration loops on this precedence. For a new problem, we minimize a lossy estimate of cost.
+% npr: \pi < \rho iff \pi solves the problem in fewer saturation iteration loops.
+This typically translates to
+a low \gls{wallclock} \gls{runtime} taken to solve the problem and
+a relatively high probability of solving the problem under an arbitrary time limit.\todo[color=green]{new sentence}
 
 \todo[inline]{Explain somewhere: We learn across problems. We try to generalize across problems. }
 
