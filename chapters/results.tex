@@ -24,12 +24,13 @@ Both of these \gls{to} schemes are parameterized by a \gls{sp} -- a permutation 
 
 The standard heuristic methods implemented in \gls{vampire} construct the \gls{precedence} by sorting the symbols by their arity or number of occurrences in the input problem.
 In the work presented below \cite{DBLP:conf/cade/Bartek020},
-a \gls{precedence} is constructed using a combination of six simple symbol features,
-including the arity and the occurrence count.
+a \gls{precedence} is constructed using a combination of six syntactic symbol features that are easy to compute,
+including the arity and the number of occurrences.
 Once the system has been trained,
-a precedence is constructed in two steps:
+a precedence for an input problem is constructed in two steps:
 \begin{enumerate}
 \item A pairwise preference regressor (Elastic-Net or Gradient Boosting) predicts a preference value for each pair of symbols.
+This value represents the degree to which the first of the symbols should precede the other.\todo[color=green]{new sentence}
 \item A precedence is constructed using the predicted symbol pair preference values.
 \end{enumerate}
 The preference regressor is trained on runs of Vampire with \gls{kbo} instantiated by random precedences.
