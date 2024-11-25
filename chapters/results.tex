@@ -30,7 +30,7 @@ Once the system has been trained,
 a precedence for an input problem is constructed in two steps:
 \begin{enumerate}
 \item A pairwise preference regressor (Elastic-Net or Gradient Boosting) predicts a preference value for each pair of symbols.
-This value represents the degree to which the first of the symbols should precede the other.\todo[color=green]{new sentence}
+This value expresses the degree to which the first of the symbols should precede the other.
 \item A precedence is constructed using the predicted symbol pair preference values.
 \end{enumerate}
 The preference regressor is trained on runs of Vampire with \gls{kbo} instantiated by random precedences.
