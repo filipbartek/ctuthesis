@@ -44,79 +44,39 @@ I constructed a static schedule of complementary configurations to optimize \gls
 
 The main innovation this branch of my research introduced is the rigorous treatment of generalization of the schedules to unseen problems.
 To this effect, I proposed a regularized greedy algorithm for constructing the schedules.
-This algorithm, as well as the whole idea of regularization of algorithm schedules, has potential applications in domains outside of \gls{tping}\todo{Provide some examples.}.
+%This algorithm, as well as the whole idea of regularization of algorithm schedules, has clear potential applications in domains outside of \gls{tping}\todo{Provide some examples.}.
 
 \todo[inline]{Highlight the data I published.}
 
 \section{Future Work}
+% Rule of thumb: Only mention stuff that makes sense in the context of Summary.
 
-\todo[inline,color=green]{New section}
+\todo[inline,color=green]{Reworked section}
+
+\todo[inline]{Mention some steps that synthesize. Look behind the horizon. Make this section sound visionary.}
 
 The research presented in this thesis,
 besides demonstrating several new approaches for applying \gls{ml} in \gls{atping},
 also opens new directions for future research.\todo{Finish the introductory paragraph.}
 
-In all the experiments presented in this thesis, I used the runtime\todo{I used saturation loop iterations and CPU instructions.} as a measure of quality of an execution.
-Timeouts are interpreted as executions that would never finish successfully even if executed with unlimited time, which is a common way of dealing with timeouts in the \gls{tping} community.
-Instead, timeouts could be treated more rigorously and precisely by modeling the runtime of a timed-out execution by a distribution estimated from the executions that did terminate.\todo{Mention and reference research on censored data. Maybe Run2Survive.}
-Similarly, we could account for noise in runtime of successful executions by modeling runtime of each execution by a distribution.\todo{Abstract this paragraph.}
+A large number of models and their associated training algorithms have been proposed as approaches to \gls{ml}.
+Each of them has specific strengths and weaknesses.
+%Each of these models can be applied in various tasks of fitting type.
+In my research, I used \glspl{gnn} trained by \acrlong{sgd}, Elastic-Net (regularized linear regression), and gradient boosted decision trees.
+The \glspl{gnn} trained on pairwise ranking tasks demonstrated the greatest success in optimization of the prover heuristics (see \cref{sec:results:npr,sec:results:selection}).
+Other models might allow reaching greater performance, training efficiency, or ease of deployment.
+%Simple, low-capacity models such as the linear model could be trained and deployed more easily at a performance cost that remains unknown.
 
-\todo[inline]{%
-Symbol precedence:\\
-Train to predict KBO weights along with the precedence.\\
-Recommend function and predicate precedences jointly.\\
-}
+While saturation-based proving is well established and researched in the context of \gls{fol},
+the paradigm, with appropriate modifications, has recently been successfully applied to \gls{hol} as well \cite{}.
+All of the heuristic optimization techniques I introduced in this thesis are of potential use in saturation-based proving for \gls{hol}.
 
-% Constrained logistic regression
-In the Neural Precedence Recommender (see \cref{sec:results:npr}),
-a trained \gls{nn} predicts symbol scores and
-a symbol precedence is constructed by ordering the symbols by their scores.
-If, instead of using a \gls{nn}, the symbol score was expressed as a weighted sum of syntactic symbol features (such as those used in \cref{sec:results:simple} -- arity, number of occurrences, etc.),
-the loss I used to train the \gls{nn} would be a convex function of the weights of the symbol features.
-This would allow finding nearly optimal feature weights efficiently \cite{},
-and the resulting weights, along with the simple algorithm that produces the precedence by ordering the symbols by their scores,
-could be integrated in the \gls{tper} easily.
-The disadvantage of this approach is the significantly reduced capacity\todo{Reference to the technical term \enquote{model capacity}} in customizing the symbol weights to the particular input problem.
-It remains unclear whether this reduced capacity would translate into a significant reduction of performance.
+Each of the problem domains that admit encoding in \gls{fol},
+such as mathematics\todo{Reference Mizar Math Library (MPTP 0.2 (2016)), Isabelle (Seventeen), ...} or software verification,
+uses a common set of symbols across the problems -- a shared signature.
+Optimizing a symbol precedence or symbol weights for clause selection for any such domain is an interesting task that could combine relevant parts of my research with new approaches.
+For example, convex optimization could be used to optimize the symbol weights down to the global optimum with respect to the pairwise ranking loss function.
 
-Similarly, a clause weight model trainable by convex optimization could be used for clause selection (see \cref{sec:results:selection}):
-Instead of estimating the weight of each symbol dynamically by a \gls{nn} for each input problem,
-we could optimize static weights for (possibly overlapping) categories of symbols,
-such as
-\enquote{predicate symbol} (capturing the number of literals in a clause)\todo{Doesn't make sense.},
-\enquote{predicate symbol of arity 1},
-\enquote{Skolem symbol}, etc.
-Such generic symbol-counting clause features could be easily augmented by other clause features,
-such as term depth, number of bound variables, derivation tree depth and size, or derivation distance from a goal clause.\todo{Reference MS's research on the generalization of age-based selection.}
-
-Furthermore, in a problem domain with a shared signature, such as Mizar Mathematical Library \cite{}\todo{Reference MPTP 0.2 (2016) as well. Consider also referencing Isabelle and Seventeen.},
-the scores or weights of individual symbols could be optimized directly.
-
-The clause selection heuristic is trained on pairs of clauses.
-From each prover execution, each proof clause is paired with each non-proof selected\todo{or active?} clause.
-We could make the training more precise by only pairing clauses that co-habited the unprocessed set during the proof search.\todo{Reference research that does this. See KC's paper with IProver.}
-
-For practical reasons, I trained the clause selection heuristic without AVATAR. ...
-
-\todo[inline]{%
-Clause selection:\\
-Generalize to RNN on term structure.\\
-Generate data with more Vampire configurations, for example with AVATAR.\\
-}
-
-\todo[inline]{%
-Strategies and schedules:\\
-Greedy schedule algorithm: Analyze in more detail. Figure out on what kind of data it works close to optimum.\\
-Dynamic scheduling.\\
-Better schedule specialization\\
-Regularization: Find more regularizers. Regularize ...\\
-Optimize parallel schedules.\\
-}
-
-\todo[inline]{%
-General future work:\\
-Automate saturation-based proving more\\
-Apply in domains outside logic\\
-}
-
-\todo[inline,color=red]{Finish.}
+Highly-parameterized solvers are common in various areas of complex problem solving.
+My work on regularized strategy schedule construction (see \cref{sec:results:regularization,sec:results:cautious}) can be applied to an arbitrary solver irrespective of the problem domain.
+It would be especially interesting to compare the specifics of the domains with respect to schedule optimization.\todo{Reference COSEAL or some related research.}
