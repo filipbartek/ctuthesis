@@ -17,7 +17,7 @@
 
 % https://www.grammarly.com/blog/punctuation-capitalization/comma-before-because/
 \Gls{ml} provides an attractive direction for improving \gls{atping} because provers are complex, heuristic-driven systems whose behavior is difficult to optimize by hand,
-and because, typically, training data can be generated in large amounts, limited only by the computational resources.
+and because, typically, training data can be generated in large amounts, limited only by the computational resources\todo{Training problem sets are, however, often very limited.}.
 In this thesis,
 I presented several novel techniques of applying \gls{ml} to improve saturation-based \gls{atping} for \gls{fol}.
 By using the prover \gls{vampire} and the \gls{tptp} problem library in the experiments,
@@ -26,23 +26,23 @@ I demonstrated the degree to which these techniques can be used to improve on th
 The first broad approach I explored is the configuration of a chosen heuristic on a per-problem basis:
 Given an input problem, a trained recommender configures a heuristic in \gls{vampire} in order to maximize the chance that the problem is solved quickly.
 I configured two heuristics in this way:
-\gls{sot} (via \gls{sp}; see \cref{sec:results:simple,sec:results:npr}) and weighted symbol-counting clause selection (see \cref{sec:results:selection}).\todo{Mention that the shape of the configuration of the heuristic depends on the signature size.}
+\gls{sot} (via \gls{sp}; see \cref{sec:results:simple,sec:results:npr}) and weighted symbol-counting clause selection (see \cref{sec:results:selection}).\todo{Mention that the shape of the configuration of the heuristic depends on the signature size. Standard AC approaches expect fixed shape.}
 
-Among the \gls{ml} techniques we experimented with,
-the \glspl{gnn} were prominently useful in configuring the heuristics,
+Among the \gls{ml} models\todo{Is this term appropriate? Alternatives: model families, approaches, techniques.} I experimented with,
+the \glspl{gnn} were prominently successful in configuring the heuristics,
 yielding an improvement of \pc{4} and \pc{6.6} over a baseline, respectively, in the expected percentage of problems solved in a fixed time limit.
 Notably, using a \gls{gnn} allows training a signature-agnostic recommender -- one that learns from the structure of the training problems, in a manner invariant to symbol renaming.
 
-Each of the \acrshort{gnn}-based recommenders is trained on a proxy task of ranking objects (precedences or clauses)
+Each of the \acrshort{gnn}-based recommenders is trained on a proxy task of ranking objects (precedences or clauses, respectively)
 with training data in the form of ordered pairs of objects.
-Notably, these designs demonstrate how methods proposed in the area of \acrlong{ltr}
+Notably, the designs of these recommenders demonstrate how methods proposed in the area of \acrlong{ltr}
 can be applied in \gls{atping}.
 
 The second approach (see \cref{sec:results:regularization,sec:results:cautious}) configures a large number of heuristics jointly.
-Instead of recommending a configuration on a per-problem basis,
-I constructed a static schedule of many configurations to optimize \gls{vampire}'s performance on a whole distribution of problems.
+Instead of recommending a single configuration on a per-problem basis,
+I constructed a static schedule of complementary configurations to optimize \gls{vampire}'s performance on a whole distribution of problems.
 
-The main innovation in this branch of my research is the rigorous treatment of generalization of the output schedules to unseen problems.
+The main innovation this branch of my research introduced is the rigorous treatment of generalization of the schedules to unseen problems.
 To this effect, I proposed a regularized greedy algorithm for constructing the schedules.
 This algorithm, as well as the whole idea of regularization of algorithm schedules, has potential applications in domains outside of \gls{tping}\todo{Provide some examples.}.
 
