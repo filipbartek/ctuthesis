@@ -55,28 +55,33 @@ To this effect, I proposed a regularized greedy algorithm for constructing the s
 
 \todo[inline]{Mention some steps that synthesize. Look behind the horizon. Make this section sound visionary.}
 
-The research presented in this thesis,
-besides demonstrating several new approaches for applying \gls{ml} in \gls{atping},
-also opens new directions for future research.\todo{Finish the introductory paragraph.}
+%The research presented in this thesis,
+%besides demonstrating several new approaches for applying \gls{ml} in \gls{atping},
+%also opens new directions for future research.\todo{Finish the introductory paragraph.}
 
-A large number of models and their associated training algorithms have been proposed as approaches to \gls{ml}.
-Each of them has specific strengths and weaknesses.
+Various models and associated training algorithms have been proposed as approaches to \gls{ml}.
+%Each of them is associated with specific strengths and weaknesses.
 %Each of these models can be applied in various tasks of fitting type.
-In my research, I used \glspl{gnn} trained by \acrlong{sgd}, Elastic-Net (regularized linear regression), and gradient boosted decision trees.
-The \glspl{gnn} trained on pairwise ranking tasks demonstrated the greatest success in optimization of the prover heuristics (see \cref{sec:results:npr,sec:results:selection}).
-Other models might allow reaching greater performance, training efficiency, or ease of deployment.
+In my research, I used \glspl{nn} trained by \acrlong{sgd}, Elastic-Net (regularized linear regression), and gradient boosted decision trees\todo{Unify terminology with the respective section in Results.}.
+The \glspl{nn} trained on pairwise ranking proxy tasks\todo{Ensure that the concept of \enquote{proxy task} is known from the Summary.} demonstrated the greatest success in optimization of the prover heuristics (see \cref{sec:results:npr,sec:results:selection}).
+%Other models might allow reaching greater performance, training efficiency, or ease of deployment.
 %Simple, low-capacity models such as the linear model could be trained and deployed more easily at a performance cost that remains unknown.
+Different attractive tradeoffs between \gls{tping} performance, training efficiency, ease of deployment, and explainability might be achieved by using different models or proxy tasks.
+
+In each of the problem domains that admit encoding in \gls{fol},
+such as mathematics (formalized, for example, in Mizar Mathematical Library \cite{DBLP:journals/jfrea/GrabowskiKN10,DBLP:journals/jar/Urban06} or Archive of Formal Proofs \cite{DBLP:conf/mkm/BlanchetteHMN15,DBLP:conf/itp/DesharnaisVBW22}) or software verification,
+a common set of symbols -- a shared signature -- can be identified.
+Configuring \gls{sot} or \gls{ClauseSelection}
+for such a domain could be tackled by combining relevant parts of my research with new approaches suitable for working with a fixed signature.
+For example, convex optimization could be used to optimize the symbol scores and weights down to the global optimum with respect to the pairwise ranking loss function.\todo{too technical}
 
 While saturation-based proving is well established and researched in the context of \gls{fol},
-the paradigm, with appropriate modifications, has recently been successfully applied to \gls{hol} as well \cite{}.
-All of the heuristic optimization techniques I introduced in this thesis are of potential use in saturation-based proving for \gls{hol}.
+the paradigm, with appropriate modifications, has also been successfully applied to \gls{hol} \cite{DBLP:conf/ijcar/BhayatS24}\todo[color=green]{Reference more papers on saturation-based proving for HOL.}.
+All of the heuristic optimization\todo{Ambiguous: optimization of heuristics, or optimization by heuristics?} techniques I introduced in this thesis are of potential use in saturation-based proving in \gls{hol}.
 
-Each of the problem domains that admit encoding in \gls{fol},
-such as mathematics\todo{Reference Mizar Math Library (MPTP 0.2 (2016)), Isabelle (Seventeen), ...} or software verification,
-uses a common set of symbols across the problems -- a shared signature.
-Optimizing a symbol precedence or symbol weights for clause selection for any such domain is an interesting task that could combine relevant parts of my research with new approaches.
-For example, convex optimization could be used to optimize the symbol weights down to the global optimum with respect to the pairwise ranking loss function.
+Highly-parameterized solvers are common in various areas of complex problem solving besides \gls{fol} and \gls{hol}.
+Alternatively, two or more solvers may be available for a problem domain in a setting known as \gls{as} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}.
+My work on regularized strategy schedule construction (see \cref{sec:results:regularization,sec:results:cautious}) can be applied to an arbitrary parameterized solver or collection of solvers irrespective of the problem domain.
+It would be particularly interesting to compare the specifics of the domains with respect to schedule optimization.
 
-Highly-parameterized solvers are common in various areas of complex problem solving.
-My work on regularized strategy schedule construction (see \cref{sec:results:regularization,sec:results:cautious}) can be applied to an arbitrary solver irrespective of the problem domain.
-It would be especially interesting to compare the specifics of the domains with respect to schedule optimization.\todo{Reference COSEAL or some related research.}
+\todo[inline]{Add a closing paragraph.}
