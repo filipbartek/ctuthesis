@@ -52,7 +52,7 @@ and clearly delimiting ambiguity in mathematics.
 The need for clarity in mathematics
 ultimately crystallized in the search for formally defined foundations of the discipline as a whole.
 In the 20th century,
-classical \gls{fol}\todo{Only first-order? How about higher-order? Consider discussing with Chad or JU.} emerged as the standard formalism for expressing these foundations \cite{DBLP:journals/bsl/Ferreiros01}.
+classical \gls{fol}\todo[color=orange]{Only first-order? How about higher-order? Consider discussing with Chad or JU.} emerged as the standard formalism for expressing these foundations \cite{DBLP:journals/bsl/Ferreiros01}.
 
 %During the 20th century,
 %\gls{fol} emerged as the standard formalism for foundations of mathematics
@@ -93,7 +93,7 @@ In this section, I outline how \gls{fol} is used in reasoning,
 focusing especially on the notions and approaches used in automated reasoning.\todo{This paragraph is too vague. What is reasoning?}
 I invite readers interested in more details to consult relevant literature on \gls{logic} \cite{DBLP:books/daglib/0072413,DBLP:books/daglib/0082098} and \gls{ar} \cite{DBLP:books/daglib/0022394,DBLP:books/el/RobinsonV01}.
 
-A reasoning task is\todo{"defined by a \emph{signature} and axioms and conjecture." Continue in this vain, starting with signature. Formulas are built using signature (non-logical symbols) and logical symbols.} represented in \gls{fol} by a set of \defn{axioms} (for example, axioms of set theory, group theory, or arithmetic; in general, any collection of \gls{fol} formulas) and a \defn{conjecture}.
+A reasoning task is\todo[color=yellow]{"defined by a \emph{signature} and axioms and conjecture." Continue in this vain, starting with signature. Formulas are built using signature (non-logical symbols) and logical symbols.} represented in \gls{fol} by a set of \defn{axioms} (for example, axioms of set theory, group theory, or arithmetic; in general, any collection of \gls{fol} formulas) and a \defn{conjecture}.
 The axioms and the conjecture are \gls{fol} \defn{sentences} (formulas with no free variable occurrences) constructed using a common \defn{signature}, that is, a set of non-logical\todo{Contrast with logical symbols -- connectives and quantifiers.} symbols that serve as identifiers of predicates and functions.
 %\footnote{Predicate symbols map tuples of elements to Boolean values, and function symbols map tuples of elements to elements.}
 An \defn{interpretation} of the signature specifies semantics of each of the signature's symbols and, by composition, each formula over the signature.
@@ -197,7 +197,7 @@ a clause is selected from the unprocessed set.
 This clause, referred to as the \defn{given clause}, is moved to the processed set.
 Then, all the clauses in the processed set are considered as premises of all the inference rules.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
-All new clauses derived by the inferences are added to the unprocessed set.\footnote{Strictly speaking, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice.\todo[inline]{Cite a text that explains forward subsumption. Look at Otter or Voronkov. Or cite Harrison.}}
+All new clauses derived by the inferences are added to the unprocessed set.\footnote{Strictly speaking, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice.\todo[inline,color=yellow]{Cite a text that explains forward subsumption. Look at Otter or Voronkov. Or cite Harrison.}}
 
 \todo[inline]{Calculi: ordered resolution (without equality, with \gls{sot}), superposition.
 
@@ -324,7 +324,7 @@ Our final goal is to optimize the performance of the prover in terms of, for exa
 For the purpose of training,
 we typically need to approximate this measure by a \defn{proxy task} -- an optimization task that admits \gls{ml} and is believed to correlate with the final performance measure.
 
-For example, the task of estimating a good age-weight ratio can be implemented as a supervised learning task, provided we have a ground truth available.\todo{Reference a ML book somewhere with general terms.}
+For example, the task of estimating a good age-weight ratio can be implemented as a supervised learning task, provided we have a ground truth available.\todo[color=yellow]{Reference a ML book somewhere with general terms.}
 In this case, such ground truth is an assignment of age-weight ratios to the training problems.
 We could, for example, evaluate each training problem with several candidate values of age-weight ratio and choose the best observed value as the respective ground truth.
 This simplification establishes a proxy task:
@@ -445,7 +445,7 @@ or all literals that are maximal with respect to the \gls{to}.
 \end{enumerate}
 In these two ways, the \gls{to} prunes and guides the proof search.
 
-\Gls{kbo}, the default \gls{to} scheme used in \gls{vampire}\todo{Is it clear that Vampire is our target prover? Mention it before this.}, is parameterized by \defn{\gls{sp}} -- a permutation of the \gls{signature} of the input problem.
+\Gls{kbo}, the default \gls{to} scheme used in \gls{vampire}\todo[color=yellow]{Is it clear that Vampire is our target prover? Mention it before this.}, is parameterized by \defn{\gls{sp}} -- a permutation of the \gls{signature} of the input problem.
 Choosing a good \gls{sp} for a given input problem
 may make the pruning more aggressive or the guidance more accurate,
 aiding in finding the proof quickly.
