@@ -51,8 +51,6 @@ To this effect, I proposed a regularized greedy algorithm for constructing the s
 \section{Future Work}
 % Rule of thumb: Only mention stuff that makes sense in the context of Summary.
 
-\todo[inline,color=green]{Reworked section}
-
 \todo[inline]{Mention some steps that synthesize. Look behind the horizon. Make this section sound visionary.}
 
 %The research presented in this thesis,
@@ -76,12 +74,13 @@ for such a domain could be tackled by combining relevant parts of my research wi
 For example, convex optimization could be used to optimize the symbol scores and weights down to the global optimum with respect to the pairwise ranking loss function.\todo{too technical}
 
 While saturation-based proving is well established and researched in the context of \gls{fol},
-the paradigm, with appropriate modifications, has also been successfully applied to \gls{hol} \cite{DBLP:conf/ijcar/BhayatS24}\todo[color=green]{Reference more papers on saturation-based proving for HOL.}.
-All of the heuristic optimization\todo{Ambiguous: optimization of heuristics, or optimization by heuristics?} techniques I introduced in this thesis are of potential use in saturation-based proving in \gls{hol}.
+the paradigm, with appropriate modifications, has also been recently successfully applied to \gls{hol} \cite{DBLP:journals/ki/Steen20,DBLP:journals/jar/VukmirovicBBCNT22,DBLP:conf/ijcar/BhayatS24}.
+All of the heuristic optimization\todo{Ambiguous: optimization of heuristics, or optimization by heuristics?} techniques I introduced in this thesis could potentially be adapted and applied in saturation-based proving in \gls{hol}.
 
 Highly-parameterized solvers are common in various areas of complex problem solving besides \gls{fol} and \gls{hol}.
-Alternatively, two or more solvers may be available for a problem domain in a setting known as \gls{as} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}.
+Alternatively, two or more solvers may be available for a problem domain\todo{Disambiguate from problem domains within FOL. Maybe: Use "area".} in a setting known as \gls{as}\todo{Do define the acronym "AC" if its not used anywhere else.} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}.
 My work on regularized strategy schedule construction (see \cref{sec:results:regularization,sec:results:cautious}) can be applied to an arbitrary parameterized solver or collection of solvers irrespective of the problem domain.
-It would be particularly interesting to compare the specifics of the domains with respect to schedule optimization.
+It would be particularly interesting to explore whether and how the best configuration of the regularization is influenced by the specifics of the domain.
+%such as the number of solvers and training problems available, the degree of specialization of the solvers, or the density of timeouts.
 
 \todo[inline]{Add a closing paragraph.}
