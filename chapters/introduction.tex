@@ -203,14 +203,10 @@ The new clauses derived by the inferences are added to the unprocessed set.\foot
 
 Vampire implements ordered resolution and superposition calculus.}
 
-Resolution is complete.
-To reason with equality, we use superposition.\todo[color=red]{Finish this paragraph.}
-
 The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
-The most common calculi are the resolution calculus \cite{} and the superposition calculus \cite{}\todo[author=MS]{chtel jsem hned chtit, abys doplnil "for natively dealing with equality", ale k tomu se pak dostavas hned brzy dal, tak ted uz nevim}.
-While the resolution calculus suffices to ensure completeness\todo{Really? Should we mention axiomatization of equality?} of the proof search\todo[author=MS]{moc nemam rad "proof search", protoze to nic neznamane}\todo[author=MS]{hlavni problem to ale je, ze normalne rikame/dokazujeme "a calculus is/isn't complete"},
-additional inference rules, in practice, greatly increase the power of the prover.
-For example, the superposition rule is the standard technique\todo[author=MS]{stylisticky mi trochu nesedi "inference rule IS a technique"} for reasoning with equality \cite{}.\todo[author=MS]{technicky potrebujes v superposition (jako kalkulus) nejen superposition (jako rule), ale i equality factoring a equality resolution (jako dalsi rules)}
+Resolution calculus \cite{} is complete\todo{Really? Should we mention axiomatization of equality?} and suitable for automated reasoning\todo{Is suitability for AR a significant property of Resolution?}\todo{Is Resolution used in SAT solving?},
+which made it popular in SAT solving.
+To handle equality natively and efficiently, the superposition calculus \cite{} extends the resolution calculus with the superposition inference rule\todo[author=MS]{technicky potrebujes v superposition (jako kalkulus) nejen superposition (jako rule), ale i equality factoring a equality resolution (jako dalsi rules)}.
 
 % Superposition is a generalization of Knuth-Bendix completion.
 % Superposition on UEQ is unfailing KB completion.
@@ -219,6 +215,8 @@ For example, the superposition rule is the standard technique\todo[author=MS]{st
 \todo[inline]{Bare, unrestricted rules are *prolific*.
 
 In the past, people tried to make the calculus as small as possible and yet preserve completeness.}
+
+\todo[color=red,inline]{Make sure the following paragraph links nicely to the previous one.}
 
 Adding generating rules into the calculus increases the power of each inference step at the cost of increasing the branching factor of the proof search.
 Even with only the resolution inference, the size of the unprocessed set typically grows quadratically in the number of iterations \cite{}.\todo{Really? Cite a source. Or avoid discussing this.}\todo{Something like that happens in practice.}
