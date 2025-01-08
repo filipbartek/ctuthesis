@@ -190,7 +190,7 @@ A \defn{\gls{saturation}-based \gls{tper}} structures the search for contradicti
 (the empty clause)
 by maintaining and incrementally expanding the \defn{processed set}
 %\todo{Consider using a different terminology: active and passive set.}
--- a set of clauses that have been used exhaustively as premises of inference rules to derive new clauses -- and the \defn{unprocessed set} -- a set of clauses that have been transitively inferred from the input clauses and have not been used as premises of inferences.
+-- a set of clauses that have been used exhaustively as premises of inference rules to derive new clauses -- and the \defn{unprocessed set} -- a set of clauses that have been transitively inferred from the input clauses and have not been used as premises of inferences.\todo[color=green]{new definition of processed and unprocessed set}
 %deriving new facts,
 %starting with the input problem expressed in \gls{cnf}.
 %\Gls{cnf} is sufficiently expressive:
@@ -215,7 +215,7 @@ An inference calculus specifies the inferences the prover may make and forms the
 The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
 Resolution calculus \cite{} is complete\todo{Really? Should we mention axiomatization of equality?} and suitable for automated reasoning\todo{Is suitability for AR a significant property of Resolution?}\todo{Is Resolution used in SAT solving?},
 which made it popular in SAT solving.
-To handle equality natively and efficiently, the superposition calculus \cite{} extends the resolution calculus with the superposition inference rule\todo[author=MS]{technicky potrebujes v superposition (jako kalkulus) nejen superposition (jako rule), ale i equality factoring a equality resolution (jako dalsi rules)}.
+To handle equality natively and efficiently, the superposition calculus \cite{} extends the resolution calculus with the superposition inference rule\todo[author=MS]{technicky potrebujes v superposition (jako kalkulus) nejen superposition (jako rule), ale i equality factoring a equality resolution (jako dalsi rules)}.\todo[color=green]{Rephrased paragraph. WIP.}
 
 % Superposition is a generalization of Knuth-Bendix completion.
 % Superposition on UEQ is unfailing KB completion.
