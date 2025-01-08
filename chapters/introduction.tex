@@ -201,7 +201,7 @@ a clause is selected from the unprocessed set.
 This clause, referred to as the \defn{given clause}, is moved to the processed set.
 Then, all the clauses in the processed set are considered as premises of all the inference rules.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
-The new clauses derived by the inferences are added to the unprocessed set.\footnote{Strictly speaking, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice.\todo[inline,color=yellow]{Cite a text that explains forward subsumption. Look at Otter or Voronkov. Or cite Harrison.}}
+The new clauses derived by the inferences are added to the unprocessed set.\footnote{Strictly speaking, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice \cite{DBLP:journals/corr/cs-SC-0310056,DBLP:journals/jar/Voronkov95,DBLP:books/daglib/0022394}.}
 
 \todo[inline]{Calculi: ordered resolution (without equality, with \gls{sot}), superposition.
 
