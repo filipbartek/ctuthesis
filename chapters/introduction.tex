@@ -195,59 +195,38 @@ by incrementally expanding the \defn{processed set}
 %starting with the input problem expressed in \gls{cnf}.
 %\Gls{cnf} is sufficiently expressive:
 %Any \gls{fol} problem can be converted (\enquote{clausified}) into an equisatisfiable \gls{cnf} in polynomial time.
-The search starts by initializing the processed set as empty and populating the unprocessed set with the input clauses.
+
+\todo[color=green]{Updated content starts here.}The search starts by initializing the processed set as empty and populating the unprocessed set with the input clauses.
 In each iteration,
 a clause is selected from the unprocessed set.
 This clause, referred to as the \defn{given clause}, is moved to the processed set.
-Then, all the clauses in the processed set are considered as premises of all the inference rules.
+Then, all the clauses in the processed set are considered as premises of all the inference rules in the calculus implemented by the prover.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
 The new clauses derived by the inferences are added to the unprocessed set.\footnote{Strictly speaking, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice \cite{DBLP:journals/corr/cs-SC-0310056,DBLP:journals/jar/Voronkov95,DBLP:books/daglib/0022394}.}
 
-\todo[inline]{Calculi: ordered resolution (without equality, with \gls{sot}), superposition.
+As soon as the empty clause is derived, the search terminates.
+The proof of unsatisfiability of the input problem consists of the empty clause and all the clauses that directly or indirectly contributed to its derivation.
 
-Vampire implements ordered resolution and superposition calculus.}
+The calculus plays a crucial role in the proof search -- it specifies which inferences are available in each iteration.
+By design of the saturation-based paradigm, if the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
+For this reason, the successful inference calculi restrict the inferences as much as possible without compromising the completeness of the calculus.
 
-The inference rules available for the prover are specified in the inference calculus.
+For example, both the ordered resolution calculus \cite{} (a subset\todo[color=green]{Is ordered resolution really a subset of superposition calculus? Or does Vampire implement the union of these calculi?} of the superposition calculus \cite{} which is implemented in Vampire)
+are parameterized by a \defn{literal selection function} -- a function that selects a subset of literals in each clause.
+The inferences are only performed on the selected literals.
+If the selection function is well-behaved,
+i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to}\todo[color=green]{Does it have to be a simplification ordering?},
+the restriction preserves completeness of the calculus \cite{DBLP:journals/logcom/BachmairG94}.
+% Note: Other restriction may preserve completeness too.
+Moreover, it may even be beneficial to restrict the inferences in a way that may forfeit completeness
+in exchange for a narrower and faster-converging proof search.\todo[color=green]{Updated content ends here.}
 
-An inference calculus specifies the inferences the prover may make and forms the core of the reasoning procedure.
-\todo[inline,color=red]{Continue here.}
-
-The inference calculus, that is the set of inference rules implemented by the prover, forms the core of the reasoning procedure.
-Resolution calculus \cite{} is complete\todo{Really? Should we mention axiomatization of equality?} and suitable for automated reasoning\todo{Is suitability for AR a significant property of Resolution?}\todo{Is Resolution used in SAT solving?},
-which made it popular in SAT solving.
-To handle equality natively and efficiently, the superposition calculus \cite{} extends the resolution calculus with the superposition inference rule\todo[author=MS]{technicky potrebujes v superposition (jako kalkulus) nejen superposition (jako rule), ale i equality factoring a equality resolution (jako dalsi rules)}.\todo[color=green]{Rephrased paragraph. WIP.}
+%\todo[author=MS]{technicky potrebujes v superposition (jako kalkulus) nejen superposition (jako rule), ale i equality factoring a equality resolution (jako dalsi rules)}.
 
 % Superposition is a generalization of Knuth-Bendix completion.
 % Superposition on UEQ is unfailing KB completion.
 
-\todo[inline]{The calculi are normally tweaked to be minimal yet ensure completeness.}
-\todo[inline]{Bare, unrestricted rules are *prolific*.
-
-In the past, people tried to make the calculus as small as possible and yet preserve completeness.}
-
-\todo[color=red,inline]{Make sure the following paragraph links nicely to the previous one.}
-
-Adding generating rules into the calculus increases the power of each inference step at the cost of increasing the branching factor of the proof search.
-Even with only the resolution inference, the size of the unprocessed set typically grows quadratically in the number of iterations \cite{}.\todo{Really? Cite a source. Or avoid discussing this.}\todo{Something like that happens in practice.}
-%Even with only the resolution inference, the number of new clauses derived in each iteration may grow quadratically \cite{}.
-This leads to a steadily increasing computational cost of each iteration,
-which effectively slows the proof search down to a crawl\todo{too informal?} in the later stages.
-
-\todo[inline]{The calculus is sound. Restrictions are included in the calculus. They are typically completeness-preserving.
-
-For example, superposition and paramodulation only differ in the restrictions.}
-
-To combat such slowdown, the successful calculi (notably, the ordered resolution and the superposition calculi) restrict the inferences in various ways.
-For example, the superposition calculus\todo{So is ordered resolution, for which this is the crucial feature. Consider demonstrating on ordered resolution.} is parameterized by a \defn{literal selection function} -- a function that selects a subset of literals in each clause.
-The inferences are only performed on the selected literals.
-If the selection function is well-behaved,
-i.e., it selects either a negative literal or all literals that are maximal with respect to a given \gls{to},
-the restriction preserves completeness of the calculus \cite{DBLP:journals/logcom/BachmairG94}.
-% Note: Other restriction may preserve completeness too.
-Moreover, it may even be beneficial to restrict the inferences in a way that forfeits completeness
-in exchange for a more narrow and faster-converging proof search.
-
-In summary, two main choice points guide the \gls{saturation}-based proof search:
+In summary, two main decision points guide the \gls{saturation}-based proof search:
 \begin{enumerate}
 \item Clause selection: Which of the unprocessed clauses should be selected?\todo{Explain why this is important. Typically the prover derives a lot of useless clauses. If it always selected a useful clause, it would find a proof quickly. Add another paragraph about clause selection and "proof".}
 \item Inference restriction: Which of the inferences should be applied to the selected clause?\todo{This is affected by \gls{sot} (literal selection, equality orienting) and forward subsumption.}\todo{Precedences actually likely work by pruning the search space rather than guidance.}
