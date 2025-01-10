@@ -94,10 +94,10 @@ focusing especially on the notions and approaches used in automated\todo{automat
 I invite readers interested in more details to consult relevant literature on \gls{logic} \cite{DBLP:books/daglib/0072413,DBLP:books/daglib/0082098} and \gls{ar} \cite{DBLP:books/daglib/0022394,DBLP:books/el/RobinsonV01}.
 
 In \gls{fol}, a reasoning task is defined by a \defn{signature}, a set of \defn{axioms}, and a \defn{conjecture}.
-The signature is a set of non-logical\todo{Contrast with logical symbols -- connectives and quantifiers.} symbols -- predicates\todo[color=green]{Identifiers of predicates, or predicates?} and functions.
+The signature is a set of non-logical\todo{Contrast with logical symbols -- connectives and quantifiers.} (predicate and function) symbols.
 The axioms and the conjecture are \gls{fo} \defn{sentences} (formulas with no free variable occurrences) over the signature.
 The set of axioms constitutes a \defn{theory};
-some common theories\todo[color=green]{This "theory" is not a set of axioms, it's a theory in a less formal sense. Disambiguate. Does "axiomatizable theory" even make sense?} axiomatizable in \gls{fol} include set theory, group theory, and arithmetic.\todo[color=green]{new paragraph}
+notable theories axiomatizable in \gls{fol} include set theory, group theory, and various fragments of arithmetic.
 %\footnote{Predicate symbols map tuples of elements to Boolean values, and function symbols map tuples of elements to elements.}
 
 An \defn{interpretation} of the signature specifies semantics of each of the signature's symbols and, by composition, each formula over the signature.
@@ -188,9 +188,9 @@ as demonstrated by the continued success of the saturation-based theorem provers
 
 A \defn{\gls{saturation}-based \gls{tper}} structures the search for contradiction
 (the empty clause)
-by maintaining and incrementally expanding the \defn{processed set}
+by incrementally expanding the \defn{processed set}
 %\todo{Consider using a different terminology: active and passive set.}
--- a set of clauses that have been used exhaustively as premises of inference rules to derive new clauses -- and the \defn{unprocessed set} -- a set of clauses that have been transitively inferred from the input clauses and have not been used as premises of inferences.\todo[color=green]{new definition of processed and unprocessed set}
+-- a set of clauses that have been used exhaustively as premises of inference rules to derive new clauses -- while consuming clauses from the \defn{unprocessed set} -- a set of clauses that have been transitively inferred from the input clauses and have not been used as premises of inferences.
 %deriving new facts,
 %starting with the input problem expressed in \gls{cnf}.
 %\Gls{cnf} is sufficiently expressive:
