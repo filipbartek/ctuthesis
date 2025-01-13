@@ -211,8 +211,8 @@ The calculus plays a crucial role in the proof search -- it specifies which infe
 By design of the saturation-based paradigm, if the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
 For this reason, the successful inference calculi restrict the inferences as much as possible without compromising the completeness of the calculus.
 
-For example, both the ordered resolution calculus \cite{} (a subset\todo[color=green]{Is ordered resolution really a subset of superposition calculus? Or does Vampire implement the union of these calculi?} of the superposition calculus \cite{} which is implemented in Vampire)
-are parameterized by a \defn{literal selection function} -- a function that selects a subset of literals in each clause.
+For example, the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}\todo[color=green]{Here I omitted "ordered resolution" completely.}
+is parameterized by a \defn{literal selection function} -- a function that selects a subset of literals in each clause.
 The inferences are only performed on the selected literals.
 If the selection function is well-behaved,
 i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to}\todo[color=green]{Does it have to be a simplification ordering?},
