@@ -275,7 +275,7 @@ the optimum value depends on the input problem
 and, in general, on the configuration of the other heuristics.
 %\todo[author=FB]{I cannot find any source to cite on this.}
 
-Traditionally, finding a good configuration of one or more parameters of a prover is the work of an expert user that draws from their experience with \gls{atping}.
+Traditionally, finding a good configuration of one or more parameters\todo{Foreshadow strategy scheduling in this section.} of a prover is the work of an expert user that draws from their experience with \gls{atping}.
 Modern computing technology has opened new possibilities for the automation of expert decisions in various domains by \defn{\gls{ml}} \cite{DBLP:books/lib/HastieTF09,DBLP:journals/nn/Schmidhuber15}.
 % Hastie provides an overview of machine learning (as does Mohri).
 % Schmidhuber argues that GPUs have made NNs much more powerful.
@@ -387,6 +387,17 @@ Consider including an overview of proxy tasks -- clause classification, ...}
 
 %\subsection{Strategy Schedules}
 
+%\subsection{Strategies}
+%
+%A typical \gls{atper} employs several heuristics that guide the proof search.
+%The heuristics determine, for example, which clause is selected as the given clause, or which inferences are performed.
+%Furthermore, the heuristics are typically parameterized, as there is no single configuration that works the best for all problems of interest.
+%A configuration of all heuristics of a \gls{atper} is known as a strategy.
+%
+%In the context of \gls{atping}, \defn{\gls{aac}} is the task of finding, given an input problem, a strategy that is expected to solve the problem in a short time.
+%In general, \gls{aac} can be applied to any parameterized solver.
+%Several general-purpose \gls{aac} systems have been proposed.
+
 \todo[inline,color=yellow]{What is the state of the art in strategy scheduling? Should we describe it for the sake of completeness? MS: Not necessarily. Consider adding a section.}
 
 \section{Contributions}
@@ -410,7 +421,7 @@ Furthermore, these techniques are potentially useful in other solvers in domains
 %a permutation (\cref{sec:contrib:SymbolPrecedenceRecommenders}) or a numeric vector (\cref{sec:contrib:ClauseSelection}) whose length depends on the input (problem) instance, or
 %executable in a configuration schedule (\cref{sec:contrib:schedules}).}
 
-I used the \gls{fol} fragment of \gls{tptp} as the target\todo{Consider factoring out "target".} problem distribution\todo{Replace or clarify?} in most of my research.
+I used the \gls{fol} fragment of \gls{tptp}\todo{Consider discussing the relation between CASC and TPTP somewhere.} as the target\todo{Consider factoring out "target".} problem distribution\todo{Replace or clarify?} in most of my research.
 Since \gls{tptp} represents several target domains of \gls{atping},
 such as mathematics and software verification,
 and since \gls{vampire} represents the state of the art in \gls{atping} \cite{casc-j12,DBLP:journals/aicom/SutcliffeD23},
