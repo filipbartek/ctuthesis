@@ -32,8 +32,11 @@
 % My publications:
 % https://docs.google.com/spreadsheets/d/1rHV33O5apSXxvtCM6_gqnm2dEmj-dV7ij-QQK0__85k
 
-\newcommand{\core}[3]{\href{https://portal.core.edu.au/conf-ranks/#3/}{CORE#1 conference rank: #2}}
-\newcommand{\wos}[1]{\href{https://www.webofscience.com/wos/woscc/full-record/WOS:#1}{Web of Science record: #1}}
+\newcommand{\corehref}[2]{\href{https://portal.core.edu.au/conf-ranks/#1/}{#2}}
+\newcommand{\core}[3]{\corehref{#3}{CORE#1 conference rank: #2}}
+\newcommand{\wosurl}[1]{https://www.webofscience.com/wos/woscc/full-record/WOS:#1}
+\newcommand{\woshref}[2]{\href{\wosurl{#1}}{#2}}
+\newcommand{\wos}[1]{\woshref{#1}{Web of Science record: #1}}
 %\newcommand{\citations}[3]{\href{https://scholar.google.com/citations?view_op=view_citation&citation_for_view=DiFzKOgAAAAJ:#3}{Number of citations according to Google Scholar: #1 (excluding self-citations: #2)}}
 \newcommand{\scholar}{Source: \href{https://scholar.google.com/}{Google Scholar}. Date extracted: \DTMdisplaydate{2024}{9}{11}{-1}.}
 %\newcommand{\external}{External -- excluding self-citations (citations from a publication with a shared author)}
@@ -63,10 +66,9 @@ Each publication is identified by the event (conference or workshop) it was publ
 & & & & All & Ext.\tablefootnote{External citations -- excluding self-citations} & & \\
 \midrule
 \Acrshort{paar}  & 2020 &   &   & 6 & 4 & \ref{sec:results:simple} & \cite{DBLP:conf/cade/Bartek020} \\
-\Acrshort{cade}  & 2021 & A & \checkmark & 8 & 5 & \ref{sec:results:npr} & \cite{DBLP:conf/cade/Bartek021} \\
-\Acrshort{lpar}  & 2023 & A &   & 3 & 1 & \ref{sec:results:selection} & \cite{DBLP:conf/lpar/Bartek023} \\
-\Acrshort{ijcar} & 2024 & A & \checkmark & 3 & 1 & \ref{sec:results:regularization} & \cite{DBLP:conf/ijcar/BartekCS24} \\
-\Acrshort{paar}  & 2024 &   &   &   &   & \ref{sec:results:cautious} & \cite{DBLP:conf/paar/BartekC024} \\
+\Acrshort{cade}  & 2021 & \corehref{918}{A} & \woshref{000693448800030}{\checkmark} & 8 & 5 & \ref{sec:results:npr} & \cite{DBLP:conf/cade/Bartek021} \\\Acrshort{lpar}  & 2023 & \corehref{1596}{A} &   & 3 & 1 & \ref{sec:results:selection} & \cite{DBLP:conf/lpar/Bartek023} \\
+\Acrshort{ijcar} & 2024 & \corehref{1314}{A} & \woshref{001273489700012}{\checkmark} & 3 & 1 & \ref{sec:results:regularization} & \cite{DBLP:conf/ijcar/BartekCS24} \\
+\Acrshort{paar}  & 2024 &   &   & 0 & 0 & \ref{sec:results:cautious} & \cite{DBLP:conf/paar/BartekC024} \\
 %\bottomrule
 \end{tabular}
 \end{ctucolortab}
