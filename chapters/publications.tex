@@ -38,7 +38,8 @@
 \newcommand{\scholar}{Source: \href{https://scholar.google.com/}{Google Scholar}. Date extracted: \DTMdisplaydate{2024}{9}{11}{-1}.}
 %\newcommand{\external}{External -- excluding self-citations (citations from a publication with a shared author)}
 %\newcommand{\citations}[4]{\href{https://scholar.google.com/scholar?cites=#4}{Number of citations\footnote{\scholar{} \external{}}\todo{Join duplicate footnotes.}\todo{Unfiy the date format with the rest of the document.}: #2}}
-\newcommand{\citations}[4]{\href{https://scholar.google.com/scholar?cites=#4}{Number of citations\footnote{\scholar{} Excluding self-citations.}: #2}}
+%\newcommand{\citations}[4]{\href{https://scholar.google.com/scholar?cites=#4}{Number of citations\footnote{\scholar{} Excluding self-citations.}: #2}}
+\newcommand{\citations}[4]{\href{https://scholar.google.com/scholar?cites=#4}{Number of external citations: #2}}
 
 This section lists the main publications I contributed to during my doctoral studies.
 All of these publications are related to the topic of this dissertation thesis and contribute to the research presented in the thesis.
@@ -59,7 +60,7 @@ Each publication is identified by the event (conference or workshop) it was publ
 \begin{tabular}{lr|ccrrcc}
 %\toprule
 \multirow{2}{*}{Event} & \multirow{2}{*}{Year} & \multirow{2}{*}{CORE\tablefootnote{CORE conference rank: \url{https://portal.core.edu.au/conf-ranks/}}} & \multirow{2}{*}{WoS\tablefootnote{Is the publication indexed in Web of Science?}} & \multicolumn{2}{c}{Citations\tablefootnote{\scholar}} & \multirow{2}{*}{Chapter} & \multirow{2}{*}{Bibliography} \\
-& & & & All & Ext.\tablefootnote{External -- excluding self-citations (citations from a publication with a shared author)} & & \\
+& & & & All & Ext.\tablefootnote{External citations -- excluding self-citations} & & \\
 \midrule
 \Acrshort{paar}  & 2020 &   &   & 6 & 4 & \ref{sec:results:simple} & \cite{DBLP:conf/cade/Bartek020} \\
 \Acrshort{cade}  & 2021 & A & \checkmark & 8 & 5 & \ref{sec:results:npr} & \cite{DBLP:conf/cade/Bartek021} \\
@@ -71,7 +72,7 @@ Each publication is identified by the event (conference or workshop) it was publ
 \end{ctucolortab}
 \end{table}
 
-For the purpose of this summary, a \defn{self-citation} is a citation from a publication with at least one shared author.
+For the purpose of this summary, an \defn{external citation} is a citation from a publication with no common author.
 
 For each of the publications included in this chapter,
 the contributions of individual authors are structured according to the \href{https://credit.niso.org/}{CRediT contributor role taxonomy} \cite{DBLP:journals/lp/BrandAAHS15}.
