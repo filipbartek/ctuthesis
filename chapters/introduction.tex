@@ -205,30 +205,32 @@ by incrementally expanding the \defn{processed set}
 %\Gls{cnf} is sufficiently expressive:
 %Any \gls{fol} problem can be converted (\enquote{clausified}) into an equisatisfiable \gls{cnf} in polynomial time.
 
-\todo[color=green]{Updated content starts here.}The search starts by initializing the processed set as empty and populating the unprocessed set with the input clauses.
+The search starts by initializing the processed set as empty and populating the unprocessed set with the input clauses.
 In each iteration,
 a clause is selected from the unprocessed set.
 This clause, referred to as the \defn{given clause}, is moved to the processed set.
-Then, all the clauses in the processed set are considered as premises of all the inference rules in the calculus implemented by the prover.
+Then, all the clauses in the processed set are considered as potential partners of the given clause
+to work as premises of all the inference rules in the calculus implemented by the prover.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
-The new clauses derived by the inferences are added to the unprocessed set.\footnote{Strictly speaking, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice \cite{DBLP:journals/corr/cs-SC-0310056,DBLP:journals/jar/Voronkov95,DBLP:books/daglib/0022394}.}
+The new clauses derived by the inferences are added to the unprocessed set.\footnote{More precisely, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice \cite{DBLP:journals/corr/cs-SC-0310056,DBLP:journals/jar/Voronkov95,DBLP:books/daglib/0022394}.}
 
 As soon as the empty clause is derived, the search terminates.
 The proof of unsatisfiability of the input problem consists of the empty clause and all the clauses that directly or indirectly contributed to its derivation.
 
 The calculus plays a crucial role in the proof search -- it specifies which inferences are available in each iteration.
-By design of the saturation-based paradigm, if the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
-For this reason, the successful inference calculi restrict the inferences as much as possible without compromising the completeness of the calculus.
+If the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
+For this reason, a successful inference calculus restricts the inferences as much as possible while maintaining its completeness.
 
-For example, the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}\todo[color=green]{Here I omitted "ordered resolution" completely.}
+For example, the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}
 is parameterized by a \defn{literal selection function} -- a function that selects a subset of literals in each clause.
 The inferences are only performed on the selected literals.
 If the selection function is well-behaved,
-i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to}\todo[color=green]{Does it have to be a simplification ordering?},
+i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to},
+% The term ordering must be a fixed simplification ordering.
 the restriction preserves completeness of the calculus.
 % Note: Other restriction may preserve completeness too.
-Moreover, it may even be beneficial to restrict the inferences in a way that may forfeit completeness
-in exchange for a narrower and faster-converging proof search.\todo[color=green]{Updated content ends here.}
+In certain scenarios, it is beneficial to further restrict the inferences in a way that forfeits completeness
+in exchange for a narrower and faster-converging proof search.
 
 %\todo[author=MS]{technicky potrebujes v superposition (jako kalkulus) nejen superposition (jako rule), ale i equality factoring a equality resolution (jako dalsi rules)}.
 
@@ -444,7 +446,7 @@ In all cases, the \gls{ml} is based on learning from results of proof searches\t
 \subsection{Symbol Precedence Recommenders}
 \label{sec:contrib:SymbolPrecedenceRecommenders}
 
-Vampire uses a \gls{sot} \cite{DBLP:journals/logcom/BachmairG94}\todo[color=green]{Is the citation correct?} to restrict the proof search without compromising completeness:
+Vampire uses a \gls{sot} \cite{DBLP:journals/logcom/BachmairG94}\todo{Make sure the cited text discusses "simplification ordering". Consider citing Term rewriting and all that.} to restrict the proof search without compromising completeness:
 \begin{enumerate}
 \item Superposition inference rule, a crucial inference rule of the superposition calculus, conceptualizes the idea of replacing equals by equals (via rewriting).
 The term ordering orients some of the equations and the oriented equations are only used as rewrite rules in one of the two possible directions.
