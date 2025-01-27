@@ -4,7 +4,6 @@
 \usepackage{array}
 \usepackage{csquotes}
 \usepackage[useregional]{datetime2}
-\usepackage{epigraph}
 \usepackage{etoolbox}
 \usepackage[detect-weight=true,binary-units=true]{siunitx}
 
@@ -22,6 +21,11 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{tablefootnote}
+
+% Epigraph
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.5\textwidth}
+\renewcommand{\textflush}{flushepinormal}
 
 \newcommand{\defn}\emph
 \newcommand{\pc}[1]{\SI{#1}{\percent}}
