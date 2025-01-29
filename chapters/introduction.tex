@@ -35,18 +35,13 @@
 
 \subsection{Advent of First-Order Logic}
 
-\todo[inline]{This section may come across as imprecise or oversimplifying or naive.}
-
-Throughout the history, mankind has faced a vast array of challenges of analytical nature.
+Throughout history, mankind has faced a wide array of challenges of analytical nature.
 Mathematics rose to prominence as a discipline that studied, on an abstract level, the tools and approaches that demonstrated success in solving such challenges.
 Mathematical knowledge grew primarily in the directions motivated by
 %Mathematical knowledge grew from the ground provided by
 natural sciences, engineering, and social sciences.
 At the same time, the fields of mathematics and logic
-%inspired special fascination
-%fascinated idealists
 fascinated humans
-%attracted the attention of idealists
 as the only rigorous\todo{Differentiate from philosophy and theology.} disciplines that can, at least in theory, be studied in isolation from the material world we inhabit.\todo{Relate to Mathematical Platonism.}
 
 \todo[inline]{Add a paragraph on the history of logic.}
@@ -57,10 +52,9 @@ advances in logic\todo{What advances, specifically?} opened new possibilities
 for resolving
 and clearly delimiting ambiguity in mathematics.
 The need for clarity in mathematics
-ultimately crystallized in the search for formally defined foundations of the discipline as a whole.
-In the 20th century,
-Zermelo--Fraenkel set theory emerged as the standard foundational theory,
-and classical \gls{fol} was established as a suitable formalism for expressing the axioms and theorems of the theory \cite{DBLP:journals/bsl/Ferreiros01}\todo{Is this citation relevant enough?}.\todo[color=green]{reworded sentence}\todo{This paragraph repeats \enquote{mathematics} many times.}
+crystallized in the search for formally defined foundations of the discipline as a whole.
+In the twentieth century, Zermelo--Fraenkel set theory emerged as the standard foundational theory
+and classical \gls{fol} was established as a suitable formalism for expressing the axioms and theorems of the theory \cite{DBLP:journals/bsl/Ferreiros01}\todo{Is this citation relevant enough?}.\todo[color=green]{expanded sentence}\todo{This paragraph repeats \enquote{mathematics} many times.}
 
 % Notes from CB:
 % ZF (set thory) FOL was the formal foundation.
@@ -77,11 +71,11 @@ and classical \gls{fol} was established as a suitable formalism for expressing t
 %This concluded historical development tracing back to Aristotle's syllogistic logic.
 % https://plato.stanford.edu/entries/logic-firstorder-emergence/
 
-Besides a formal language that allows expressing complex statements,
+In addition to a formal language that allows the expression of complex statements,
 \gls{fol} defines unambiguous notions of valid statement and sound reasoning.\todo{Define reasoning. Reasoning is proving validity or satisfiability.}
-In practice, these notions have been applied in various sub-domains of mathematics, such as arithmetic, group theory, and graph theory.
+In practice, these notions have been applied in various subdomains of mathematics, such as arithmetic, group theory, and graph theory.
 
-While mathematics played a crucial role in the establishment of \gls{fol},
+Although mathematics played a crucial role in the establishment of \gls{fol},
 the expressive power of \gls{fol} makes it suitable for reasoning in other analytical domains.
 % What is ATP good for: https://tptp.org/Seminars/ATP/Applications/Summary.html
 % These are actually example use cases of ATP, not FOL.
@@ -106,19 +100,21 @@ DBLP:conf/atal/LibalN21}.\todo[color=yellow]{The listed areas are actually relat
 
 \Gls{fol} is a general-purpose reasoning paradigm.
 In this section, I outline how \gls{fol} is used in reasoning,
-focusing especially on the notions and approaches used in automated\todo{automatic?} reasoning.\todo{This paragraph is too vague. What is reasoning?}
-I invite readers interested in more details to consult relevant literature on \gls{logic} \cite{DBLP:books/daglib/0072413,DBLP:books/daglib/0082098} and \gls{ar} \cite{DBLP:books/daglib/0022394,DBLP:books/el/RobinsonV01}.
+focusing especially on the notions and approaches relevant for automated\todo{automatic?} reasoning.\todo{This paragraph is too vague. What is reasoning?}
+I invite readers interested in more details to consult the relevant literature on \gls{logic} \cite{DBLP:books/daglib/0072413,DBLP:books/daglib/0082098} and \gls{ar} \cite{DBLP:books/daglib/0022394,DBLP:books/el/RobinsonV01}.
 
 In \gls{fol}, a reasoning task is defined by a \defn{signature}, a set of \defn{axioms}, and a \defn{conjecture}.
-The signature is a set of non-logical\todo{Contrast with logical symbols -- connectives and quantifiers.} (predicate and function) symbols.
+The signature is a set of non-logical (predicate and function) symbols.
+%\footnote{These are contrasted with logical symbols -- logical connectives (such as $\lnot$, $\land$, $\lor$), equality $=$, and quantifiers ($\forall$, $\exists$).}
 The axioms and the conjecture are \gls{fo} \defn{sentences} (formulas with no free variable occurrences) over the signature.
 The set of axioms constitutes a \defn{theory};
 notable theories axiomatizable in \gls{fol} include set theory, group theory, and various fragments of arithmetic.
 %\footnote{Predicate symbols map tuples of elements to Boolean values, and function symbols map tuples of elements to elements.}
 
-An \defn{interpretation} of the signature specifies semantics of each of the signature's symbols and, by composition, each formula over the signature.
+An \defn{interpretation} of the signature specifies the semantics of each of the non-logical symbols and, by composition, each formula over the signature.
 %The (possibly\todo{Or even necessarily?} infinitely many) interpretations that satisfy a set of axioms form the \defn{theory} of the axioms.\todo[author=MS]{"In mathematical logic, a theory (also called a formal theory) is a set of sentences in a formal language." \url{https://en.wikipedia.org/wiki/Theory\_(mathematical\_logic)}}
-If the conjecture is satisfied by all the interpretations that satisfy the axioms\todo{all the models of the theory},
+If the conjecture is satisfied by every interpretation that satisfies the axioms,
+%(that is, the interpretation is a model of the theory),
 the axioms \defn{logically entail} the conjecture.
 % Here we define "theorem" solely for "automated theorem proving" to make more sense.
 We then call the conjecture
@@ -137,14 +133,14 @@ provability coincides with logical entailment \cite{DBLP:books/daglib/0072413}.}
 %Solving the problem amounts to verifying that such entailment holds.\todo{Storify, add more detail, expand.}\todo{"holds" and "entailment" are both metalogical technical terms.}
 %%(or, equivalently, that the conjecture holds assuming the axioms hold).
 
-Proof by contradiction is a common technique of establishing validity of a theorem in mathematics.
-A straightforward counterpart exists in formal logic --
-the task of certifying
+Proof by contradiction is a common technique for certifying the validity of a theorem in mathematics.
+A direct counterpart exists in formal logic:
+The task of certifying
 entailment is easily reduced to
 certifying the
-unsatisfiability of a set of formulas:
+unsatisfiability of a set of formulas.
 The set of axioms $\Gamma$ entails conjecture $C$\todo{Consider using another symbol for conjecture. Try to find a standard one.} if the set of formulas $\Gamma \cup \{\lnot C\}$ (where $\lnot C$ is the negation of $C$) is unsatisfiable, that is, falsified by every interpretation.
-In the rest of this text, we call such set of \gls{fol} formulas a \defn{\gls{fol} problem}.
+In the rest of this text, we call such a set of \gls{fol} formulas an \defn{\gls{fol} problem}.
 
 %One of the approaches of establishing such entailment is proving by contradiction.
 %To prove the entailment \defn{by contradiction}\todo{Introduce: Why do we care about proving by contradiction?},
@@ -153,31 +149,31 @@ In the rest of this text, we call such set of \gls{fol} formulas a \defn{\gls{fo
 %%This is the basis of \defn{refutational theorem proving}.
 
 By applying
-De Morgan laws,
+the De Morgan laws,
 % 1. To obtain negation normal form (NNF) by pushing down negations; we also use "invinite De Morgan laws" to push below quantifiers
 % 2. To obtain CNF
 Skolemizing,
 % Skolemization eliminates existential quantifiers. The resulting formula is equisatisfiable but not equivalent.
 pulling out quantifiers, and
 naming subformulas (Tseitin transformation),
-every \gls{fol} problem can be transformed into an equisatisfiable set of universally quantified clauses (disjunctions of \gls{fo} literals) in polynomial time \cite{DBLP:books/el/RV01/NonnengartW01}.
-We call such representation of the problem \defn{\gls{cnf}}
+every \gls{fol} problem can be transformed into an equisatisfiable set of universally quantified \defn{clauses} (disjunctions of \gls{fo} literals) in polynomial time \cite{DBLP:books/el/RV01/NonnengartW01}.
+We call such a representation of the problem \defn{\gls{cnf}}
 and the process leading to it \defn{clausification}\todo{Define \enquote{preprocessing}.}.
 
 Solving a \gls{cnf} problem amounts to showing that the set of clauses is unsatisfiable.
-A common way to define a proof of unsatisfiability (or, generally, entailment) is using an \defn{inference calculus} -- a set of inference rules.
+The standard way to define a proof of unsatisfiability (or, more generally, entailment) is based on an \defn{inference calculus} -- a set of inference rules.
 A proof, then, is a finite sequence of clauses,
 each of which is either an input\todo{potentially unclear} clause or a clause derived from some (typically one or two) of the preceding clauses by an inference rule.
-If all the inference rules are \defn{sound},
+If each of the inference rules is \defn{sound},
 then each of the clauses in the proof is a logical consequence of the input set of clauses.
 Finally, if the empty clause (a trivial contradiction) appears in the proof,
 the proof certifies the unsatisfiability of the input set of clauses.
-In this paradigm, the task of proving unsatisfiablity of a set of clauses can be realized as a search for (a derivation of) the empty clause.
+In this paradigm, the task of proving the unsatisfiability of a set of clauses can be realized as a search for (a derivation of) the empty clause.
 
 \defn{Complete} inference calculi are of special interest:
 If an inference calculus is complete and the input clause set is unsatisfiable,
 then a proof of unsatisfiability exists.
-In such case, a proof (being a finite object) can be found, for example, by
+In such a case, a proof (being a finite object) can be found, for example, by
 exhaustively
 enumerating clauses derivable from the input clauses.
 Enumerating the derivable clauses in a way that ensures a fast derivation of the empty clause (provided the input set of clauses is unsatisfiable) is the main goal of saturation-based \gls{tping}.
@@ -206,7 +202,7 @@ A \defn{\gls{saturation}-based \gls{tper}} structures the search for contradicti
 (the empty clause)
 by incrementally expanding the \defn{processed set}
 %\todo{Consider using a different terminology: active and passive set.}
--- a set of clauses that have been used exhaustively as premises of inference rules to derive new clauses -- while consuming clauses from the \defn{unprocessed set} -- a set of clauses that have been transitively inferred from the input clauses and have not been used as premises of inferences.
+-- a set of clauses that have been used exhaustively as premises of inference rules to derive new clauses -- while consuming clauses from the \defn{unprocessed set} -- a set of clauses that have been inferred from the input clauses and have not been used as premises of inferences yet.
 %deriving new facts,
 %starting with the input problem expressed in \gls{cnf}.
 %\Gls{cnf} is sufficiently expressive:
@@ -216,21 +212,27 @@ The search starts by initializing the processed set as empty and populating the 
 In each iteration,
 a clause is selected from the unprocessed set.
 This clause, referred to as the \defn{given clause}, is moved to the processed set.
-Then, all the clauses in the processed set are considered as potential partners of the given clause
-to work as premises of all the inference rules in the calculus implemented by the prover.
+Then, all the clauses in the processed set are considered potential partners of the given clause
+to act as premises of all the inference rules in the calculus implemented by the prover.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
 The new clauses derived by the inferences are added to the unprocessed set.\footnote{More precisely, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice \cite{DBLP:journals/corr/cs-SC-0310056,DBLP:journals/jar/Voronkov95,DBLP:books/daglib/0022394}.}
 
 As soon as the empty clause is derived, the search terminates.
-The proof of unsatisfiability of the input problem consists of the empty clause and all the clauses that directly or indirectly contributed to its derivation.
+The proof of the unsatisfiability of the input problem consists of the empty clause and all the clauses that contributed to its derivation.
+This shows the importance of clause selection for the efficiency of the proof search:
+If the prover always selected a clause that ends up in the final proof,
+the proof search would be highly efficient in terms of iterations of the saturation loop.\todo[color=green]{new sentence}
+% Not perfectly efficient, since a shorter proof may exist.
+However, provers typically derive many clauses that do not contribute to the proof,
+which makes the clause selection heuristic an attractive target for optimization.\todo[color=green]{new sentence}
 
 The calculus plays a crucial role in the proof search -- it specifies which inferences are available in each iteration.
 If the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
-For this reason, a successful inference calculus restricts the inferences as much as possible while maintaining its completeness.
+For this reason, a successful inference calculus restricts the inferences as much as possible while maintaining completeness.
 
 For example, the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}
 is parameterized by a \defn{literal selection function} -- a function that selects a subset of literals in each clause.
-The inferences are only performed on the selected literals.
+Inferences are only made on selected literals.
 If the selection function is well-behaved,
 i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to},
 % The term ordering must be a fixed simplification ordering.
@@ -246,7 +248,7 @@ in exchange for a narrower and faster-converging proof search.
 
 In summary, two main decision points guide the \gls{saturation}-based proof search:
 \begin{enumerate}
-\item Clause selection: Which of the unprocessed clauses should be selected?\todo{Explain why this is important. Typically the prover derives a lot of useless clauses. If it always selected a useful clause, it would find a proof quickly. Add another paragraph about clause selection and "proof".}
+\item Clause selection: Which of the unprocessed clauses should be selected?
 \item Inference restriction: Which of the inferences should be applied to the selected clause?\todo{This is affected by \gls{sot} (literal selection, equality orienting) and forward subsumption.}\todo{Precedences actually likely work by pruning the search space rather than guidance.}
 \end{enumerate}
 %My research has dealt with both of these:
@@ -260,6 +262,8 @@ In addition to these, the performance of a saturation-based prover may also depe
 %This dissertation thesis discusses various ways of adjusting the heuristics in the prover Vampire using \gls{ml}.
 
 \subsection{Machine Learning for Theorem Proving}
+
+\todo[inline,color=red]{Continue here.}
 
 \todo[inline]{Reference \href{https://github.com/IBM/TRAIL}{TRAIL}.}
 
