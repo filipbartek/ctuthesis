@@ -54,7 +54,7 @@ and clearly delimiting ambiguity in mathematics.
 The need for clarity in mathematics
 crystallized in the search for formally defined foundations of the discipline as a whole.
 In the twentieth century, Zermelo--Fraenkel set theory emerged as the standard foundational theory
-and classical \gls{fol} was established as a suitable formalism for expressing the axioms and theorems of the theory \cite{DBLP:journals/bsl/Ferreiros01}\todo{Is this citation relevant enough?}.\todo[color=green]{expanded sentence}\todo{This paragraph repeats \enquote{mathematics} many times.}
+and classical \gls{fol} was established as a suitable formalism for expressing the axioms and theorems of the theory \cite{DBLP:journals/bsl/Ferreiros01}\todo{Is this citation relevant enough?}.\todo{This paragraph repeats \enquote{mathematics} many times.}
 
 % Notes from CB:
 % ZF (set thory) FOL was the formal foundation.
@@ -221,10 +221,10 @@ As soon as the empty clause is derived, the search terminates.
 The proof of the unsatisfiability of the input problem consists of the empty clause and all the clauses that contributed to its derivation.
 This shows the importance of clause selection for the efficiency of the proof search:
 If the prover always selected a clause that ends up in the final proof,
-the proof search would be highly efficient in terms of iterations of the saturation loop.\todo[color=green]{new sentence}
+the proof search would be highly efficient in terms of iterations of the saturation loop.
 % Not perfectly efficient, since a shorter proof may exist.
 However, provers typically derive many clauses that do not contribute to the proof,
-which makes the clause selection heuristic an attractive target for optimization.\todo[color=green]{new sentence}
+which makes the clause selection heuristic an attractive target for optimization.
 
 The calculus plays a crucial role in the proof search -- it specifies which inferences are available in each iteration.
 If the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
