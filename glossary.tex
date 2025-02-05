@@ -29,8 +29,8 @@
 \newglossaryentry{to}{name={\gls{term} ordering}, description={a partial ordering on \glspl{term}}}
 \newglossaryentry{sot}{name={simplification ordering on \glspl{term}}, parent=to, description={\gls{to} used to orient equations in \glslink{SuperpositionCalculus}{superposition} inferences and inform \gls{LiteralSelection}}}
 \newacronym{kb}{KB}{Knuth-Bendix}
-\newacronym[parent=sot]{kbo}{KBO}{Knuth-Bendix \glslink{to}{ordering}}
-\newacronym[parent=sot]{lpo}{LPO}{lexicographic path \glslink{to}{ordering}}
+\newacronym[parent=sot]{kbo}{KBO}{Knuth-Bendix ordering}
+\newacronym[parent=sot]{lpo}{LPO}{lexicographic path ordering}
 \newglossaryentry{superposition}{name={superposition}, see=SuperpositionCalculus, description={?}}
 \newglossaryentry{SuperpositionCalculus}{name={superposition calculus}, description={TBA}}
 \newglossaryentry{precedence}{name={precedence}, description={?}}
@@ -67,13 +67,13 @@
 \newglossaryentry{LinearRegression}{name={linear regression}, description={?}}
 
 % Neural networks
-\newacronym{nn}{NN}{neural network}
-\newacronym[parent=nn]{ann}{ANN}{aritificial \acrlong{nn}}
-\newacronym[parent=nn]{cnn}{CNN}{convolutional \acrlong{nn}}
+\newglossaryentry{nn}{name={neural network}, description={?}}
+\newacronym[parent=nn]{ann}{ANN}{artificial neural network}
+\newacronym[parent=nn]{cnn}{CNN}{convolutional neural network}
 \newacronym{dl}{DL}{deep learning}
-\newacronym[parent=nn]{dnn}{DNN}{deep \acrlong{nn}}
-\newacronym[parent=nn]{gnn}{GNN}{graph \acrlong{nn}}
-\newacronym[parent=nn]{rnn}{RNN}{recursive \acrlong{nn}}
+\newacronym[parent=nn]{dnn}{DNN}{deep neural network}
+\newacronym[parent=nn]{gnn}{GNN}{graph neural network}
+\newacronym[parent=nn]{rnn}{RNN}{recursive neural network}
 \newglossaryentry{gd}{name={gradient descent}, description={TBA}}
 \newacronym[parent=gd]{sgd}{SGD}{stochastic \gls{gd}}
 
@@ -84,9 +84,9 @@
 \newacronym{paar}{PAAR}{Workshop on Practical Aspects of Automated Reasoning}
 
 % AutoML
-\newacronym{ac}{AC}{algorithm configuration}
-\newacronym{aac}{AAC}{automated \acrlong{ac}}
-\newacronym{as}{AS}{algorithm selection}
+\newglossaryentry{ac}{name={algorithm configuration}, description={?}}
+\newglossaryentry{aac}{name={automated \gls{ac}}, description={?}, parent=ac}
+\newglossaryentry{as}{name={algorithm selection}, description={?}}
 \newglossaryentry{AlgorithmScheduling}{name={algorithm scheduling}, description={?}}
 \newacronym{smac}{SMAC}{sequential model-based \acrlong{ac}}
 \newacronym{smbo}{SMBO}{sequential model-based optimization}
@@ -97,7 +97,7 @@
 \newacronym{mi}{Mi}{megainstruction}
 \newglossaryentry{wallclock}{name={wallclock}, description={TBA}}
 \newglossaryentry{runtime}{name={runtime}, description={TBA}}
-\newacronym{par}{PAR}{penalized average \gls{runtime}}
+\newacronym{par}{PAR}{penalized average runtime}
 \newacronym{pcs}{PCS}{parameter configuration space}
 \newacronym{sat}{SAT}{propositional satisfiability}
 \newacronym{smt}{SMT}{satisfiability modulo theories}
