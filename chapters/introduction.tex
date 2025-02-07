@@ -119,7 +119,7 @@ the axioms \defn{logically entail} the conjecture.
 % Here we define "theorem" solely for "automated theorem proving" to make more sense.
 We then call the conjecture
 a \defn{logical consequence} of the axioms,
-or a \defn{theorem} of the theory defined by the axioms\footnote{Strictly speaking, a theorem is a provable formula.
+or a \defn{theorem} of the theory defined by the axioms.\footnote{Strictly speaking, a theorem is a formula provable in some calculus.
 Gödel's completeness theorem shows that in \gls{fol},
 provability coincides with logical entailment \cite{DBLP:books/daglib/0072413}.}.
 
@@ -273,7 +273,7 @@ In addition to these, the performance of a saturation-based prover may also depe
 %Both of these approaches are parameterized by a set (or, more generally, a distribution) of input problems.
 %In general terms, we want the prover to solve problems of interest in a relatively short runtime.
 
-Each of the main decision points in a theorem prover is governed by a \defn{heuristic} -- a procedure that aims to resolve the decision so as to optimize the performance of the prover\footnote{Standard performance measures include success rate and \gls{par} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}. Each of them is parameterized by a runtime limit and a set of input problems.}.
+Each of the main decision points in a theorem prover is governed by a \defn{heuristic} -- a procedure that aims to resolve the decision so as to optimize the performance of the prover.\footnote{Standard performance measures include success rate and \gls{par} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}. Each of them is parameterized by a runtime limit and a set of input problems.}
 %\footnote{The most common measures of performance of a prover on a set of problems are success rate and \gls{par} \cite{}. Both of them assume a fixed runtime limit.}
 %\todo{Too technical?}
 Many such heuristics can be configured to specialize the prover to a particular kind of input problems.
