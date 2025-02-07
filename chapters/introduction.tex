@@ -137,7 +137,7 @@ Proof by contradiction is a common technique for certifying the validity of a th
 A direct counterpart exists in formal logic:
 The task of certifying
 entailment is easily reduced to
-certifying the
+certifying
 unsatisfiability of a set of formulas.
 The set of axioms $\Gamma$ entails conjecture $C$\todo{Consider using another symbol for conjecture. Try to find a standard one.} if the set of formulas $\Gamma \cup \{\lnot C\}$ (where $\lnot C$ is the negation of $C$) is unsatisfiable, that is, falsified by every interpretation.
 In the rest of this text, we call such a set of \gls{fol} formulas an \defn{\gls{fol} problem}.
@@ -168,11 +168,11 @@ If each of the inference rules is \defn{sound},
 then each of the clauses in the proof is a logical consequence of the input set of clauses.
 Finally, if the empty clause (a trivial contradiction) appears in the proof,
 the proof certifies the unsatisfiability of the input set of clauses.
-In this paradigm, the task of proving the unsatisfiability of a set of clauses can be realized as a search for (a derivation of) the empty clause.
+In this paradigm, the task of proving unsatisfiability of a set of clauses can be realized as a search for (a derivation of) the empty clause.
 
 \defn{Complete} inference calculi are of special interest:
 If an inference calculus is complete and the input clause set is unsatisfiable,
-then a proof of unsatisfiability exists.
+then a proof of the unsatisfiability exists.
 In such a case, a proof (being a finite object) can be found, for example, by
 exhaustively
 enumerating clauses derivable from the input clauses.
