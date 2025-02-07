@@ -27,16 +27,11 @@
 
 \todo[inline]{Search for knowledge, problem solving}
 
-\section{State of the Art}
-\label{sec:sota}
-
 \todo[inline]{Too technical. Make it more storylike.}
 \todo[inline]{Make terminology more consistent. Representation, solving (original problem or FOL problem), introduce "task" (computational task). Witness, certificate, convince, argue, ascertain $\approx$ proof. ATP finds proof, proves conjecture (don't use "proving" in other meanings).}
 
-\subsection{Advent of First-Order Logic}
-
 Throughout history, mankind has faced a wide array of challenges of analytical nature.
-Mathematics rose to prominence as a discipline that studied, on an abstract level, the tools and approaches that demonstrated success in solving such challenges.
+Mathematics rose to prominence as a discipline that studies, on an abstract level, the tools and approaches that demonstrate success in solving such challenges.
 Mathematical knowledge grew primarily in the directions motivated by
 %Mathematical knowledge grew from the ground provided by
 natural sciences, engineering, and social sciences.
@@ -73,9 +68,9 @@ and classical \gls{fol} was established as a suitable formalism for expressing t
 
 In addition to a formal language that allows the expression of complex statements,
 \gls{fol} defines unambiguous notions of valid statement and sound reasoning.\todo{Define reasoning. Reasoning is proving validity or satisfiability.}
-In practice, these notions have been applied in various subdomains of mathematics, such as arithmetic, group theory, and graph theory.
+In practice, these notions have been applied in various subdomains of mathematics, such as arithmetic, group theory, or graph theory.
 
-Although mathematics played a crucial role in the establishment of \gls{fol},
+Although mathematics played a crucial role in establishing \gls{fol},
 the expressive power of \gls{fol} makes it suitable for reasoning in other analytical domains.
 % What is ATP good for: https://tptp.org/Seminars/ATP/Applications/Summary.html
 % These are actually example use cases of ATP, not FOL.
@@ -91,6 +86,9 @@ DBLP:conf/atal/LibalN21}.\todo[color=yellow]{The listed areas are actually relat
 %These areas demonstrate the general importance of reasoning in \gls{fol}.
 \todo[inline,author=MS]{celkove prvni odstavec zatim pusobi nedokoncene; drive jsi tam mel tusim "problems"/"represented in logic"/"solvers" a to smerovani mi proslo nosnejsi. Mozna muzes mit nejdriv historii, pak aplikace (jeste zkust nejake prihodit) a pak to modelovani a resice?}
 
+\section{State of the Art}
+\label{sec:sota}
+
 \subsection{Reasoning in First-Order Logic}
 
 \todo[inline]{Consider specializing this section to \emph{automated} reasoning in FOL. "To make a part of reasoning computable, we use logic.}
@@ -100,7 +98,7 @@ DBLP:conf/atal/LibalN21}.\todo[color=yellow]{The listed areas are actually relat
 
 \Gls{fol} is a general-purpose reasoning paradigm.
 In this section, I outline how \gls{fol} is used in reasoning,
-focusing especially on the notions and approaches relevant for automated\todo{automatic?} reasoning.\todo{This paragraph is too vague. What is reasoning?}
+focusing especially on the notions and approaches relevant for automated\todo{automatic?} theorem proving.\todo{This paragraph is too vague. What is reasoning?}
 I invite readers interested in more details to consult the relevant literature on \gls{logic} \cite{DBLP:books/daglib/0072413,DBLP:books/daglib/0082098} and \gls{ar} \cite{DBLP:books/daglib/0022394,DBLP:books/el/RobinsonV01}.
 
 In \gls{fol}, a reasoning task is defined by a \defn{signature}, a set of \defn{axioms}, and a \defn{conjecture}.
@@ -111,7 +109,7 @@ The set of axioms constitutes a \defn{theory};
 notable theories axiomatizable in \gls{fol} include set theory, group theory, and various fragments of arithmetic.
 %\footnote{Predicate symbols map tuples of elements to Boolean values, and function symbols map tuples of elements to elements.}
 
-An \defn{interpretation} of the signature specifies the semantics of each of the non-logical symbols and, by composition, each formula over the signature.
+An \defn{interpretation} specifies the semantics of each of the non-logical symbols of the signature and, by composition, each formula over the signature.
 %The (possibly\todo{Or even necessarily?} infinitely many) interpretations that satisfy a set of axioms form the \defn{theory} of the axioms.\todo[author=MS]{"In mathematical logic, a theory (also called a formal theory) is a set of sentences in a formal language." \url{https://en.wikipedia.org/wiki/Theory\_(mathematical\_logic)}}
 If the conjecture is satisfied by every interpretation that satisfies the axioms,
 %(that is, the interpretation is a model of the theory),
@@ -121,7 +119,7 @@ We then call the conjecture
 a \defn{logical consequence} of the axioms,
 or a \defn{theorem} of the theory defined by the axioms.\footnote{Strictly speaking, a theorem is a formula provable in some calculus.
 Gödel's completeness theorem shows that in \gls{fol},
-provability coincides with logical entailment \cite{DBLP:books/daglib/0072413}.}.
+provability in a suitable calculus coincides with logical entailment \cite{DBLP:books/daglib/0072413}.}
 
 %\Gls{fol} is an established formalism capable of representing\todo{Discuss the process of representation in more detail. Give an example.} a wide range of reasoning tasks from diverse areas such as mathematics and software verification\todo{Add more examples.}.
 %A \gls{fol} representation of a problem consists of a set of \defn{axioms} and a \defn{conjecture},
@@ -134,11 +132,11 @@ provability coincides with logical entailment \cite{DBLP:books/daglib/0072413}.}
 %%(or, equivalently, that the conjecture holds assuming the axioms hold).
 
 Proof by contradiction is a common technique for certifying the validity of a theorem in mathematics.
-A direct counterpart exists in formal logic:
+A direct counterpart exists in formal logic.
 The task of certifying
-entailment is easily reduced to
+entailment is reduced to
 certifying
-unsatisfiability of a set of formulas.
+unsatisfiability of a set of formulas as follows:
 The set of axioms $\Gamma$ entails conjecture $C$\todo{Consider using another symbol for conjecture. Try to find a standard one.} if the set of formulas $\Gamma \cup \{\lnot C\}$ (where $\lnot C$ is the negation of $C$) is unsatisfiable, that is, falsified by every interpretation.
 In the rest of this text, we call such a set of \gls{fol} formulas an \defn{\gls{fol} problem}.
 
@@ -156,7 +154,7 @@ Skolemizing,
 % Skolemization eliminates existential quantifiers. The resulting formula is equisatisfiable but not equivalent.
 pulling out quantifiers, and
 naming subformulas (Tseitin transformation),
-every \gls{fol} problem can be transformed into an equisatisfiable set of universally quantified \defn{clauses} (disjunctions of \gls{fo} literals) in polynomial time \cite{DBLP:books/el/RV01/NonnengartW01}.
+every \gls{fol} problem can be transformed into an equisatisfiable set (understood as a conjunction) of universally quantified \defn{clauses} (disjunctions of \gls{fo} literals) in polynomial time \cite{DBLP:books/el/RV01/NonnengartW01}.
 We call such a representation of the problem \defn{\gls{cnf}}
 and the process leading to it \defn{clausification}.
 
@@ -166,7 +164,7 @@ A proof, then, is a finite sequence of clauses,
 each of which is either an input\todo{potentially unclear} clause or a clause derived from some (typically one or two) of the preceding clauses by an inference rule.
 If each of the inference rules is \defn{sound},
 then each of the clauses in the proof is a logical consequence of the input set of clauses.
-Finally, if the empty clause (a trivial contradiction) appears in the proof,
+If the empty clause (a trivial contradiction) appears in the proof,
 the proof certifies the unsatisfiability of the input set of clauses.
 In this paradigm, the task of proving unsatisfiability of a set of clauses can be realized as a search for (a derivation of) the empty clause.
 
@@ -200,9 +198,11 @@ as demonstrated by the continued success of the saturation-based theorem provers
 
 A \defn{\gls{saturation}-based \gls{tper}} structures the search for contradiction
 (the empty clause)
-by incrementally expanding the \defn{processed set}
+by incrementally expanding two sets of clauses.
+The \defn{processed set} contains the clauses that
 %\todo{Consider using a different terminology: active and passive set.}
--- a set of clauses that have been used exhaustively as premises of inference rules to derive new clauses -- while consuming clauses from the \defn{unprocessed set} -- a set of clauses that have been inferred from the input clauses and have not been used as premises of inferences yet.
+have been used exhaustively as premises of the inference rules to derive new clauses.
+The clauses in the \defn{unprocessed set} have been inferred from the input clauses and have not been used as premises of inferences yet.
 %deriving new facts,
 %starting with the input problem expressed in \gls{cnf}.
 %\Gls{cnf} is sufficiently expressive:
@@ -223,7 +223,7 @@ This shows the importance of clause selection for the efficiency of the proof se
 If the prover always selected a clause that ends up in the final proof,
 the proof search would be highly efficient in terms of iterations of the saturation loop.
 % Not perfectly efficient, since a shorter proof may exist.
-However, provers typically derive many clauses that do not contribute to the proof,
+However, because it is generally hard to recognize these clauses in advance, provers typically derive many clauses that do not contribute to the proof,
 which makes the clause selection heuristic an attractive target for optimization.
 
 The calculus plays a crucial role in the proof search -- it specifies which inferences are available in each iteration.
@@ -248,7 +248,7 @@ in exchange for a narrower and faster-converging proof search.
 
 In summary, two main decision points guide the \gls{saturation}-based proof search:
 \begin{enumerate}
-\item Clause selection: Which of the unprocessed clauses should be selected?
+\item Clause selection: Which of the unprocessed clauses should be selected in each iteration of the saturation loop?
 \item Inference restriction: Which of the inferences should be applied to the selected clause?\todo{Precedences actually likely work by pruning the search space rather than guidance.}
 % \todo{This is affected by \gls{sot} (literal selection, equality orienting) and forward subsumption.}
 \end{enumerate}
@@ -302,7 +302,7 @@ Modern computing technology has opened new possibilities for the automation of e
 % Hastie provides an overview of machine learning (as does Mohri).
 % Schmidhuber argues that GPUs have made NNs much more powerful.
 %and a growing number of researchers believes in the potential of applying \gls{ml} to \gls{atping}.
-However, to apply \gls{ml} to \gls{atping}, specific considerations\todo[color=green]{What are these considerations? Does the text make them clear?} must be taken into account.
+However, to apply \gls{ml} to \gls{atping}, specific considerations\todo[color=green]{What are these considerations? Does the text make them clear? -- signature agnosticism, computational cost of ML model vs. efficient proving, proxy tasks} must be taken into account.
 
 \todo[inline]{"statistical models" "data from prover runs" - what could it mean to use ML for ATP? Foreshadow the challenges -- representation of formulas and terms, etc.}
 
@@ -363,7 +363,7 @@ DBLP:conf/mkm/JakubuvU17,DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/cade/JakubuvCO
 % Loos
 DBLP:conf/lpar/LoosISK17,
 % Deepire
-DBLP:conf/cade/000121a,DBLP:conf/frocos/Suda21}.
+DBLP:conf/cade/000121a,DBLP:conf/frocos/Suda21}.\todo{Reference TRAIL?}
 Such \gls{ml} systems evaluate all the inferred clauses to prioritize the most promising ones.
 
 While a growing body of research on \gls{ml} for \gls{atping} exists \cite{DBLP:conf/birthday/BlaauwbroekCGJK24},
@@ -477,7 +477,7 @@ Informally, complex terms are replaced by simple ones.\todo[color=green]{new sen
 \end{enumerate}
 Both of these restrictions effectively prune the proof search without rendering it incomplete.
 Choosing a good \gls{to} for a given input problem
-can make the pruning more aggressive while still allowing a short proof\todo[color=green]{Is this a good description of what we want to happen?},
+can make the pruning more aggressive while still allowing a short proof,
 which helps the saturation procedure to find a proof quickly.
 
 \Gls{kbo}, the default \gls{to} scheme\todo{Say something more about the ordering. Why is it a good choice?} implemented in \gls{vampire}, is parameterized by a \defn{\gls{sp}} -- a permutation of the \gls{signature} of the input problem.
