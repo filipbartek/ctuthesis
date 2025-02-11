@@ -196,7 +196,7 @@ Enumerating the derivable clauses in a way that ensures a fast derivation of the
 \Gls{saturation} is the state-of-the-art approach to \gls{fol} \gls{atping},
 as demonstrated by the continued success of the saturation-based theorem provers such as Vampire \cite{DBLP:conf/cav/KovacsV13}, E \cite{DBLP:conf/cade/0001CV19}, and SPASS \cite{DBLP:conf/cade/WeidenbachDFKSW09} in the \gls{casc} \cite{Sut16}.\todo{This paragraph breaks the flow. Move it somewhere else.}
 
-A \defn{\gls{saturation}-based \gls{tper}} structures the search for contradiction
+A \defn{\gls{saturation}-based \gls{tper}} structures the search for a contradiction
 (the empty clause)
 by incrementally expanding two sets of clauses.
 The \defn{processed set} contains the clauses that
@@ -236,7 +236,7 @@ Inferences are only made on selected literals.
 If the selection function is well-behaved,
 i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to},
 % The term ordering must be a fixed simplification ordering.
-the restriction preserves the completeness of the calculus.
+the restriction preserves completeness of the calculus.
 % Note: Other restriction may preserve completeness too.
 In certain scenarios, it is beneficial to further restrict the inferences in a way that forfeits completeness
 in exchange for a narrower and faster-converging proof search.
