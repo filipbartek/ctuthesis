@@ -318,7 +318,7 @@ To train such a system using standard supervised learning techniques,
 we would need to map input problems to numeric vectors of fixed length.
 For example, we could construct the numeric vector representation using human-designed features,
 such as symbol counts or term walk counts \cite{DBLP:conf/mkm/JakubuvU17},
-or automate feature extraction using a \gls{rnn} \cite{DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/iclr/EvansSAKG18} or a \gls{gnn} \cite{DBLP:conf/cade/JakubuvCOP0U20}.
+or automate feature extraction using a \gls{rnn} \cite{DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/iclr/EvansSAKG18} or a \gls{gnn} \cite{DBLP:conf/cade/JakubuvCOP0U20}.\todo[author=MS,color=yellow]{konci toho odstavce nejak chybi nejaky zaver. Jakoze neco si muzem vybrat, ale co to ovlivni?}
 
 Since the satisfiability of a set of clauses does not depend on the particular naming of the symbols and variables,
 we may decide to use an input problem representation that abstracts away from the symbol and variable names.
@@ -456,7 +456,7 @@ Furthermore, these techniques are potentially useful in other solvers in domains
 
 In all of the research presented in this thesis, I used the problems in the \gls{fol} fragment of \gls{tptp}\todo{Consider discussing the relation between CASC and TPTP somewhere.} \cite{Sutcliffe2017}, a library of benchmark problems.
 The problems in \gls{tptp} represent several target domains of \gls{atping},
-such as mathematics and software verification, and have been encoded by various procedures.
+such as mathematics and software verification, and have been encoded by various procedures\todo[author=MS,color=yellow]{poznamenal jsem si "not well connected" Asi by to chtelo o epsilon vic rozvest/zpresnit, aby bylo jasnejsi, proc obe casti vety argumentuji pro to same}.
 For these reasons, they do not have a common \gls{signature} -- a symbol may represent different concepts in different problems, and a concept may appear under different names.\todo{Include examples.}
 This motivated some of the design decisions in my research, namely the preference for signature-agnostic problem representations.
 
@@ -475,7 +475,7 @@ which restricts the inferences in two ways:
 \begin{enumerate}
 \item Literal selection: In each clause, inferences are restricted to the selected literals.
 Either one of the negative literals
-or all literals that are maximal with respect to the \gls{to} are selected.
+or all literals that are maximal with respect to the \gls{to} are selected.\todo[author=MS,color=yellow]{Literal selection is another standalone restriction of the calculus, which just needs to be compatible with the ordering for completeness. Tedy rikat, ze ordering (jen ten) restringuje kalkulus dvema zpusoby je nepresne.}
 \item Equation orienting: The superposition inference rule conceptualizes the idea of rewriting terms by replacing equals by equals.\todo{This doesn't sound like my English.}
 The \gls{to} orients some of the equations, and each oriented equation is only used as a rewrite rule in one of the two possible directions.
 Informally, complex terms are replaced by simple ones.
