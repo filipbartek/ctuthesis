@@ -12,26 +12,30 @@
 
 State-of-the-art \glspl{atper}, including \gls{vampire}, use the \gls{SuperpositionCalculus} as the core of the reasoning procedure.
 The inferences of the \gls{SuperpositionCalculus} are restricted by a \gls{sot}.
-Various schemes have been used to instantiate the ordering,
-for example,
-\gls{kbo} and \gls{lpo}.
-Both of these \gls{to} schemes are parameterized by a \gls{sp} -- a permutation of the symbols in the signature.\todo{Most of this has been discussed above.}
+% MS: my feeling is that a KBO is instantiated with a precedence, but a scheme (KBO vs LPO) is simply chosen/picked/selected (not instantiated)
+\Gls{vampire} implements the \acrfull{kbo} and the \gls{lpo}, two popular simplification orderings.
+Each of these orderings is parameterized by \gls{sp} -- permutation of the symbols in the signature.\todo[color=green]{2 sentences reworded}\todo{Most of this has been discussed above.}
 
 The standard heuristic methods implemented in \gls{vampire} construct the \gls{precedence} by sorting the symbols by their arity or number of occurrences in the input problem.
 In the work presented below \cite{DBLP:conf/cade/Bartek020},
-a \gls{precedence} is constructed using a combination of six syntactic symbol features that are easy to compute,
-including the arity and the number of occurrences.
+a \gls{precedence} is constructed using a combination of six syntactic symbol features that are easy to compute.
+Arity and number of occurrences are two of these features.\todo[color=green]{sentence broken into two and slightly reworded}
+This ensures that the system may be trained to represent, besides various other functions of the features, any of the standard heuristics.\todo[color=green]{sentence added}
+
 Once the system has been trained,
-a precedence for an input problem is constructed in two steps:
+we can obtain a precedence for an input problem in two steps:
 \begin{enumerate}
 \item A pairwise preference regressor (Elastic-Net or gradient-boosted decision trees) predicts a preference value for each pair of symbols.
-This value expresses the degree to which the first of the symbols should precede the other.
-\item A precedence is constructed using the predicted symbol pair preference values.
+This value expresses a degree of importance\todo[color=green]{reworded} with which the first of the symbols should precede the second one.
+\item A precedence is constructed
+% using the predicted symbol pair preference values
+by a method that approximately optimizes the total preference value of pairs of symbols consistent with the precedence.\todo[color=green]{explained in more detail}
 \end{enumerate}
+
 The preference regressor is trained on runs of Vampire with \gls{kbo} instantiated by random precedences.
 The training aims to minimize the time it takes Vampire to solve an input problem.
 
-The main contribution of this work is the establishment of a method of using pairwise ranking as a proxy task in \gls{ml} for \gls{atping} (in this case, for training a \gls{sp} recommender).
+The main contribution of this work is a method of using pairwise ranking as a proxy task in \gls{ml} for \gls{atping} (in this case, for training a \gls{sp} recommender).
 This proved especially useful in my subsequent research,
 as presented in \cref{sec:results:npr,sec:results:selection}.
 
@@ -94,7 +98,7 @@ For each problem, the \gls{nn} is only evaluated once as a preprocessing step to
 This approach allows using the optimized clause selection procedure implemented in Vampire
 with very little modification and negligible computational overhead during the proof search.
 
-The trained system increased the performance of a baseline Vampire by \pc{6.6},
+The trained system increased the performance of a baseline configuration of Vampire by \pc{6.6},
 which is more than the increase introduced by AVATAR,
 a powerful technique that delegates some propositional sub-tasks of the \gls{fol} proof search to a highly optimized \gls{sat} solver.
 %integrates a \gls{sat} solver into the saturation-based proof search.
@@ -102,7 +106,7 @@ Manual inspection revealed that
 the system learned to
 prioritize clauses with occurrences of symbols that appear in the conjecture (goal-directed guidance),
 deprioritize clauses with subformula names,
-and prioritize general clauses -- clauses with variable occurrences.
+and prioritize non-ground clauses -- clauses with variable occurrences.
 
 \IncludePaper{publications/3-weights}
 
@@ -121,7 +125,7 @@ constitute the main contributions presented in the paper.
 
 The data we used to construct the schedules (strategies and their performance measurements)
 has been published \cite{bartek10814478}.
-The dataset is of potential interest for research on static algorithm scheduling and \gls{as}.\todo[color=green]{new paragraph}
+The dataset is of potential interest for research on static algorithm scheduling and \gls{as}.
 
 \IncludePaper{publications/4-regularization}
 
@@ -135,7 +139,7 @@ and constructing a specialized schedule for each of the classes.
 Each of such classes should be identified by problem features that are easy to compute
 so that a branching system of schedules can be used on an unseen problem efficiently.
 
-As long as the classes are relatively homogeneous with respect to the performance of the strategies,
+As long as the classes are relatively homogeneous in\todo[color=green]{reworded} performance of the strategies,
 this approach is expected to yield an improvement of performance on the training problems.
 However, aggressive specialization may lead to a decreased performance on unseen problems.
 
