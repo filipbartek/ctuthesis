@@ -265,8 +265,6 @@ In addition to these, the performance of a saturation-based prover may also depe
 
 \subsection{Machine Learning for Theorem Proving}
 
-\todo[inline,color=yellow]{Reference \href{https://github.com/IBM/TRAIL}{TRAIL}.}
-
 %\todo[inline]{Describe all the crucial parameterized heuristics in Vampire.}
 
 %Various approaches have been used to assess the performance of \glspl{atper}.
@@ -318,7 +316,7 @@ To train such a system using standard supervised learning techniques,
 we would need to map input problems to numeric vectors of fixed length --
 we might construct the numeric vector representation using human-designed features,
 such as symbol counts or term walk counts \cite{DBLP:conf/mkm/JakubuvU17},
-or automate feature extraction using a \gls{rnn} \cite{DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/iclr/EvansSAKG18} or a \gls{gnn} \cite{DBLP:conf/cade/JakubuvCOP0U20}.
+or automate feature extraction using a \gls{rnn} \cite{DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/iclr/EvansSAKG18} or a \gls{gnn} \cite{DBLP:conf/cade/JakubuvCOP0U20,DBLP:journals/pami/AbdelazizCMACIK23}.
 %\todo[author=MS,color=yellow]{konci toho odstavce nejak chybi nejaky zaver. Jakoze neco si muzem vybrat, ale co to ovlivni?}
 Each approach presents a specific tradeoff between representation faithfulness and computational efficiency.\todo[color=green]{new sentence}
 
@@ -369,7 +367,9 @@ DBLP:conf/mkm/JakubuvU17,DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/cade/JakubuvCO
 % Loos
 DBLP:conf/lpar/LoosISK17,
 % Deepire
-DBLP:conf/cade/000121a,DBLP:conf/frocos/Suda21}.\todo{Reference TRAIL?}
+DBLP:conf/cade/000121a,DBLP:conf/frocos/Suda21,
+% TRAIL
+DBLP:journals/pami/AbdelazizCMACIK23}.
 Such \gls{ml} systems evaluate all the inferred clauses to prioritize the most promising ones.
 
 While a growing body of research on \gls{ml} for \gls{atping} exists \cite{DBLP:conf/birthday/BlaauwbroekCGJK24},
