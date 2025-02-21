@@ -212,7 +212,7 @@ The search starts by initializing the processed set as empty and populating the 
 In each iteration,
 a clause is selected from the unprocessed set.
 This clause, referred to as the \defn{given clause}, is moved to the processed set.
-Then, all the clauses in the processed set are considered potential partners of the given clause
+Then, all the clauses in the processed set are considered as potential partners of the given clause
 to act as premises of all the inference rules in the calculus implemented by the prover.
 %Then, all the admissible inferences, in which all premises are in the processed set and at least one premise is the given clause, are performed.
 The new clauses derived by the inferences are added to the unprocessed set.\footnote{More precisely, if a new clause is subsumed (and thus implied) by another clause derived previously, the new clause may be discarded without loss of completeness. This optimization, known as forward subsumption, is widely used in practice \cite{DBLP:journals/corr/cs-SC-0310056,DBLP:journals/jar/Voronkov95,DBLP:books/daglib/0022394}.}
