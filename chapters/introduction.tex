@@ -229,13 +229,13 @@ which makes the clause selection heuristic an attractive target for optimization
 
 The calculus plays a crucial role in the proof search -- it specifies which inferences are available in each iteration.
 If the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
-For this reason, a successful inference calculus restricts the inferences as much as possible while maintaining completeness.
+For this reason, a successful inference calculus restricts the inferences as much as possible while maintaining completeness.\todo{Too strong unsupported claim?}
 
 For example, the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}
 is parameterized by a \defn{literal selection function} -- a function that selects a subset of literals in each clause.
 Inferences are only made on selected literals.
 If the selection function is well-behaved,
-i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to},
+i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to}\todo{Does it need to be the same ordering as the one used for equation orienting in the superposition rule?},
 % The term ordering must be a fixed simplification ordering.
 the restriction preserves completeness of the calculus.
 % Note: Other restriction may preserve completeness too.
