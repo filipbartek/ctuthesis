@@ -474,12 +474,12 @@ In all cases, the \gls{ml} is based on learning from the results of executions o
 \subsection{Symbol Precedence Recommenders}
 \label{sec:contrib:SymbolPrecedenceRecommenders}
 
-Vampire uses the superposition calculus \cite{DBLP:conf/cav/KovacsV13,DBLP:journals/logcom/BachmairG94}.
-The calculus is parameterized by a \gls{sot}\todo{Consider citing Term rewriting and all that.} and a literal selection function.
-The inferences of the calculus are restricted in two ways: literal selection and equation orienting.\todo[color=green]{paragraph reworded and expanded}
+Vampire uses the superposition calculus \cite{DBLP:conf/cav/KovacsV13,DBLP:journals/logcom/BachmairG94},
+which is parameterized by a \gls{sot}\todo{Consider citing Term rewriting and all that.} and a literal selection function\todo[color=green]{How is the selection function chosen in Vampire? I just want to know it, not necessarily write about it.}.
+These parameters affect two restrictions of the inferences in the calculus: literal selection and equation orienting.\todo[color=green]{paragraph reworded and expanded}
 
 \paragraph{Literal selection}
-Each of the inference rules targets some of the literals of the input clauses;
+Each of the inference rules targets\todo[color=green]{Each inference operates on all literals by the means of substitution, but only some (\enquote{targeted}) literals by other means. I came up with \enquote{targeting} because I did not know any established term. Is this terminology ok?} some of the literals of the input clauses;
 for example, the resolution rule targets (and resolves) a positive literal in a clause and a complementary negative literal in another\todo{possibly the same} clause.
 Not all literals need to be considered as targets:
 The literal selection function selects one or more literals in each clause
@@ -496,7 +496,7 @@ The superposition inference rule conceptualizes the idea of rewriting terms by r
 The \gls{to} orients some of the equations, and each oriented equation is only used as a rewrite rule in one of the two possible directions.
 Informally, complex terms are replaced by simple ones.
 
-Both of these restrictions effectively prune the proof search without rendering it incomplete.
+Both literal selection and equation orienting effectively prune the proof search without rendering it incomplete.
 Choosing a good \gls{to}\todo[color=green]{Here we silently assume that the ordering influences the selection function, and omit the discussion of how the selection function is chosen.} for a given input problem
 can make the pruning more aggressive while still allowing a short proof,
 which helps the saturation procedure to find a proof quickly.
