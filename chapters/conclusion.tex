@@ -31,7 +31,7 @@ I configured two heuristics in this way:
 Among the \gls{ml} models\todo{Is this term appropriate? Alternatives: model families, approaches, techniques.} I experimented with,
 the \glspl{gnn} were prominently successful in configuring the heuristics,
 yielding an improvement of \pc{4} and \pc{6.6} over a baseline, respectively, in the expected percentage of problems solved in a fixed time limit.
-Notably, using a \gls{gnn} allows training a signature-agnostic recommender -- one that learns from the structure of the training problems, in a manner invariant to symbol renaming.
+Notably, using a \gls{gnn} allows training a signature-agnostic recommender---one that learns from the structure of the training problems, in a manner invariant to symbol renaming.
 
 Each of the \acrshort{gnn}-based recommenders is trained on a proxy task\todo[color=yellow]{Emphasize. Present the concept as a contribution.} of ranking objects (precedences or clauses, respectively)
 with training data in the form of ordered pairs of objects.
@@ -70,7 +70,7 @@ Different attractive tradeoffs between \gls{tping} performance, training efficie
 
 In each of the problem domains that admit encoding in \gls{fol},
 such as mathematics (formalized, for example, in Mizar Mathematical Library \cite{DBLP:journals/jfrea/GrabowskiKN10,DBLP:journals/jar/Urban06} or Archive of Formal Proofs \cite{DBLP:conf/mkm/BlanchetteHMN15,DBLP:conf/itp/DesharnaisVBW22}) or software verification,
-a common set of symbols -- a shared signature -- can be identified.
+a common set of symbols---a shared signature---can be identified.
 Configuring a \gls{sot} or the \gls{ClauseSelection} procedure
 for such a domain could be achieved by combining relevant parts of my research with approaches suitable for operating with a fixed signature, such as convex optimization.
 %For example, convex optimization could be used to optimize the symbol scores and weights down to the global optimum with respect to the pairwise ranking loss function.\todo{too technical}

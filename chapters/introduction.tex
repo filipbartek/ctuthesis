@@ -103,7 +103,7 @@ I invite readers interested in more details to consult the relevant literature o
 
 In \gls{fol}, a reasoning task is defined by a \defn{signature}, a set of \defn{axioms}, and a \defn{conjecture}.
 The signature is a set of non-logical (predicate and function) symbols.
-%\footnote{These are contrasted with logical symbols -- logical connectives (such as $\lnot$, $\land$, $\lor$), equality $=$, and quantifiers ($\forall$, $\exists$).}
+%\footnote{These are contrasted with logical symbols---logical connectives (such as $\lnot$, $\land$, $\lor$), equality $=$, and quantifiers ($\forall$, $\exists$).}
 The axioms and the conjecture are \gls{fo} \defn{sentences} (formulas with no free variable occurrences) over the signature.
 The set of axioms constitutes a \defn{theory};
 notable theories axiomatizable in \gls{fol} include set theory, group theory, and various fragments of arithmetic.
@@ -124,7 +124,7 @@ provability in a suitable calculus coincides with logical entailment \cite{DBLP:
 %\Gls{fol} is an established formalism capable of representing\todo{Discuss the process of representation in more detail. Give an example.} a wide range of reasoning tasks from diverse areas such as mathematics and software verification\todo{Add more examples.}.
 %A \gls{fol} representation of a problem consists of a set of \defn{axioms} and a \defn{conjecture},
 %each expressed as a \gls{fol} formula.
-%The axioms \defn{logically entail} the conjecture if and only if\todo{Informalize -- use "if" or something similar.}
+%The axioms \defn{logically entail} the conjecture if and only if\todo{Informalize---use "if" or something similar.}
 %every interpretation\todo{unclear term}\todo{Here we implicitly assume that all variables are bound. Otherwise, we would need to talk about valuation too.} that satisfies all the axioms also satisfies the conjecture\footnote{Note that if the conjecture is logically entailed by an empty set of axioms
 %(that is, satisfied by every interpretation),
 %the conjecture is said to be \defn{logically valid} (tautological).}.
@@ -159,7 +159,7 @@ We call such a representation of the problem \defn{\gls{cnf}}
 and the process leading to it \defn{clausification}.
 
 Solving a \gls{cnf} problem amounts to showing that the set of clauses is unsatisfiable.
-The standard way to define a proof of unsatisfiability (or, more generally, entailment) is based on an \defn{inference calculus} -- a set of inference rules.
+The standard way to define a proof of unsatisfiability (or, more generally, entailment) is based on an \defn{inference calculus}---a set of inference rules.
 A proof, then, is a finite sequence of clauses,
 each of which is either an input\todo{potentially unclear} clause or a clause derived from some (typically one or two) of the preceding clauses by an inference rule.
 If each of the inference rules is \defn{sound},
@@ -227,12 +227,12 @@ the proof search would be highly efficient in terms of iterations of the saturat
 However, because it is generally hard to recognize these clauses in advance, provers typically derive many clauses that do not contribute to the proof,
 which makes the clause selection heuristic an attractive target for optimization.
 
-The calculus plays a crucial role in the proof search -- it specifies which inferences are available in each iteration.
+The calculus plays a crucial role in the proof search---it specifies which inferences are available in each iteration.
 If the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
 For this reason, a successful inference calculus restricts the inferences as much as possible while maintaining completeness.\todo{Too strong unsupported claim?}
 
 For example, the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}
-is parameterized by a \defn{literal selection function} -- a function that selects a subset of literals in each clause.
+is parameterized by a \defn{literal selection function}---a function that selects a subset of literals in each clause.
 Inferences are only made on selected literals.
 If the selection function is well-behaved,
 i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to}\todo{Does it need to be the same ordering as the one used for equation orienting in the superposition rule?},
@@ -272,7 +272,7 @@ In addition to these, the performance of a saturation-based prover may also depe
 %Both of these approaches are parameterized by a set (or, more generally, a distribution) of input problems.
 %In general terms, we want the prover to solve problems of interest in a relatively short runtime.
 
-Each of the main decision points in a theorem prover is governed by a \defn{heuristic} -- a procedure that aims to resolve the decision so as to optimize the performance of the prover.\footnote{Standard performance measures include success rate and \gls{par} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}. Each of them is parameterized by a runtime limit and a set of input problems.}
+Each of the main decision points in a theorem prover is governed by a \defn{heuristic}---a procedure that aims to resolve the decision so as to optimize the performance of the prover.\footnote{Standard performance measures include success rate and \gls{par} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}. Each of them is parameterized by a runtime limit and a set of input problems.}
 %\footnote{The most common measures of performance of a prover on a set of problems are success rate and \gls{par} \cite{}. Both of them assume a fixed runtime limit.}
 %\todo{Too technical?}
 Many such heuristics can be configured to specialize the prover to a particular kind of input problem.
@@ -305,7 +305,7 @@ However, to apply \gls{ml} to \gls{atping}, specific considerations
 %\todo{What are these considerations? Does the text make them clear? -- signature agnosticism, computational cost of ML model vs. efficient proving, proxy tasks}
 must be taken into account.
 
-\todo[inline]{"statistical models" "data from prover runs" - what could it mean to use ML for ATP? Foreshadow the challenges -- representation of formulas and terms, etc.}
+\todo[inline]{"statistical models" "data from prover runs" - what could it mean to use ML for ATP? Foreshadow the challenges---representation of formulas and terms, etc.}
 
 One of these considerations is the choice of a suitable representation of the input data.
 For example, we could try to predict, for an arbitrary input problem, an age-weight ratio
@@ -313,8 +313,7 @@ that makes the prover likely to solve the problem in a given time limit.
 To train such a system using standard supervised learning techniques,
 %Let us consider the example of clause selection using the age- and weight-based priority queues once more.
 %To train a \gls{ml} system that predicts a good value of the age-weight ratio for an arbitrary input problem,
-we would need to map input problems to numeric vectors of fixed length --
-we might construct the numeric vector representation using human-designed features,
+we would need to map input problems to numeric vectors of fixed length---we might construct the numeric vector representation using human-designed features,
 such as symbol counts or term walk counts \cite{DBLP:conf/mkm/JakubuvU17},
 or automate feature extraction using a \gls{rnn} \cite{DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/iclr/EvansSAKG18} or a \gls{gnn} \cite{DBLP:conf/cade/JakubuvCOP0U20,DBLP:journals/pami/AbdelazizCMACIK23}.
 %\todo[author=MS,color=yellow]{konci toho odstavce nejak chybi nejaky zaver. Jakoze neco si muzem vybrat, ale co to ovlivni?}
@@ -334,7 +333,7 @@ rather than idiosyncratic patterns based on naming conventions used by the users
 %(for example, outcomes of prover runs with varying age-weight ratio and input problem).
 Our final goal is to optimize the performance of the prover in terms of, for example, the success rate on an input problem set with a fixed per-execution time limit.
 For training purposes,
-we typically need to approximate this measure by a \defn{proxy task} -- an optimization task that admits \gls{ml} and is believed to correlate with the final performance measure.
+we typically need to approximate this measure by a \defn{proxy task}---an optimization task that admits \gls{ml} and is believed to correlate with the final performance measure.
 
 For example, the task of estimating a good age-weight ratio can be implemented as a supervised learning task, provided that we have a ground truth available
 in the form of an assignment of age-weight ratios to training problems.
@@ -391,7 +390,7 @@ The work presented in this thesis explores several novel approaches, as detailed
 %To achieve greater performance, several strong and mutually complementary strategies were identified and combined into strategy schedules.
 %The main innovation in this part of my research is the systematic treatment of generalization of the strategy schedules\todo{vague}.\todo{Consider discussing strategies separately. New section. "Strategy schedules are also very important for ATP. "No ML model is executed in preprocessing or runtime."}
 
-%A promising approach to automated optimization of the heuristics is based on learning from proof search traces -- sequences of annotated clauses derived in a proof search.
+%A promising approach to automated optimization of the heuristics is based on learning from proof search traces---sequences of annotated clauses derived in a proof search.
 %Standard techniques of \gls{ml} are applicable.\todo{Such formulation undermines the challenge. We should stress we need non-standard techniques. Remember we often used proxy tasks. Another challenge: ML uses real vectors while we use discrete stuff, for example representations of formulas (graphs).}
 %For example, clause selection can be cast as a supervised classification problem \cite{}.
 
@@ -405,7 +404,7 @@ The work presented in this thesis explores several novel approaches, as detailed
 
 \todo[inline]{Explain GNN. Relate to the challenge of representing the logic formulas for NN.
 
-Consider including an overview of proxy tasks -- clause classification, ...}
+Consider including an overview of proxy tasks---clause classification, ...}
 
 %\subsection{Strategies and Strategy Schedules}
 %
@@ -461,7 +460,7 @@ such as mathematics and software verification, and have been encoded by various 
 %\todo[author=MS,color=yellow]{poznamenal jsem si "not well connected" Asi by to chtelo o epsilon vic rozvest/zpresnit, aby bylo jasnejsi, proc obe casti vety argumentuji pro to same}
 Each domain may use symbols and concepts that are specific for the domain,
 and each encoding procedure may use a different symbol naming scheme.
-For these reasons, the problems do not share a common \gls{signature} -- a symbol may represent different concepts in different problems, and a concept may appear under different names.\todo{Include examples.}
+For these reasons, the problems do not share a common \gls{signature}---a symbol may represent different concepts in different problems, and a concept may appear under different names.\todo{Include examples.}
 This motivated some of the design decisions in my research, namely the preference for signature-agnostic problem representations.
 
 Since \gls{vampire} represents the state of the art in \gls{atping} \cite{doi:10.1177/30504554241305110,DBLP:journals/aicom/SutcliffeD23}
@@ -500,7 +499,7 @@ Choosing a good \gls{to} for a given input problem
 can make the pruning more aggressive while still allowing a short proof,
 which helps the saturation procedure to find a proof quickly.
 
-\Gls{kbo}, the default \gls{to} scheme\todo{Say something more about the ordering. Why is it a good choice?} implemented in \gls{vampire}, is parameterized by a \defn{\gls{sp}} -- a permutation of the \gls{signature} of the input problem.
+\Gls{kbo}, the default \gls{to} scheme\todo{Say something more about the ordering. Why is it a good choice?} implemented in \gls{vampire}, is parameterized by a \defn{\gls{sp}}---a permutation of the \gls{signature} of the input problem.
 I explored two approaches to automatically finding a good \gls{sp} to instantiate \gls{kbo} for an arbitrary input problem.
 
 In my first paper \cite{DBLP:conf/cade/Bartek020} (see \cref{sec:results:simple}),
@@ -517,7 +516,7 @@ an improved probability of solving the problem under an arbitrary time limit.
 
 \todo[inline]{Explain somewhere: We learn across problems. We try to generalize across problems.}
 
-%The problems in \gls{tptp}, in general, do not share \glspl{signature} -- one symbol may represent different concepts in different problems, and one concept may appear under different names.\todo{Include examples.}
+%The problems in \gls{tptp}, in general, do not share \glspl{signature}---one symbol may represent different concepts in different problems, and one concept may appear under different names.\todo{Include examples.}
 %This poses an unusual design challenge\todo{Clarify what the challenge is: there is no clear mapping of symbols and the signature sizes vary. Thus we use a signature-agnostic model/system.},
 %which eventually led us to apply techniques that have been previously explored in the context of \gls{ltr}\todo[color=yellow]{Is the inclusion of LTR really motivated by signature agnosticism? Wouldn't we use LTR even with aligned signatures? Cite a source on LTR.}.
 %Our work connects the fields of \gls{ltr} and \gls{atping} and provides, notably, an instructive description of a \acrshort{gnn}-based permutation recommender.
@@ -563,7 +562,7 @@ In addition to \gls{sot} and clause selection we discussed above,
 the options configure \gls{AxiomSelection}, subformula naming, redundancy elimination, etc.
 % redundancy elimination ~ backward and forward subsumption
 The configuration of all of the options of a prover constitutes a \defn{strategy}.
-Different problems may require different strategies -- for example, aggressive \gls{AxiomSelection} is, in practice, necessary to solve problems with many axioms, while it rarely brings any benefit for small problems.
+Different problems may require different strategies---for example, aggressive \gls{AxiomSelection} is, in practice, necessary to solve problems with many axioms, while it rarely brings any benefit for small problems.
 
 The research presented in \cref{sec:results:regularization,sec:results:cautious} combines two important tasks
 that are relevant for \gls{atping} as well as for other forms of parameterized problem solving:
