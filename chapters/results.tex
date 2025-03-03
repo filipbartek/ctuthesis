@@ -19,17 +19,17 @@ Each of these orderings is parameterized by \gls{sp} -- permutation of the symbo
 The standard heuristic methods implemented in \gls{vampire} construct the \gls{precedence} by sorting the symbols by their arity or number of occurrences in the input problem.
 In the work presented below \cite{DBLP:conf/cade/Bartek020},
 a \gls{precedence} is constructed using a combination of six syntactic symbol features that are easy to compute.
-Arity and number of occurrences are two of these features.\todo[color=green]{sentence broken into two and slightly reworded}
-This ensures that the system may be trained to represent, besides various other functions of the features, any of the standard heuristics.\todo[color=green]{sentence added}
+Arity and number of occurrences are two of these features.
+This ensures that the system may be trained to represent, besides various other functions of the features, any of the standard heuristics.
 
 Once the system has been trained,
 we can obtain a precedence for an input problem in two steps:
 \begin{enumerate}
 \item A pairwise preference regressor (Elastic-Net or gradient-boosted decision trees) predicts a preference value for each pair of symbols.
-This value expresses a degree of importance\todo[color=green]{reworded} with which the first of the symbols should precede the second one.
+This value expresses a degree of importance with which the first of the symbols should precede the second one.
 \item A precedence is constructed
 % using the predicted symbol pair preference values
-by a method that approximately optimizes the total preference value of pairs of symbols consistent with the precedence.\todo[color=green]{explained in more detail}
+by a method that approximately optimizes the total preference value of pairs of symbols consistent with the precedence.\todo[color=yellow]{Unclear. Reword, clarify, make this easier to understand. MS: Smells like cyclic definition superficially.}
 \end{enumerate}
 
 The preference regressor is trained on runs of Vampire with \gls{kbo} instantiated by random precedences.
@@ -140,7 +140,7 @@ and constructing a specialized schedule for each of the classes.
 Each of such classes should be identified by problem features that are easy to compute
 so that a branching system of schedules can be used on an unseen problem efficiently.
 
-As long as the classes are relatively homogeneous in\todo[color=green]{reworded} performance of the strategies,
+As long as the classes are relatively homogeneous in performance of the strategies,
 this approach is expected to yield an improvement of performance on the training problems.
 However, aggressive specialization may lead to a decreased performance on unseen problems.
 
