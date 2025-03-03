@@ -476,7 +476,7 @@ Vampire uses the superposition calculus \cite{DBLP:conf/cav/KovacsV13,DBLP:journ
 which is parameterized by a \gls{sot}\todo{Consider citing Term rewriting and all that.} and a literal selection function.
 These parameters affect two restrictions of the inferences in the calculus: literal selection and equation orienting.
 
-\paragraph{Literal selection}\todo[color=yellow]{Cite the paper Selecting the selection.}
+\paragraph{Literal selection}
 Each of the inference rules targets some of the literals of the input clauses;
 for example, the resolution rule targets (and resolves) a positive literal in a clause and a complementary negative literal in another clause.
 Not all literals need to be considered as targets:
@@ -486,7 +486,7 @@ If the selection function is well-behaved
 (selecting either a negative literal
 or all literals that are maximal with respect to the \gls{to}),
 %\todo[author=MS,color=green]{Literal selection is another standalone restriction of the calculus, which just needs to be compatible with the ordering for completeness. Tedy rikat, ze ordering (jen ten) restringuje kalkulus dvema zpusoby je nepresne.}
-the restriction does not compromise completeness of the calculus.
+the restriction does not compromise completeness of the calculus \cite{DBLP:conf/cade/HoderR0V16}.
 %Informally, complex literals are processed before simple ones.
 
 \paragraph{Equation orienting}
