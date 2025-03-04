@@ -25,7 +25,7 @@ This ensures that the system may be trained to represent, besides various other 
 Once the system has been trained,
 we can obtain a precedence for an input problem in two steps:
 \begin{enumerate}
-\item A pairwise preference regressor (Elastic-Net or gradient-boosted decision trees) predicts a preference value for each pair of symbols.
+\item A pairwise preference regressor (Elastic-Net or gradient-boosted decision trees) predicts a preference value for each (ordered) pair of distinct symbols.
 This value expresses a degree of importance with which the first of the symbols should precede the second one.
 \item A greedy algorithm constructs a precedence using the preference values.
 The algorithm approximately optimizes the cost of the precedence, that is,
