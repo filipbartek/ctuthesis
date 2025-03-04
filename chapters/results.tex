@@ -27,9 +27,10 @@ we can obtain a precedence for an input problem in two steps:
 \begin{enumerate}
 \item A pairwise preference regressor (Elastic-Net or gradient-boosted decision trees) predicts a preference value for each pair of symbols.
 This value expresses a degree of importance with which the first of the symbols should precede the second one.
-\item A precedence is constructed
-% using the predicted symbol pair preference values
-by a method that approximately optimizes the total preference value of pairs of symbols consistent with the precedence.\todo[color=yellow]{Unclear. Reword, clarify, make this easier to understand. MS: Smells like cyclic definition superficially.}
+\item A greedy algorithm constructs a precedence using the preference values.
+The algorithm approximately optimizes the cost of the precedence, that is,
+the sum of preference values of symbol pairs that appear in the precedence as subsequences.\todo[color=green]{Is this explanation clear?}
+% The measure we are trying to minimize is precedence cost: sum of costs of symbol pairs that are consistent with the precedence.
 \end{enumerate}
 
 The preference regressor is trained on runs of Vampire with \gls{kbo} instantiated by random precedences.
