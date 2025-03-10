@@ -30,7 +30,7 @@
 \todo[inline]{Too technical. Make it more storylike.}
 \todo[inline]{Make terminology more consistent. Representation, solving (original problem or FOL problem), introduce "task" (computational task). Witness, certificate, convince, argue, ascertain $\approx$ proof. ATP finds proof, proves conjecture (don't use "proving" in other meanings).}
 
-Throughout history, mankind has faced a wide array of challenges of analytical nature.
+Throughout history, humankind has faced a wide array of challenges of an analytical nature.
 Mathematics rose to prominence as a discipline that studies, on an abstract level, the tools and approaches that demonstrate success in solving such challenges.
 Mathematical knowledge grew primarily in the directions motivated by
 %Mathematical knowledge grew from the ground provided by
@@ -41,18 +41,18 @@ as the only rigorous\todo{Differentiate from philosophy and theology.} disciplin
 
 \todo[inline]{Add a paragraph on the history of logic.}
 
-In the 19th century, mathematics was considered a mature and important discipline of human intellectual endeavor.
+In the nineteenth century, mathematics was considered a mature and important discipline of human intellectual endeavor.
 Meanwhile,
 advances in logic\todo{What advances, specifically?} opened new possibilities
-for resolving
-and clearly delimiting ambiguity in mathematics.
+for delimiting and resolving
+ambiguity in mathematics.
 The need for clarity in mathematics
 crystallized in the search for formally defined foundations of the discipline as a whole.
 In the twentieth century, Zermelo--Fraenkel set theory emerged as the standard foundational theory
 and classical \gls{fol} was established as a suitable formalism for expressing the axioms and theorems of the theory \cite{DBLP:journals/bsl/Ferreiros01}\todo{Is this citation relevant enough?}.\todo{This paragraph repeats \enquote{mathematics} many times.}
 
 % Notes from CB:
-% ZF (set thory) FOL was the formal foundation.
+% ZF (set theory) FOL was the formal foundation.
 % Hilbert Bernais 1920s - modern FOL
 % Hilbert restricted logic to first-order (what we call so now)
 % Standard reference for HOL: Church 1940
@@ -98,7 +98,7 @@ DBLP:conf/atal/LibalN21}.\todo[color=yellow]{The listed areas are actually relat
 
 \Gls{fol} is a general-purpose reasoning paradigm.
 In this section, I outline how \gls{fol} is used in reasoning,
-focusing especially on the notions and approaches relevant for automated\todo{automatic?} theorem proving.\todo{This paragraph is too vague. What is reasoning?}
+focusing mainly on the notions and approaches relevant to \gls{atping}\todo{Automatic, or automated?}.\todo{This paragraph is too vague. What is reasoning?}
 I invite readers interested in more details to consult the relevant literature on \gls{logic} \cite{DBLP:books/daglib/0072413,DBLP:books/daglib/0082098} and \gls{ar} \cite{DBLP:books/daglib/0022394,DBLP:books/el/RobinsonV01}.
 
 In \gls{fol}, a reasoning task is defined by a \defn{signature}, a set of \defn{axioms}, and a \defn{conjecture}.
@@ -147,7 +147,7 @@ In the rest of this text, we call such a set of \gls{fol} formulas an \defn{\gls
 %%This is the basis of \defn{refutational theorem proving}.
 
 By applying
-the De Morgan laws,
+De Morgan's laws,
 % 1. To obtain negation normal form (NNF) by pushing down negations; we also use "invinite De Morgan laws" to push below quantifiers
 % 2. To obtain CNF
 Skolemizing,
@@ -159,14 +159,14 @@ We call such a representation of the problem \defn{\gls{cnf}}
 and the process leading to it \defn{clausification}.
 
 Solving a \gls{cnf} problem amounts to showing that the set of clauses is unsatisfiable.
-The standard way to define a proof of unsatisfiability (or, more generally, entailment) is based on an \defn{inference calculus}---a set of inference rules.
+The standard way to define proof of unsatisfiability (or, more generally, proof of entailment) is based on an \defn{inference calculus}---a set of inference rules.
 A proof, then, is a finite sequence of clauses,
 each of which is either an input\todo{potentially unclear} clause or a clause derived from some (typically one or two) of the preceding clauses by an inference rule.
-If each of the inference rules is \defn{sound},
-then each of the clauses in the proof is a logical consequence of the input set of clauses.
+If each inference rule in the calculus is \defn{sound},
+then each clause in the proof is a logical consequence of the input set of clauses.
 If the empty clause (a trivial contradiction) appears in the proof,
 the proof certifies the unsatisfiability of the input set of clauses.
-In this paradigm, the task of proving unsatisfiability of a set of clauses can be realized as a search for (a derivation of) the empty clause.
+In this paradigm, proving unsatisfiability of a set of clauses can be realized as a search for (a derivation of) the empty clause.
 
 \defn{Complete} inference calculi are of special interest:
 If an inference calculus is complete and the input clause set is unsatisfiable,
@@ -174,7 +174,7 @@ then a proof of the unsatisfiability exists.
 In such a case, a proof (being a finite object) can be found, for example, by
 exhaustively
 enumerating clauses derivable from the input clauses.
-Enumerating the derivable clauses in a way that ensures a fast derivation of the empty clause (provided the input set of clauses is unsatisfiable) is the main goal of saturation-based \gls{tping}.
+Enumerating the derivable clauses in a way that ensures a fast derivation of the empty clause (provided the input set of clauses is unsatisfiable) is the primary goal of saturation-based \gls{tping}.
 
 %If a set of clauses is unsatisfiable, then its negation is logically valid.
 %If a set of clauses is satisfiable, than the satisfying interpretation defines a counter-example to the negation of the set.
@@ -194,7 +194,7 @@ Enumerating the derivable clauses in a way that ensures a fast derivation of the
 \subsection{Saturation-Based Theorem Proving}
 
 \Gls{saturation} is the state-of-the-art approach to \gls{fol} \gls{atping},
-as demonstrated by the continued success of the saturation-based theorem provers such as Vampire \cite{DBLP:conf/cav/KovacsV13}, E \cite{DBLP:conf/cade/0001CV19}, and SPASS \cite{DBLP:conf/cade/WeidenbachDFKSW09} in the \gls{casc} \cite{Sut16}.\todo{This paragraph breaks the flow. Move it somewhere else.}
+as demonstrated by the continued success of saturation-based theorem provers such as Vampire \cite{DBLP:conf/cav/KovacsV13}, E \cite{DBLP:conf/cade/0001CV19}, and SPASS \cite{DBLP:conf/cade/WeidenbachDFKSW09} in the \gls{casc} \cite{Sut16}.\todo{This paragraph breaks the flow. Move it somewhere else.}
 
 A \defn{\gls{saturation}-based \gls{tper}} structures the search for a contradiction
 (the empty clause)
@@ -202,7 +202,7 @@ by incrementally expanding two sets of clauses.
 The \defn{processed set} contains the clauses that
 %\todo{Consider using a different terminology: active and passive set.}
 have been used exhaustively as premises of the inference rules to derive new clauses.
-The clauses in the \defn{unprocessed set} have been inferred from the input clauses and have not been used as premises of inferences yet.
+The clauses in the \defn{unprocessed set} have been inferred from the input clauses and have not yet been used as premises of inferences.
 %deriving new facts,
 %starting with the input problem expressed in \gls{cnf}.
 %\Gls{cnf} is sufficiently expressive:
@@ -228,18 +228,19 @@ However, because it is generally hard to recognize these clauses in advance, pro
 which makes the clause selection heuristic an attractive target for optimization.
 
 The calculus plays a crucial role in the proof search---it specifies which inferences are available in each iteration.
-If the calculus is prolific (allowing relatively many inferences on a set of clauses), the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
-For this reason, a successful inference calculus restricts the inferences as much as possible while maintaining completeness.\todo{Too strong unsupported claim?}
+Suppose the calculus is prolific (allowing relatively many inferences on a set of clauses).
+In that case, the proof search may slow down to a crawl quickly as the number of clauses derived in each iteration increases.
+For this reason, a successful inference calculus restricts inferences as much as possible while maintaining completeness.\todo{Too strong unsupported claim?}
 
 For example, the superposition calculus \cite{DBLP:journals/logcom/BachmairG94}
 is parameterized by a \defn{literal selection function}---a function that selects a subset of literals in each clause.
 Inferences are only made on selected literals.
 If the selection function is well-behaved,
-i.e., it selects either a negative literal or all literals that are maximal with respect to a \gls{to}\todo{Does it need to be the same ordering as the one used for equation orienting in the superposition rule?},
+that is, it selects either a negative literal or all literals that are maximal with respect to a \gls{to}\todo{Does it need to be the same ordering as the one used for equation orienting in the superposition rule?},
 % The term ordering must be a fixed simplification ordering.
 the restriction preserves completeness of the calculus.
 % Note: Other restriction may preserve completeness too.
-In certain scenarios, it is beneficial to further restrict the inferences in a way that forfeits completeness
+In specific scenarios, it is beneficial to further restrict the inferences in a way that forfeits completeness
 in exchange for a narrower and faster-converging proof search.
 
 %\todo[author=MS]{technicky potrebujes v superposition (jako kalkulus) nejen superposition (jako rule), ale i equality factoring a equality resolution (jako dalsi rules)}.
@@ -256,7 +257,7 @@ In summary, two main decision points guide the \gls{saturation}-based proof sear
 %My research has dealt with both of these:
 %See \cref{sec:contrib:ClauseSelection} and \cref{sec:contrib:SymbolPrecedenceRecommenders}, respectively.
 
-In addition to these, the performance of a saturation-based prover may also depend on the configuration of the preprocessing of the input problem (clausification, \gls{AxiomSelection} \cite{DBLP:conf/cade/HoderV11,DBLP:conf/cade/KuhlweinLTUH12}), redundancy elimination (forward and backward subsumption), and other features, such as the integration of a \gls{sat} solver \cite{DBLP:conf/cav/Voronkov14}.
+In addition to these, the performance of a saturation-based prover may also depend on the configuration of the preprocessing of the input problem (clausification, \gls{AxiomSelection} \cite{DBLP:conf/cade/HoderV11,DBLP:conf/cade/KuhlweinLTUH12}), redundancy elimination (forward and backward subsumption), and other features, such as integration of a \gls{sat} solver \cite{DBLP:conf/cav/Voronkov14}.
 
 %Besides these, the performance of a saturation-based prover typically depends on a number of heuristics that control preprocessing (clausification) and the choice of the inference calculus and further restrict the inferences.\todo{Improve.}
 %Such heuristics can be configured by various command-line options,
@@ -272,14 +273,14 @@ In addition to these, the performance of a saturation-based prover may also depe
 %Both of these approaches are parameterized by a set (or, more generally, a distribution) of input problems.
 %In general terms, we want the prover to solve problems of interest in a relatively short runtime.
 
-Each of the main decision points in a theorem prover is governed by a \defn{heuristic}---a procedure that aims to resolve the decision so as to optimize the performance of the prover.\footnote{Standard performance measures include success rate and \gls{par} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}. Each of them is parameterized by a runtime limit and a set of input problems.}
+Each of the main decision points in a theorem prover is governed by a \defn{heuristic}---a procedure that aims to resolve the decision so as to optimize the prover's performance.\footnote{Standard performance measures include success rate and \gls{par} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}. Each of them is parameterized by a runtime limit and a set of input problems.}
 %\footnote{The most common measures of performance of a prover on a set of problems are success rate and \gls{par} \cite{}. Both of them assume a fixed runtime limit.}
 %\todo{Too technical?}
-Many such heuristics can be configured to specialize the prover to a particular kind of input problem.
+Many such heuristics can be configured to specialize the prover to a particular class of input problems.
 
 For example, clause selection is often implemented by interleaving two priority queues (\enquote{age} and \enquote{weight}).
 The ratio in which these queues are interleaved, the so-called \enquote{age-weight ratio}, is configurable.
-There is no universally best value of the ratio;
+There is no universal best value of the ratio;
 the optimum depends on the input problem
 %\footnote{Specifically, in the unit problems (all clauses are unit) with equality,
 %weight-based selection should be performed twice as often as age-based selection,
@@ -301,9 +302,8 @@ Modern computing technology has opened new possibilities for the automation of e
 % Hastie provides an overview of machine learning (as does Mohri).
 % Schmidhuber argues that GPUs have made NNs much more powerful.
 %and a growing number of researchers believes in the potential of applying \gls{ml} to \gls{atping}.
-However, to apply \gls{ml} to \gls{atping}, specific considerations
+However, to apply \gls{ml} to \gls{atping}, specific considerations must be taken into account.
 %\todo{What are these considerations? Does the text make them clear? -- signature agnosticism, computational cost of ML model vs. efficient proving, proxy tasks}
-must be taken into account.
 
 \todo[inline]{"statistical models" "data from prover runs" - what could it mean to use ML for ATP? Foreshadow the challenges---representation of formulas and terms, etc.}
 
@@ -317,13 +317,13 @@ we would need to map input problems to numeric vectors of fixed length---we migh
 such as symbol counts or term walk counts \cite{DBLP:conf/mkm/JakubuvU17},
 or automate feature extraction using a \gls{rnn} \cite{DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/iclr/EvansSAKG18} or a \gls{gnn} \cite{DBLP:conf/cade/JakubuvCOP0U20,DBLP:journals/pami/AbdelazizCMACIK23}.
 %\todo[author=MS,color=yellow]{konci toho odstavce nejak chybi nejaky zaver. Jakoze neco si muzem vybrat, ale co to ovlivni?}
-Each approach presents a specific tradeoff between representation faithfulness and computational efficiency.
+Each approach presents a specific trade-off between representation faithfulness and computational efficiency.
 
 Since the satisfiability of a set of clauses does not depend on the particular naming of the symbols and variables,
-we may decide to use an input problem representation that abstracts away from the symbol and variable names.
-This ensures we are learning general patterns based on common abstract sub-structures in the problems,
+we may use an input problem representation that abstracts away from the symbol and variable names.
+Such representation ensures that we are learning general patterns based on common abstract substructures in the problems
 rather than idiosyncratic patterns based on naming conventions used by the users.
-\Glspl{gnn} support such naming-agnostic representation naturally \cite{DBLP:conf/cade/JakubuvCOP0U20}.
+\Glspl{gnn} implement such naming-agnostic representation naturally \cite{DBLP:conf/cade/JakubuvCOP0U20}.
 
 %We may include the names of some or all the symbols and variables,
 %or leave them out to make the system oblivious to the symbol and variable names,
@@ -337,7 +337,7 @@ we typically need to approximate this measure by a \defn{proxy task}---an optimi
 
 For example, the task of estimating a good age-weight ratio can be implemented as a supervised learning task, provided that we have a ground truth available
 in the form of an assignment of age-weight ratios to training problems.
-To obtain such assignment, we could, for example, evaluate each training problem with several age-weight ratios and assign the best of the observed values to the problem.
+To obtain such an assignment, we could, for example, evaluate each training problem with several age-weight ratios and assign the best of the observed values to the problem.
 This simplification establishes a proxy task:
 Predicting an age-weight ratio close to the best observed value is a machine-learnable proxy of solving the problem.% (in the sense of finding a proof of unsatisfiability).
 
@@ -360,7 +360,7 @@ Or: Do not mention RL at all.}
 
 As an alternative to configuring one or more heuristics before the proof search starts (offline integration),
 a trained \gls{ml} system may be integrated within the proof search procedure as a replacement for a man-made heuristic (online integration).\todo{What is the source of the "offline" and "online" terminology?}
-For example, \gls{ml}-based systems have been trained to perform clause selection directly \cite{
+For example, \acrshort{ml}-based systems have been trained to perform clause selection directly \cite{
 % ENIGMA
 DBLP:conf/mkm/JakubuvU17,DBLP:conf/cade/ChvalovskyJ0U19,DBLP:conf/cade/JakubuvCOP0U20,
 % Loos
@@ -371,7 +371,7 @@ DBLP:conf/cade/000121a,DBLP:conf/frocos/Suda21,
 DBLP:journals/pami/AbdelazizCMACIK23}.
 Such \gls{ml} systems evaluate all the inferred clauses to prioritize the most promising ones.
 
-While a growing body of research on \gls{ml} for \gls{atping} exists \cite{DBLP:conf/birthday/BlaauwbroekCGJK24},
+Although there is a growing body of research on \gls{ml} for \gls{atping} \cite{DBLP:conf/birthday/BlaauwbroekCGJK24},
 %\cite{DBLP:conf/gcai/Urban15,DBLP:conf/cpp/JakubuvU17,DBLP:conf/gcai/SchaferS15,DBLP:journals/jar/KuhlweinU15,DBLP:conf/mkm/HoldenK21}
 many avenues remain unexplored.
 The work presented in this thesis explores several novel approaches, as detailed in the next section.
@@ -458,10 +458,10 @@ In all of the research presented in this thesis, I used the problems in the \gls
 The problems in \gls{tptp} represent several target domains of \gls{atping},
 such as mathematics and software verification, and have been encoded by various procedures.
 %\todo[author=MS,color=yellow]{poznamenal jsem si "not well connected" Asi by to chtelo o epsilon vic rozvest/zpresnit, aby bylo jasnejsi, proc obe casti vety argumentuji pro to same}
-Each domain may use symbols and concepts that are specific for the domain,
+Each domain may use symbols and concepts that are specific to the domain,
 and each encoding procedure may use a different symbol naming scheme.
 For these reasons, the problems do not share a common \gls{signature}---a symbol may represent different concepts in different problems, and a concept may appear under different names.\todo{Include examples.}
-This motivated some of the design decisions in my research, namely the preference for signature-agnostic problem representations.
+The lack of common signature in \gls{tptp} motivated some of the design decisions in my research, namely the preference for signature-agnostic problem representations.
 
 Since \gls{vampire} represents the state of the art in \gls{atping} \cite{doi:10.1177/30504554241305110,DBLP:journals/aicom/SutcliffeD23}
 and since \gls{tptp} represents various domains of reasoning,
@@ -480,24 +480,24 @@ These parameters affect two restrictions of the inferences in the calculus: lite
 Each of the inference rules targets some of the literals of the input clauses;
 for example, the resolution rule targets (and resolves) a positive literal in a clause and a complementary negative literal in another clause.
 Not all literals need to be considered as targets:
-The literal selection function selects one or more literals in each clause
-and the inferences are only performed on the selected literals.
+The literal selection function selects one or more literals in each clause,
+and inferences are only performed on the selected literals.
 If the selection function is well-behaved
 (selecting either a negative literal
 or all literals that are maximal with respect to the \gls{to}),
 %\todo[author=MS,color=green]{Literal selection is another standalone restriction of the calculus, which just needs to be compatible with the ordering for completeness. Tedy rikat, ze ordering (jen ten) restringuje kalkulus dvema zpusoby je nepresne.}
-the restriction does not compromise completeness of the calculus \cite{DBLP:conf/cade/HoderR0V16}.
+the restriction does not compromise the completeness of the calculus \cite{DBLP:conf/cade/HoderR0V16}.
 %Informally, complex literals are processed before simple ones.
 
 \paragraph{Equation orienting}
-The superposition inference rule conceptualizes the idea of rewriting terms by replacing equals by equals.\todo{This doesn't sound like my English.}
+The superposition inference rule generalizes the idea of rewriting terms by replacing equals with equals.\todo{This doesn't sound like my English.}
 The \gls{to} orients some of the equations, and each oriented equation is only used as a rewrite rule in one of the two possible directions.
 Informally, complex terms are replaced by simpler ones.
 
 Both literal selection and equation orienting effectively prune the proof search without rendering it incomplete.
 Choosing a good \gls{to} for a given input problem
-can make the pruning more aggressive while still allowing a short proof,
-which helps the saturation procedure to find a proof quickly.
+can make the pruning more aggressive while still allowing for a short proof,
+which helps the saturation procedure find a proof quickly.
 
 \Gls{kbo}, the default \gls{to} scheme\todo{Say something more about the ordering. Why is it a good choice?} implemented in \gls{vampire}, is parameterized by a \defn{\gls{sp}}---a permutation of the \gls{signature} of the input problem.
 I explored two approaches to automatically finding a good \gls{sp} to instantiate \gls{kbo} for an arbitrary input problem.
@@ -510,7 +510,7 @@ In both cases, I trained the recommender to generate a \gls{sp} that
 approximately minimizes the number of iterations the saturation loop takes to solve the input problem.
 % simple: cost(\pi) is the number of saturation iteration loops on this precedence. For a new problem, we minimize a lossy estimate of cost.
 % npr: \pi < \rho iff \pi solves the problem in fewer saturation iteration loops.
-This generally corresponds to
+This reduction generally corresponds to
 a low \gls{wallclock} \gls{runtime} needed to solve the problem and
 an improved probability of solving the problem under an arbitrary time limit.
 
@@ -530,17 +530,17 @@ an improved probability of solving the problem under an arbitrary time limit.
 %The selected clause is then added to the active clause set and all the possible inferences within the active set are performed.
 %The \glspl{atper} rely on heuristics to select the (given) clause.
 
-Clause selection is, arguably, the most important choice point in a saturation-based prover.
-The symbol-counting heuristic \cite{DBLP:conf/cade/SchulzM16}, which is one of the most common clause selection heuristics,
+Clause selection is, arguably, the most crucial choice point in a saturation-based prover.
+The symbol-counting heuristic \cite{DBLP:conf/cade/SchulzM16}, one of the most common clause selection heuristics,
 prioritizes clauses that are small in the number of symbol and variable occurrences.
 In the weighted variant of this heuristic \cite{E-manual},
 the user specifies a weight for each of the symbols
 and
-the clause weight is computed as the weighted sum of the symbol occurrence counts.
+the weight of a clause is calculated as the weighted sum of the symbol occurrence counts.
 
 In the work included in \cref{sec:results:selection} \cite{DBLP:conf/lpar/Bartek023},
 I modified Vampire to support the weighted symbol-counting clause selection heuristic
-and trained a \gls{gnn} to propose a weight for each of the symbols of any given input problem.
+and trained a \gls{gnn} to propose a weight for each symbol of any given input problem.
 %These weights were then used in a weighted symbol-counting clause selection heuristic in \gls{vampire}.
 Thanks to the use of a \gls{gnn}, this symbol weight recommender is signature-agnostic,
 which overcomes the challenge of misaligned signatures present in \gls{tptp}.\todo{This is common with precedence recommender.}
@@ -561,22 +561,22 @@ The prominent \glspl{atper} expose various options that control the preprocessin
 In addition to \gls{sot} and clause selection we discussed above,
 the options configure \gls{AxiomSelection}, subformula naming, redundancy elimination, etc.
 % redundancy elimination ~ backward and forward subsumption
-The configuration of all of the options of a prover constitutes a \defn{strategy}.
+The configuration of all the options of a prover constitutes a \defn{strategy}.
 Different problems may require different strategies---for example, aggressive \gls{AxiomSelection} is, in practice, necessary to solve problems with many axioms, while it rarely brings any benefit for small problems.
 
 The research presented in \cref{sec:results:regularization,sec:results:cautious} combines two important tasks
-that are relevant for \gls{atping} as well as for other forms of parameterized problem solving:
+that are relevant to \gls{atping} as well as to other forms of parameterized problem solving:
 %in the automation of parameterized problem solving and applies them to \gls{atping}:
 \begin{enumerate}
 \item \Gls{aac} \cite{DBLP:journals/jair/SchedeBTWBHT22} is the task of finding a good configuration (strategy) for a distribution of problems.
-\item Budgeted \gls{AlgorithmScheduling} \cite{DBLP:journals/ec/KerschkeHNT19} is the task of finding a good static algorithm schedule (an assignment of runtime limits to algorithms), given a distribution of problems, a portfolio of algorithms, and a runtime budget.
+\item Budgeted \gls{AlgorithmScheduling} \cite{DBLP:journals/ec/KerschkeHNT19} is the task of finding a good static algorithm schedule (an assignment of runtime limits to algorithms) given a distribution of problems, a portfolio of algorithms, and a runtime budget.
 \end{enumerate}
 
 In our initial work on the topic \cite{DBLP:conf/ijcar/BartekCS24} (see \cref{sec:results:regularization}),
 my co-authors and I generated a set of strong and mutually complementary strategies for the \gls{atper} \gls{vampire}
 and combined these strategies into strong schedules.
-To ensure good generalization of the resulting schedules,
-we introduced novel regularization techniques into the scheduling process.
+We introduced novel regularization techniques into the scheduling process
+to ensure good generalization of the resulting schedules.
 To the best of our knowledge, this is the first principled treatment of generalization of \gls{AlgorithmScheduling}.\todo{Polish the wording.}
 
 In a follow-up work \cite{DBLP:conf/paar/BartekC024} (see \cref{sec:results:cautious}), we investigated the possibility of specializing the schedules to homogeneous classes of problems.\todo{Outline the main result.}

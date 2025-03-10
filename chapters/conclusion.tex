@@ -1,5 +1,7 @@
 \chapter{Conclusion}
 
+\todo[inline,color=yellow]{Check whether this chapter makes sense in isolation from the rest of the text. It should not strongly rely on the previous chapters.}
+
 %e) in the concluding part,
 %i) an overview of the dissertation results including the doctoral student’s own
 %original contributions (i.e. a brief summary of the original results of the
@@ -16,22 +18,23 @@
 \section{Summary}
 
 % https://www.grammarly.com/blog/punctuation-capitalization/comma-before-because/
-\Gls{ml} provides an attractive direction for improving \gls{atping} because provers are complex, heuristic-driven systems whose behavior is difficult to optimize by hand,
-and because, typically, training data can be generated in large amounts, limited only by the computational resources\todo{Training problem sets are, however, often very limited.}.
+\Gls{ml} provides an attractive direction for improving \gls{atping}
+because provers are complex, heuristic-driven systems whose behavior is difficult to optimize by hand
+and because, typically, training data can be generated in large amounts, limited only by computational resources\todo{Training problem sets are, however, often very limited.}.
 In this thesis,
-I presented several novel techniques of applying \gls{ml} to improve saturation-based \gls{atping} for \gls{fol}.
+I presented several novel techniques for applying \gls{ml} to improve saturation-based \gls{atping} for \gls{fol}.
 By using the prover \gls{vampire} and the \gls{tptp} problem library in my experiments,
-I demonstrated the degree to which these techniques can be used to improve on the state of the art in \gls{atping}.
+I demonstrated the degree to which these techniques can be used to improve the state of the art in \gls{atping}.
 
 The first broad approach I explored is the configuration of a chosen heuristic on a per-problem basis:
-Given an input problem, a trained recommender configures a heuristic in \gls{vampire} in order to maximize the chance that the problem is solved quickly.
-I configured two heuristics in this way:
+Given an input problem, a trained recommender configures a heuristic in \gls{vampire} to maximize the chance that the problem is solved quickly.
+I configured two heuristics this way:
 \gls{sot} (via \gls{sp}; see \cref{sec:results:simple,sec:results:npr}) and weighted symbol-counting clause selection (see \cref{sec:results:selection}).\todo{Mention that the shape of the configuration of the heuristic depends on the signature size. Standard AC approaches expect fixed shape.}
 
 Among the \gls{ml} models\todo{Is this term appropriate? Alternatives: model families, approaches, techniques.} I experimented with,
 the \glspl{gnn} were prominently successful in configuring the heuristics,
 yielding an improvement of \pc{4} and \pc{6.6} over a baseline, respectively, in the expected percentage of problems solved in a fixed time limit.
-Notably, using a \gls{gnn} allows training a signature-agnostic recommender---one that learns from the structure of the training problems, in a manner invariant to symbol renaming.
+Notably, using a \gls{gnn} allows training a signature-agnostic recommender---one that learns from the structure of the training problems in a manner invariant to symbol renaming.
 
 Each of the \acrshort{gnn}-based recommenders is trained on a proxy task\todo[color=yellow]{Emphasize. Present the concept as a contribution.} of ranking objects (precedences or clauses, respectively)
 with training data in the form of ordered pairs of objects.
@@ -66,23 +69,25 @@ In my research, I used \glspl{nn} trained by \acrlong{sgd}, Elastic-Net (regular
 The \glspl{nn} trained on pairwise ranking proxy tasks demonstrated the greatest success in optimization of the prover heuristics (see \cref{sec:results:npr,sec:results:selection}).
 %Other models might allow reaching greater performance, training efficiency, or ease of deployment.
 %Simple, low-capacity models such as the linear model could be trained and deployed more easily at a performance cost that remains unknown.
-Different attractive tradeoffs between \gls{tping} performance, training efficiency, ease of deployment, and explainability might be achieved by using different models or proxy tasks.
+Different attractive trade-offs between \gls{tping} performance, training efficiency, ease of deployment, and explainability might be achieved by using different models or proxy tasks.
 
 In each of the problem domains that admit encoding in \gls{fol},
-such as mathematics (formalized, for example, in Mizar Mathematical Library \cite{DBLP:journals/jfrea/GrabowskiKN10,DBLP:journals/jar/Urban06} or Archive of Formal Proofs \cite{DBLP:conf/mkm/BlanchetteHMN15,DBLP:conf/itp/DesharnaisVBW22}) or software verification,
+such as mathematics (formalized, for example, in the Mizar Mathematical Library \cite{DBLP:journals/jfrea/GrabowskiKN10,DBLP:journals/jar/Urban06} or Archive of Formal Proofs \cite{DBLP:conf/mkm/BlanchetteHMN15,DBLP:conf/itp/DesharnaisVBW22}) or software verification,
 a common set of symbols---a shared signature---can be identified.
 Configuring a \gls{sot} or the \gls{ClauseSelection} procedure
 for such a domain could be achieved by combining relevant parts of my research with approaches suitable for operating with a fixed signature, such as convex optimization.
 %For example, convex optimization could be used to optimize the symbol scores and weights down to the global optimum with respect to the pairwise ranking loss function.\todo{too technical}
 
 While saturation-based proving is well established and researched in the context of \gls{fol},
-the paradigm, with appropriate modifications, has also been recently successfully applied to \gls{hol} \cite{DBLP:journals/ki/Steen20,DBLP:journals/jar/VukmirovicBBCNT22,DBLP:conf/ijcar/BhayatS24}.
-All of the techniques for the optimization of heuristics I introduced in this thesis could potentially be adapted and applied in saturation-based proving in \gls{hol}.
+the paradigm, with appropriate modifications, has also recently been successfully applied to \gls{hol} \cite{DBLP:journals/ki/Steen20,DBLP:journals/jar/VukmirovicBBCNT22,DBLP:conf/ijcar/BhayatS24}.
+All of the techniques for optimization of heuristics I introduced in this thesis\todo{Is \enquote{I introduced in this thesis} referring to the heuristics (incorrect) or the techniques (correct)? Disambiguate.} could potentially be adapted and applied in saturation-based proving in \gls{hol}.
 
 Highly parameterized solvers are common in various areas of complex problem solving besides \gls{fol} and \gls{hol}.
 Alternatively, two or more solvers may be available for a problem area in a setting known as \gls{as} \cite{DBLP:journals/ai/BischlKKLMFHHLT16}.
-My work on regularized strategy schedule construction (see \cref{sec:results:regularization,sec:results:cautious}) could be applied to an arbitrary parameterized solver or collection of solvers irrespective of the problem area.
-It would be particularly interesting to explore whether and how the best configuration of the regularization is influenced by the specifics of the area.
+My work on regularized strategy schedule construction (see \cref{sec:results:regularization,sec:results:cautious}) could be applied to an arbitrary parameterized solver or a collection of solvers regardless of the problem area.
+It would be particularly exciting to explore whether and how
+the specifics of the problem area
 %such as the number of solvers and training problems available, the degree of specialization of the solvers, or the density of timeouts.
+influence the effect of the regularization.
 
 \todo[inline]{Add a closing paragraph.}
