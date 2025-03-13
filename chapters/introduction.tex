@@ -71,7 +71,7 @@ In addition to a formal language that allows the expression of complex statement
 In practice, these notions have been applied in various subdomains of mathematics, such as arithmetic, group theory, or graph theory.
 
 Although mathematics played a crucial role in establishing \gls{fol},
-the expressive power of \gls{fol} makes it suitable for reasoning in other analytical domains.
+the expressive power makes \gls{fol} suitable for reasoning in other analytical domains.
 % What is ATP good for: https://tptp.org/Seminars/ATP/Applications/Summary.html
 % These are actually example use cases of ATP, not FOL.
 \Gls{fol} and its extensions have been applied in, for example, software and hardware verification and synthesis
@@ -97,8 +97,8 @@ DBLP:conf/atal/LibalN21}.\todo[color=yellow]{The listed areas are actually relat
 \todo[inline]{Why is reasoning in FOL so hard? How hard is it? Discuss undecidability and incompleteness.}
 
 \Gls{fol} is a general-purpose reasoning paradigm.
-In this section, I outline how \gls{fol} is used in reasoning,
-focusing mainly on the notions and approaches relevant to \gls{atping}\todo{Automatic, or automated?}.\todo{This paragraph is too vague. What is reasoning?}
+In this section, I outline how \gls{fol} is used in reasoning
+and \gls{atping}\todo{Automatic, or automated?}.\todo{This paragraph is too vague. What is reasoning?}
 I invite readers interested in more details to consult the relevant literature on \gls{logic} \cite{DBLP:books/daglib/0072413,DBLP:books/daglib/0082098} and \gls{ar} \cite{DBLP:books/daglib/0022394,DBLP:books/el/RobinsonV01}.
 
 In \gls{fol}, a reasoning task is defined by a \defn{signature}, a set of \defn{axioms}, and a \defn{conjecture}.
@@ -193,9 +193,6 @@ Enumerating the derivable clauses in a way that ensures a fast derivation of the
 
 \subsection{Saturation-Based Theorem Proving}
 
-\Gls{saturation} is the state-of-the-art approach to \gls{fol} \gls{atping},
-as demonstrated by the continued success of saturation-based theorem provers such as Vampire \cite{DBLP:conf/cav/KovacsV13}, E \cite{DBLP:conf/cade/0001CV19}, and SPASS \cite{DBLP:conf/cade/WeidenbachDFKSW09} in the \gls{casc} \cite{Sut16}.\todo{This paragraph breaks the flow. Move it somewhere else.}
-
 A \defn{\gls{saturation}-based \gls{tper}} structures the search for a contradiction
 (the empty clause)
 by incrementally expanding two sets of clauses.
@@ -248,7 +245,7 @@ in exchange for a narrower and faster-converging proof search.
 % Superposition is a generalization of Knuth-Bendix completion.
 % Superposition on UEQ is unfailing KB completion.
 
-In summary, two main decision points guide the \gls{saturation}-based proof search:
+In summary, two main decision points guide \gls{saturation}-based proof search:
 \begin{enumerate}
 \item Clause selection: Which of the unprocessed clauses should be selected in each iteration of the saturation loop?
 \item Inference restriction: Which of the inferences should be applied to the selected clause?\todo{Precedences actually likely work by pruning the search space rather than guidance.}
@@ -263,6 +260,9 @@ In addition to these, the performance of a saturation-based prover may also depe
 %Such heuristics can be configured by various command-line options,
 %and the complete configuration specifies a proof search \defn{strategy}.
 %This dissertation thesis discusses various ways of adjusting the heuristics in the prover Vampire using \gls{ml}.
+
+\Gls{saturation} is the state-of-the-art approach to \gls{fol} \gls{atping}.
+This has been demonstrated by the continued success of saturation-based theorem provers such as Vampire \cite{DBLP:conf/cav/KovacsV13}, E \cite{DBLP:conf/cade/0001CV19}, and SPASS \cite{DBLP:conf/cade/WeidenbachDFKSW09} in the \gls{casc}~\cite{Sut16}.
 
 \subsection{Machine Learning for Theorem Proving}
 
@@ -302,7 +302,7 @@ Modern computing technology has opened new possibilities for the automation of e
 % Hastie provides an overview of machine learning (as does Mohri).
 % Schmidhuber argues that GPUs have made NNs much more powerful.
 %and a growing number of researchers believes in the potential of applying \gls{ml} to \gls{atping}.
-However, to apply \gls{ml} to \gls{atping}, specific considerations must be taken into account.
+However, to apply \gls{ml} to \gls{atping}, specific considerations need to be taken into account.
 %\todo{What are these considerations? Does the text make them clear? -- signature agnosticism, computational cost of ML model vs. efficient proving, proxy tasks}
 
 \todo[inline]{"statistical models" "data from prover runs" - what could it mean to use ML for ATP? Foreshadow the challenges---representation of formulas and terms, etc.}
@@ -430,6 +430,8 @@ Consider including an overview of proxy tasks---clause classification, ...}
 \todo[inline,color=yellow]{What is the state of the art in strategy scheduling? Should we describe it for the sake of completeness? MS: Not necessarily. Consider adding a section.}
 \todo[inline]{Mention algorithm configuration in \cref{sec:sota}.}
 
+\newpage
+
 \section{Contributions}
 \label{sec:contributions}
 
@@ -437,8 +439,8 @@ Consider including an overview of proxy tasks---clause classification, ...}
 
 \todo[inline]{Relate to challenges and proxies outlined above.}
 
-I designed and implemented several software systems that optimize the performance of the saturation-based \gls{atper} Vampire.
-Each of these systems employs a novel approach to learn from Vampire executions.
+I designed and implemented several software systems that optimize the performance of the saturation-based prover Vampire.
+Each of these systems employs a novel approach to learn from executions of Vampire.
 
 The results of my research have been peer-reviewed and published at various conferences and workshops.
 \Cref{sec:results:simple,sec:results:npr,sec:results:selection,sec:results:regularization,sec:results:cautious}
@@ -447,7 +449,7 @@ Each of the publications is included in its final published form and is self-con
 
 \subsection{Common Design Decisions}
 
-Although the experiments presented in the following have been performed using the \gls{atper} \gls{vampire},
+Although the experiments presented in the following have been performed using \gls{vampire},
 the core techniques are applicable to any \gls{saturation}-based \gls{atper}.
 Furthermore, these techniques are potentially useful in other solvers in domains both within and outside of logic.\todo{This is never discussed in the thesis nor in the papers. Consider demonstrating on the (prominent) example of strategy schedule construction.}
 %\footnote{This is especially true if the solver in question is parameterized by
@@ -460,7 +462,7 @@ such as mathematics and software verification, and have been encoded by various 
 %\todo[author=MS,color=yellow]{poznamenal jsem si "not well connected" Asi by to chtelo o epsilon vic rozvest/zpresnit, aby bylo jasnejsi, proc obe casti vety argumentuji pro to same}
 Each domain may use symbols and concepts that are specific to the domain,
 and each encoding procedure may use a different symbol naming scheme.
-For these reasons, the problems do not share a common \gls{signature}---a symbol may represent different concepts in different problems, and a concept may appear under different names.\todo{Include examples.}
+For these reasons, the problems do not share a common \gls{signature}---a symbol may represent different concepts across problems, and a concept may appear under different names.\todo{Include examples.}
 The lack of common signature in \gls{tptp} motivated some of the design decisions in my research, namely the preference for signature-agnostic problem representations.
 
 Since \gls{vampire} represents the state of the art in \gls{atping} \cite{doi:10.1177/30504554241305110,DBLP:journals/aicom/SutcliffeD23}
@@ -476,7 +478,8 @@ Vampire uses the superposition calculus \cite{DBLP:conf/cav/KovacsV13,DBLP:journ
 which is parameterized by a \gls{sot}\todo{Consider citing Term rewriting and all that.} and a literal selection function.
 These parameters affect two restrictions of the inferences in the calculus: literal selection and equation orienting.
 
-\paragraph{Literal selection}
+\begin{description}
+\item[Literal selection]
 Each of the inference rules targets some of the literals of the input clauses;
 for example, the resolution rule targets (and resolves) a positive literal in a clause and a complementary negative literal in another clause.
 Not all literals need to be considered as targets:
@@ -488,18 +491,18 @@ or all literals that are maximal with respect to the \gls{to}),
 %\todo[author=MS,color=green]{Literal selection is another standalone restriction of the calculus, which just needs to be compatible with the ordering for completeness. Tedy rikat, ze ordering (jen ten) restringuje kalkulus dvema zpusoby je nepresne.}
 the restriction does not compromise the completeness of the calculus \cite{DBLP:conf/cade/HoderR0V16}.
 %Informally, complex literals are processed before simple ones.
-
-\paragraph{Equation orienting}
+\item[Equation orienting]
 The superposition inference rule generalizes the idea of rewriting terms by replacing equals with equals.\todo{This doesn't sound like my English.}
 The \gls{to} orients some of the equations, and each oriented equation is only used as a rewrite rule in one of the two possible directions.
 Informally, complex terms are replaced by simpler ones.
+\end{description}
 
 Both literal selection and equation orienting effectively prune the proof search without rendering it incomplete.
 Choosing a good \gls{to} for a given input problem
 can make the pruning more aggressive while still allowing for a short proof,
 which helps the saturation procedure find a proof quickly.
 
-\Gls{kbo}, the default \gls{to} scheme\todo{Say something more about the ordering. Why is it a good choice?} implemented in \gls{vampire}, is parameterized by a \defn{\gls{sp}}---a permutation of the \gls{signature} of the input problem.
+\Gls{kbo}, \gls{vampire}'s default \gls{to}\todo{Say something more about the ordering. Why is it a good choice?}, is parameterized by a \defn{\gls{sp}}---a permutation of the \gls{signature} of the input problem.
 I explored two approaches to automatically finding a good \gls{sp} to instantiate \gls{kbo} for an arbitrary input problem.
 
 In my first paper \cite{DBLP:conf/cade/Bartek020} (see \cref{sec:results:simple}),

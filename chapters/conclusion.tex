@@ -46,6 +46,9 @@ Instead of recommending a single prover strategy (configuration) on a per-proble
 I constructed a static schedule of complementary strategies to optimize \gls{vampire}'s performance on a whole distribution of problems.
 The strategies and performance measurements that served as the basis for the schedule construction have been published.
 
+% Prevent an orphan
+\pagebreak
+
 The main innovation this branch of my research introduced is the rigorous treatment of generalization of the schedules to unseen problems.
 To this effect, I proposed a regularized greedy algorithm for constructing the schedules.
 %This algorithm, as well as the whole idea of regularization of algorithm schedules, has clear potential applications in domains outside of \gls{tping}\todo{Provide some examples.}.
@@ -74,7 +77,7 @@ Different attractive trade-offs between \gls{tping} performance, training effici
 In each of the problem domains that admit encoding in \gls{fol},
 such as mathematics (formalized, for example, in the Mizar Mathematical Library \cite{DBLP:journals/jfrea/GrabowskiKN10,DBLP:journals/jar/Urban06} or Archive of Formal Proofs \cite{DBLP:conf/mkm/BlanchetteHMN15,DBLP:conf/itp/DesharnaisVBW22}) or software verification,
 a common set of symbols---a shared signature---can be identified.
-Configuring a \gls{sot} or the \gls{ClauseSelection} procedure
+Configuring a \gls{to} or the \gls{ClauseSelection} procedure
 for such a domain could be achieved by combining relevant parts of my research with approaches suitable for operating with a fixed signature, such as convex optimization.
 %For example, convex optimization could be used to optimize the symbol scores and weights down to the global optimum with respect to the pairwise ranking loss function.\todo{too technical}
 

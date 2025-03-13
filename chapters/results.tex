@@ -14,7 +14,7 @@ State-of-the-art \glspl{atper}, including \gls{vampire}, use the \gls{Superposit
 Inferences of the \gls{SuperpositionCalculus} are restricted by a \gls{sot}.
 % MS: my feeling is that a KBO is instantiated with a precedence, but a scheme (KBO vs LPO) is simply chosen/picked/selected (not instantiated)
 \Gls{vampire} implements the \acrfull{kbo} and the \gls{lpo}, two popular simplification orderings.
-Each of these orderings is parameterized by \gls{sp}---permutation of the symbols in the signature.\todo{Most of this has been discussed above.}
+Each of these orderings is parameterized by a \gls{sp}---permutation of the symbols in the signature.\todo{Most of this has been discussed above.}
 
 The standard heuristic methods implemented in \gls{vampire} construct the \gls{precedence} by sorting the symbols by their arity or number of occurrences in the input problem.
 In the work presented below \cite{DBLP:conf/cade/Bartek020},
@@ -58,7 +58,7 @@ Such exhaustive evaluation is prohibitively expensive for all but the smallest p
 On the other hand, we can easily compare an arbitrary pair of precedences.
 Following this observation, we train the symbol score predictor on the proxy task of (pairwise) ranking of precedences.\todo{Mention when a precedence is considered better than another.}
 
-In summary, our \gls{sp} recommender is trained on three nested proxy tasks:
+In summary, the \gls{sp} recommender is trained on three nested proxy tasks:
 \begin{enumerate}
 \item Predicting a score of a symbol
 \item Predicting a score of a precedence
@@ -90,11 +90,11 @@ This result confirms that the proxy tasks are aligned with the main task of solv
 \label{sec:results:selection}
 
 In the work presented below \cite{DBLP:conf/lpar/Bartek023},
-we turn our attention to clause selection,
+we tackled clause selection,
 arguably the most important heuristic choice point in a saturation-based prover.
 We used the \gls{gnn} architecture
 that proved useful in precedence recommendation (see \cref{sec:results:npr})
-and trained a \gls{nn} that proposes symbol weights to configure the symbol-counting clause selection heuristic \cite{DBLP:conf/cade/SchulzM16,E-manual}.
+and trained a \gls{nn} that proposes symbol weights to configure the symbol-counting clause selection heuristic~\cite{DBLP:conf/cade/SchulzM16,E-manual}.
 
 For each problem, the \gls{nn} is only evaluated once as a preprocessing step to determine the symbol weights.
 This approach allows using the optimized clause selection procedure implemented in Vampire
@@ -106,7 +106,7 @@ a powerful technique that delegates some propositional sub-tasks of the \gls{fol
 %integrates a \gls{sat} solver into the saturation-based proof search.
 Manual inspection revealed that
 the system learned to
-prioritize clauses with occurrences of symbols that appear in the conjecture (goal-directed guidance),
+prioritize clauses with symbols that appear in the conjecture (goal-directed guidance),
 deprioritize clauses with subformula names,
 and prioritize non-ground clauses---clauses with variable occurrences.
 
