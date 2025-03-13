@@ -246,11 +246,11 @@ in exchange for a narrower and faster-converging proof search.
 % Superposition on UEQ is unfailing KB completion.
 
 In summary, two main decision points guide \gls{saturation}-based proof search:
-\begin{enumerate}
-\item Clause selection: Which of the unprocessed clauses should be selected in each iteration of the saturation loop?
-\item Inference restriction: Which of the inferences should be applied to the selected clause?\todo{Precedences actually likely work by pruning the search space rather than guidance.}
+\begin{description}
+\item[Clause selection] Which of the unprocessed clauses should be selected in each iteration of the saturation loop?
+\item[Inference restriction] Which of the inferences should be applied to the selected clause?\todo{Precedences actually likely work by pruning the search space rather than guidance.}
 % \todo{This is affected by \gls{sot} (literal selection, equality orienting) and forward subsumption.}
-\end{enumerate}
+\end{description}
 %My research has dealt with both of these:
 %See \cref{sec:contrib:ClauseSelection} and \cref{sec:contrib:SymbolPrecedenceRecommenders}, respectively.
 
@@ -568,12 +568,12 @@ The configuration of all the options of a prover constitutes a \defn{strategy}.
 Different problems may require different strategies---for example, aggressive \gls{AxiomSelection} is, in practice, necessary to solve problems with many axioms, while it rarely brings any benefit for small problems.
 
 The research presented in \cref{sec:results:regularization,sec:results:cautious} combines two important tasks
-that are relevant to \gls{atping} as well as to other forms of parameterized problem solving:
+that are relevant to \acrlong{atping} as well as to other forms of parameterized problem solving:
 %in the automation of parameterized problem solving and applies them to \gls{atping}:
-\begin{enumerate}
-\item \Gls{aac} \cite{DBLP:journals/jair/SchedeBTWBHT22} is the task of finding a good configuration (strategy) for a distribution of problems.
-\item Budgeted \gls{AlgorithmScheduling} \cite{DBLP:journals/ec/KerschkeHNT19} is the task of finding a good static algorithm schedule (an assignment of runtime limits to algorithms) given a distribution of problems, a portfolio of algorithms, and a runtime budget.
-\end{enumerate}
+\begin{description}
+\item[\Gls{aac}] \cite{DBLP:journals/jair/SchedeBTWBHT22} is the task of finding a good configuration (strategy) for a distribution of problems.
+\item[Budgeted \gls{AlgorithmScheduling}] \cite{DBLP:journals/ec/KerschkeHNT19} is the task of finding a good algorithm schedule (a mapping from algorithms to runtime limits) given a distribution of problems, a portfolio of algorithms, and a runtime budget.
+\end{description}
 
 In our initial work on the topic \cite{DBLP:conf/ijcar/BartekCS24} (see \cref{sec:results:regularization}),
 my co-authors and I generated a set of strong and mutually complementary strategies for the \gls{atper} \gls{vampire}
