@@ -18,11 +18,11 @@
 
 % Automated reasoning
 \newglossaryentry{ar}{name={automated reasoning}, description={TBA}}
-\newacronym{atper}{ATP}{automatic theorem prover}
 \newglossaryentry{tper}{name={theorem prover}, description={TBA}}
+\newglossaryentry{atper}{name={automatic \gls{tper}}, parent=tper, description={TBA}}
 \newglossaryentry{tping}{name={theorem proving}, description={TBA}}
-%\newacronym{atping}{ATP}{automatic theorem proving}
-\newglossaryentry{atping}{parent=tping, name={automatic \gls{tping}}, description={TBA}}
+\newacronym[parent=tping]{atping}{ATP}{automatic theorem proving}
+%\newglossaryentry{atping}{parent=tping, name={automatic \gls{tping}}, description={TBA}}
 \newglossaryentry{saturation}{name={saturation}, description={TBA}}
 \newglossaryentry{AxiomSelection}{name={premise selection}, description={TBA}}
 % Vampire option: --term_ordering (-to)
