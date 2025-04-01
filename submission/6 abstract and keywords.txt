@@ -1,0 +1,31 @@
+# English
+
+## Abstract
+
+Automatic theorem proving (ATP) for first-order logic (FOL) addresses a wide array of formalized tasks in domains such as mathematics and software verification. Saturation-based automatic theorem provers, notably the highly optimized Vampire prover, represent the cutting edge in ATP.
+
+State-of-the-art provers employ various heuristics, and the success of a prover on a problem largely depends on the configuration of these heuristics. Traditionally, configuring the heuristics has been the domain of expert users. The vast number of available configurations and the unpredictability of their effects complicate this task, making machine learning (ML) an attractive alternative to human expertise.
+
+This dissertation explores the application of ML in saturation-based ATP, with research focused on enhancing the performance of the Vampire prover through three developed approaches. The first approach involves a system that recommends, for an arbitrary input problem, a symbol precedence to instantiate a simplification ordering on terms in order to prune the proof search efficiently. The second approach leverages a system that recommends symbol weights for the weighted symbol-counting clause selection scheme. Finally, in collaboration with co-authors, a system was developed that autonomously finds complementary strategies (heuristic configurations) and constructs robust strategy schedules that generalize well to previously unseen problems.
+
+All research presented in this thesis has been published in peer-reviewed articles. The thesis presents these articles in their final published forms.
+
+## Keywords
+
+automatic theorem proving, machine learning
+
+# Czech
+
+## Abstrakt
+
+Automatické dokazování (ATP) pro predikátovou logiku prvního řádu řeší širokou škálu formalizovaných úloh v oblastech, jako jsou například matematika a verifikace softwaru. Automatické dokazovače založené na saturaci, zejména vysoce optimalizovaný dokazovač Vampire, představují špičku v oblasti ATP.
+
+Současné moderní dokazovače používají různé heuristiky a úspěšnost dokazovače na daném problému do značné míry závisí na konfiguraci těchto heuristik. Konfigurace heuristik je tradičně úkolem expertních uživatelů. Množství dostupných konfigurací a nepředvídatelnost jejich účinků tento úkol komplikují. Proto je strojové učení (ML) slibnou alternativou k lidským odborným znalostem.
+
+Tato disertační práce se zabývá aplikací ML v ATP založeném na saturaci. Výzkum představený v této práci se zaměřuje na zvýšení výkonu dokazovače Vampire pomocí tří přístupů. První přístup je založený na systému, který pro libovolný vstupní problém doporučí precedenci symbolů pro instanciaci zjednodušujicího uspořádání termů, která zajistí efektivní prořezávání grafu odvozených tvrzení. Druhý přístup využívá systém, který doporučuje váhy symbolů pro schéma výběru klauzulí založené na váženém počítáním symbolů. Nakonec byl ve spolupráci se spoluautory vyvinut systém, který samostatně vyhledává komplementární strategie (konfigurace heuristik) a sestavuje z nich robustní rozvrhy, které dobře generalizují na nové problémy.
+
+Veškerý výzkum představený v této práci byl publikován v recenzovaných článcích. V práci jsou tyto články uvedeny v jejich konečné publikované podobě.
+
+## Klíčová slova
+
+automatické dokazování, strojové učení
