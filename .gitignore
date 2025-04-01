@@ -18,7 +18,10 @@ ctuman-*.pdf
 *.glo
 *.gls
 *.ist
-*.pdf
+/*.pdf
 *.run.xml
 
-!publications/*.pdf
+/inspiration/
+/instructions/
+/literature/
+/wip/
