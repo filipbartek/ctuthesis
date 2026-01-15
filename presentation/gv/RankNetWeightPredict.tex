@@ -1,0 +1,42 @@
+\digraph[scale=0.4]{RankNetWeightPredict}{
+graph [splines=ortho, ranksep=0.25, margin=0];
+node [shape=record, fontsize=14, width=0, height=0, style=filled, fillcolor=white];
+% Training example
+subgraph cluster_input {
+label=<Training example "<i>C<sub>&minus;</sub></i> is worse than <i>C<sub>+</sub></i>">;
+margin=10;
+style=dashed;
+rank=same;
+Problem [label=<Input problem>, \NodeStylePrediction];
+SampleI [label=<<i>C<sub>&minus;</sub></i>|Negative clause>];
+SampleJ [label=<<i>C<sub>+</sub></i>|Positive clause>];
+}
+% Neural network
+GCN [label=<GNN>, style="filled,rounded", penwidth=3, \NodeStylePrediction];
+%Activation [label=<<i>1 + softplus(*)</i>|Output activation>, style="filled,rounded", \NodeStylePrediction];
+SymbolWeights [label=<<i><b>w</b></i>|Symbol weights>, \NodeStylePrediction];
+Problem -> GCN;
+GCN -> SymbolWeights [penwidth=3];
+%ATP [label=<ATP>, style=rounded];
+%SymbolWeights -> ATP;
+%Problem -> ATP;
+%ATP -> Result;
+%
+SymbolCountsI [label=<<i><b>x</b><sub>&minus;</sub></i>|Symbol counts>];
+SymbolCountsJ [label=<<i><b>x</b><sub>+</sub></i>|Symbol counts>];
+Problem -> SymbolCountsI;
+Problem -> SymbolCountsJ;
+ScoreI [label=<<i>o<sub>&minus;</sub> = <b>x</b><sub>&minus;</sub> &middot; <b>w</b></i>|Weight of clause <i>C<sub>&minus;</sub></i>>];
+ScoreJ [label=<<i>o<sub>+</sub> = <b>x</b><sub>+</sub> &middot; <b>w</b></i>|Weight of clause <i>C<sub>+</sub></i>>];
+SampleI -> SymbolCountsI -> ScoreI;
+SampleJ -> SymbolCountsJ -> ScoreJ;
+SymbolWeights -> ScoreI [penwidth=3];
+SymbolWeights -> ScoreJ [penwidth=3];
+ScoreI -> ScorePair [penwidth=3];
+ScoreJ -> ScorePair [penwidth=3];
+% RankNet
+ScorePair [label=<{<i>o = o<sub>&minus;</sub> &minus; o<sub>+</sub></i>|Score of clause pair <i>(C<sub>&minus;</sub>, C<sub>+</sub>)</i>}>];
+Prob [label=<{<i>P = &sigma;(o)</i>|Estimated probability of "<i>C<sub>&minus;</sub></i> is worse than <i>C<sub>+</sub></i>"}>];
+Loss [label=<{<i>l = BCE(P, 1) = &minus; log P</i>|Binary cross-entropy loss}>];
+ScorePair -> Prob -> Loss [penwidth=3];
+}

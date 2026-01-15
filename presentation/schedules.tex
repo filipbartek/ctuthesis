@@ -1,0 +1,102 @@
+\begin{frame}{Strategies of a theorem prover}
+\begin{itemize}[<+->]
+\item Automated theorem provers (Vampire, E, etc.) expose large numbers of \emph{parameters}
+\item Different \emph{strategies} (configurations) specialize on different input \emph{problems}
+\item Given a problem and a time limit, how can we use the allocated time efficiently?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Vampire strategies}
+%\centering
+\only<1>{\includegraphics{figure/presentation/cactus_rel}}
+\only<2>{\includegraphics{figure/presentation/cactus_rel_vbs}}
+\only<3>{\includegraphics{figure/presentation/cactus_rel_sched}}
+\note{\Mi{10000} $\approx$ \SI{5}{\second}}
+\end{frame}
+
+%\begin{frame}{Plan of action}
+%\begin{enumerate}[<+->]
+%\item Strategy discovery: Collect a diverse portfolio of strong strategies
+%\item Schedule construction: Construct a strong strategy schedule% using the discovered strategies
+%\note{In this work, we focus on static schedules.}
+%\end{enumerate}
+%\end{frame}
+
+\begin{frame}{Strategy portfolio and performance measurements}
+\begin{itemize}
+\item \num{1096} \emph{strategies} (configurations of Vampire)
+\item \num{7866} \acrlong{fol} \emph{problems} from \acrshort{tptp}
+%\item $\num{8621136} = 1096 \cdot 7866$ solver runs
+%\item Time to compute: \SI{21}{days} $\times$ \num{120} \gls{cpu} cores
+% TODO: How much time was taken by strategy collection and evaluation, respectively?
+\end{itemize}
+
+\begin{figure}
+\centering
+%\includegraphics[clip,trim=0 496px 7066px 0]{figure/presentation/performance_matrix}
+\frame{\includegraphics[width=\textwidth]{figure/presentation/performance_matrix}}
+% TODO: Make a colored plot with status information. Shades of green: UNS. Shades of red: GUP. Blue: TMO. Separate incomplete strategies.
+\end{figure}
+
+%\centering
+%\url{https://zenodo.org/records/10814478}
+\end{frame}
+
+\begin{frame}{Performance measurements (detail)}
+\only<1>{\includegraphics{figure/presentation/heatmap}}
+\only<2>{\includegraphics{figure/presentation/cactus_rel_sched}}
+\note{We use incomplete strategies - axiom filtering etc.}
+\end{frame}
+
+\begin{frame}{Perfect schedule optimization}
+\note{Schedule optimization is NP-hard by reduction from the Maximum coverage problem.}
+\begin{table}
+\centering
+\caption{Problems covered out of 7866 for $T = \Mi{256000}$}
+\begin{tabular}{@{}l|ll|l@{}}
+\toprule
+Schedule & Train & Test & Time to construct \\
+\midrule
+Optimal & \num[round-mode=places,round-precision=1]{6536.7} & \num[round-mode=places,round-precision=1]{6057.4} & $> \SI{16}{\hour}$ (ILP with Gurobi) \\
+Greedy & \num[round-mode=places,round-precision=1]{6491.700286078} & \num[round-mode=places,round-precision=1]{6048.924015248} & $< \SI{1}{\minute}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\note{Gurobi takes more than \SI{24}{\hour} for $T \in \set*{16000, 64000}$.}
+
+\note{On 6293 problems and approximately 876 strategies, Gurobi finds an optimal schedule for $T = 256000$ (relatively easy) in approximately \SI{16}{\hour}.
+
+We may retrieve a feasible sub-optimal solution if we limit the optimization time.}
+
+%\pause
+%\emph{How can we prevent overfitting to $\ProblemsTrain$?}
+\end{frame}
+
+\definecolor{SliceExtension}{gray}{0}
+
+\begin{frame}{Greedy schedule construction}
+\only<1>{
+\begin{block}{Slice extension criterion}
+\begin{algorithmic}
+\State $s, t \gets \argmax_{s \in S, 0 < t \leq T'} \frac{
+%\sum_{p \in P} \iverson{\sched{s} < \SolveTimeP{p}{s} \leq \sched{s} + t}
+\norm*{\SetBuilder{p \in P'}{\SolveTimeP{p}{s} \leq \sched{s} + t}}^{\textcolor{alpha}{\alpha}}
+}{t}$
+\end{algorithmic}
+\end{block}
+}
+%\only<2>{\includegraphics{figure/presentation/greedy/0}}
+%\only<3>{\includegraphics{figure/presentation/greedy/1}}
+%\note{The schedule slices may be ordered using the greedy criterion.}
+\end{frame}
+
+\begin{frame}{Regularization for budget \Mi{64000}}
+%\begin{figure}
+%\raggedleft
+\centering
+\includegraphics[scale=0.6]{figure/snakes_64000_compact}
+% TODO: Prepare an answer: Why are we so far from the main diagonal? Why is the spread so small relatively?
+% TODO: Try to plot this graph for a single split. Do we see a similar pattern?
+% TODO: Compare to an idealized regularization curve from some paper.
+%\end{figure}
+\end{frame}

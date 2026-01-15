@@ -1,0 +1,312 @@
+{\usebackgroundtemplate{\titlebackground}
+\frame[plain]{
+\vfill
+\centering
+\color{\titlecolor} \bfseries \Large Backup slides
+\vfill
+}
+}
+
+\section{Publications}
+\begin{frame}{Publications}
+\begin{itemize}
+\item \underline{Filip Bártek} and Martin Suda.\\Learning Precedences from Simple Symbol Features. PAAR 2020.
+\item \underline{Filip Bártek} and Martin Suda.\\Neural Precedence Recommender. CADE 2021.\footnote[1]{CORE conference rank: A}
+\item \underline{Filip Bártek} and Martin Suda.\\How Much Should This Symbol Weigh? A GNN-Advised Clause Selection. LPAR~2023.\footnotemark[1]
+\item \underline{Filip Bártek}, Karel Chvalovský, and Martin Suda.\\Regularization in {S}pider-Style Strategy Discovery and Schedule Construction. IJCAR~2024.\footnotemark[1]
+\item \underline{Filip Bártek}, Karel Chvalovský, and Martin Suda.\\Cautious Specialization of Strategy Schedules (Extended Abstract). PAAR 2024.
+\end{itemize}
+\end{frame}
+
+\section{Prerequisites}
+
+\subsection{First-order logic}
+
+\begin{frame}{First-order logic (FOL) with equality}
+\begin{itemize}
+\item Logical symbols
+\begin{itemize}
+\item Connectives: $\land$, $\lor$, $\lnot$, $\to$
+\item Quantifiers: $\forall$, $\exists$
+\item Variables: $x$, $y$, etc.
+\item Equality: $=$
+\end{itemize}
+\item Non-logical symbols
+\begin{itemize}
+\item Predicates: $P$, $Q$, etc.
+\item Functions (including constants): $+$, $s$, $0$, $f$, $g$, etc.
+\end{itemize}
+\end{itemize}
+
+In this work, we use the \defn{clause normal form (CNF)}.
+\end{frame}
+
+%\begin{frame}{FOL CNF problem}
+%Signature: Set of all predicate and function symbols
+%
+%Input problem: Set of clauses
+%\end{frame}
+
+%\subsection{TPTP problem library}
+%
+%\begin{frame}{TPTP problem library}
+%Many problems from various domains in FOL and CNF
+%\end{frame}
+
+\subsection{Saturation-based theorem proving}
+
+\begin{frame}{Saturation-based theorem proving}
+
+Input: Set of clauses
+\bigskip
+
+Proof search state -- two sets of clauses:
+\begin{itemize}
+\item Passive
+\item Active
+\end{itemize}
+\bigskip
+
+Saturation loop:
+\begin{enumerate}
+\item Select clause $C$ from Passive.
+\item Move $C$ from Passive to Active.
+\item Perform all inferences in Active in which $C$ participates.
+\begin{itemize}
+%\item Prune the inferences by \emph{literal selection} and \emph{equation orienting}
+\item Add the generated clauses to Passive.
+\item If the empty clause $\square$ is generated, terminate.
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+%\begin{frame}{Saturation-based theorem proving}
+%Repeatedly infer clauses provable from the input problem.
+%
+%When the empty clause (trivial contradiction) is inferred, we conclude that the conjecture holds.
+%
+%When no new clauses can be inferred, we conclude that the conjecture does not hold.
+%
+%When the conjecture does not hold, the proof search may run forever.
+%\end{frame}
+
+\section{Learning symbol precedences for simplification ordering on terms}
+
+\begin{frame}{Simplification ordering on terms}
+\begin{itemize}
+\item Superposition calculus is parameterized by \defn{simplification ordering on terms}
+\item Prunes the proof search without compromising completeness:
+\begin{itemize}
+\item Literal selection
+\item Equation orienting
+\end{itemize}
+\item Knuth-Bendix ordering is parameterized by a \emph{symbol precedence} -- a permutation of the signature of the input problem
+\begin{itemize}
+\item Standard heuristics: sort the symbols by arity or number of occurrences
+\end{itemize}
+\end{itemize}
+
+Learning task: Given an input problem, recommend a symbol precedence.
+\end{frame}
+
+\input{presentation/npr}
+
+\section{Clause selection}
+\begin{frame}{Evaluation}
+
+% TODO: This slide is too complex. Simplify.
+
+\begin{center}
+\begin{tabular}{l|rrrrr}
+% Formatting inpsiration:
+% - Vampire with a brain ...: Table 2
+% - CASC-J11 report
+% - Neural Precedence Recommender
+%\hline
+
+Configuration & \multicolumn{2}{c}{Proofs found} & \multicolumn{3}{c}{Compared to B} \\
+& /3149 & \% & $+$ & $-$ & \% \\
+
+\hline
+
+Trained \acrshort{gnn} & \num{1494} & \pc{47.4436} & +\num{141} & \num{-49} & +\pc{6.5620542} \\
+% Evaluation results: /mnt/cluster/home/bartefil/git/vampire-ml/weight/workspace/nwc/outputs/eval/champion/epoch/-1/eval/problems.pkl
+% Success filter: dataset_train=false & dataset_val=false & valid=true & success_uns=true & (megainstructions is null | megainstructions <= 50000)
+% `megainstructions is null` counts as success because it represents a run with 0 megainstructions.
+
+% FB: I accidentally used the figure 1439 in the reviewed version.
+% 1439 is the number of successes in the test set before large problems were removed, so within 3487 (rather than 3149) problems.
+% The originally reported percentage (44.5221) was for the correct success count (1402).
+Baseline (B) & \num{1402} & \pc{44.5221} & +0 & $-0$ & +\pc{0.0} \\
+
+\hline
+
+%\Gls{gnn} trained on nwc=5 & \num{1485} & & & & \\
+% Evaluation results: /mnt/cluster/home/bartefil/git/vampire-ml/weight/workspace/nwc/outputs/eval/nwc5-large-test/epoch/-1/eval/problems.pkl
+
+B + AVATAR & \num{1485} & \pc{47.1578279} & & & +\pc{5.920114123} \\
+B + Goal-directed & \num{1463} & \pc{46.4592} & & & +\pc{4.350927247} \\
+
+% TODO: Include paths to data in comments.
+
+%\hline
+\end{tabular}
+\end{center}
+
+\note{The dashed line shows the default evaluation limit of \num{5e10} instructions
+that was used to generate the training data.
+The configurations were evaluated to up to \num{20e10} instructions.
+
+In our experimental setup, \num{5e10} instructions were executed in approximately 16 seconds of wallclock time.
+
+Results reported are for \num{5e10} instructions.}
+\end{frame}
+
+\section{Strategies}
+
+\begin{frame}{Strategy discovery}
+\note{The discovery is inspired by Spider. Spider was invented by Andrei Voronkov.}
+	% TODO: Use algorithmic package to typeset nice pseudocode
+	\note{We run the strategy collection in 3 phases: "unsolved", "improving", and "group".}
+    Repeat:
+	\begin{enumerate}
+		\item Sample strategy $s$, time limit $t$, problem $p$
+        \note{The options are sampled nearly independently. The only dependencies turn the option on or off. The distribution is biased in favor of complementarily-strong strategies (based on a previous strategy discovery experiment).}
+        \note{96 Vampire options (categorical and numeric) + 7 auxiliary parameters (categorical)}
+		\note{We set \texttt{sil} (simulated instruction limit) to $2t$ because the evaluation will run with the limit of $2t$.}
+		% Unsolved: From unsolved problems biased in favor of problems with low TPTP rating
+		% Improving: Uniformly from problems whose optimum solving time is between 1000 and 2000 (if $t = 2000$) - in a bracket
+		% If t=1000, the lower bound of the bracket is some constant smaller than 1000.
+		% We also have 3rd approach: sample a group of problems
+		\item Attempt to solve $p$ with $s$ in time limit $t$. If success:
+		% Unsolved: solving is success
+		% Improving: improving the solving time to one half or better is success
+		\begin{itemize}
+			\item Optimize $s$ on $p$ by local search to reduce runtime
+			\note{Local search: 2 rounds of free local search (sampling using a distribution), 3 rounds of minimization (only steps towards default strategy). Each round perturbs each parameter once.}
+			\item Evaluate $s$ on all problems
+			%\item Store $s$ and the evaluation results
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Strategy schedule construction}
+\begin{block}{Input}
+\begin{itemize}
+\item Strategies $S$
+\note{We optimize \emph{strategy} schedules but our technique applies to arbitrary algorithm schedules.}
+\item Problems $P$
+\item Runtime measurements $E : P \times S \to \NatExt$
+\note{Runtime is expressed in Mi.
+$\infty$ represents timeout or other failure.
+Runtime measurement values are extended natural numbers.
+We assume determinism.}
+\item Runtime budget $T \in \Nat$
+\end{itemize}
+\end{block}
+\begin{block}{Output}
+Schedule $\sched{s} : S \to \Nat$ such that $\sum_{s \in S} \sched{s} \leq T$
+\note{The schedule is sequential and unordered.}
+\end{block}
+\begin{block}{Maximize}
+%Maximize the number of solved problems:
+$$\norm*{\bigcup_{s \in S} \SetBuilder{p \in P}{E(p, s) \leq \sched{s}}}$$
+%\CountBuilder{p \in P}{\exists s \in S : E(p, s) \leq \sched{s}}
+%$$\sum_{p \in P} \iverson{\bigvee_{s \in S} E(p, s) < \sched{s}}$$
+% TODO: Stress the meaning of schedule performance. Show an example.
+\note{Other possible criteria: \gls{par} score}
+\end{block}
+\note{In practice, the schedule is typically run sequentially. We disregard the order of slices in this work.}
+% TODO: How many slices do our schedules have?
+\end{frame}
+
+\begin{frame}{Generalizing to unseen problems}
+For a fixed time budget $T$, repeat:
+\note{$T \in \{16000, 64000, 256000\}$}
+\begin{enumerate}
+\item Randomly split $P$ into $\ProblemsTrain$ and $\ProblemsTest$ (80:20)
+%\item Training problems: $|\ProblemsTrain| \approx \SI{80}{\percent} \cdot |P| \approx 6293$
+\note{$\norm*{\ProblemsTrain} \approx 7866 \cdot \frac{4}{5} = 6292.8$}
+%\item Strategies: $|S| \approx 829$
+\note{$|\StrategiesTrain| \approx 1 + 1035 \cdot \SI{80}{\percent} = 829$}
+\item Construct schedule $\sched{s}$ using runtime measurements on $\ProblemsTrain$
+\item Evaluate $\sched{s}$ using $\ProblemsTest$: How many problems does the schedule solve in runtime $T$?
+\note{We use simulated evaluation using $E$.}
+\end{enumerate}
+Average the evaluation results.
+\end{frame}
+
+\begin{frame}{Regularization methods}
+% Describe briefly each method. Talk about some motivation.
+% alpha: arbitrary stressing
+% beta: redundance
+
+% Intuition: We don't know a priori how much we should stress solved problems or time. ... We may be fitting to our data.
+
+\begin{table}
+\centering
+%\caption{Regularization methods}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Regularization method & Parameter & Default \\
+\midrule
+Additive slack & $\textcolor{b}{b} \in \Nat$ & $b = 0$ \\
+Multiplicative slack & $\textcolor{w}{w} \geq 1$ & $w = 1$ \\
+Diminishing problem rewards & $0 \leq \textcolor{beta}{\beta} \leq 1$ (discount factor) & $\beta = 0$ \note{Motivation for $\beta$: We want to cover the problems robustly.} \\
+Temporal reward adjustment & $0 \leq \textcolor{alpha}{\alpha}$ (reward exponent) & $\alpha = 1$ \note{The relative stress on number of problems solved and time is arbitrary. We expose this tradeoff.} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{block}{Slice extension criterion with reward adjustment}
+\begin{algorithmic}
+\State $s, t \gets \argmax_{s \in S, 0 < t \leq T'} \frac{\RoundBracket*{\sum_{p \in P} \iverson{\sched{s} < \SolveTimeP{p}{s} \leq \sched{s} + t} \textcolor{beta}{\beta^{\mli{\#covered}(p)}}}^{\textcolor{alpha}{\alpha}}}{t}$
+\end{algorithmic}
+\end{block}
+
+\begin{block}{Schedule post-processing with slack}
+\begin{algorithmic}
+\ForAll{$s \in S$ such that $\sched{s} > 0$}
+\State $\sched{s} \gets \sched{s} \cdot \textcolor{w}{w} + \textcolor{b}{b}$
+\EndFor
+\end{algorithmic}
+\end{block}
+\end{frame}
+
+\begin{frame}{Temporal reward adjustment ($\alpha = 1.7$)}
+\only<1>{\includegraphics{figure/presentation/greedy/1}}
+\only<2>{\includegraphics{figure/presentation/greedy/17}}
+\note{The curve is $t^{\frac{1}{\alpha}} \cdot c$.}
+% score == best.solved_cumcount ** tra / best.runtime_increment
+% solved_cumcount == (runtime_increment * score) ** (1 / tra)
+\end{frame}
+
+\newcommand{\perf}{\num[round-mode=places,round-precision=0]}
+\newcommand{\ttf}{\num[round-mode=places,round-precision=1]}
+\begin{frame}{Empirical results}
+\begin{table}[t]
+    \centering
+    \caption{Budget: \Mi{64000}.
+    Performance is the mean number of problems solved out of \num{7866} across 50 splits.
+    Time to fit is the mean time to construct a schedule in seconds.}
+    \begin{tabular}{@{}c|rr|r@{}}
+        \toprule
+        \multirow{2}{*}{Regularization} & \multicolumn{2}{c}{Performance} & \multirow{2}{*}{Time to fit [s]} \\
+        & Test & Train & \\
+        \midrule
+
+$\alpha = 1.7$ & \emph{\perf{5704.399593}} & \perf{5904.724703} & \ttf{ 4.325128} \\
+$\beta = 0.3$  & \perf{5641.199691} & \perf{5955.299844} & \ttf{66.538374} \\
+$w = 1.1$      & \perf{5625.900160} & \perf{5946.099763} & \ttf{19.332677} \\
+$b = 10$       & \perf{5620.700770} & \perf{5971.249778} & \ttf{19.607397} \\
+None (default) & \perf{5616.100439} & \emph{\perf{5986.124790}} & \ttf{19.885694} \\
+
+        \bottomrule
+    \end{tabular}
+\end{table}
+\end{frame}
+
+\section{Acknowledgments}
+\begin{frame}{Acknowledgments}
+\Acknowledgments
+\end{frame}

@@ -1,0 +1,176 @@
+\begin{frame}{\Gls{gcn}}
+\centering
+\digraph[scale=0.4]{GcnPlain}{
+graph [ranksep=0.3];
+node [fontsize=14, shape=record, height=0, label=""];
+edge [fontsize=14, dir=both];
+problem [color=1];
+{ rank = same;
+c0 [color=2];
+c1 [color=2];
+}
+problem -> c0 [color=1];
+problem -> c1 [color=1];
+{ rank = same;
+t0 [color=3];
+t1 [color=3];
+}
+c0 -> t0 [color=2];
+c1 -> t1 [color=3];
+{ rank = same;
+tfab [color=4];
+tfbb [color=4];
+}
+{ rank = same;
+ta [color=4];
+tb [color=4];
+}
+ff [color=5];
+fa [color=5];
+fb [color=5];
+tfab0 [color=6];
+tfab1 [color=6];
+tfbb0 [color=6];
+tfbb1 [color=6];
+t0 -> ta [color=4];
+t0 -> tb [color=4];
+t1 -> tfab [color=4];
+t1 -> tfbb [color=4];
+tfab -> ff [color=5];
+tfab -> tfab0 [color=6];
+tfab0 -> tfab1 [color=7];
+tfab0 -> ta [color=8];
+tfab1 -> tb [color=8];
+tfbb -> ff [color=5];
+tfbb -> tfbb0 [color=6];
+tfbb0 -> tfbb1 [color=7];
+tfbb0 -> tb [color=8];
+tfbb1 -> tb [color=8];
+ta -> fa [color=5];
+tb -> fb [color=5];
+}
+%{\small $$
+%h_d^{(l+1)} =
+%\sigma \Parentheses*{\sum_{s \in \mathcal{N}_d} \frac{1}{\sqrt{\card{\mathcal{N}_s}} \sqrt{\card{\mathcal{N}_d}}} (W^{(l)} h_s^{(l)} + b^{(l)})}
+%$$}
+\end{frame}
+
+\begin{frame}{\Gls{rgcn}}
+\centering
+\digraph[scale=0.4]{GcnRelational}{
+graph [ranksep=0.3];
+node [fontsize=14, shape=record, height=0, label=""];
+edge [fontsize=14, dir=both, arrowtail=empty, colorscheme=set19];
+problem [color=1];
+{ rank = same;
+c0 [color=2];
+c1 [color=2];
+}
+problem -> c0 [color=1];
+problem -> c1 [color=1];
+{ rank = same;
+t0 [color=3];
+t1 [color=3];
+}
+c0 -> t0 [color=2];
+c1 -> t1 [color=3];
+{ rank = same;
+tfab [color=4];
+tfbb [color=4];
+}
+{ rank = same;
+ta [color=4];
+tb [color=4];
+}
+ff [color=5];
+fa [color=5];
+fb [color=5];
+tfab0 [color=6];
+tfab1 [color=6];
+tfbb0 [color=6];
+tfbb1 [color=6];
+t0 -> ta [color=4];
+t0 -> tb [color=4];
+t1 -> tfab [color=4];
+t1 -> tfbb [color=4];
+tfab -> ff [color=5];
+tfab -> tfab0 [color=6];
+tfab0 -> tfab1 [color=7];
+tfab0 -> ta [color=8];
+tfab1 -> tb [color=8];
+tfbb -> ff [color=5];
+tfbb -> tfbb0 [color=6];
+tfbb0 -> tfbb1 [color=7];
+tfbb0 -> tb [color=8];
+tfbb1 -> tb [color=8];
+ta -> fa [color=5];
+tb -> fb [color=5];
+}
+%{\small $$
+%h_d^{(l+1)} =
+%\mathemph{\sum_{r \in \mathcal{R}}} \sigma \Parentheses*{\sum_{s \in \mathcal{N}_d^{\mathemph{r}}} \frac{1}{\sqrt{\card{\mathcal{N}_s^{\mathemph{r}}}} \sqrt{\card{\mathcal{N}_d^{\mathemph{r}}}}} (W_{\mathemph{r}}^{(l)} h_s^{(l)} + b_{\mathemph{r}}^{(l)})}
+%$$}
+\end{frame}
+
+\begin{frame}
+\frametitle{Graph representation of a \acrshort{cnf} problem}
+% TODO: Use one running example.
+% Mention: relational graph, node types, edge types
+
+Input problem: $a=b \wedge f(a,b) \neq f(b,b)$
+
+\centering
+\digraph[scale=0.4]{GcnExample}{
+graph [ranksep=0.3];
+node [fontsize=14, shape=record, height=0, width=0];
+edge [fontsize=14, dir=both, arrowtail=empty, colorscheme=set19];
+problem [label=<a=b &and; f(a,b)&ne;f(b,b)|problem>, color=1];
+{ rank = same;
+c0 [label="a=b|clause", color=2];
+c1 [label=<f(a,b)&ne;f(b,b)|clause>, color=2];
+}
+problem -> c0 [color=1];
+problem -> c1 [color=1];
+{ rank = same;
+t0 [label="a=b|equality atom", color=3];
+t1 [label="f(a,b)=f(b,b)|equality atom", color=3];
+}
+c0 -> t0 [label=" pos ", color=2];
+c1 -> t1 [label=" neg ", color=3];
+{ rank = same;
+tfab [label="f(a,b)|term", color=4];
+tfbb [label="f(b,b)|term", color=4];
+}
+{ rank = same;
+ta [label="a|term", color=4];
+tb [label="b|term", color=4];
+}
+ff [label="f|function", color=5];
+fa [label="a|function", color=5];
+fb [label="b|function", color=5];
+tfab0 [label="|argument", color=6];
+tfab1 [label="|argument", color=6];
+tfbb0 [label="|argument", color=6];
+tfbb1 [label="|argument", color=6];
+t0 -> ta [color=4];
+t0 -> tb [color=4];
+t1 -> tfab [color=4];
+t1 -> tfbb [color=4];
+tfab -> ff [color=5];
+tfab -> tfab0 [color=6];
+tfab0 -> tfab1 [color=7];
+tfab0 -> ta [color=8];
+tfab1 -> tb [color=8];
+tfbb -> ff [color=5];
+tfbb -> tfbb0 [color=6];
+tfbb0 -> tfbb1 [color=7];
+tfbb0 -> tb [color=8];
+tfbb1 -> tb [color=8];
+ta -> fa [color=5];
+tb -> fb [color=5];
+% Technical details:
+%ff -> ff [dir=forward];
+%fa -> fa [dir=forward];
+%fb -> fb [dir=forward];
+}
+\end{frame}

@@ -21,6 +21,11 @@ ctuman-*.pdf
 /*.pdf
 *.run.xml
 
+# presentation
+*.dot
+*.nav
+*.snm
+
 /inspiration/
 /instructions/
 /literature/

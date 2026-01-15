@@ -1,0 +1,72 @@
+\input{presentation/example}
+
+\subsection{Machine learning}
+
+\begin{frame}{Heuristics in theorem proving}
+How should we select the next clause to activate?
+\pause
+\medskip
+
+Heuristics:
+\begin{itemize}
+\item Age: Prioritize clauses derived early
+\item Weight: Prioritize small clauses
+\end{itemize}
+
+Can we do better?
+\end{frame}
+
+\begin{frame}{Machine learning (ML) for theorem proving}
+Challenge: Learn \enquote{intuition} from training data
+\pause
+\bigskip
+
+\begin{block}{Supervised ML}
+\begin{enumerate}
+\item Gather data: Run the prover on the available problems
+%\item Split the problems into train and test set (possibly repeatedly)
+\item Train a ML model on training problems
+\item Evaluate the model on test problems
+\end{enumerate}
+\end{block}
+
+%\bigskip
+%
+%We have a difficult combinatorial task - theorem proving
+%Algorithms struggle
+%Mathematicians are quite good
+%We want to learn intuition
+%
+%Why ML for automated theorem proving?
+%\begin{itemize}
+%\item ATP is inherently hard in general, yet humans are quite capable
+%\item Could the missing piece be the human intuition?
+%\item The provers have many heuristics that are difficult to optimize.
+%\item Theorem proving is hard and rely on human-engineered heuristics
+%\item ML has been successful in other domains
+%\item Challenge: ATP
+%\item We specialize Vampire for a target distribution of problems
+%\item ML can help extract patterns from a problem distribution which would be hard to extract by hand
+%\item Training data can be generated easily.
+%\end{itemize}
+\end{frame}
+
+\subsection{Experimental setup}
+
+\begin{frame}[<+->]{Experimental setup}
+\begin{block}{Target prover: Vampire}
+\begin{itemize}
+\item Highly optimized state-of-the-art theorem prover
+\item Saturation-based
+\item Superposition inference calculus
+%\item Runtime measured in CPU (mega)instructions: $\SI{2000}{Mi} \sim \SI{1}{\second}$
+\end{itemize}
+\end{block}
+\begin{block}{Target problem set: TPTP}
+\begin{itemize}
+\item \enquote{Thousands of Problems for Theorem Provers}
+\item More than 7000 first-order logic (FOL) problems
+\item Diverse domains and encodings
+\end{itemize}
+\end{block}
+\end{frame}

@@ -1,0 +1,52 @@
+\digraph[scale=0.4]{RankNetPrecedence}{
+graph [splines=ortho, ranksep=0.25, margin=0];
+node [shape=record, fontsize=14, width=0, height=0, style=filled, fillcolor=white];
+%
+Problem [label="Input problem", \NodeStylePrediction];
+% Neural network
+GCN [label="GNN", style="filled,rounded", penwidth=3, \NodeStylePrediction];
+SymbolWeights [label=<<i><b>c</b></i>|Symbol costs>, \NodeStylePrediction];
+Problem -> GCN;
+GCN -> SymbolWeights [penwidth=3];
+subgraph cluster_training {
+label=<Training on "<i>&rho;</i> is worse than <i>&pi;</i>">;
+margin=10;
+style=dashed;
+% Training example
+%subgraph cluster_input {
+%label=<Training example "<i>&rho; is worse than &pi;</i>">;
+%margin=10;
+%style=dashed;
+%rank=same;
+SampleI [label=<<i>&rho;</i>|Worse precedence>];
+SampleJ [label=<<i>&pi;</i>|Better precedence>];
+%}
+%
+ScoreI [label=<{<i>o<sub>&rho;</sub> = &rho;<sup>-1</sup> &middot; <b>c</b></i>|Cost of <i>&rho;</i>}>];
+ScoreJ [label=<{<i>o<sub>&pi;</sub> = &pi;<sup>-1</sup> &middot; <b>c</b></i>|Cost of <i>&pi;</i>}>];
+SampleI -> ScoreI;
+SampleJ -> ScoreJ;
+ScoreI -> ScorePair [penwidth=3];
+ScoreJ -> ScorePair [penwidth=3];
+% RankNet
+ScorePair [label=<{<i>o = o<sub>&rho;</sub> &minus; o<sub>&pi;</sub></i>|Score of precedence pair <i>(&rho;, &pi;)</i>}>];
+Prob [label=<{<i>P = &sigma;(o)</i>|Estimated probability of "<i>&rho;</i> is worse than <i>&pi;</i>"}>];
+Loss [label=<{<i>l = BCE(P, 1) = &minus; log P</i>|Binary cross-entropy loss}>];
+ScorePair -> Prob -> Loss [penwidth=3];
+}
+SymbolWeights -> ScoreI [penwidth=3];
+SymbolWeights -> ScoreJ [penwidth=3];
+%
+subgraph cluster_prediction {
+label=<Prediction>;
+margin=10;
+style=dashed;
+Sort [label=<Sort symbols by cost>, style="filled,rounded", \NodeStylePrediction];
+Recommended [label=<<i>&pi;<sup>*</sup></i>|Recommended precedence>, \NodeStylePrediction];
+Sort -> Recommended;
+}
+SymbolWeights -> Sort;
+}
+\note{For sake of simplicity, we are omitting normalization of precedence cost by $Z_n = \frac{2}{n(n+1)}$.
+
+$$\pi^{-1} \cdot c = \sum_{i=1}^n \pi^{-1}(i) \cdot c(i) = \sum_{i=1}^n i \cdot c(\pi(i))$$}

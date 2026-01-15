@@ -1,0 +1,155 @@
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage[pdf]{graphviz}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{stmaryrd}
+\usepackage{tablefootnote}
+\usepackage{xfp}
+
+%\newcommand{\pc}[1]{\SI[round-mode=places,round-precision=1]{#1}{\percent}}
+\newcommand{\FracPc}[2]{\pc{\fpeval{100*#1/#2}}}
+
+% Pseudocode
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\algtext*{EndWhile}% Remove "end while" text
+
+\usepackage{textcomp}
+
+% https://tex.stackexchange.com/a/129434/202639
+\newcommand{\mli}[1]{\mathit{#1}}
+
+%%%% Commands
+% Symbols
+\newcommand{\Instances}{P}
+\newcommand{\Problems}{\Instances}
+\newcommand{\InstancesTrain}{\Instances_\mli{train}}
+\newcommand{\ProblemsTrain}{\Problems_\mli{train}}
+\newcommand{\ProblemsTest}{\Problems_\mli{test}}
+\newcommand{\Instance}{p}
+%\newcommand{\Problem}{\Instance}
+\newcommand{\Algorithm}{\mathcal{A}}
+\newcommand{\AlgorithmInstance}[1]{\Algorithm(#1)}
+\newcommand{\Configurations}{S}
+\newcommand{\Configuration}{s}
+\newcommand{\sched}[1]{t_{#1}}
+\newcommand{\Schedule}{t_s}
+\newcommand{\Strategies}{\Configurations}
+\newcommand{\Strategy}{\Configuration}
+\newcommand{\StrategiesTrain}{\Strategies_\mli{train}}
+\newcommand{\Budget}{\beta}
+\newcommand{\Time}{t}
+\newcommand{\Status}{s}
+
+\DeclareMathOperator{\argmax}{argmax}
+
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% https://www.tptp.org/TPTP/TPTPTParty/2007/PositionStatements/GeoffSutcliffe_SZS.html
+\newcommand{\Success}{\mathtt{SOL}}
+\newcommand{\Fail}{\mathtt{GUP}}
+\newcommand{\Timeout}{\mathtt{TMO}}
+
+%\newcommand{\pcs}{\boldsymbol{\Theta}}
+%\newcommand{\config}{\boldsymbol{\theta}}
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Integer}{\mathbb{Z}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\NatExt}{\Nat \cup \{\infty\}}
+
+\newcommand{\option}{\texttt}
+\newcommand{\instructions}{\num[round-mode=places]}
+\newcommand{\Mi}[1]{\SI{#1}{\acrshort{mi}}}
+
+\newcommand{\VarBool}[1]{\dotuline{#1}}
+\newcommand{\VarInt}[1]{\dashuline{#1}}
+
+\newcommand{\SolveTime}{\ensuremath{E}}
+\DeclareMathOperator{\Solved}{Solved}
+\DeclareMathOperator{\SolvedBy}{SolvedBy}
+%\DeclareMathOperator{\StrategyTime}{\sched}
+
+\newcommand{\SolveTimeP}[2]{\SolveTime(#1, #2)}
+\newcommand{\SolvedP}[1]{\VarBool{\Solved(#1)}}
+\newcommand{\SolvedByP}[2]{\VarBool{\SolvedBy(#1, #2)}}
+\newcommand{\StrategyTimeP}[1]{\VarInt{\sched{#1}}}
+
+%\DeclarePairedDelimiter{\iverson}{\llbracket}{\rrbracket}
+\newcommand{\iverson}[1]{\left\llbracket#1\right\rrbracket}
+\DeclarePairedDelimiter\norm\lvert\rvert
+\DeclarePairedDelimiter\set\{\}
+\newcommand{\SetBuilder}[2]{\set*{#1 \mid #2}}
+\newcommand{\CountBuilder}[2]{\norm*{\SetBuilder{#1}{#2}}}
+\DeclarePairedDelimiter\RoundBracket{(}{)}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{pgf-pie}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{wrapfig}
+
+%\usepackage{qrcode}
+%\qrset{padding}
+
+%\usepackage{layouts}
+
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+\title{\Title}
+\subtitle{Dissertation Thesis Defence}
+\author{\href{https://people.ciirc.cvut.cz/bartefil/}{Filip Bártek}}
+\institute{\Acrlong{ctu}}
+\date{\DTMdisplaydate{2025}{9}{17}{-1}}
+%\ctutitlenote{\tiny \Acknowledgments}
+
+\DeclarePairedDelimiter{\Parentheses}{(}{)}
+\DeclarePairedDelimiter{\card}{\lvert}{\rvert}
+
+\makeatletter
+\def\mathcolor#1#{\@mathcolor{#1}}
+\def\@mathcolor#1#2#3{%
+  \protect\leavevmode
+  \begingroup\color#1{#2}#3\endgroup
+}
+\makeatother
+
+\newcommand{\mathemph}{\mathcolor{red}}
+
+\DeclareMathOperator{\sigmoid}{sigmoid}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator{\argsort}{argsort}
+\newcommand{\Better}[3]{#1 \prec_{#3} #2}
+
+% Precedences
+\newcommand{\PrecBetter}{\pi}
+\newcommand{\PrecWorse}{\rho}
+
+\newcommand{\loss}{\ell}
+
+\usepackage{pgfplots}
+% https://tex.stackexchange.com/a/33612/202639
+\def\FuncSigmoid(#1){1.0/(1.0 + exp(-(#1)))}
+
+\AtBeginSection
+{
+    \begin{frame}
+        \frametitle{Outline}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\setcounter{tocdepth}{1}
+
+\usepackage{newverbs}
+\Verbdef\NodeStylePrediction{fillcolor="#B4D6F1"}
+
+\input{preamble-common}
+
+\hypersetup{
+    pdfsubject={Dissertation Thesis Defence Presentation}
+}

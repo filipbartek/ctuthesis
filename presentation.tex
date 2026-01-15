@@ -1,0 +1,58 @@
+% !TeX document-id = {ee44db72-750e-4bec-90b1-816eb0f44090}
+% !TeX TXS-program:compile = txs:///pdflatex/[-shell-escape]
+
+\documentclass[aspectratio=169]{ctuslides}
+%\setbeameroption{show notes}
+
+\input{preamble-presentation}
+
+%\setbeamercovered{transparent}
+
+%\usepackage[symbol]{footmisc}
+
+\DeclareMathOperator{\softplus}{softplus}
+
+% We the default palette from matplotlib to match the "spider" plot.
+% Palette: category10
+% https://matplotlib.org/stable/users/prev_whats_new/dflt_style_changes.html
+\definecolor{alpha}{HTML}{1f77b4}
+\definecolor{beta}{HTML}{ff7f0e}
+\definecolor{w}{HTML}{2ca02c}
+\definecolor{b}{HTML}{d62728}
+
+\begin{document}
+
+\ctutitleframe
+
+%Dissertation thesis: \url{https://dspace.cvut.cz/handle/10467/122064}
+
+{
+\AtBeginSection[]{}
+\section{Introduction}
+\input{presentation/introduction}
+}
+
+% 17 min
+
+\section{Learning symbol weights for clause selection}
+% LPAR 2023
+
+\input{presentation/weights}
+
+\section{Learning strategy schedules}
+% IJCAR 2024, PAAR 2024
+
+\input{presentation/schedules}
+
+\section{Conclusion}
+
+\input{presentation/conclusion}
+
+\appendix
+
+{
+\AtBeginSection[]{}
+\input{presentation/appendix}
+}
+
+\end{document}

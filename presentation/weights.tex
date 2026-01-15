@@ -1,0 +1,116 @@
+\begin{frame}[<+->]{Clause selection}
+\begin{itemize}
+\item Symbol-counting heuristic:
+\begin{enumerate}
+\item Count symbol and variable occurrences in each passive clause
+\item Select the smallest clause
+\end{enumerate}
+\item Generalized version: Assign a weight to each symbol
+\item GNN-based symbol weight recommender
+\end{itemize}
+\end{frame}
+
+\input{presentation/gcn}
+
+\begin{frame}{Symbol weight recommender}
+%\begin{columns}
+%\column{0.7\textwidth}
+\centering
+\input{presentation/gv/RankNetWeightPredict}
+%\column{0.3\textwidth}
+%\vspace{0.5cm}
+%\tiny $$\softplus(x) = \log(1 + e^x)$$
+%\vspace{1.5cm}
+%\tiny $$\sigma(x) = \frac{1}{1 + e^{-x}}$$
+%\end{columns}
+
+%\centering
+% TODO: Improve the diagram: make it prettier, use colors etc.
+%\input{presentation/gv/RankNetWeightPredict}
+%\digraph[scale=0.45]{TrainingEvaluation}{
+%graph [splines=ortho, ranksep=0.25];
+%node [shape=box, fontsize=14, width=0, height=0];
+%Problem [label="Input problem", pos="0,0!"];
+%subgraph cluster_recommender {
+%	label="Recommender";
+%	style=dashed;
+%	GCN [style=<rounded>, label="Neural network", pos="0,10!"];
+%	Activation [style=<rounded>, label=<Output activation<br/><i>1+softplus(*)</i>>];
+%}
+%SymbolCost [label=<Symbol weights <i>w(*)</i>>];
+%Problem -> GCN -> Activation -> SymbolCost;
+%%
+%subgraph cluster_evaluation {
+%	label="Evaluation";
+%	style=dashed;
+%	ATP [style=<rounded>, label=<Automatic theorem prover>];
+%	Result [label=<Result>];
+%	ATP -> Result;
+%}
+%Problem -> ATP;
+%SymbolCost -> ATP;
+%%
+%subgraph cluster_training {
+%	label="Training";
+%	style=dashed;
+%	{ rank = same;
+%	c1 [label=<Clause <i>C<sub>+</sub></i>>];
+%	c0 [label=<Clause <i>C<sub>&minus;</sub></i>>];
+%	}
+%	{ rank = same;
+%	wc1 [label=<Clause weight <i>W(C<sub>+</sub>)</i>>];
+%	wc0 [label=<Clause weight <i>W(C<sub>&minus;</sub>)</i>>];
+%	}
+%	c1 -> wc1;
+%	c0 -> wc0;
+%	Logit [label=<Logit <i>W(C<sub>&minus;</sub>) &minus; W(C<sub>+</sub>)</i>>];
+%	wc1 -> Logit;
+%	wc0 -> Logit;
+%%	Prob [label=<Likelihood <i>p = sigmoid(W(C<sub>&minus;</sub>) &minus; W(C<sub>+</sub>))</i>>];
+%	Loss [label=<Loss <i>l = &minus; log sigmoid(W(C<sub>&minus;</sub>) &minus; W(C<sub>+</sub>))</i>>];
+%%	Logit -> Prob -> Loss;
+%	Logit -> Loss;
+%}
+%SymbolCost -> wc1;
+%SymbolCost -> wc0;
+%SymbolCost -> c1 [style="invis"];
+%SymbolCost -> c0 [style="invis"];
+%}
+\note{This is an instance of RankNet. We are learning symbol weights to rank clauses. The clause ranking task is a mere proxy task.
+
+The scale of influence of the recommender is small, since it does not evaluate the passive clauses themselves, but only the symbol weights.
+This is compensated by the computational cheapness:
+The recommender is only evaluated once in the beginning of the proof search,
+and there is virtually no overhead over standard weight-based selection.
+
+Note the output activation function.
+It ensures a positive lower bound on the symbol weights.
+This in turn ensures fairness of the selection.
+Negative symbol weights tend to lead to useless attractors.}
+\end{frame}
+
+\begin{frame}{Summary: Symbol weight recommender}
+\begin{itemize}
+\item Strengths:
+\begin{itemize}
+\item One evaluation of GNN per proof search
+\item Negligible computational overhead during proof search
+\item Signature-agnostic
+\end{itemize}
+\item Empirical result: +\pc{6.5620542} problems solved
+\end{itemize}
+\end{frame}
+
+\begin{frame}[<+->]{Brief mention: Neural Precedence Recommender}
+\begin{itemize}
+\item Superposition calculus is restricted by symbol precedence
+\item GNN-based precedence recommender:
+\begin{itemize}
+\item Trainable from pairs of precedences (learning to rank)
+\item Easy construction of the recommended precedence (sort symbols by predicted costs)
+%\item To train by RankNet, we define precedence cost to be minimized by the good precedences.
+%\item To allow easy construction of a good precedence, we define the precedence cost as a linear combination of symbol costs (dot product of symbol costs and symbol ranks in the precedence). Then sorting symbols by cost minimizes precedence cost.
+%\item Normalization: Precedence cost is weighted by $\frac{2}{n(n+1)}$
+\end{itemize}
+\end{itemize}
+\end{frame}
