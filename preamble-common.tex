@@ -1,5 +1,3 @@
-\input{glossary}
-
 % Custom packages
 \usepackage{array}
 \usepackage{csquotes}
@@ -7,28 +5,9 @@
 \usepackage{etoolbox}
 \usepackage[detect-weight=true,binary-units=true]{siunitx}
 
-\usepackage[color=ctulightblue]{todonotes}
-% Allow the `todonotes` side notes to span the whole margin.
-\setlength{\marginparwidth}{4.5cm}
-
-% Bibliography
-\usepackage[numbers,sort&compress]{natbib}
-\bibliographystyle{unsrtnat}
-\usepackage{doi}
-\usepackage{cleveref}
-
-% Tables
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{tablefootnote}
-
-% Epigraph
-\usepackage{epigraph}
-\setlength{\epigraphwidth}{0.55\textwidth}
-\renewcommand{\textflush}{flushepinormal}
-
 \newcommand{\defn}\emph
-\newcommand{\pc}[1]{\SI{#1}{\percent}}
+%\newcommand{\pc}[1]{\SI{#1}{\percent}}
+\newcommand{\pc}[1]{\SI[round-mode=places,round-precision=1]{#1}{\percent}}
 
 % Authors and contributors
 \newcommand{\auth}\emph
@@ -37,3 +16,28 @@
 \newcommand{\KC}{K.C.}
 \newcommand{\JU}{Josef Urban}
 \newcommand{\CK}{Cezary Kaliszyk}
+
+\newcommand{\Title}{Machine Learning for Saturation-Based Theorem Proving}
+\newcommand{\Author}{Mgr. Filip Bártek}
+\newcommand{\Keywords}{automatic theorem proving, machine learning}
+
+\newcommand{\Acknowledgments}{The research presented in this doctoral thesis was supported by
+the Czech Science Foundation grants 20-06390Y and 24-12759S,
+the European Regional Development Fund under the Czech project AI\&Reasoning no.~CZ.02.1.01/0.0/0.0/15\_003/0000466,
+% Project 649043 (AI4REASON) financed only my PAAR 2020 publication.
+the \gls{erc} under the European Union's Horizon 2020 research and innovation programme (grant agreement n°~649043), and
+the Grant Agency of the Czech Technical University in Prague, grant No.~SGS20/215/OHK3/3T/37.}
+
+% hyperref should be loaded as late as possible.
+\usepackage{hyperref}
+% ctuthesis does not set the PDF metadata correctly.
+\hypersetup{
+    pdftitle={\Title},
+    pdfauthor={\Author},
+    pdfkeywords={\Keywords}
+}
+
+% glossary
+% glossaries must be loaded after hyperref
+\input{glossary}
+\glsdisablehyper

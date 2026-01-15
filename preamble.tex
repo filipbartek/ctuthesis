@@ -91,7 +91,12 @@ In Prague, \today
 \input{abstract/czech}
 \end{abstract-czech}
 
-\input{preamble-common}
+% Epigraph
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.55\textwidth}
+\renewcommand{\textflush}{flushepinormal}
+
+\input{preamble-paper}
 \hypersetup{hidelinks}
 
 % ctuthesis does not set the PDF metadata correctly.
