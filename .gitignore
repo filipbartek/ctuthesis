@@ -26,6 +26,10 @@ ctuman-*.pdf
 *.nav
 *.snm
 
+# MacOS
+*.fdb_latexmk
+*.fls
+
 /inspiration/
 /instructions/
 /literature/
