@@ -29,6 +29,7 @@ ctuman-*.pdf
 # MacOS
 *.fdb_latexmk
 *.fls
+*.synctex(busy)
 
 /inspiration/
 /instructions/
