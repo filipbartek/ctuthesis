@@ -7,4 +7,4 @@ fof(adding_zero,axiom,
       ( add(A,n0) = A ) ).
 
 fof(conjecture,conjecture,
-    add(n0,successor(successor(n0))) = successor(successor(n0)) ).
+    successor(successor(n0)) = add(n0,successor(successor(n0))) ).
