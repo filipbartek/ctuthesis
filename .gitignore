@@ -35,3 +35,6 @@ ctuman-*.pdf
 /instructions/
 /literature/
 /wip/
+
+# Jupyter
+.ipynb_checkpoints/
