@@ -1,5 +1,3 @@
-% vampire --input_syntax tptp --proof tptp --output_axiom_names true --statistics full
-
 % equalish
 fof(transitivity,axiom,
     ! [A,B,C] :
@@ -19,5 +17,6 @@ fof(addition,axiom,
     ! [A,B] :
       ( equalish(add(A,successor(B)),successor(add(A,B))) ) ).
 
+% conjecture
 fof(conjecture,conjecture,
     equalish(add(n0,successor(successor(n0))),successor(successor(n0))) ).
